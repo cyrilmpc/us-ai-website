@@ -2676,6 +2676,44 @@ document.addEventListener('click', function(e){
 });
 </script>
 
+
+<script>
+// SIMPLE SCROLL FADE - All side icons fade at Our Services
+(function(){
+  var targets = ['#top-widgets', '#top-widgets-right', '#share-rail', '#lc-wrap', '#wa-join'];
+  function update(){
+    var y = window.scrollY || window.pageYOffset;
+    // Find Our Services
+    var svcs = null;
+    var heads = document.querySelectorAll('h1,h2,h3');
+    for(var i=0; i<heads.length; i++){
+      if(heads[i].textContent.indexOf('Our Services') >= 0){ svcs = heads[i]; break; }
+    }
+    var startY = 400; // fallback
+    if(svcs){
+      var r = svcs.getBoundingClientRect();
+      startY = r.top + y - 150;
+    }
+    var op = 1;
+    if(y > startY){
+      op = Math.max(0, 1 - (y - startY) / 250);
+    }
+    targets.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        el.style.opacity = op;
+        el.style.transition = 'opacity 0.25s';
+        el.style.pointerEvents = op < 0.2 ? 'none' : '';
+      });
+    });
+  }
+  var tick = false;
+  window.addEventListener('scroll', function(){
+    if(!tick){ requestAnimationFrame(function(){ update(); tick=false; }); tick=true; }
+  }, {passive:true});
+  setTimeout(update, 1500);
+})();
+</script>
+
 </body>
 </html>
 
