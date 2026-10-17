@@ -110,7 +110,7 @@ a[href*="whatsapp"][class*="community"], .community-join {
 </style>
 
 <style>
-/* FIX: Floating widget overlap - expanded widgets should not hide others permanently */
+/* OLD FIX REMOVED */
 .tw-card, [id*="widget"], [class*="float-"] {
   transition: all 0.3s ease;
 }
@@ -119,6 +119,30 @@ a[href*="whatsapp"][class*="community"], .community-join {
 .tw-card.collapsed ~ .tw-card {
   visibility: visible !important;
   opacity: 1 !important;
+}
+</style>
+
+
+<style>
+/* FIX: Widget stack - expanded widgets push others down, never overlap */
+#top-widgets-right{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:8px !important;
+}
+#top-widgets-right .tw-card{
+  position:relative !important;
+  flex-shrink:0 !important;
+  overflow:hidden !important;
+}
+#top-widgets-right .tw-card.expanded{
+  z-index:10 !important;
+}
+/* Ensure widgets below are never hidden */
+#top-widgets-right .tw-card:not(.expanded){
+  visibility:visible !important;
+  opacity:1 !important;
+  display:block !important;
 }
 </style>
 
