@@ -1004,7 +1004,15 @@ function doSearch(){
   if(results.length < 20){
     for(let i = 1; i <= 200000 && results.length < 200; i++){
       const p = genProduct(i);
-      if(qlist.some(kw=>p.name.toLowerCase().includes(kw)) || p.category.toLowerCase().includes(q)){
+      if((()=>{
+      const pname = p.name.toLowerCase();
+      // Check full query and keywords
+      if(qlist.some(kw=>pname.includes(kw))) return true;
+      // Check individual significant words (3+ chars, not common words)
+      const stopwords = ['for','the','and','with','from','type','single','double'];
+      const words = qLower.split(/\s+/).filter(w => w.length >= 3 && !stopwords.includes(w));
+      return words.some(w => pname.includes(w));
+    })() || p.category.toLowerCase().includes(q)){
         if(!results.find(r => r.id === p.id)) results.push(p);
       }
     }
