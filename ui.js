@@ -2954,8 +2954,7 @@ if (document.readyState === 'loading') {
     if (!pcVisible) return;
     var now=new Date();
     var mins=now.getMinutes(), secs=now.getSeconds();
-    var toNext=(10-(mins%10))*60-secs;
-    if(toNext<=0)toNext=600;
+    var toNext=60-secs; if(toNext<=0)toNext=60;
     if(toNext<15){
       el.textContent="🆕 Fresh drop — watch now";
       el.classList.add("fresh");
