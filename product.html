@@ -121,6 +121,10 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 </div>
 <div class="md" id="lM"><div class="bx"><h2>🔑 Login</h2><input id="lE" type="email" placeholder="Email"><input id="lP" type="password" placeholder="Password"><button class="bl" onclick="dL()">Login</button><button class="bg" onclick="cL()">Cancel</button></div></div>
 <div class="md" id="pM"><div class="bx"><h2>💳 Payment</h2>
+<div style="display:flex;gap:12px;align-items:center;background:#2d2a5e;border-radius:10px;padding:10px;margin-bottom:12px;">
+<img id="pmImg" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+<div><div id="pmName" style="font-size:.85rem;font-weight:bold;"></div><div id="pmPrice" style="color:#a78bfa;font-weight:bold;"></div></div>
+</div>
 <div class="po sel" onclick="sP(this,'JazzCash')"><b>📱 JazzCash</b></div>
 <div class="po" onclick="sP(this,'EasyPaisa')"><b>💚 EasyPaisa</b></div>
 <div class="po" onclick="sP(this,'COD')"><b>💵 Cash on Delivery</b></div>
@@ -139,9 +143,9 @@ function gp(pid,cat){
   const pr=(r()*1950+5).toFixed(2),op=(pr*1.4).toFixed(2),d=Math.floor(r()*45+5);
   const rt=(3.5+r()*1.5).toFixed(1),rv=Math.floor(r()*8000+20);
   const imgs=[];for(let i=0;i<5;i++)imgs.push("https://images.unsplash.com/"+IMGS[Math.floor(r()*IMGS.length)]+"?w=800");
-  let nm=b+" Premium "+(1000+Math.floor(r()*9000));
-  if(cat&&cat.length>3){try{nm=decodeURIComponent(cat);}catch(e){}}
-  return{id:pid,name:nm,price:pr,old_price:op,discount:"-"+d+"%",category:"General",images:imgs,rating:rt,reviews:rv.toLocaleString()};
+  const cn=cat&&cat.length>3?decodeURIComponent(cat):"General";
+  let nm=b+" "+cn.split(' ')[0]+" "+(1000+Math.floor(r()*9000))+" Pro";
+  return{id:pid,name:nm,price:pr,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
 }
 const up=new URLSearchParams(location.search);
 const pid=up.get('id')||'p1', cat=up.get('cat')||'';
@@ -173,7 +177,12 @@ function closeFS(){document.getElementById('fsM').classList.remove('open');}
 function fsN(d){fsi=(fsi+d+P.images.length)%P.images.length;uFS();}
 function uFS(){document.getElementById('fsImg').src=P.images[fsi];document.getElementById('fsCt').textContent=(fsi+1)+" / "+P.images.length;}
 function addC(){let c=parseInt(localStorage.getItem('cart_n')||'0')+1;localStorage.setItem('cart_n',c);alert("🛒 Added!");}
-function buyN(){if(!log)document.getElementById('lM').classList.add('open');else document.getElementById('pM').classList.add('open');}
+function buyN(){
+  document.getElementById('pmImg').src=P.images[0];
+  document.getElementById('pmName').textContent=P.name;
+  document.getElementById('pmPrice').textContent="$"+P.price;
+  if(!log)document.getElementById('lM').classList.add('open');else document.getElementById('pM').classList.add('open');
+}
 function dL(){if(document.getElementById('lE').value&&document.getElementById('lP').value){localStorage.setItem('usai_logged','1');log=true;cL();document.getElementById('pM').classList.add('open');}else alert("Enter email+password!");}
 function cL(){document.getElementById('lM').classList.remove('open');}
 function sP(e,m){document.querySelectorAll('.po').forEach(o=>o.classList.remove('sel'));e.classList.add('sel');pm=m;}
