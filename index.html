@@ -2458,6 +2458,34 @@ function startLCPoll(){
 </script>
 <!-- ===== END LIVE CHAT ===== -->
 
+
+<script>
+// USER REQUEST: When top widget expands, hide sports icons
+document.addEventListener('click', function(e){
+  var title = e.target.closest('.tw-title');
+  if(title){
+    var card = title.closest('.tw-card');
+    if(card){
+      setTimeout(function(){
+        var expanded = document.querySelector('#top-widgets-right .tw-card.expanded') || 
+                       document.querySelector('#top-widgets-right .tw-card.open');
+        // Also check if card body is visible (expanded)
+        var anyOpen = false;
+        document.querySelectorAll('#top-widgets-right .tw-card').forEach(function(c){
+          var body = c.querySelector('.cr-body, .tw-body, div:not(.tw-title)');
+          if(body && body.offsetHeight > 50) anyOpen = true;
+        });
+        // Hide/show sports icons - target by common patterns
+        var sportsSelectors = '[id*="sport"], [class*="sport"], #sports-icons, .sports-bar';
+        document.querySelectorAll(sportsSelectors).forEach(function(el){
+          el.style.display = anyOpen ? 'none' : '';
+        });
+      }, 100);
+    }
+  }
+});
+</script>
+
 </body>
 </html>
 
