@@ -2326,12 +2326,28 @@ function loadLCHistory(){
   hist.forEach(m => addLCMsg(m.who, m.text));
 }
 let _lcPoll = null;
+let _lcLastCount = 0;
 function startLCPoll(){
   if(_lcPoll) return;
-  // Poll for owner replies every 10s (owner replies via admin panel)
+  const user = JSON.parse(localStorage.getItem('usai_session') || localStorage.getItem('LS_SESSION') || '{}');
+  const chatId = 'lc_' + (user.email || user.id || 'guest');
+  _lcLastCount = JSON.parse(localStorage.getItem(chatId) || '[]').length;
+  // Poll for owner replies every 3s
   _lcPoll = setInterval(() => {
-    // Check for new replies (placeholder - owner uses admin panel)
-  }, 10000);
+    const hist = JSON.parse(localStorage.getItem(chatId) || '[]');
+    if(hist.length > _lcLastCount){
+      // New messages!
+      const msgs = document.getElementById('lc-msgs');
+      for(let i=_lcLastCount; i<hist.length; i++){
+        const m = hist[i];
+        // Only add if it's from admin (ai) and not already shown
+        if(m.who === 'ai'){
+          addLCMsg('ai', m.text);
+        }
+      }
+      _lcLastCount = hist.length;
+    }
+  }, 3000);
 }
 </script>
 <!-- ===== END LIVE CHAT ===== -->

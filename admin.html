@@ -432,6 +432,86 @@ document.addEventListener('click',function(e){if(document.body.classList.contain
 document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
+
+<!-- ===== LIVE CHAT ADMIN ===== -->
+<div class="admin-sec">
+<h2>💬 Live Chat Messages</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap;">
+  <div style="flex:1;min-width:250px;max-width:300px;">
+    <h3 style="color:#aaa;margin-bottom:10px;">Conversations</h3>
+    <div id="lc-users" style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;"></div>
+  </div>
+  <div style="flex:2;min-width:300px;">
+    <h3 style="color:#aaa;margin-bottom:10px;" id="lc-chat-title">Select a conversation</h3>
+    <div id="lc-chat-msgs" style="background:#1e1b4b;border-radius:10px;padding:16px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+    <div style="display:flex;gap:8px;">
+      <input id="lc-reply" placeholder="Type reply..." style="flex:1;background:#2d2a5e;border:1px solid #444;border-radius:8px;padding:10px;color:#fff;" onkeypress="if(event.key==='Enter')sendLCReply()">
+      <button onclick="sendLCReply()" style="background:#8b5cf6;color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;">Send</button>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+let _lcActiveUser = null;
+function loadLCUsers(){
+  const container = document.getElementById('lc-users');
+  if(!container) return;
+  // Find all chat histories in localStorage
+  const users = [];
+  for(let i=0; i<localStorage.length; i++){
+    const k = localStorage.key(i);
+    if(k && k.startsWith('lc_')){
+      const hist = JSON.parse(localStorage.getItem(k) || '[]');
+      if(hist.length > 0){
+        const name = k.replace('lc_', '');
+        const lastMsg = hist[hist.length-1];
+        users.push({id:k, name:name, count:hist.length, last:lastMsg.text, time:lastMsg.time});
+      }
+    }
+  }
+  users.sort((a,b) => b.time - a.time);
+  container.innerHTML = users.map(u => `
+    <div onclick="openLCChat('${u.id}')" style="background:${_lcActiveUser===u.id?'#8b5cf6':'#2d2a5e'};border-radius:10px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;">
+      <div style="width:40px;height:40px;border-radius:50%;background:#444;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👤</div>
+      <div style="flex:1;">
+        <div style="color:#fff;font-weight:bold;">${u.name}</div>
+        <div style="color:#aaa;font-size:.8rem;">${u.last.substring(0,30)}...</div>
+      </div>
+      <div style="background:#ff6b35;color:#fff;border-radius:12px;padding:2px 8px;font-size:.75rem;">${u.count}</div>
+    </div>
+  `).join('') || '<p style="color:#666;">No conversations yet</p>';
+}
+function openLCChat(userId){
+  _lcActiveUser = userId;
+  loadLCUsers();
+  const hist = JSON.parse(localStorage.getItem(userId) || '[]');
+  const msgs = document.getElementById('lc-chat-msgs');
+  document.getElementById('lc-chat-title').textContent = 'Chat with ' + userId.replace('lc_', '');
+  msgs.innerHTML = hist.map(m => `
+    <div style="max-width:80%;padding:8px 12px;border-radius:12px;font-size:.9rem;${m.who==='user'?'background:#2d2a5e;color:#fff;align-self:flex-start;':'background:#8b5cf6;color:#fff;align-self:flex-end;'}">
+      ${m.text}
+      <div style="font-size:.65rem;opacity:.7;margin-top:4px;">${new Date(m.time).toLocaleString()}</div>
+    </div>
+  `).join('');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function sendLCReply(){
+  if(!_lcActiveUser) { alert('Select a conversation first!'); return; }
+  const inp = document.getElementById('lc-reply');
+  const text = inp.value.trim();
+  if(!text) return;
+  let hist = JSON.parse(localStorage.getItem(_lcActiveUser) || '[]');
+  hist.push({who:'ai', text:text, time:Date.now()});
+  localStorage.setItem(_lcActiveUser, JSON.stringify(hist));
+  inp.value = '';
+  openLCChat(_lcActiveUser);
+}
+// Load on page open
+setTimeout(loadLCUsers, 1000);
+setInterval(loadLCUsers, 5000);
+</script>
+<!-- ===== END LIVE CHAT ADMIN ===== -->
+
 </body>
 </html>
 
