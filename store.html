@@ -966,7 +966,7 @@ function loadMore(){
 let displayedProducts = [];
 
 // Keyword expansion for better search
-const KW = {"phone":["smartphone","mobile"],"shoe":["sneakers","boots"],"tv":["television"],"fridge":["refrigerator"],"bike":["bicycle","motorbike"],"car":["vehicle","auto"],"book":["novel"],"watch":["smartwatch"],"bag":["handbag","backpack"],"cream":["lotion","moisturizer"]};
+const KW = {"phone":["smartphone","mobile"],"shoe":["sneakers","boots"],"tv":["television"],"fridge":["refrigerator"],"bike":["bicycle","motorbike"],"car":["vehicle","auto"],"book":["novel"],"watch":["smartwatch"],"mic":["microphone"],"wireless":["bluetooth"],"k8":["mic"],"k9":["mic"],"bag":["handbag","backpack"],"cream":["lotion","moisturizer"]};
 function expandQ(q){
   let qs=[q];
   for(const k in KW){ if(q.includes(k)) qs=qs.concat(KW[k]); }
