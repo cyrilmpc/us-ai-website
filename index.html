@@ -2542,7 +2542,7 @@ document.addEventListener('click', function(e){
   function collect(){
     fadeEls = [];
     // Left and right rails/widgets
-    document.querySelectorAll('#top-widgets, #top-widgets-right, #lc-wrap, #left-rail, .left-rail').forEach(function(el){
+    document.querySelectorAll('#top-widgets, #top-widgets-right, #lc-wrap, #left-rail, .left-rail, [id*="left"], [class*="left-rail"]').forEach(function(el){
       fadeEls.push(el);
     });
   }
