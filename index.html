@@ -2597,6 +2597,48 @@ setTimeout(function(){
 }, 2000);
 </script>
 
+
+<script>
+(function(){
+  // Hide airplane and compass permanently
+  function hideAC(){
+    document.querySelectorAll('#top-widgets button, #top-widgets a, #left-rail button, .left-rail button').forEach(function(el){
+      var t = (el.textContent || '').trim();
+      // Airplane ✈️ and compass 🧭 - hide them
+      if(t === '✈' || t === '✈️' || t === '🧭' || t.includes('✈') && t.length < 5){
+        // Make sure it's not X or f
+        if(t !== 'X' && t !== 'f'){
+          el.style.display = 'none !important';
+          el.remove(); // Remove completely
+        }
+      }
+    });
+  }
+  setTimeout(hideAC, 1000);
+  setTimeout(hideAC, 3000);
+  
+  // When left widget expands, hide X and f below
+  document.addEventListener('click', function(e){
+    var title = e.target.closest('#top-widgets .tw-title');
+    if(title){
+      setTimeout(function(){
+        var anyOpen = false;
+        document.querySelectorAll('#top-widgets .tw-card').forEach(function(c){
+          var body = c.querySelector('div:not(.tw-title)');
+          if(body && body.offsetHeight > 100) anyOpen = true;
+        });
+        document.querySelectorAll('#top-widgets button').forEach(function(el){
+          var t = (el.textContent || '').trim();
+          if(t === 'X' || t === 'f'){
+            el.style.display = anyOpen ? 'none' : '';
+          }
+        });
+      }, 150);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
 
