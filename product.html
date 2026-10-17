@@ -254,6 +254,30 @@ function getDesc(nm, cat){
 <div class="qa"><div class="q">Q: Delivery time?</div><div class="a">A: 2-4 working days, free delivery!</div></div>
 <div class="qa"><div class="q">Q: Return policy?</div><div class="a">A: 14-day easy returns!</div></div>
 </div>
+<div class="sec"><h2>🤝 Frequently Bought Together</h2>
+<div id="fbt" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;"></div>
+</div>
+<script>
+// Frequently bought together
+setTimeout(()=>{
+  try{
+    const fbtEl = document.getElementById('fbt');
+    if(fbtEl && typeof gp !== 'undefined'){
+      let html = '';
+      for(let i=1;i<=3;i++){
+        const fp = gp('p'+(parseInt((new URLSearchParams(location.search).get('id')||'p1').replace(/\D/g,''))+i*791), '');
+        html += `<div style="text-align:center;width:120px;">
+<img src="${fp.images[0]}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="location.href='product.html?id=${fp.id}'">
+<div style="font-size:.75rem;margin:4px 0;">${fp.name.substring(0,20)}</div>
+<div style="color:#f97316;font-weight:bold;">$${fp.price}</div>
+</div>`;
+        if(i<3) html += '<div style="font-size:1.5rem;color:#888;">+</div>';
+      }
+      fbtEl.innerHTML = html;
+    }
+  }catch(e){}
+}, 1000);
+</script>
 <div class="sec"><h2>💝 You may also like</h2><div class="pg" id="rel"></div></div>
 </div>
 <div class="md" id="lM"><div class="bx"><h2>🔑 Login</h2><input id="lE" type="email" placeholder="Email"><input id="lP" type="password" placeholder="Password"><button class="bl" onclick="dL()">Login</button><button class="bg" onclick="cL()">Cancel</button></div></div>
