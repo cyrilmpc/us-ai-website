@@ -136,54 +136,115 @@ function showPanel(name){
 function searchFlights(){
   var from=document.getElementById('fl-from').value||'New York';
   var to=document.getElementById('fl-to').value||'London';
-  var date=document.getElementById('fl-date').value;
-  var ret=document.getElementById('fl-return').value;
+  var date=document.getElementById('fl-date').value||'Any date';
+  var ret=document.getElementById('fl-return').value||'';
   var pax=document.getElementById('fl-passengers').value||'1';
-  var q='Flights from '+from+' to '+to;
-  if(date&&ret){q+=' on '+date+' through '+ret;}
-  else if(date){q+=' on '+date;}
-  if(pax!=='1'){q+=' for '+pax+' passengers';}
+  var ref='FL'+Date.now().toString(36).toUpperCase();
   document.getElementById('flight-results').innerHTML=
     '<div class="result-card"><div class="result-icon">✈️</div>'+
     '<div class="result-info"><h3>'+from+' → '+to+'</h3>'+
-    '<p>'+(date?date:'Any date')+(ret?' → '+ret:'')+' • '+pax+' passenger(s)</p>'+
-    '<p style="color:#4ade80;">✓ Opening Google Flights — 100% real live prices</p></div>'+
-    '<div class="result-price">LIVE</div></div>';
-  setTimeout(function(){
-    window.open('https://www.google.com/travel/flights?q='+encodeURIComponent(q),'_blank');
-  },800);
+    '<p>'+date+(ret?' → '+ret:'')+' • '+pax+' passenger(s)</p>'+
+    '<p style="color:#4ade80;">✓ Our team will find the best live fare for you</p></div>'+
+    '<button class="book-btn" onclick="bookTravel(\'flight\',\''+from+'\',\''+to+'\',\''+date+'\',\''+pax+'\')">Book Now</button></div>';
 }
 
 function searchHotels(){
   var city=document.getElementById('ht-city').value||'Dubai';
-  var ci=document.getElementById('ht-checkin').value;
-  var co=document.getElementById('ht-checkout').value;
+  var ci=document.getElementById('ht-checkin').value||'Any date';
+  var co=document.getElementById('ht-checkout').value||'';
+  var rooms=document.getElementById('ht-rooms').value||'1';
+  var guests=document.getElementById('ht-guests').value||'2';
   document.getElementById('hotel-results').innerHTML=
     '<div class="result-card"><div class="result-icon">🏨</div>'+
     '<div class="result-info"><h3>Hotels in '+city+'</h3>'+
-    '<p>Opening Google Hotels with live rates...</p></div>'+
-    '<div class="result-price">LIVE</div></div>';
-  setTimeout(function(){
-    var q='hotels in '+city;
-    window.open('https://www.google.com/travel/hotels?q='+encodeURIComponent(q),'_blank');
-  },800);
+    '<p>'+ci+(co?' → '+co:'')+' • '+rooms+' room(s), '+guests+' guest(s)</p>'+
+    '<p style="color:#4ade80;">✓ Our team will find the best live rates for you</p></div>'+
+    '<button class="book-btn" onclick="bookTravel(\'hotel\',\''+city+'\',\'Hotel\',\''+ci+'\',\''+rooms+' rooms, '+guests+' guests\')">Book Now</button></div>';
 }
 
 function searchCars(){
   var city=document.getElementById('car-city').value||'Los Angeles';
+  var pickup=document.getElementById('car-pickup').value||'Any date';
+  var dropoff=document.getElementById('car-dropoff').value||'';
   document.getElementById('car-results').innerHTML=
     '<div class="result-card"><div class="result-icon">🚗</div>'+
     '<div class="result-info"><h3>Rental cars in '+city+'</h3>'+
-    '<p>Opening Kayak with live car prices...</p></div>'+
-    '<div class="result-price">LIVE</div></div>';
-  setTimeout(function(){
-    window.open('https://www.kayak.com/cars/'+encodeURIComponent(city),'_blank');
-  },800);
+    '<p>'+pickup+(dropoff?' → '+dropoff:'')+'</p>'+
+    '<p style="color:#4ade80;">✓ Our team will find the best rental deals for you</p></div>'+
+    '<button class="book-btn" onclick="bookTravel(\'car\',\''+city+'\',\'Car Rental\',\''+pickup+'\',\'Rental car\')">Book Now</button></div>';
 }
 </script>
 
 <footer style="text-align:center;padding:20px;color:#666;">
   <p>Live prices via Google Flights, Google Hotels & Kayak • <a href="index.html">US AI Home</a></p>
 </footer>
+
+<!-- BOOKING MODAL -->
+<div id="booking-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:9999;overflow-y:auto;">
+  <div style="max-width:600px;margin:40px auto;background:#1e1b4b;border-radius:20px;padding:30px;color:#fff;">
+    <h2 id="booking-title">Book Your Trip</h2>
+    <div id="booking-details" style="background:#0f0d2a;padding:16px;border-radius:12px;margin:16px 0;"></div>
+    <form id="booking-form" onsubmit="submitBooking(event)">
+      <div class="search-row"><input type="text" id="bk-name" placeholder="Full Name" required></div>
+      <div class="search-row"><input type="email" id="bk-email" placeholder="Email" required></div>
+      <div class="search-row"><input type="tel" id="bk-phone" placeholder="WhatsApp Number" required></div>
+      <div class="search-row"><textarea id="bk-notes" placeholder="Special requests (optional)" rows="3" style="width:100%;padding:12px;border-radius:10px;background:#0f0d2a;color:#fff;border:1px solid #555;"></textarea></div>
+      <button type="submit" class="search-btn" style="width:100%;">✅ Confirm Booking Request</button>
+      <button type="button" onclick="closeBooking()" style="width:100%;margin-top:10px;padding:10px;background:none;border:1px solid #555;color:#fff;border-radius:10px;cursor:pointer;">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<!-- ORDER COMPLETE -->
+<div id="order-complete" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:10000;overflow-y:auto;">
+  <div style="max-width:600px;margin:40px auto;background:#1e1b4b;border-radius:20px;padding:40px;color:#fff;text-align:center;">
+    <div style="font-size:4rem;">✅</div>
+    <h2>Booking Request Received!</h2>
+    <div id="complete-details" style="background:#0f0d2a;padding:20px;border-radius:12px;margin:20px 0;text-align:left;"></div>
+    <p>Our travel team will contact you on WhatsApp within 2 hours with the best live prices and payment details.</p>
+    <button onclick="closeComplete()" class="search-btn">Done</button>
+  </div>
+</div>
+
+<script>
+var currentBooking={};
+function bookTravel(type,from,to,date,extra){
+  currentBooking={type:type,from:from,to:to,date:date,extra:extra,ref:'TRV'+Date.now().toString(36).toUpperCase()};
+  document.getElementById('booking-title').textContent='Book '+(type==='flight'?'Flight':type==='hotel'?'Hotel':'Car');
+  document.getElementById('booking-details').innerHTML=
+    '<p><b>Route:</b> '+from+' → '+to+'</p>'+
+    '<p><b>Date:</b> '+date+'</p>'+
+    '<p><b>Details:</b> '+extra+'</p>'+
+    '<p><b>Ref:</b> '+currentBooking.ref+'</p>';
+  document.getElementById('booking-modal').style.display='block';
+}
+function closeBooking(){document.getElementById('booking-modal').style.display='none';}
+function closeComplete(){document.getElementById('order-complete').style.display='none';}
+function submitBooking(e){
+  e.preventDefault();
+  var name=document.getElementById('bk-name').value;
+  var email=document.getElementById('bk-email').value;
+  var phone=document.getElementById('bk-phone').value;
+  var notes=document.getElementById('bk-notes').value||'—';
+  // Send via FormSubmit
+  var data={_subject:'New Travel Booking: '+currentBooking.ref,
+    BookingRef:currentBooking.ref, Type:currentBooking.type,
+    From:currentBooking.from, To:currentBooking.to,
+    Date:currentBooking.date, Details:currentBooking.extra,
+    Name:name, Email:email, WhatsApp:phone, Notes:notes};
+  fetch('https://formsubmit.co/ajax/cyrilmp4665@gmail.com',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  // Show completion
+  document.getElementById('booking-modal').style.display='none';
+  document.getElementById('complete-details').innerHTML=
+    '<p><b>📋 Booking Ref:</b> '+currentBooking.ref+'</p>'+
+    '<p><b>✈️ Type:</b> '+currentBooking.type+'</p>'+
+    '<p><b>📍 Route:</b> '+currentBooking.from+' → '+currentBooking.to+'</p>'+
+    '<p><b>📅 Date:</b> '+currentBooking.date+'</p>'+
+    '<p><b>👤 Name:</b> '+name+'</p>'+
+    '<p><b>📱 WhatsApp:</b> '+phone+'</p>';
+  document.getElementById('order-complete').style.display='block';
+}
+</script>
 </body>
 </html>
