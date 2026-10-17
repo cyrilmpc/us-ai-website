@@ -970,7 +970,7 @@ function doSearch(){
   });
   // Then search more from generator (sequential IDs like displayed!)
   if(results.length < 20){
-    for(let i = 1; i <= 5000 && results.length < 50; i++){
+    for(let i = 1; i <= 50000 && results.length < 50; i++){
       const p = genProduct(i);
       if(qlist.some(kw=>p.name.toLowerCase().includes(kw)) || p.category.toLowerCase().includes(q)){
         if(!results.find(r => r.id === p.id)) results.push(p);
@@ -1190,7 +1190,7 @@ function openDetail(id){
   // Find product by ID
   let p = null;
   // Search in generated products
-  for(let i = 1; i <= 200000; i += 997){
+  for(let i = 1; i <= 2000000; i += 499){
     const gp = genProduct(i);
     if(gp.id === id){ p = gp; break; }
   }
