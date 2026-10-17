@@ -144,6 +144,20 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 /* Responsive */
 @media(max-width:900px){.pgrid{grid-template-columns:repeat(3,1fr)}.ct-grid{grid-template-columns:repeat(4,1fr)}.ftr-in{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:550px){.pgrid{grid-template-columns:repeat(2,1fr)}.pc .im{height:140px}.bnr h1{font-size:1.4rem}.hdr-in{gap:10px}.logo{font-size:1.3rem}.live-pill{display:none}}
+
+/* Header nav icons */
+.hnav{display:flex;gap:8px;margin-left:auto}
+.hnav a{font-size:1.4rem;text-decoration:none;background:rgba(255,255,255,.1);width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;transition:all .3s;border:1px solid rgba(255,255,255,.1)}
+.hnav a:hover{background:#8b5cf6;transform:translateY(-3px) scale(1.1);box-shadow:0 8px 20px rgba(139,92,246,.4)}
+/* Floating side icons */
+.side-icons{position:fixed;right:15px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:99}
+.side-icons a{width:48px;height:48px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 6px 20px rgba(139,92,246,.4);transition:all .3s;animation:floatY 3s ease-in-out infinite}
+.side-icons a:nth-child(2){animation-delay:.5s;background:linear-gradient(135deg,#22d3ee,#3b82f6)}
+.side-icons a:nth-child(3){animation-delay:1s;background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.side-icons a:nth-child(4){animation-delay:1.5s;background:linear-gradient(135deg,#10b981,#22d3ee)}
+.side-icons a:hover{transform:scale(1.15)}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:768px){.side-icons{right:8px}.side-icons a{width:42px;height:42px;font-size:1.2rem}}
 </style>
 </head>
 <body>
@@ -678,5 +692,13 @@ function setMainImg(idx){
   });
 }
 </script>
+
+<!-- Floating Side Icons -->
+<div class="side-icons">
+  <a href="javascript:void(0)" onclick="showCart()" title="🛒 Cart">🛒</a>
+  <a href="javascript:void(0)" onclick="showOrders()" title="📋 My Orders">📋</a>
+  <a href="track.html" title="📦 Track Order">📦</a>
+  <a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="⬆️ Top">⬆️</a>
+</div>
 </body>
 </html>
