@@ -1061,10 +1061,16 @@ function doSearch(){
     if(pbrand === qLower) s += 80;                   // exact brand match (Nike for "nike")
     if(pname.startsWith(qLower)) s += 60;            // starts with query
     if(pbrand && qLower.includes(pbrand) && pbrand.length >= 3) s += 50; // brand in query
-    if(pname.includes(qLower)) s += 40;              // name contains query
+    if(qLower.length <= 4){
+      const qre = new RegExp('\\b' + qLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+      if(qre.test(pname)) s += 40;
+    } else if(pname.includes(qLower)) s += 40;              // name contains query
     if(pcat.includes(qLower)) s += 20;               // category contains
-    // word matches
-    words.forEach(w => { if(pname.includes(w)) s += 15; });
+    // word matches (with word boundaries to avoid false positives like "pen" in "dispenser")
+    words.forEach(w => {
+      const re = new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+      if(re.test(pname)) s += 15;
+    });
     // penalize nonsense: brand shouldn't be on wrong category items
     return s;
   }
