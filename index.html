@@ -2507,10 +2507,24 @@ document.addEventListener('click', function(e){
           var body = c.querySelector('.cr-body, .tw-body, div:not(.tw-title)');
           if(body && body.offsetHeight > 50) anyOpen = true;
         });
-        // Hide/show sports icons - target by common patterns
+        // Hide/show sports icons (right) - target by common patterns
         var sportsSelectors = '[id*="sport"], [class*="sport"], #sports-icons, .sports-bar';
         document.querySelectorAll(sportsSelectors).forEach(function(el){
           el.style.display = anyOpen ? 'none' : '';
+        });
+        // Also handle left side: when top-widgets card expands, hide social icons below
+        var leftOpen = false;
+        document.querySelectorAll('#top-widgets .tw-card').forEach(function(c){
+          var body = c.querySelector('div:not(.tw-title)');
+          if(body && body.offsetHeight > 80) leftOpen = true;
+        });
+        // Hide left social icons when left widget expands
+        document.querySelectorAll('#top-widgets button, #top-widgets a').forEach(function(el){
+          var txt = el.textContent || '';
+          // Social icons are small buttons with X, f, etc.
+          if((txt.trim() === 'X' || txt.trim() === 'f') && el.offsetHeight < 50){
+            el.style.display = leftOpen ? 'none' : '';
+          }
         });
       }, 100);
     }
