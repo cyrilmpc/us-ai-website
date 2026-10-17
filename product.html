@@ -164,6 +164,70 @@ body .sp-float, body [id*="float"], body [class*="float-"] { display: none !impo
 /* US AI Dark Theme Override */
 body{background:linear-gradient(135deg,#0f0c29 0%,#1a1a3e 50%,#0d1b4c 100%) !important;color:#fff !important;}
 </style>
+
+<script>
+// ===== PRODUCT GENERATOR (same as store) =====
+function srand(seed){
+  let s = seed % 2147483647;
+  if(s <= 0) s += 2147483646;
+  return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+}
+const BRANDS = ["Apple","Samsung","Sony","LG","Xiaomi","Huawei","Oppo","Vivo","Realme","OnePlus","Dell","HP","Lenovo","Nike","Adidas","P&G","Huawei","HP","Puma","Nivea"];
+function genProductFromId(pid, catName){
+  const num = parseInt(pid.replace('p','')) || 1;
+  const r = srand(num * 7919 + 13);
+  const b = BRANDS[Math.floor(r() * BRANDS.length)];
+  const price = (r() * 1950 + 5).toFixed(2);
+  const oldP = (price * 1.4).toFixed(2);
+  const disc = Math.floor(r() * 45 + 5);
+  const rating = (3.5 + r() * 1.5).toFixed(1);
+  const revs = Math.floor(r() * 8000 + 20);
+  // Use cat from URL if provided
+  const cat = catName || "Electronics";
+  const baseImg = "https://images.unsplash.com/photo-1441986300917-64674bd600d8";
+  const images = [
+    baseImg + "?w=800",
+    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
+    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+    "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800"
+  ];
+  // Try to extract name from cat param (URL has product name)
+  let name = b + " Premium Product " + (1000 + Math.floor(r() * 9000));
+  if(catName && catName.length > 3){
+    // cat param actually contains the product name from URL
+    try { name = decodeURIComponent(catName); } catch(e){}
+  }
+  return {
+    id: pid, name: name,
+    price, old_price: oldP, discount: "-" + disc + "%",
+    category: "Electronics", images,
+    rating, reviews: revs.toLocaleString()
+  };
+}
+// Override: get product from URL
+(function(){
+  const urlP = new URLSearchParams(window.location.search);
+  const pid = urlP.get('id');
+  const cat = urlP.get('cat');
+  if(pid){
+    window.PRODUCT_DATA = genProductFromId(pid, cat);
+    // Update page when ready
+    window.addEventListener('DOMContentLoaded', function(){
+      const pd = window.PRODUCT_DATA;
+      // Try to update common elements
+      const set = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+      const setHTML = (id, val) => { const e = document.getElementById(id); if(e) e.innerHTML = val; };
+      set('pName', pd.name); set('productName', pd.name); set('pTitle', pd.name);
+      set('pPrice', '$' + pd.price); set('productPrice', '$' + pd.price);
+      const img = document.getElementById('mainImg') || document.getElementById('pImg') || document.querySelector('.gal-main img');
+      if(img) img.src = pd.images[0];
+      // Hide "not found" if present
+      document.body.innerHTML = document.body.innerHTML.replace(/Product not found/gi, '');
+    });
+  }
+})();
+</script>
 </head>
 <body>
 <nav class="nav">
