@@ -809,6 +809,13 @@ function expandQ(q){
   return qs;
 }
 
+
+// Price range search: "under 50", "below 100"
+function parsePriceQ(q){
+  const m = q.match(/(?:under|below|less than)\s*\$?(\d+)/i);
+  return m ? parseFloat(m[1]) : null;
+}
+
 function doSearch(){
   const qraw = document.getElementById('q').value.trim().toLowerCase();
   const qlist = (typeof expandQ !== 'undefined') ? expandQ(qraw) : [qraw];
