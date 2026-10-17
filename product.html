@@ -467,10 +467,10 @@ function gp(pid,cat){
         const _sep = pim.includes('?') ? '&' : '?';
       imgs = [
         pim,
-        pim + _sep + 'fit=crop&crop=top&h=800',
-        pim + _sep + 'fit=crop&crop=bottom&h=800',
-        pim + _sep + 'fit=crop&crop=left&w=800&h=800',
-        pim + _sep + 'fit=crop&crop=right&w=800&h=800'
+        pim + _sep + 'fit=crop&crop=entropy&w=800&h=800',
+        pim + _sep + 'sat=-100&w=800',
+        pim + _sep + 'fit=crop&w=400&h=800&crop=top',
+        pim + _sep + 'fit=crop&w=800&h=400&crop=center'
       ];
       }catch(e){}
     }

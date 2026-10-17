@@ -867,10 +867,10 @@ function genProduct(id, forceCat){
     const img = "https://images.unsplash.com/" + rp[3] + "?w=800";
     const images = [
   img,
-  img + "&fit=crop&crop=top&h=800",
-  img + "&fit=crop&crop=bottom&h=800",
-  img + "&fit=crop&crop=left&w=800&h=800",
-  img + "&fit=crop&crop=right&w=800&h=800"
+  img + "&fit=crop&crop=entropy&w=800&h=800",
+  img + "&sat=-100&w=800",
+  img + "&fit=crop&w=400&h=800&crop=top",
+  img + "&fit=crop&w=800&h=400&crop=center"
 ];
     return {id:'p'+rid, name:rp[0], brand:rp[1], category:rp[2], price:price.toFixed(2), old_price:oldP.toFixed(2), discount:'-'+disc+'%', rating:(4+r()).toFixed(1), reviews:Math.floor(r()*5000+100).toLocaleString(), image:img, images:images};
   }
