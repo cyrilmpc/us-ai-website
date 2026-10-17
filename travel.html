@@ -51,6 +51,8 @@
   <button class="travel-tab active" onclick="showPanel('flights')">✈️ Flights</button>
   <button class="travel-tab" onclick="showPanel('hotels')">🏨 Hotels</button>
   <button class="travel-tab" onclick="showPanel('cars')">🚗 Cars</button>
+  <button class="travel-tab" onclick="showPanel('trains')">🚂 Trains</button>
+  <button class="travel-tab" onclick="showPanel('insurance')">🛡️ Insurance</button>
 </div>
 
 <!-- FLIGHTS PANEL -->
@@ -162,6 +164,30 @@ function searchHotels(){
     '<button class="book-btn" onclick="bookTravel(\'hotel\',\''+city+'\',\'Hotel\',\''+ci+'\',\''+rooms+' rooms, '+guests+' guests\')">Book Now</button></div>';
 }
 
+function searchTrains(){
+  var from=document.getElementById('tr-from').value||'Lahore';
+  var to=document.getElementById('tr-to').value||'Karachi';
+  var date=document.getElementById('tr-date').value||'Any date';
+  document.getElementById('train-results').innerHTML=
+    '<div class="result-card"><div class="result-icon">🚂</div>'+
+    '<div class="result-info"><h3>'+from+' → '+to+'</h3>'+
+    '<p>'+date+'</p>'+
+    '<p style="color:#4ade80;">✓ Our team will arrange train tickets for you</p></div>'+
+    '<button class="book-btn" onclick="bookTravel(\'train\',\''+from+'\',\''+to+'\',\''+date+'\',\'Train ticket\')">Book Now</button></div>';
+}
+
+function searchInsurance(){
+  var dest=document.getElementById('in-dest').value||'USA';
+  var start=document.getElementById('in-start').value||'Any date';
+  var end=document.getElementById('in-end').value||'';
+  document.getElementById('insurance-results').innerHTML=
+    '<div class="result-card"><div class="result-icon">🛡️</div>'+
+    '<div class="result-info"><h3>Travel Insurance — '+dest+'</h3>'+
+    '<p>'+start+(end?' → '+end:'')+'</p>'+
+    '<p style="color:#4ade80;">✓ Our team will get you the best insurance quote</p></div>'+
+    '<button class="book-btn" onclick="bookTravel(\'insurance\',\''+dest+'\',\'Insurance\',\''+start+'\',\'Travel insurance\')">Get Quote</button></div>';
+}
+
 function searchCars(){
   var city=document.getElementById('car-city').value||'Los Angeles';
   var pickup=document.getElementById('car-pickup').value||'Any date';
@@ -178,6 +204,37 @@ function searchCars(){
 <footer style="text-align:center;padding:20px;color:#666;">
   <p>Live prices via Google Flights, Google Hotels & Kayak • <a href="index.html">US AI Home</a></p>
 </footer>
+
+
+<!-- TRAINS PANEL -->
+<div class="travel-panel" id="panel-trains">
+  <div class="travel-card">
+    <h2>🚂 Train Tickets <span class="live-badge">● LIVE</span></h2>
+    <p style="color:#a5b4fc;">Book train tickets — our team will arrange the best options.</p>
+    <div class="search-row">
+      <input type="text" id="tr-from" placeholder="From station/city">
+      <input type="text" id="tr-to" placeholder="To station/city">
+      <input type="date" id="tr-date" aria-label="Travel date">
+    </div>
+    <button class="search-btn" onclick="searchTrains()">🔍 Search Trains</button>
+  </div>
+  <div id="train-results"></div>
+</div>
+
+<!-- INSURANCE PANEL -->
+<div class="travel-panel" id="panel-insurance">
+  <div class="travel-card">
+    <h2>🛡️ Travel Insurance <span class="live-badge">● LIVE</span></h2>
+    <p style="color:#a5b4fc;">Get travel insurance — complete protection for your trip.</p>
+    <div class="search-row">
+      <input type="text" id="in-dest" placeholder="Destination country">
+      <input type="date" id="in-start" aria-label="Trip start">
+      <input type="date" id="in-end" aria-label="Trip end">
+    </div>
+    <button class="search-btn" onclick="searchInsurance()">🔍 Get Insurance Quote</button>
+  </div>
+  <div id="insurance-results"></div>
+</div>
 
 <!-- BOOKING MODAL -->
 <div id="booking-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:9999;overflow-y:auto;">
@@ -202,14 +259,20 @@ function searchCars(){
     <h2>Booking Request Received!</h2>
     <div id="complete-details" style="background:#0f0d2a;padding:20px;border-radius:12px;margin:20px 0;text-align:left;"></div>
     <p>Our travel team will contact you on WhatsApp within 2 hours with the best live prices and payment details.</p>
-    <button onclick="closeComplete()" class="search-btn">Done</button>
+    <button id="wa-send-btn" class="search-btn" style="background:#25D366;margin-bottom:10px;">📱 Send Booking on WhatsApp</button><br>
+    <button onclick="closeComplete()" class="search-btn" style="background:#555;">Done</button>
   </div>
 </div>
 
 <script>
 var currentBooking={};
 function bookTravel(type,from,to,date,extra){
-  currentBooking={type:type,from:from,to:to,date:date,extra:extra,ref:'TRV'+Date.now().toString(36).toUpperCase()};
+  // Login required
+  var user=null;
+  try{var em=localStorage.getItem('usai_session');if(em){var users=JSON.parse(localStorage.getItem('usai_users')||'{}');var u=users[em.toLowerCase()];if(u)user={name:u.name,email:em};}}catch(e){}
+  if(!user){alert('Please login first to book!');window.location.href='account.html';return;}
+  currentBooking.user=user;
+  currentBooking={type:type,from:from,to:to,date:date,extra:extra,ref:'TRV'+Date.now().toString(36).toUpperCase(),user:user};
   document.getElementById('booking-title').textContent='Book '+(type==='flight'?'Flight':type==='hotel'?'Hotel':'Car');
   document.getElementById('booking-details').innerHTML=
     '<p><b>Route:</b> '+from+' → '+to+'</p>'+
@@ -244,6 +307,11 @@ function submitBooking(e){
     '<p><b>👤 Name:</b> '+name+'</p>'+
     '<p><b>📱 WhatsApp:</b> '+phone+'</p>';
   document.getElementById('order-complete').style.display='block';
+  // Setup WhatsApp button
+  var waMsg='🧳 *NEW TRAVEL BOOKING*\n\n📋 Ref: '+currentBooking.ref+'\n✈️ Type: '+currentBooking.type+'\n📍 Route: '+currentBooking.from+' → '+currentBooking.to+'\n📅 Date: '+currentBooking.date+'\n👤 Name: '+name+'\n📧 Email: '+email+'\n📱 WhatsApp: '+phone+'\n📝 Notes: '+notes;
+  document.getElementById('wa-send-btn').onclick=function(){
+    window.open('https://wa.me/923254746678?text='+encodeURIComponent(waMsg),'_blank');
+  };
 }
 </script>
 </body>
