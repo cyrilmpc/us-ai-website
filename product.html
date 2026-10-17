@@ -324,7 +324,7 @@ setTimeout(()=>{
     if(fbtEl && typeof gp !== 'undefined'){
       let html = '';
       for(let i=1;i<=3;i++){
-        const fp = gp('p'+(parseInt((new URLSearchParams(location.search).get('id')||'p1').replace(/\D/g,''))+i*791), '');
+        const fp = gp('p'+(parseInt((new URLSearchParams(location.search).get('id')||new URLSearchParams(location.search).get('pid')||'p1').replace(/\D/g,''))+i*791), '');
         html += `<div style="text-align:center;width:120px;">
 <img src="${fp.images[0]}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="location.href='product.html?id=${fp.id}'">
 <div style="font-size:.75rem;margin:4px 0;">${fp.name.substring(0,20)}</div>
@@ -424,7 +424,7 @@ function gp(pid,cat){
   return{id:pid,name:nm,price:pr_use,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
 }
 const up=new URLSearchParams(location.search);
-const pid=up.get('id')||'p1', cat=up.get('cat')||'';
+const pid=up.get('id')||up.get('pid')||'p1', cat=up.get('cat')||'';
 const P=gp(pid,cat);
 let pm='JazzCash',fsi=0,log=localStorage.getItem('usai_logged')==='1';
 function init(){
