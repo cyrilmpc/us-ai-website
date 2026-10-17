@@ -166,6 +166,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
     <div class="srch" style="max-width:700px;margin:0 auto;">
       <input type="text" id="q" placeholder="🔍 Search 500 million products..." onkeypress="if(event.key==='Enter')doSearch()">
       <button onclick="doSearch()">🔍</button>
+      <button onclick="clearSearch()" id="clearBtn" style="display:none;background:#ef4444;color:#fff;" title="Clear search">✕</button>
     </div>
   </div>
 </header>
@@ -414,6 +415,7 @@ function doSearch(){
   document.querySelector('.sec-h h2').innerHTML = `🔍 Results for "${q}" (${results.length}+)`;
   document.getElementById('jfyG').innerHTML = html;
   document.getElementById('lmBtn').style.display = 'none';
+  document.getElementById('clearBtn').style.display = '';
   toast(`Found ${results.length}+ results for "${q}"!`);
 }
 // ===== CATEGORY PANEL =====
@@ -470,6 +472,21 @@ function showCart(){ toast("🛒 Cart: " + document.getElementById('cartN').text
 function showOrders(){
   const o = JSON.parse(localStorage.getItem('my_orders') || '[]');
   alert(o.length ? "📋 Your Orders:\n\n" + o.map(x => x.code + " - " + x.product + " ($" + x.price + ")").join('\n') : 'No orders yet! 🛒');
+}
+function clearSearch(){
+  document.getElementById('q').value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+  document.getElementById('lmBtn').style.display = '';
+  document.querySelector('.sec-h h2').innerHTML = '🎯 Just For You';
+  // Reset to initial products
+  jfyCount = 0;
+  displayedProducts = [];
+  document.getElementById('jfyG').innerHTML = '';
+  const flashBatch = genBatch(1, 10);
+  flashBatch.forEach(p => displayedProducts.push(p));
+  document.getElementById('flashG').innerHTML = flashBatch.map(cardHTML).join('');
+  loadMore();
+  toast("🔄 Reset! Fresh products loaded!");
 }
 function toast(m){
   const t = document.getElementById('tst');
