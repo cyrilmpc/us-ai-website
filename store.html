@@ -867,10 +867,10 @@ function genProduct(id, forceCat){
     const img = "https://images.unsplash.com/" + rp[3] + "?w=800";
     const images = [
   img,
-  img + "&fit=crop&crop=entropy&w=800&h=800",
-  img + "&sat=-100&w=800",
-  img + "&fit=crop&w=400&h=800&crop=top",
-  img + "&fit=crop&w=800&h=400&crop=center"
+  img + "&fit=crop&crop=entropy&w=600&h=600",
+  img + "&fit=crop&crop=top&w=800&h=600",
+  img + "&fit=crop&crop=bottom&w=800&h=600",
+  img + "&fit=crop&w=800&h=800&crop=center"
 ];
     return {id:'p'+rid, name:rp[0], brand:rp[1], category:rp[2], price:price.toFixed(2), old_price:oldP.toFixed(2), discount:'-'+disc+'%', rating:(4+r()).toFixed(1), reviews:Math.floor(r()*5000+100).toLocaleString(), image:img, images:images};
   }
@@ -921,9 +921,7 @@ function openProduct(id, cat){
   const im = pr ? encodeURIComponent(pr.image) : '';
   const ims = pr && pr.images ? encodeURIComponent(JSON.stringify(pr.images)) : '';
   const url = 'product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc + '&im=' + im + '&ims=' + ims;
-  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  if(isMobile){ location.href = url; }
-  else { window.open(url, '_blank'); }
+  window.open(url, '_blank');
 }
 // Product images for hover
 function getPImgs(p){
@@ -1046,7 +1044,13 @@ function genFromQuery(q, count){
   return arr;
 }
 
-function doSearch(){
+function doSearch(fromURL){
+  const sq = document.getElementById('q').value.trim();
+  // If not from URL param and not already on search results, open in new tab
+  if(!fromURL && sq && !window.location.search.includes('q=')){
+    window.open('store.html?q=' + encodeURIComponent(sq), '_blank');
+    return;
+  }
   const qraw = document.getElementById('q').value.trim().toLowerCase();
   const qlist = (typeof expandQ !== 'undefined') ? expandQ(qraw) : [qraw];
   const q = qlist[0];
@@ -1349,6 +1353,8 @@ function startNotifs(){
   }, 12000);
 }
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
+// Auto-search from URL param (new tab search)
+(function(){ const up=new URLSearchParams(window.location.search); const qq=up.get('q'); if(qq){ document.getElementById('q').value=qq; setTimeout(()=>doSearch(true), 800); } })();
 </script>
 
 <!-- ===== PRODUCT DETAIL MODAL (Daraz style) ===== -->
