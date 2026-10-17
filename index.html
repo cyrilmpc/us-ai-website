@@ -146,6 +146,22 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 </style>
 
+
+<style>
+/* FIX: Expanded widgets must not grow too tall and cover sports icons */
+#top-widgets-right .tw-card .tw-body,
+#top-widgets-right .tw-card > div:not(.tw-title){
+  max-height:280px !important;
+  overflow-y:auto !important;
+}
+/* Crypto widget specifically - it's the tallest */
+#top-widgets-right .tw-card:has(.crypto-body) .crypto-body,
+#top-widgets-right [id*="crypto"]{
+  max-height:280px !important;
+  overflow-y:auto !important;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
