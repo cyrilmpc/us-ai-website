@@ -275,6 +275,20 @@ body.widget-open .left-rail .social-icons{display:none !important;}
 }
 </style>
 
+
+<style>
+/* Article cards animation - restore */
+.mini-art{
+  animation:artFloat 4s ease-in-out infinite !important;
+}
+.mini-art:nth-child(2n){animation-delay:-2s !important;}
+.mini-art:nth-child(3n){animation-delay:-1s !important;}
+@keyframes artFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
