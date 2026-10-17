@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Read in Turkish">
+<defs>
+<linearGradient id="bg-h15-lang-tr" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#1c0a00"/>
+</linearGradient>
+<radialGradient id="glow-h15-lang-tr" cx="0.8" cy="0.15" r="0.9">
+<stop offset="0" stop-color="#fb7185" stop-opacity="0.55"/><stop offset="1" stop-color="#fb7185" stop-opacity="0"/>
+</radialGradient>
+<pattern id="dots-h15-lang-tr" width="46" height="46" patternUnits="userSpaceOnUse">
+<circle cx="6" cy="6" r="2.2" fill="#ffffff" opacity="0.10"/>
+</pattern>
+<linearGradient id="scrim-h15-lang-tr" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0.45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.62"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg-h15-lang-tr)"/>
+<rect width="1200" height="630" fill="url(#glow-h15-lang-tr)"/>
+<circle cx="902" cy="97" r="254" fill="#fb7185" opacity="0.16"/>
+<circle cx="998" cy="487" r="179" fill="#ffffff" opacity="0.07"/>
+<circle cx="180" cy="120" r="90" fill="#facc15" opacity="0.12"/>
+<rect width="1200" height="630" fill="url(#dots-h15-lang-tr)"/>
+<path d="M0,490 C300,370 700,590 1200,450 L1200,630 L0,630 Z" fill="#fb7185" opacity="0.14"/>
+<rect width="1200" height="630" fill="url(#scrim-h15-lang-tr)"/>
+<text x="80" y="120" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="8" fill="#fb7185" opacity="0.95">US AI · LANGUAGES</text>
+<text x="76" y="470" font-family="Arial,Helvetica,sans-serif" font-size="86" font-weight="bold" fill="#ffffff">Read in Turkish</text>
+</svg>

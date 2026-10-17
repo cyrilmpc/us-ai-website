@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Free Cron Expression Generator Online">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#021b2e"/><stop offset="1" stop-color="#0b3d62"/>
+</linearGradient>
+<radialGradient id="glow" cx="0.8" cy="0.15" r="0.9">
+<stop offset="0" stop-color="#22d3ee" stop-opacity="0.55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+</radialGradient>
+<pattern id="dots" width="46" height="46" patternUnits="userSpaceOnUse">
+<circle cx="6" cy="6" r="2.2" fill="#ffffff" opacity="0.10"/>
+</pattern>
+<linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0.45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.62"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<rect width="1200" height="630" fill="url(#glow)"/>
+<circle cx="967" cy="266" r="252" fill="#22d3ee" opacity="0.16"/>
+<circle cx="300" cy="476" r="275" fill="#ffffff" opacity="0.07"/>
+<rect width="1200" height="630" fill="url(#dots)"/>
+<path d="M0,490 C300,370 700,590 1200,450 L1200,630 L0,630 Z" fill="#22d3ee" opacity="0.14"/>
+<rect width="1200" height="630" fill="url(#scrim)"/>
+<rect x="80" y="376" width="64" height="8" rx="4" fill="#22d3ee"/>
+<text x="80" y="416" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#ffffff" opacity="0.75">US AI · FREE TOOL</text>
+<text x="80" y="494" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="64" font-weight="800" fill="#ffffff"><tspan x="80" dy="0">Free Cron Expression Generator</tspan><tspan x="80" dy="76">Online</tspan></text>
+</svg>

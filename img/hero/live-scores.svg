@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Live Sports Scores">
+<defs>
+<linearGradient id="bg-live-scores" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#052e16"/><stop offset="1" stop-color="#020617"/>
+</linearGradient>
+<radialGradient id="glow-live-scores" cx="0.8" cy="0.15" r="0.9">
+<stop offset="0" stop-color="#ef4444" stop-opacity="0.55"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/>
+</radialGradient>
+<pattern id="dots-live-scores" width="46" height="46" patternUnits="userSpaceOnUse">
+<circle cx="6" cy="6" r="2.2" fill="#ffffff" opacity="0.10"/>
+</pattern>
+<linearGradient id="scrim-live-scores" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0.45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.62"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg-live-scores)"/>
+<rect width="1200" height="630" fill="url(#glow-live-scores)"/>
+<circle cx="902" cy="97" r="254" fill="#ef4444" opacity="0.16"/>
+<circle cx="998" cy="487" r="179" fill="#ffffff" opacity="0.07"/>
+<circle cx="180" cy="120" r="90" fill="#a3e635" opacity="0.12"/>
+<rect width="1200" height="630" fill="url(#dots-live-scores)"/>
+<path d="M0,490 C300,370 700,590 1200,450 L1200,630 L0,630 Z" fill="#ef4444" opacity="0.14"/>
+<rect width="1200" height="630" fill="url(#scrim-live-scores)"/>
+<rect x="80" y="452" width="64" height="8" rx="4" fill="#ef4444"/>
+<text x="80" y="492" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#ffffff" opacity="0.75">US AI · LIVE</text>
+<text x="80" y="570" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="64" font-weight="800" fill="#ffffff"><tspan x="80" dy="0">Live Sports Scores</tspan></text>
+</svg>

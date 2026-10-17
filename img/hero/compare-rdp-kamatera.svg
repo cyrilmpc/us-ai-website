@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="RDP vs Kamatera">
+<defs>
+<linearGradient id="bg-h15-compare-rdp-kamatera" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0c4a6e"/><stop offset="1" stop-color="#020617"/>
+</linearGradient>
+<radialGradient id="glow-h15-compare-rdp-kamatera" cx="0.8" cy="0.15" r="0.9">
+<stop offset="0" stop-color="#22d3ee" stop-opacity="0.55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+</radialGradient>
+<pattern id="dots-h15-compare-rdp-kamatera" width="46" height="46" patternUnits="userSpaceOnUse">
+<circle cx="6" cy="6" r="2.2" fill="#ffffff" opacity="0.10"/>
+</pattern>
+<linearGradient id="scrim-h15-compare-rdp-kamatera" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0.45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.62"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg-h15-compare-rdp-kamatera)"/>
+<rect width="1200" height="630" fill="url(#glow-h15-compare-rdp-kamatera)"/>
+<circle cx="902" cy="97" r="254" fill="#22d3ee" opacity="0.16"/>
+<circle cx="998" cy="487" r="179" fill="#ffffff" opacity="0.07"/>
+<circle cx="180" cy="120" r="90" fill="#fb923c" opacity="0.12"/>
+<rect width="1200" height="630" fill="url(#dots-h15-compare-rdp-kamatera)"/>
+<path d="M0,490 C300,370 700,590 1200,450 L1200,630 L0,630 Z" fill="#22d3ee" opacity="0.14"/>
+<rect width="1200" height="630" fill="url(#scrim-h15-compare-rdp-kamatera)"/>
+<text x="80" y="120" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="8" fill="#22d3ee" opacity="0.95">US AI · COMPARE</text>
+<text x="76" y="470" font-family="Arial,Helvetica,sans-serif" font-size="86" font-weight="bold" fill="#ffffff">RDP vs Kamatera</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="RDP &amp; VPS Hosting">
+<defs>
+<linearGradient id="bg-rdp" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0b1e3a"/><stop offset="1" stop-color="#020617"/>
+</linearGradient>
+<radialGradient id="glow-rdp" cx="0.8" cy="0.15" r="0.9">
+<stop offset="0" stop-color="#38bdf8" stop-opacity="0.55"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+</radialGradient>
+<pattern id="dots-rdp" width="46" height="46" patternUnits="userSpaceOnUse">
+<circle cx="6" cy="6" r="2.2" fill="#ffffff" opacity="0.10"/>
+</pattern>
+<linearGradient id="scrim-rdp" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0.45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.62"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg-rdp)"/>
+<rect width="1200" height="630" fill="url(#glow-rdp)"/>
+<circle cx="902" cy="97" r="254" fill="#38bdf8" opacity="0.16"/>
+<circle cx="998" cy="487" r="179" fill="#ffffff" opacity="0.07"/>
+<rect width="1200" height="630" fill="url(#dots-rdp)"/>
+<path d="M0,490 C300,370 700,590 1200,450 L1200,630 L0,630 Z" fill="#38bdf8" opacity="0.14"/>
+<rect width="1200" height="630" fill="url(#scrim-rdp)"/>
+<rect x="80" y="452" width="64" height="8" rx="4" fill="#38bdf8"/>
+<text x="80" y="492" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#ffffff" opacity="0.75">US AI · RDP &amp; VPS</text>
+<text x="80" y="570" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif" font-size="64" font-weight="800" fill="#ffffff"><tspan x="80" dy="0">RDP &amp; VPS Hosting</tspan></text>
+</svg>
