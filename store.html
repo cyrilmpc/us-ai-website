@@ -249,6 +249,19 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .toolbar select,.toolbar button{transition:all .3s}
 .toolbar select:hover,.toolbar button:hover{transform:translateY(-2px)}
 .newsletter{animation:fadeUp .8s ease}
+
+/* Loading skeleton */
+.skel{background:linear-gradient(90deg,#1e1b4b 25%,#2d2a5e 50%,#1e1b4b 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:12px}
+@keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Scroll top button */
+#topBtn{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);border:none;border-radius:50%;color:#fff;font-size:1.5rem;cursor:pointer;display:none;z-index:99;box-shadow:0 8px 20px rgba(139,92,246,.4);transition:all .3s}
+#topBtn:hover{transform:scale(1.15)}
+#topBtn.show{display:block;animation:popIn .3s}
+@keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+/* Category panel animation */
+#cpanel{transition:all .4s}
+#cpanel.open{animation:slideUp .4s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -296,6 +309,17 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
       <button onclick="clearSearch()" id="clearBtn" style="display:none;background:#ef4444;color:#fff;" title="Clear search">✕</button>
     </div>
   </div>
+<div style="text-align:center;margin:8px 0;">
+<span style="color:#888;font-size:.8rem;">🔥 Trending: </span>
+<a href="javascript:void(0)" onclick="qSearch('headphones')" style="color:#a78bfa;font-size:.8rem;margin:0 6px;text-decoration:none;">headphones</a>
+<a href="javascript:void(0)" onclick="qSearch('perfume')" style="color:#a78bfa;font-size:.8rem;margin:0 6px;text-decoration:none;">perfume</a>
+<a href="javascript:void(0)" onclick="qSearch('laptop')" style="color:#a78bfa;font-size:.8rem;margin:0 6px;text-decoration:none;">laptop</a>
+<a href="javascript:void(0)" onclick="qSearch('watch')" style="color:#a78bfa;font-size:.8rem;margin:0 6px;text-decoration:none;">watch</a>
+<a href="javascript:void(0)" onclick="qSearch('shoes')" style="color:#a78bfa;font-size:.8rem;margin:0 6px;text-decoration:none;">shoes</a>
+</div>
+<script>
+function qSearch(q){document.getElementById('q').value=q;doSearch();}
+</script>
 
 <!-- Animated Banners -->
 <div class="banners" id="banners">
@@ -1084,6 +1108,8 @@ setInterval(updateFlash, 1000);
   }
 })();
 </script>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️</button>
+<script>window.addEventListener("scroll",()=>{document.getElementById("topBtn").classList.toggle("show",window.scrollY>500);});</script>
 </body>
 </html><div class="mini-search" id="miniSearch">
   <a href="index.html" style="text-decoration:none;"><img src="img/logo.png" style="width:28px;height:28px;border-radius:8px;" alt="US AI"></a>
