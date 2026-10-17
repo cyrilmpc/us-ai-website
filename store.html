@@ -214,6 +214,18 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 @keyframes utilFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .hdr{position:relative}
 @media(max-width:768px){.top-utils a{width:24px;height:24px;font-size:.8rem}}
+
+/* Flash countdown */
+.flash-timer{background:linear-gradient(90deg,#ef4444,#f97316);color:#fff;padding:8px 20px;border-radius:20px;font-weight:bold;display:inline-flex;gap:8px;align-items:center;animation:pulse 2s infinite;margin-left:12px;font-size:.9rem}
+/* Product badges */
+.badge-new{position:absolute;top:8px;left:40px;background:#10b981;color:#fff;font-size:.65rem;padding:3px 8px;border-radius:8px;font-weight:bold;z-index:5}
+.badge-hot{position:absolute;top:8px;left:40px;background:#ef4444;color:#fff;font-size:.65rem;padding:3px 8px;border-radius:8px;font-weight:bold;z-index:5;animation:pulse 1.5s infinite}
+/* Newsletter */
+.newsletter{background:linear-gradient(135deg,#1e1b4b,#2d2a5e);border-radius:16px;padding:25px;margin:20px auto;max-width:1200px;text-align:center;border:1px solid #8b5cf6}
+.newsletter h3{color:#a78bfa;margin-bottom:10px}
+.newsletter input{padding:12px 20px;border:2px solid #8b5cf6;border-radius:25px;background:#0f0c29;color:#fff;width:300px;max-width:80%;outline:none;margin-right:8px}
+.newsletter button{padding:12px 30px;background:linear-gradient(90deg,#8b5cf6,#3b82f6);border:none;border-radius:25px;color:#fff;font-weight:bold;cursor:pointer}
+.newsletter button:hover{transform:scale(1.05)}
 </style>
 </head>
 <body>
@@ -309,7 +321,7 @@ setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
 
 <div class="sec">
   <div class="sec-h flash-h">
-    <h2>⚡ Flash Sale</h2>
+    <h2>⚡ Flash Sale <span class="flash-timer">⏰ <span id="flashTime">05:23:11</span></span></h2>
     <div class="tmr" id="tmr">⏰ 05:23:11</div>
   </div>
   <div class="pgrid" id="flashG"></div>
@@ -340,6 +352,24 @@ setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
   <div class="lm"><button onclick="loadMore()" id="lmBtn">LOAD MORE ⬇</button></div>
 </div>
 
+<div class="newsletter">
+  <h3>📧 Get Exclusive Deals!</h3>
+  <p style="color:#888;margin-bottom:15px;">Subscribe for daily flash sales and new arrivals!</p>
+  <input type="email" id="nlEmail" placeholder="Your email...">
+  <button onclick="subscribeNL()">Subscribe</button>
+</div>
+<script>
+function subscribeNL(){
+  const e = document.getElementById('nlEmail').value;
+  if(e && e.includes('@')){
+    localStorage.setItem('newsletter', e);
+    toast('✅ Subscribed! Deals coming your way!');
+    document.getElementById('nlEmail').value = '';
+  } else {
+    toast('⚠️ Please enter valid email!');
+  }
+}
+</script>
 <footer class="ftr">
   <div class="ftr-in">
     <div><h4>Customer Care</h4><a href="#">Help Center</a><a href="#">How to Buy</a><a href="track.html">Track Order</a><a href="#">Returns</a></div>
@@ -473,7 +503,7 @@ function cardHTML(p){
   return `<div class="pc" onclick="addRecent(window._prodCache[\'${p.id}\']);openProduct('${p.id}','${(p.category||'').replace(/'/g,"")}')">
     <div class="im" style="position:relative;">
       <span class="wish ${isWished(p.id) ? 'active' : ''}" onclick="toggleWish('${p.id}', this)">${isWished(p.id) ? '❤️' : '🤍'}</span>
-      <span class="share" onclick="shareProduct('${p.id}', this)">📤</span>
+      ${Math.random() < 0.15 ? '<span class="badge-new">NEW</span>' : (Math.random() < 0.2 ? '<span class="badge-hot">🔥 HOT</span>' : '')}<span class="share" onclick="shareProduct('${p.id}', this)">📤</span>
       <img src="${p.image}" onmouseover="phOver(this,'${p.id}')" onmouseout="phOut(this,'${p.id}','${p.image}')" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'">
       <span class="off">${p.discount}</span>${Math.random() < 0.2 ? '<span class="stock">🔥 Only few left!</span>' : ''}
     </div>
@@ -981,6 +1011,22 @@ function addRecent(p){
   const el = document.getElementById('wishN');
   if(el) el.textContent = w.length;
 })();
+</script>
+
+<script>
+// Flash sale countdown
+function updateFlash(){
+  const el = document.getElementById('flashTime');
+  if(!el) return;
+  let t = el.textContent.split(':').map(Number);
+  let s = t[0]*3600 + t[1]*60 + t[2] - 1;
+  if(s < 0) s = 5*3600 + 59*60 + 59;
+  const hh = String(Math.floor(s/3600)).padStart(2,'0');
+  const mm = String(Math.floor((s%3600)/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  el.textContent = `${hh}:${mm}:${ss}`;
+}
+setInterval(updateFlash, 1000);
 </script>
 </body>
 </html>
