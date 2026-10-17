@@ -140,6 +140,15 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="info">
 <h1 id="pN">Loading...</h1>
 <div class="rt" id="pR"></div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:.8rem;color:#888;margin-bottom:4px;">
+<span>🔥 <b style="color:#f97316;">FLASH SALE</b></span><span id="soldN">45 sold</span>
+</div>
+<div style="height:6px;background:#2d2a5e;border-radius:3px;overflow:hidden;">
+<div id="soldBar" style="height:100%;width:45%;background:linear-gradient(90deg,#f97316,#ef4444);"></div>
+</div>
+</div>
+<script>const _s=20+Math.floor(Math.random()*80);var sn=document.getElementById('soldN');var sb=document.getElementById('soldBar');if(sn)sn.textContent=_s+' sold';if(sb)sb.style.width=_s+'%';</script>
 <div class="pr" id="pP"></div>
 <div class="old"><s id="pO"></s> <span class="dc" id="pD"></span></div>
 <div class="mt"><span>🚚 Free Delivery</span><span>↩️ 14-Day Returns</span><span>🛡️ 1yr Warranty</span><span>✅ In Stock</span></div>
