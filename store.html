@@ -722,7 +722,9 @@ function expandQ(q){
 }
 
 function doSearch(){
-  const q = document.getElementById('q').value.trim().toLowerCase();
+  const qraw = document.getElementById('q').value.trim().toLowerCase();
+  const qlist = (typeof expandQ !== 'undefined') ? expandQ(qraw) : [qraw];
+  const q = qlist[0];
   if(!q) return;
   searchQ = q;
   const results = [];
