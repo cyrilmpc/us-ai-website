@@ -59,6 +59,12 @@
 #sports-ticker .ticker-content { display: inline-block; animation: ticker-scroll 30s linear infinite; }
 @keyframes ticker-scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 </style>
+
+<style>
+/* Fix overlapping sidebar icons */
+.a11y-btn, [aria-label*="ccessibility"] { position: relative !important; z-index: 1 !important; margin: 4px 0 !important; }
+.sidebar-widget { position: relative !important; z-index: 2 !important; margin-bottom: 8px !important; }
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
