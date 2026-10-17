@@ -174,6 +174,19 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <button class="bl" onclick="cP()">Confirm Order</button><button class="bg" onclick="document.getElementById('pM').classList.remove('open')">Cancel</button></div></div>
 <div class="fs" id="fsM"><span class="cl" onclick="closeFS()">✕</span><span class="nv pv" onclick="fsN(-1)">‹</span><img id="fsImg"><span class="nv nx" onclick="fsN(1)">›</span><div class="ct2" id="fsCt"></div></div>
 <script>
+
+// Category images (match store!)
+const CATIMG = {
+  "Electronic Devices":"photo-1511707171634-5f897ff02aa9",
+  "Health & Beauty":"photo-1596462502278-27bfdc403348",
+  "Babies & Toys":"photo-1559454403-b8fb88521f11",
+  "default":"photo-1441986300917-64674bd600d8"
+};
+function catImg(cat){
+  for(const k in CATIMG){ if(cat.toLowerCase().includes(k.split(' ')[0].toLowerCase())) return CATIMG[k]; }
+  return CATIMG["default"];
+}
+
 // Seeded generator (same as store)
 function sr(s){let x=s%2147483647;if(x<=0)x+=2147483646;return function(){x=(x*16807)%2147483647;return (x-1)/2147483646;};}
 const BR=["Apple","Samsung","Sony","LG","Xiaomi","Huawei","Oppo","Vivo","Realme","OnePlus","Dell","HP","Lenovo","Asus","Acer","Nike","Adidas","Puma","Reebok","L'Oreal","Maybelline","Dove","Nivea","Colgate","Lux","Lifebuoy","Dettol","Surf Excel","Ariel","Vim","Harpic","Nestle","Unilever","P&G"];
@@ -182,19 +195,28 @@ function gp(pid,cat){
   const n=parseInt(pid.replace(/\D/g,''))||1;
   const r=sr(n*7919+13);
   const b=BR[Math.floor(r()*BR.length)];
-  const pr=(r()*1950+5).toFixed(2),op=(pr*1.4).toFixed(2),d=Math.floor(r()*45+5);
-  const rt=(3.5+r()*1.5).toFixed(1),rv=Math.floor(r()*8000+20);
-  const imgs=[];for(let i=0;i<5;i++)imgs.push("https://images.unsplash.com/"+IMGS[Math.floor(r()*IMGS.length)]+"?w=800");
   const cn=cat&&cat.length>3?decodeURIComponent(cat):"General";
-  // Use passed name if available (exact match for search!)
   const passedNm=up.get('nm');
-  const passedPr=up.get('pr');
   let nm;
   if(passedNm){ try{ nm=decodeURIComponent(passedNm); }catch(e){ nm=""; } }
   if(!nm){
     const tname=cn.split(' ')[0];
     nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" Pro Max Ultra";
   }
+  // Realistic prices based on product type!
+  const pranges={"Face Cream":[10,60],"Perfume":[20,150],"Cream":[10,60],"Smartphone":[200,800],"Laptop":[400,1500],"Headphones":[30,200],"Watch":[50,400],"Shoes":[30,150],"Sneakers":[30,150],"Shampoo":[5,30],"Teddy Bear":[10,50],"Book":[5,40],"Guitar":[100,800],"Camera":[200,900],"Drone":[150,600]};
+  let pra=[10,200];
+  for(const kk in pranges){ if(nm.toLowerCase().includes(kk.toLowerCase())){ pra=pranges[kk]; break; } }
+  const pr=(pra[0]+r()*(pra[1]-pra[0])).toFixed(2);
+  const op=(pr*1.3).toFixed(2), d=Math.floor(r()*25+5);
+  const rt=(3.5+r()*1.5).toFixed(1), rv=Math.floor(r()*8000+20);
+  // Category-matching images!
+  const cimg=catImg(cn);
+  const imgs=[];
+  for(let i=0;i<5;i++){
+    imgs.push("https://images.unsplash.com/"+(i<3?cimg:IMGS[Math.floor(r()*IMGS.length)])+"?w=800");
+  }
+  const passedPr=up.get('pr');
   let pr_use=passedPr||pr;
   return{id:pid,name:nm,price:pr_use,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
 }
