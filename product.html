@@ -141,6 +141,52 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="main">
 <div class="top">
 <div>
+<div style="display:flex;gap:8px;margin-bottom:10px;">
+<button id="tabVideo" onclick="showTab('video')" style="padding:8px 20px;border:1px solid #444;border-radius:8px;background:#1e1b4b;color:#fff;cursor:pointer;">🎬 Video</button>
+<button id="tabPhotos" onclick="showTab('photos')" style="padding:8px 20px;border:none;border-radius:8px;background:#f97316;color:#fff;font-weight:bold;cursor:pointer;">🖼️ Photos</button>
+</div>
+<div id="videoWrap" style="display:none;margin-bottom:12px;position:relative;">
+<video id="pVideo" controls playsinline preload="metadata" style="width:100%;max-height:400px;border-radius:12px;background:#000;">
+<source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+</video>
+</div>
+<script>
+function showTab(t){
+  var vw=document.getElementById('videoWrap');
+  var gm=document.querySelector('.gm');
+  var gt=document.querySelector('.gt');
+  var tv=document.getElementById('tabVideo');
+  var tp=document.getElementById('tabPhotos');
+  if(t==='video'){
+    if(vw)vw.style.display='block';
+    if(gm)gm.style.display='none';
+    if(gt)gt.style.display='none';
+    if(tv){tv.style.background='#f97316';tv.style.border='none';}
+    if(tp){tp.style.background='#1e1b4b';tp.style.border='1px solid #444';}
+    var v=document.getElementById('pVideo');
+    if(v)v.play().catch(function(){});
+  }else{
+    if(vw){vw.style.display='none';var v=document.getElementById('pVideo');if(v)v.pause();}
+    if(gm)gm.style.display='';
+    if(gt)gt.style.display='';
+    if(tp){tp.style.background='#f97316';tp.style.border='none';}
+    if(tv){tv.style.background='#1e1b4b';tv.style.border='1px solid #444';}
+  }
+}
+window.addEventListener('scroll',function(){
+  var vw=document.getElementById('videoWrap');
+  if(!vw||vw.style.display==='none')return;
+  var r=vw.getBoundingClientRect();
+  if(r.bottom<0){
+    vw.style.position='fixed';vw.style.bottom='80px';vw.style.right='16px';
+    vw.style.width='200px';vw.style.zIndex='999';
+    vw.style.boxShadow='0 8px 30px rgba(0,0,0,.5)';vw.style.borderRadius='12px';vw.style.overflow='hidden';
+  }else if(r.top>=0){
+    vw.style.position='';vw.style.bottom='';vw.style.right='';vw.style.width='';
+    vw.style.zIndex='';vw.style.boxShadow='';
+  }
+});
+</script>
 <div class="gm" onclick="openFS()"><img id="mImg" src=""></div>
 <div class="gt" id="thumbs"></div>
 </div>
