@@ -627,6 +627,19 @@ function srand(seed){
   };
 }
 function genProduct(id, forceCat){
+  // Use REAL products first!
+  const rid = parseInt(String(id).replace(/\D/g,'')) || 1;
+  if(typeof REAL_PRODUCTS !== 'undefined' && rid <= REAL_PRODUCTS.length){
+    const rp = REAL_PRODUCTS[rid-1];
+    const r = sr(rid*7919+13);
+    const disc = Math.floor(r()*25+5);
+    const price = rp[4];
+    const oldP = rp[5];
+    const img = "https://images.unsplash.com/" + rp[3] + "?w=800";
+    const images = [img, img+"&h=800&fit=crop&crop=top", img+"&h=800&fit=crop&crop=bottom", img+"&sat=-30", img+"&flip=h"];
+    return {id:'p'+rid, name:rp[0], brand:rp[1], category:rp[2], price:price.toFixed(2), old_price:oldP.toFixed(2), discount:'-'+disc+'%', rating:(4+r()).toFixed(1), reviews:Math.floor(r()*5000+100).toLocaleString(), image:img, images:images};
+  }
+
   const r = srand(id * 7919 + 13);
   const b = BRANDS[Math.floor(r() * BRANDS.length)];
   const c = forceCat ? CATS.find(x => x[1] === forceCat) || CATS[0] : CATS[Math.floor(r() * CATS.length)];
