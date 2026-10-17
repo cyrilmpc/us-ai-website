@@ -2534,7 +2534,16 @@ document.addEventListener('click', function(e){
   }
   function onScroll(){
     var y = window.scrollY;
-    var opacity = Math.max(0, 1 - y/300); // Fade over 300px
+    // Find Our Services section
+    var services = null;
+    document.querySelectorAll('h2, h1, h3').forEach(function(h){
+      if(h.textContent.includes('Our Services')) services = h;
+    });
+    var startY = services ? services.getBoundingClientRect().top + y - 200 : 300;
+    var opacity = 1;
+    if(y > startY){
+      opacity = Math.max(0, 1 - (y - startY)/200);
+    }
     fadeEls.forEach(function(el){
       el.style.opacity = opacity;
       el.style.pointerEvents = opacity < 0.3 ? 'none' : '';
