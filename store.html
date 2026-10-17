@@ -198,7 +198,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .recent .pmini div{font-size:.7rem;color:#888;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
 
 /* Top utility icons (animated) */
-.top-utils{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:101;align-items:center}
+.top-utils{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:999;align-items:center;pointer-events:auto}
 .top-utils a{flex-shrink:0}
 .more-menu{position:relative}
 .more-dropdown{position:absolute;top:34px;right:0;background:#1e1b4b;border:1px solid #8b5cf6;border-radius:12px;padding:8px;display:none;flex-direction:column;gap:4px;min-width:140px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:200}
@@ -281,6 +281,28 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 @keyframes stockBlink{0%,100%{opacity:1}50%{opacity:.6}}
 .badge-hot{animation:hotPulse 1.2s infinite}
 @keyframes hotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+
+/* Deals section */
+.deals{background:linear-gradient(135deg,#7c2d12,#431407);border-radius:16px;padding:20px;margin:18px auto;max-width:1200px;border:1px solid #f97316}
+.deals h2{color:#fdba74;margin-bottom:12px;animation:slideR .6s}
+
+/* Free shipping bar */
+.ship-bar{background:#1e1b4b;border-radius:12px;padding:12px 18px;margin:12px auto;max-width:1200px;display:flex;align-items:center;gap:12px;border:1px solid #2d2a5e}
+.ship-bar .bar{flex:1;height:8px;background:#2d2a5e;border-radius:4px;overflow:hidden}
+.ship-bar .fill{height:100%;background:linear-gradient(90deg,#10b981,#22d3ee);border-radius:4px;animation:fillAnim 2s ease}
+@keyframes fillAnim{from{width:0}}
+
+/* Card image effects */
+.pc .im{overflow:hidden;position:relative}
+.pc .im img{transition:transform .6s ease}
+.pc:hover .im img{transform:scale(1.12) rotate(1deg)}
+.pc .off{animation:offPulse 2s infinite}
+@keyframes offPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.pc .np{transition:all .3s}
+.pc:hover .np{color:#22d3ee;text-shadow:0 0 15px rgba(34,211,238,.5)}
+/* Rating stars animation */
+.pc .rt{transition:all .3s}
+.pc:hover .rt{transform:scale(1.05)}
 </style>
 </head>
 <body>
