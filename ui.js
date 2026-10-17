@@ -1356,10 +1356,15 @@ window.sawalScrollBehavior = function () {
   }
 
   /* ---------- All Articles: compact sidebar index ---------- */
-  function initAllArticles() {
+  function initAllArticles(retry) {
     var list = document.getElementById("allart-list");
     var search = document.getElementById("allart-search");
-    if (!list || typeof ARTICLES_INDEX === "undefined") return;
+    if (!list) return;
+    if (typeof ARTICLES_INDEX === "undefined") {
+      // Retry after 1s (script may load late)
+      if (!retry) setTimeout(function(){ initAllArticles(true); }, 1000);
+      return;
+    }
     function esc(s) {
       return String(s).replace(/[&<>"']/g, function (c) {
         return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
