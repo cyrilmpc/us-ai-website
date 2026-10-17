@@ -525,19 +525,27 @@ function cardHTML(p){
   </div>`;
 }
 function init(){
-  document.getElementById('ctGrid').innerHTML = CATS.map(c =>
-    `<div class="ct" onclick="openCat('${c[1]}')">
-      <div class="ct-img-wrap"><img src="${c[0]}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200'"></div>
-      <span class="t">${c[1]}</span>
-    </div>`
-  ).join('');
-  // Flash: products 1-10
-  const flashBatch = genBatch(1, 10);
-  flashBatch.forEach(p => displayedProducts.push(p));
-  document.getElementById('flashG').innerHTML = flashBatch.map(cardHTML).join('');
-  // JFY: 500 products initially!
-  loadMore();
-  startTimer(); startLive(); startNotifs();
+  try {
+    document.getElementById('ctGrid').innerHTML = CATS.map(c =>
+      `<div class="ct" onclick="openCat('${c[1]}')">
+        <div class="ct-img-wrap"><img src="${c[0]}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200'"></div>
+        <span class="t">${c[1]}</span>
+      </div>`
+    ).join('');
+  } catch(e){ console.log("Cats error:", e); }
+  try {
+    // Flash: products 1-10
+    const flashBatch = genBatch(1, 10);
+    flashBatch.forEach(p => displayedProducts.push(p));
+    document.getElementById('flashG').innerHTML = flashBatch.map(cardHTML).join('');
+  } catch(e){ console.log("Flash error:", e); }
+  try {
+    // JFY: 50 products!
+    loadMore();
+  } catch(e){ console.log("JFY error:", e); }
+  try { startTimer(); } catch(e){}
+  try { startLive(); } catch(e){}
+  try { startNotifs(); } catch(e){}
 }
 const MAX_PRODUCTS = 10000;
 function loadMore(){
