@@ -809,6 +809,22 @@ const REAL_PRODUCTS = [
 ["Umbrella Automatic","Generic","Home & Lifestyle","photo-1534274988757-a28bf1a57c17",18,28],
 ];
 
+
+// Brand expertise mapping (realistic!)
+const BRAND_CAT = {
+"Apple":["Electronic Devices"],"Samsung":["Electronic Devices","TV & Home Appliances"],
+"Sony":["Electronic Devices"],"Nike":["Men's Fashion","Sports & Outdoor","Women's Fashion"],
+"Adidas":["Men's Fashion","Sports & Outdoor"],"Dove":["Health & Beauty"],
+"Nivea":["Health & Beauty"],"L'Oreal":["Health & Beauty"],"Maybelline":["Health & Beauty"],
+"LEGO":["Babies & Toys"],"Barbie":["Babies & Toys"],"Dyson":["TV & Home Appliances","Health & Beauty"],
+"Philips":["TV & Home Appliances","Electronic Devices","Health & Beauty"],
+"Levi's":["Men's Fashion","Women's Fashion"],"Zara":["Women's Fashion","Men's Fashion"],
+"Gucci":["Watches, Bags & Jewellery"],"Rolex":["Watches, Bags & Jewellery"],
+"Casio":["Watches, Bags & Jewellery","Electronic Devices","Musical Instruments"],
+"Yamaha":["Musical Instruments"],"Wilson":["Sports & Outdoor"],
+"Hasbro":["Babies & Toys"],"Mattel":["Babies & Toys"],
+};
+
 function genProduct(id, forceCat){
   // Use REAL products first!
   const rid = parseInt(String(id).replace(/\D/g,'')) || 1;
@@ -825,7 +841,8 @@ function genProduct(id, forceCat){
 
   const r = srand(id * 7919 + 13);
   const b = BRANDS[Math.floor(r() * BRANDS.length)];
-  const c = forceCat ? CATS.find(x => x[1] === forceCat) || CATS[0] : CATS[Math.floor(r() * CATS.length)];
+const _bcat=(typeof BRAND_CAT!=='undefined'&&BRAND_CAT[b])?BRAND_CAT[b][Math.floor(r()*BRAND_CAT[b].length)]:null;
+    const c = forceCat ? CATS.find(x => x[1] === forceCat) || CATS[0] : (_bcat?[_bcat,_bcat]:CATS[Math.floor(r()*CATS.length)]);
   const typeList = CAT_PRODUCTS[c[1]] || CAT_PRODUCTS["default"];
   const t = typeList[Math.floor(r() * typeList.length)];
   const priceRanges = {"Smartphone":[200,800],"Laptop":[400,1500],"Perfume":[20,150],"Shampoo":[5,30],"Teddy Bear":[10,50],"Car":[5000,30000],"Book":[5,40],"Guitar":[100,800]};
