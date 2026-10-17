@@ -830,7 +830,7 @@ function genProduct(id, forceCat){
   const rid = parseInt(String(id).replace(/\D/g,'')) || 1;
   if(typeof REAL_PRODUCTS !== 'undefined' && rid <= REAL_PRODUCTS.length){
     const rp = REAL_PRODUCTS[rid-1];
-    const r = sr(rid*7919+13);
+    const r = srand(rid*7919+13);
     const disc = Math.floor(r()*25+5);
     const price = rp[4];
     const oldP = rp[5];
