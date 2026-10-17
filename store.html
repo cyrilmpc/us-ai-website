@@ -1047,60 +1047,68 @@ function doSearch(){
   const q = qlist[0];
   if(!q) return;
   searchQ = q;
-  const results = [];
-  // EXACT title match first!
   const qLower = q.toLowerCase();
-  displayedProducts.forEach(p => {
-    if(p.name.toLowerCase() === qLower && results.length < 200){
-      if(!results.find(r => r.id === p.id)) results.push(p);
-    }
-  });
-  // Then partial matches in DISPLAYED products
-  displayedProducts.forEach(p => {
-    if(results.length < 200 && (p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))){
-      results.push(p);
-    }
-  });
-  // Then search more from generator (sequential IDs like displayed!)
-  if(results.length < 20){
-    for(let i = 1; i <= 200000 && results.length < 200; i++){
-      const p = genProduct(i);
-      if((()=>{
-      const pname = p.name.toLowerCase();
-      // Check full query and keywords
-      if(qlist.some(kw=>pname.includes(kw))) return true;
-      // Check individual significant words (3+ chars, not common words)
-      const stopwords = ['for','the','and','with','from','type','single','double'];
-      const words = qLower.split(/\s+/).filter(w => w.length >= 3 && !stopwords.includes(w));
-      return words.some(w => pname.includes(w));
-    })() || p.category.toLowerCase().includes(q)){
-        if(!results.find(r => r.id === p.id)) results.push(p);
-      }
+  const stopwords = ['for','the','and','with','from','type','single','double','a','an','of','in','on'];
+  const words = qLower.split(/\s+/).filter(w => w.length >= 3 && !stopwords.includes(w));
+
+  // Score function: higher = more relevant
+  function score(p){
+    const pname = (p.name||'').toLowerCase();
+    const pbrand = (p.brand||'').toLowerCase();
+    const pcat = (p.category||'').toLowerCase();
+    let s = 0;
+    if(pname === qLower) s += 100;                    // exact title match
+    if(pbrand === qLower) s += 80;                   // exact brand match (Nike for "nike")
+    if(pname.startsWith(qLower)) s += 60;            // starts with query
+    if(pbrand && qLower.includes(pbrand) && pbrand.length >= 3) s += 50; // brand in query
+    if(pname.includes(qLower)) s += 40;              // name contains query
+    if(pcat.includes(qLower)) s += 20;               // category contains
+    // word matches
+    words.forEach(w => { if(pname.includes(w)) s += 15; });
+    // penalize nonsense: brand shouldn't be on wrong category items
+    return s;
+  }
+
+  const seen = new Set();
+  const scored = [];
+
+  function addProduct(p){
+    if(!p || !p.id) return;
+    const key = (p.name||'').toLowerCase();
+    if(seen.has(key)) return;
+    const s = score(p);
+    if(s > 0){
+      seen.add(key);
+      scored.push({p:p, s:s});
     }
   }
-  // Show results as list + related products
-  let html = results.map(cardHTML).join('');
-  // Add related products (similar category)
-  if(results.length > 0 && results.length < 30){
-    const relCat = results[0].category;
-    const related = [];
-    for(let i = 0; i < 20 && related.length < 10; i++){
-      const rp = genProduct(50000 + i * 791, relCat);
-      if(!results.find(r => r.id === rp.id)) related.push(rp);
-    }
-    if(related.length > 0){
-      html += `<div style="grid-column:1/-1;margin:20px 0 10px;padding:15px;background:#1e1b4b;border-radius:12px;border:1px solid #8b5cf6;">
-        <h3 style="color:#a78bfa;">🎯 Related Products</h3>
-      </div>` + related.map(cardHTML).join('');
+
+  // Search displayed products
+  displayedProducts.forEach(addProduct);
+
+  // Search generator if needed
+  if(scored.length < 50){
+    for(let i = 1; i <= 200000 && scored.length < 200; i++){
+      addProduct(genProduct(i));
     }
   }
-  document.querySelector('.sec-h h2').innerHTML = `🔍 Results for "${q}" (${results.length}+)`;
+
+  // Sort by score (highest first)
+  scored.sort((a,b) => b.s - a.s);
+  const results = scored.slice(0, 200).map(x => x.p);
+
+  // Generate from query if still few results
   if(results.length < 10){
-    // Generate products from query!
     const generated = genFromQuery(q, 20);
-    generated.forEach(p => { if(!results.find(r => r.id === p.id)) results.push(p); });
-    if(results.length > 0) toast('Found ' + results.length + ' products for "' + q + '"!');
+    generated.forEach(p => {
+      const key = (p.name||'').toLowerCase();
+      if(!seen.has(key)){ seen.add(key); results.push(p); }
+    });
   }
+
+  // Render
+  let html = results.map(cardHTML).join('');
+  document.querySelector('.sec-h h2').innerHTML = `\uD83D\uDD0D Results for "${q}" (${results.length}+)`;
   document.getElementById('jfyG').innerHTML = html;
   document.getElementById('lmBtn').style.display = 'none';
   document.getElementById('clearBtn').style.display = '';
