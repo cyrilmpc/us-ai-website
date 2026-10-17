@@ -121,7 +121,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <body>
 <header class="hdr"><div class="hdr-in">
 <a href="index.html" class="logo"><img src="img/logo.png">US AI</a>
-<button class="back" onclick="history.back()">← Back</button>
+<button class="back" onclick="if(history.length>1){history.back();}else{location.href='store.html';}">← Back</button>
 </div></header>
 <div class="main">
 <div class="top">
