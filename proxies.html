@@ -289,6 +289,50 @@
 }
 </style>
 
+
+<style>
+/* RDP-STYLE proxy layout - user order */
+.proxy-main{
+  max-width:1400px !important;
+  margin:10px auto !important;
+  padding:0 16px !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr 1fr !important;
+  gap:14px !important;
+  align-items:start !important;
+}
+.proxy-main > div{
+  background:linear-gradient(160deg,#141736,#0d1026) !important;
+  border:1px solid rgba(99,102,241,.4) !important;
+  border-radius:18px !important;
+  padding:16px 14px !important;
+  font-size:0.85rem !important;
+}
+.proxy-main h2, .proxy-main h3{
+  font-size:1rem !important;
+  margin:0 0 10px 0 !important;
+}
+.proxy-main p{
+  font-size:0.8rem !important;
+  line-height:1.45 !important;
+}
+.proxy-main input, .proxy-main select, .proxy-main button{
+  padding:8px 10px !important;
+  font-size:0.85rem !important;
+  border-radius:10px !important;
+}
+.proxy-main table{
+  font-size:0.75rem !important;
+  width:100% !important;
+}
+.proxy-main th, .proxy-main td{
+  padding:5px 6px !important;
+}
+@media(max-width:900px){
+  .proxy-main{grid-template-columns:1fr !important;}
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
