@@ -2518,6 +2518,44 @@ document.addEventListener('click', function(e){
 });
 </script>
 
+
+<script>
+// Scroll: floating icons fade out on scroll down, fade in on scroll up
+(function(){
+  var lastY = 0;
+  var ticking = false;
+  var fadeEls = [];
+  function collect(){
+    fadeEls = [];
+    // Left and right rails/widgets
+    document.querySelectorAll('#left-rail, .left-rail, #top-widgets-right, #lc-wrap').forEach(function(el){
+      fadeEls.push(el);
+    });
+  }
+  function onScroll(){
+    var y = window.scrollY;
+    var opacity = Math.max(0, 1 - y/300); // Fade over 300px
+    fadeEls.forEach(function(el){
+      el.style.opacity = opacity;
+      el.style.pointerEvents = opacity < 0.3 ? 'none' : '';
+      el.style.transition = 'opacity 0.3s ease';
+    });
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  });
+  // Collect after load
+  if(document.readyState === 'complete') collect();
+  else window.addEventListener('load', collect);
+  setTimeout(collect, 2000);
+})();
+</script>
+
 </body>
 </html>
 
