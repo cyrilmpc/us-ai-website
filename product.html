@@ -84,6 +84,38 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .big-imgs img{width:100%;height:280px;object-fit:cover;border-radius:14px;cursor:pointer;transition:all .3s}
 .big-imgs img:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(139,92,246,.3)}
 @media(max-width:768px){.big-imgs{grid-template-columns:1fr}.big-imgs img{height:220px}}
+
+/* ===== STUNNING ANIMATIONS ===== */
+.top{animation:fadeUp .8s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.gm img{transition:transform .6s}
+.gm:hover img{transform:scale(1.08)}
+.info h1{animation:slideR .7s ease}
+@keyframes slideR{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+.pr{animation:priceGlow 2s ease-in-out infinite}
+@keyframes priceGlow{0%,100%{text-shadow:0 0 10px rgba(167,139,250,.3)}50%{text-shadow:0 0 25px rgba(167,139,250,.8)}}
+.bn{animation:btnShine 3s infinite;background-size:200% 100%}
+@keyframes btnShine{0%{background-position:0% 0}50%{background-position:100% 0}100%{background-position:0% 0}}
+.bc,.bn{transition:all .3s}
+.bc:hover,.bn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 25px rgba(139,92,246,.4)}
+.sec{animation:fadeUp .7s ease both}
+.sec:nth-child(2){animation-delay:.1s}.sec:nth-child(3){animation-delay:.2s}.sec:nth-child(4){animation-delay:.3s}
+.gt img{transition:all .3s}
+.gt img:hover{transform:scale(1.15) rotate(3deg)}
+.mt span{animation:popIn .5s ease both}
+.mt span:nth-child(2){animation-delay:.1s}.mt span:nth-child(3){animation-delay:.2s}.mt span:nth-child(4){animation-delay:.3s}
+@keyframes popIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.seller{animation:fadeUp .8s ease;transition:all .3s}
+.seller:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(139,92,246,.3)}
+.big-imgs img{animation:fadeUp .6s ease both}
+.big-imgs img:nth-child(2){animation-delay:.15s}.big-imgs img:nth-child(3){animation-delay:.3s}
+.ri{animation:slideR .6s ease both;transition:all .3s}
+.ri:hover{transform:translateX(5px)}
+.ri:nth-child(2){animation-delay:.1s}.ri:nth-child(3){animation-delay:.2s}.ri:nth-child(4){animation-delay:.3s}
+.pc{animation:fadeUp .5s ease both;transition:all .3s}
+.pc:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 28px rgba(139,92,246,.4)}
+.dc{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 </style>
 </head>
 <body>
