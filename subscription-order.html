@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Your Order | US AI</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.order-wrap{max-width:700px;margin:40px auto;padding:20px}
+.order-card{background:#1e1b4b;border-radius:20px;padding:30px;color:#fff}
+.order-card h2{text-align:center;color:#a5b4fc}
+.form-row{margin:16px 0}
+.form-row label{display:block;margin-bottom:6px;color:#a5b4fc}
+.form-row input,.form-row textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #555;background:#0f0d2a;color:#fff;font-size:1rem;box-sizing:border-box}
+.pay-box{background:#0f0d2a;border:2px solid #4ade80;border-radius:12px;padding:20px;margin:20px 0}
+.pay-box h3{color:#4ade80;margin-top:0}
+.submit-btn{width:100%;padding:14px;border:none;border-radius:30px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer}
+.submit-btn:hover{transform:scale(1.02)}
+</style>
+</head>
+<body>
+<div class="order-wrap">
+  <div class="order-card">
+    <h2>🛒 Place Your Order</h2>
+    <div id="selected-info" style="background:#0f0d2a;padding:16px;border-radius:12px;margin:16px 0;text-align:center;"></div>
+    
+    <form id="order-form" onsubmit="submitOrder(event)">
+      <div class="form-row">
+        <label>Your Name</label>
+        <input type="text" id="o-name" placeholder="Full name" required>
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" id="o-email" placeholder="you@email.com" required>
+      </div>
+      <div class="form-row">
+        <label>WhatsApp Number</label>
+        <input type="tel" id="o-phone" placeholder="+92..." required>
+      </div>
+      <div class="form-row">
+        <label>Notes (optional)</label>
+        <textarea id="o-notes" rows="3" placeholder="Anything we should know"></textarea>
+      </div>
+      
+      <div class="pay-box">
+        <h3>💰 Payment via JazzCash</h3>
+        <p>1. Send payment to: <b>0300-1234567</b> (US AI)</p>
+        <p>2. Enter your Transaction ID below:</p>
+        <div class="form-row">
+          <input type="text" id="o-tid" placeholder="JazzCash TID" required style="border-color:#4ade80;">
+        </div>
+      </div>
+      
+      <button type="submit" class="submit-btn">✅ Confirm Order</button>
+    </form>
+    
+    <div id="success" style="display:none;text-align:center;padding:20px;">
+      <div style="font-size:4rem;">✅</div>
+      <h3>Order Placed!</h3>
+      <p id="success-details"></p>
+      <p>Account details will arrive on WhatsApp + email within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Get selection from URL
+var params = new URLSearchParams(location.search);
+var name = params.get('name') || 'Subscription';
+var price = params.get('price') || '';
+document.getElementById('selected-info').innerHTML = 
+  '<h3 style="margin:0;">' + name + '</h3>' + 
+  (price ? '<p style="color:#4ade80;font-size:1.2rem;margin:8px 0;">' + price + '</p>' : '');
+
+function submitOrder(e){
+  e.preventDefault();
+  var orderId = 'SUB-' + Date.now().toString(36).toUpperCase();
+  var data = {
+    _subject: 'New Subscription Order: ' + orderId,
+    OrderID: orderId,
+    Product: name,
+    Price: price,
+    Name: document.getElementById('o-name').value,
+    Email: document.getElementById('o-email').value,
+    WhatsApp: document.getElementById('o-phone').value,
+    Notes: document.getElementById('o-notes').value || '—',
+    TID: document.getElementById('o-tid').value
+  };
+  // Save locally
+  try{
+    var orders = JSON.parse(localStorage.getItem('usai_orders')||'[]');
+    orders.unshift({id: orderId, kind: 'Subscription', product: name, ...data, status: 'Pending', date: new Date().toISOString()});
+    localStorage.setItem('usai_orders', JSON.stringify(orders));
+  }catch(e){}
+  // Send email
+  fetch('https://formsubmit.co/ajax/cyrilmp4665@gmail.com', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  // Show success
+  document.getElementById('order-form').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+  document.getElementById('success-details').innerHTML = 
+    '<b>Order ID:</b> ' + orderId + '<br><b>Product:</b> ' + name;
+}
+</script>
+</body>
+</html>

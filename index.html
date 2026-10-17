@@ -102,6 +102,12 @@ a[href*="whatsapp"][class*="community"], .community-join {
   margin-top: 12px !important;
 }
 </style>
+
+<style>
+/* Center Choose subscription, wider and compact */
+#choose-sub-card { max-width: 900px !important; margin: 0 auto !important; }
+#choose-sub-card .sub-grid { max-height: 400px; overflow-y: auto; }
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -1280,8 +1286,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
       </label>
       <div class="price-box">Total: <strong id="proxy-total">$8.93</strong> <span class="tiny muted" id="proxy-unit"></span></div>
     </div>
-    <div class="chat-card">
-      <h3>Place your order</h3>
+    <div class="chat-card" id="place-order-card" style="display:none;"      <h3>Place your order</h3>
       <form id="proxy-order-form">
         <label class="fld"><span>Your name</span><input type="text" name="name" required placeholder="Full name"></label>
         <label class="fld"><span>Email</span><input type="email" name="email" required placeholder="you@email.com"></label>
@@ -2186,6 +2191,20 @@ function apply(code){document.querySelectorAll('input[name="whatsapp"],input#sub
 try{var c=sessionStorage.getItem("usai_dial");if(c){apply(c);return;}}catch(e){}
 fetch("https://ipapi.co/json/").then(function(r){return r.json();}).then(function(d){var code=(d&&d.country_code&&DIAL[d.country_code])||"+92";try{sessionStorage.setItem("usai_dial",code);}catch(e){}apply(code);}).catch(function(){apply("+92");});
 })();
+</script>
+
+<script>
+// When user selects a subscription, open order form in new tab
+document.addEventListener('click', function(e){
+  var card = e.target.closest('.sub-card, [data-sub]');
+  if(card){
+    var name = card.getAttribute('data-name') || card.querySelector('h4')?.textContent || 'Subscription';
+    var price = card.getAttribute('data-price') || '';
+    // Open order page in new tab with selection
+    var url = 'subscription-order.html?name=' + encodeURIComponent(name) + '&price=' + encodeURIComponent(price);
+    window.open(url, '_blank');
+  }
+});
 </script>
 </body>
 </html>
