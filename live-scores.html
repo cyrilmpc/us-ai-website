@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Cricket Score Today, Football & All Sports Live Scores — US AI</title>
+<meta name="description" content="Today's live cricket scores, live football, basketball and tennis scores — auto-updated every minute, free on US AI.">
+<link rel="canonical" href="https://www.usai-usa.com/live-scores.html">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<style>
+.ls-wrap{max-width:1020px;margin:0 auto;}
+.ls-status{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#12152e;border:1px solid rgba(99,102,241,.25);border-radius:14px;padding:12px 16px;margin:16px 0;}
+.ls-status .dot{width:10px;height:10px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:8px;animation:blink 1.6s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.ls-status small{color:#9aa0c3;}
+#ls-refresh{background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.5);color:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:.9rem;}
+#ls-refresh:hover{background:rgba(99,102,241,.45);}
+.ls-sports{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 6px;}
+@media(max-width:640px){.ls-sports{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.ls-sports::-webkit-scrollbar{display:none;}.ls-sport-pill{flex:none;}}
+.ls-sport-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:24px;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.3);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;transition:transform .2s,background .2s;}
+.ls-sport-pill:hover{transform:translateY(-2px);background:rgba(99,102,241,.25);}
+.ls-sport-pill.active{background:rgba(99,102,241,.4);border-color:#a78bfa;}
+.ls-sport-pill .cnt{background:#ef4444;color:#fff;font-size:.72rem;font-weight:800;border-radius:12px;padding:2px 8px;animation:blink 1.4s infinite;}
+.ls-sec-title{margin:26px 0 12px;font-size:1.25rem;color:#fff;display:flex;align-items:center;gap:10px;}
+.ls-sub-title{margin:20px 0 10px;font-size:1.02rem;color:#e6e9ff;display:flex;align-items:center;gap:8px;font-weight:700;}
+.ls-sub-title .n{background:rgba(99,102,241,.25);border:1px solid rgba(99,102,241,.4);color:#c7d2fe;font-size:.72rem;border-radius:12px;padding:2px 10px;font-weight:800;}
+.ls-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+@media(min-width:700px){.ls-grid{grid-template-columns:repeat(2,1fr);}}
+/* 2026-10-11: desktop par 3 columns (denser, khaali jagah khatam) + wider wrap */
+@media(min-width:1100px){.ls-wrap{max-width:1200px;}.ls-grid{grid-template-columns:repeat(3,1fr);}}
+/* 2026-10-11: ls-title ka CSS missing tha (unstyled titles) */
+.ls-title{font-weight:800;color:#fff;font-size:.95rem;margin-bottom:12px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.ls-card{background:#12152e;border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:16px;text-align:left;animation:cardIn .4s ease;}
+@media(max-width:640px){.ls-card{padding:13px 12px;border-radius:14px;}.ls-team img{width:36px;height:36px;}.ls-team .nm{font-size:.92rem;}.ls-team .sc{font-size:.95rem;}.ls-sec-title{font-size:1.1rem;margin:22px 0 10px;}.cc-score{white-space:normal;line-height:1.7;font-size:.86rem;}}
+.ls-mc{display:inline-block;margin-top:10px;font-size:.82rem;font-weight:700;color:#a78bfa;text-decoration:none;border:1px solid rgba(167,139,250,.4);border-radius:20px;padding:6px 14px;background:rgba(167,139,250,.08);}
+.ls-mc:hover{background:rgba(167,139,250,.22);color:#fff;}
+.ls-when{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:.8rem;color:#9aa0c3;}
+.ls-venue{margin-top:6px;font-size:.78rem;color:#8b90b5;}
+.cc-note{font-size:.78rem;color:#8b90b5;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:10px 14px;margin:0 0 12px;line-height:1.6;}
+.cc-score{font-weight:800;color:#ffd166;font-size:.92rem;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.cc-details{margin-top:10px;border-top:1px dashed rgba(99,102,241,.3);padding-top:10px;font-size:.85rem;color:#c9cede;line-height:1.7;}
+.cc-details b{color:#fff;}
+.cc-squad{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.cc-squad span{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);border-radius:14px;padding:3px 10px;font-size:.76rem;color:#e6e9ff;}
+.cc-btn{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:10px;}
+.cc-btn:hover{background:rgba(167,139,250,.22);color:#fff;}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ls-card.live-now{border-color:rgba(239,68,68,.55);box-shadow:0 0 24px rgba(239,68,68,.12);}
+.ls-comp{font-size:.75rem;color:#9aa0c3;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;}
+.ls-teams{display:flex;flex-direction:column;gap:10px;}
+.ls-team{display:flex;align-items:center;gap:12px;}
+.ls-team img{width:42px;height:42px;object-fit:contain;background:#0d1026;border-radius:10px;padding:4px;flex:none;animation:logoFloat 3s ease-in-out infinite;}
+.ls-team:nth-child(2) img{animation-delay:-1.5s;}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.ls-team .nm{flex:1;font-weight:700;color:#fff;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ls-team .sc{font-weight:800;color:#ffd166;font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.ls-state{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.ls-badge{font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:20px;flex:none;}
+.ls-badge.live{background:#ef4444;color:#fff;animation:blink 1.2s infinite;}
+.ls-badge.soon{background:rgba(99,102,241,.25);color:#c7d2fe;border:1px solid rgba(99,102,241,.4);}
+.ls-badge.done{background:rgba(148,163,184,.18);color:#94a3b8;border:1px solid rgba(148,163,184,.3);}
+.ls-badge.fmt{background:rgba(255,209,102,.12);color:#ffd166;border:1px solid rgba(255,209,102,.35);}
+.ls-state small{color:#9aa0c3;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ls-empty{text-align:center;padding:40px 20px;color:#9aa0c3;background:#12152e;border:1px dashed rgba(99,102,241,.35);border-radius:16px;line-height:1.8;}
+.ls-err{text-align:center;padding:24px;color:#fca5a5;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:14px;margin:16px 0;}
+.ls-foot{margin:30px 0 10px;text-align:center;color:#9aa0c3;font-size:.85rem;}
+.nav-links a.active{color:#a78bfa;}
+@media(prefers-reduced-motion:reduce){.ls-team img,.ls-badge.live,.ls-sport-pill .cnt{animation:none;}}
+</style>
+    <meta property="og:image" content="https://www.usai-usa.com/img/og/live-scores.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Live Cricket Score Today, Football &amp; All Sports Live Scores — US AI">
+<meta name="twitter:description" content="Today&#x27;s live cricket scores, live football, basketball and tennis scores — auto-updated every minute, free on US AI.">
+<meta name="twitter:image" content="https://www.usai-usa.com/img/og/live-scores.png">
+
+<meta property="og:title" content="Live Cricket Score Today, Football &amp; All Sports Live Scores — US AI">
+<meta property="og:description" content="Today&#x27;s live cricket scores, live football, basketball and tennis scores — auto-updated every minute, free on US AI.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Live Cricket Score Today, Football & All Sports Live Scores",
+  "description": "Today's live cricket scores, live football, basketball and tennis scores — auto-updated every minute, free on US AI.",
+  "url": "https://www.usai-usa.com/live-scores.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/",
+    "logo": "https://www.usai-usa.com/img/logo.png"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the live score really live? How often does it update?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, free forever. Use the \"↻ Refresh now\" button anytime for the freshest score; the page refreshes automatically in the background so Live Now matches stay current."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do the three groups mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "🔴 Live Now = matches playing right now. 🕐 Upcoming Matches = fixtures with date and time. ✅ Recent Results = finished matches with final scores."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the \"Full scorecard\" button?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It opens the detailed match page (ball-by-ball / full stats) in a new tab so you can dig deeper without losing this page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Cricket Centre?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tap any cricket card’s details to see venue, date and time, live score, toss result and both squads. Details load only when you tap, keeping it fast and free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything on this page is free with no login — scores, schedules, results and Cricket Centre details."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I read the tennis scores?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Live tennis cards show which set is currently in play (e.g. “2nd set”). If a set score isn’t available yet, the card shows ⏳ Score updating — tap “📊 Full scorecard” on any tennis card for the full set-by-set score. A player shown as “TBD” means their draw opponent isn’t decided yet."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+/* q-loading skeletons: additive loading states (page JS wipes them on render via innerHTML) */
+.qsk{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.qsc{height:118px;border-radius:14px;background:linear-gradient(100deg,rgba(139,144,184,.10) 40%,rgba(167,139,250,.22) 50%,rgba(139,144,184,.10) 60%);background-size:200% 100%;animation:qskshim 1.3s linear infinite}
+@keyframes qskshim{to{background-position:-200% 0}}
+.qspin{display:flex;align-items:center;justify-content:center;gap:12px;padding:36px 16px;color:#8b90b8;font:500 .95rem/1.4 system-ui,sans-serif}
+.qspin i{width:30px;height:30px;flex:none;border-radius:50%;border:3px solid rgba(139,144,184,.25);border-top-color:#a78bfa;animation:qskrot .8s linear infinite}
+@keyframes qskrot{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="60px" alt="US AI logo" width="60" height="60" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="index.html#services">Services</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="live-scores.html" class="active">🏆 Live Scores</a>
+    <a href="index.html#articles">Articles</a>
+                <a href="builder.html">🏗️ Builder</a>
+<a href="temp-box.html">📧 Temp Mail</a>
+<a href="numbers.html">💎 Numbers</a>
+    <a href="purchases.html">🧾 Purchases</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+<section class="section" id="live-scores">
+  <div class="ls-wrap">
+    <h2>🏆 Live Sports <span class="grad">Scores</span></h2>
+    <p class="muted center">Cricket, football, basketball, tennis — every live match, auto-updated every minute. Free forever.</p>
+    <p class="muted center" style="max-width:720px;margin:0 auto;">Live scores, upcoming fixtures and recent results for cricket, football, basketball and tennis — upcoming and finished matches show the date &amp; time, and the "Full scorecard" link opens venue, line-ups and ball-by-ball details. Scores refresh automatically every 60 seconds.</p>
+
+    <div class="ls-sports" id="ls-sports"><div class="qspin" aria-hidden="true" style="width:100%"><i></i><span>Loading sports…</span></div></div>
+
+    <div class="ls-status">
+      <div><span class="dot"></span><span id="ls-state-text">Connecting…</span></div>
+      <small id="ls-updated"></small>
+      <button id="ls-refresh" type="button">↻ Refresh now</button>
+    </div>
+
+    <div id="ls-error" class="ls-err" hidden></div>
+    <div id="cric-centre"></div>
+    <div id="ls-sections"><div class="qspin" aria-hidden="true"><i></i><span>Loading live scores…</span></div><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div></div></div>
+
+    <p class="ls-foot">Scores update automatically every 60 seconds — leave the page open and never miss a moment.<br>
+    <a href="worldcup.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,209,102,.12);color:#ffd166;border-radius:20px;text-decoration:none;font:700 .85rem system-ui,sans-serif;border:1px solid rgba(255,209,102,.4);margin-top:8px;">🏆 World Cup Hub — teams, groups, champions & history</a><br>
+    <a href="ipl.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(96,165,250,.12);color:#93c5fd;border-radius:20px;text-decoration:none;font:700 .85rem system-ui,sans-serif;border:1px solid rgba(96,165,250,.4);margin-top:8px;">🏏 IPL Hub — 2027 season, auction countdown & 10 teams</a><br>
+    <a href="https://sportscore.com/" rel="dofollow" title="Sports data by SportScore" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#0a1e3d;color:#fff;border-radius:20px;text-decoration:none;font:600 .85rem system-ui,sans-serif;border:1px solid rgba(99,102,241,.4);margin-top:8px;">Powered by SportScore</a></p>
+  </div>
+</section>
+</main>
+
+<section class="live-scores-faq" style="max-width:860px;margin:36px auto;padding:0 16px">
+  <h2 style="text-align:center;margin-bottom:18px">❓ Frequently Asked Questions</h2>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Is the live score really live? How often does it update?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Yes, free forever. Use the "↻ Refresh now" button anytime for the freshest score; the page refreshes automatically in the background so Live Now matches stay current.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">What do the three groups mean?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">🔴 Live Now = matches playing right now. 🕐 Upcoming Matches = fixtures with date and time. ✅ Recent Results = finished matches with final scores.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">What is the "Full scorecard" button?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">It opens the detailed match page (ball-by-ball / full stats) in a new tab so you can dig deeper without losing this page.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">What is the Cricket Centre?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Tap any cricket card’s details to see venue, date and time, live score, toss result and both squads. Details load only when you tap, keeping it fast and free.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Do I need an account or payment?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">No. Everything on this page is free with no login — scores, schedules, results and Cricket Centre details.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">How do I read the tennis scores?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Live tennis cards show which set is currently in play (e.g. “2nd set”). If a set score isn’t available yet, the card shows ⏳ Score updating — tap “📊 Full scorecard” on any tennis card for the full set-by-set score. A player shown as “TBD” means their draw opponent isn’t decided yet.</p>
+  </details>
+</section>
+
+<footer>
+  <p class="tiny"><a href="about.html">About &amp; Contact</a></p>
+  <p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var SPORTS = [
+    { id: "cricket", name: "Cricket", emoji: "🏏" },
+    { id: "football", name: "Football", emoji: "⚽" },
+    { id: "basketball", name: "Basketball", emoji: "🏀" },
+    { id: "tennis", name: "Tennis", emoji: "🎾" }
+  ];
+  var API = "https://sportscore.com/api/widget/matches/?sport=";
+  /* CricAPI (free tier: 100 hits/day) — detailed cricket: venue, squads, toss.
+     Quota guard: fetched ONCE per page load + on manual refresh only, never on the 60s auto-cycle.
+     match_info fetched only when the user taps "Squads & details". */
+  var CRICAPI_KEY = "6256df14-8d67-4233-9411-344136ff2a5e";
+  var CRICAPI = "https://api.cricapi.com/v1/";
+  var cricLoaded = false, cricFailed = false;
+  var sectionsEl = document.getElementById("ls-sections");
+  var sportsEl = document.getElementById("ls-sports");
+  var stateText = document.getElementById("ls-state-text");
+  var updatedEl = document.getElementById("ls-updated");
+  var errEl = document.getElementById("ls-error");
+  var liveCounts = {};
+  var activeSport = "all";
+  try {
+    var q = new URLSearchParams(window.location.search).get("sport");
+    if (q && SPORTS.some(function (s) { return s.id === q; })) activeSport = q;
+  } catch (e) {}
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+  function score(s) {
+    s = String(s == null ? "" : s).trim();
+    if (!s || s === "-" || s === "None") return '<span class="sc" title="Score updating">⏳</span>';
+    return '<span class="sc">' + esc(s) + "</span>";
+  }
+
+  function fmtTime(iso) {
+    try {
+      if (!iso) return "";
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      return d.toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+    } catch (e) { return ""; }
+  }
+
+  /* ---------- CricAPI Cricket Centre (venue, squads, toss) ---------- */
+  function cricScoreText(sc) {
+    if (!sc || !sc.length) return "";
+    return sc.map(function (s) {
+      var inn = String(s.inning || "").replace(/ Inning \d+$/i, "").trim();
+      /* 2026-10-11: team name capitalize (API kabhi lowercase bhejta hai: "australia" → "Australia") */
+      var label = inn ? inn.split(",").pop().trim().split(" ").slice(0, 2).join(" ") : "";
+      if (label) label = label.charAt(0).toUpperCase() + label.slice(1);
+      return (label ? label + " " : "") + s.r + "/" + s.w + " (" + s.o + ")";
+    }).join("  •  ");
+  }
+  function cricTeamLogo(ti, name) {
+    if (ti) {
+      var t = ti.filter(function (x) { return x.name === name; })[0] || ti[0];
+      if (t && t.img) return t.img;
+    }
+    return "";
+  }
+  function cricCard(m) {
+    var ti = m.teamInfo || [];
+    var teams = (m.teams || []).slice(0, 2);
+    var rows = teams.map(function (t) {
+      var logo = cricTeamLogo(ti, t);
+      return '<div class="ls-team">' +
+        (logo ? '<img src="' + esc(logo) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' : "") +
+        '<span class="nm">' + esc(t) + "</span></div>";
+    }).join("");
+    var sc = cricScoreText(m.score);
+    var live = m.matchStarted && !m.matchEnded;
+    var badge = live ? '<span class="ls-badge live">● LIVE</span>'
+      : (m.matchEnded ? '<span class="ls-badge done">Finished</span>' : '<span class="ls-badge soon">Upcoming</span>');
+    /* 2026-10-12: match format chip (T20/ODI/Test) from CricAPI matchType — additive */
+    var fmtRaw = String(m.matchType || "").toLowerCase().trim();
+    var fmtLabel = fmtRaw === "t20" ? "T20" : fmtRaw === "odi" ? "ODI" : fmtRaw === "test" ? "Test" : (fmtRaw ? fmtRaw.charAt(0).toUpperCase() + fmtRaw.slice(1) : "");
+    var fmtChip = fmtLabel ? '<span class="ls-badge fmt">' + esc(fmtLabel) + "</span> " : "";
+    var dt = "";
+    try { if (m.dateTimeGMT) dt = new Date(m.dateTimeGMT).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) {}
+    return '<div class="ls-card' + (live ? " live-now" : "") + '">' +
+      '<div class="ls-title">' + fmtChip + esc(m.name || teams.join(" vs ")) + "</div>" +
+      '<div class="ls-teams">' + rows + "</div>" +
+      (sc ? '<div style="margin-top:8px"><span class="cc-score">' + esc(sc) + "</span></div>" : "") +
+      (dt ? '<div class="ls-when">📅 ' + esc(dt) + "</div>" : "") +
+      (m.venue ? '<div class="ls-venue">📍 ' + esc(m.venue) + "</div>" : "") +
+      '<div class="ls-state">' + badge + "<small>" + esc(m.status || "") + "</small></div>" +
+      '<button type="button" class="cc-btn" data-cric-id="' + esc(m.id) + '">👥 Squads &amp; toss →</button>' +
+      '<a class="ls-mc" href="https://sportscore.com/cricket/" target="_blank" rel="noopener">📊 Scorecards on SportScore →</a>' +
+      '<div class="cc-details" hidden></div>' +
+    "</div>";
+  }
+  function cricDetailsHTML(d) {
+    var h = "";
+    if (d.tossWinner) h += "<div>🪙 <b>Toss:</b> " + esc(d.tossWinner) + " won the toss and chose to " + esc(d.tossChoice || "") + "</div>";
+    if (d.venue) h += "<div>📍 <b>Venue:</b> " + esc(d.venue) + "</div>";
+    var players = d.players || d.squad || [];
+    if (players && players.length) {
+      h += '<div style="margin-top:6px"><b>👥 Squads:</b></div><div class="cc-squad">' +
+        players.map(function (p) { return "<span>" + esc(typeof p === "string" ? p : (p.name || p.player || "")) + "</span>"; }).join("") +
+        "</div>";
+    } else if (d.hasSquad === false) {
+      h += '<div style="margin-top:6px;color:#8b90b5">Squads not announced yet for this match.</div>';
+    }
+    return h || '<div style="color:#8b90b5">No extra details available.</div>';
+  }
+  function loadCricCentre() {
+    if (cricLoaded || cricFailed || !CRICAPI_KEY) return;
+    cricLoaded = true;
+    var box = document.getElementById("cric-centre");
+    if (!box) return;
+    /* 2026-10-12 think-224 (cricket centre): loading + quota-failure notes — additive, existing classes only */
+    box.innerHTML = '<div class="cc-note">⏳ Loading Cricket Centre…</div>';
+    function done() {}
+    Promise.all([
+      fetch(CRICAPI + "currentMatches?apikey=" + CRICAPI_KEY + "&offset=0").then(function (r) { return r.json(); }).catch(function () { return null; }),
+      fetch(CRICAPI + "matches?apikey=" + CRICAPI_KEY + "&offset=0").then(function (r) { return r.json(); }).catch(function () { return null; })
+    ]).then(function (res) {
+      var cur = (res[0] && res[0].status === "success" && res[0].data) || [];
+      var all = (res[1] && res[1].status === "success" && res[1].data) || [];
+      if (!cur.length && !all.length) { cricFailed = true;
+        box.innerHTML = '<div class="cc-note">⚠️ Cricket Centre is unavailable right now — the free data limit for today has been reached. Please check back later.</div>';
+        return; }
+      var seen = {};
+      cur.forEach(function (m) { seen[m.id] = 1; });
+      var now = Date.now();
+      var up = [], doneM = [];
+      all.forEach(function (m) {
+        if (seen[m.id]) return;
+        if (m.matchEnded) doneM.push(m);
+        else if (!m.matchStarted) up.push(m);
+      });
+      up = up.filter(function (m) { try { return new Date(m.dateTimeGMT).getTime() >= now - 864e5; } catch (e) { return true; } }).slice(0, 8);
+      doneM = doneM.slice(0, 8);
+      var h = '<h3 class="ls-sec-title">🏏 Cricket Centre <span class="ls-badge soon">detailed</span></h3>' +
+        '<div class="cc-note">📍 Venue, 📅 date &amp; time, toss and squads — powered by CricAPI. Tap <b>“Squads &amp; toss”</b> on any card for full details. <a href="cricket-world-cup.html" style="color:#ffd166;font-weight:700;">🏆 WC Hub</a></div>';
+      function grp(t, icon, arr) {
+        if (!arr.length) return "";
+        return '<div class="ls-sub-title">' + icon + " " + t + ' <span class="n">' + arr.length + "</span></div>" +
+          '<div class="ls-grid">' + arr.map(cricCard).join("") + "</div>";
+      }
+      h += grp("Live Now", "🔴", cur);
+      h += grp("Upcoming Matches", "🕐", up);
+      h += grp("Recent Results", "✅", doneM);
+      box.innerHTML = h;
+    }).catch(function () { cricFailed = true; });
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-cric-id]") : null;
+    if (!b || b.dataset.done) return;
+    b.dataset.done = "1";
+    b.textContent = "⏳ Loading…";
+    var panel = b.parentElement.querySelector(".cc-details");
+    fetch(CRICAPI + "match_info?apikey=" + CRICAPI_KEY + "&id=" + encodeURIComponent(b.getAttribute("data-cric-id")))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.status === "success" && d.data) {
+          panel.innerHTML = cricDetailsHTML(d.data);
+          panel.hidden = false;
+          b.textContent = "✅ Details loaded";
+        } else { b.textContent = "⚠️ Unavailable"; }
+      })
+      .catch(function () { b.textContent = "⚠️ Unavailable"; });
+  });
+
+  function card(m, kind) {
+    var badge, sub, prefix, when = "", mc = "";
+    if (m.url) mc = '<a class="ls-mc" href="https://sportscore.com' + esc(m.url) + '" target="_blank" rel="noopener">📊 Full scorecard &amp; details →</a>';
+    if (kind === "live") { badge = '<span class="ls-badge live">● LIVE</span>'; sub = esc(m.status_text || "Live"); prefix = "Live score"; }
+    else if (kind === "up") {
+      badge = '<span class="ls-badge soon">Upcoming</span>'; sub = ""; prefix = "Upcoming match";
+      var t = fmtTime(m.time);
+      when = '<div class="ls-when">📅 ' + esc(t || "Date to be announced") + '</div>';
+    }
+    else { badge = '<span class="ls-badge done">Finished</span>'; sub = esc(m.status_text || ""); prefix = "Result";
+      var t2 = fmtTime(m.time);
+      if (t2) when = '<div class="ls-when">📅 ' + esc(t2) + '</div>';
+    }
+    return '<div class="ls-card' + (kind === "live" ? " live-now" : "") + '">' +
+      '<div class="ls-title">' + prefix + ": " + esc(m.home) + " vs " + esc(m.away) + "</div>" +
+      '<div class="ls-comp">' + esc(m.competition || "") + "</div>" +
+      '<div class="ls-teams">' +
+        '<div class="ls-team"><img src="' + esc(m.home_logo || "") + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"><span class="nm">' + esc(m.home) + "</span>" + score(m.home_score) + "</div>" +
+        '<div class="ls-team"><img src="' + esc(m.away_logo || "") + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"><span class="nm">' + esc(m.away) + "</span>" + score(m.away_score) + "</div>" +
+      "</div>" + when +
+      '<div class="ls-state">' + badge + "<small>" + sub + "</small></div>" + mc +
+    "</div>";
+  }
+
+  function sportSection(sp, matches) {
+    var live = [], up = [], done = [];
+    matches.forEach(function (m) {
+      if (m.status === "live") live.push(m);
+      else if (m.status === "finished") done.push(m);
+      else up.push(m);
+    });
+    liveCounts[sp.id] = live.length;
+    var h = '<h3 class="ls-sec-title">' + sp.emoji + " " + sp.name +
+      (live.length ? ' <span class="ls-badge live">● ' + live.length + " LIVE</span>" : "") + "</h3>";
+    /* 2026-10-12 think-227: tennis display polish (additive, tennis-only).
+       Widget issues: (a) draw placeholders "R32P27" → "TBD";
+       (b) live tennis cards with fake "0 vs 0" → score cleared, card shows ⏳ "Score updating";
+       (c) Canceled/Walkover/Retired matches → no fake 0-0 score shown. */
+    if (sp.id === "tennis") {
+      var drawRe = /^R\d+P\d+$/i;
+      var voidRe = /cancel|walkover|retir|postpon|abandon/i;
+      var isBlankScore = function (v) {
+        v = String(v == null ? "" : v).trim();
+        return v === "" || v === "0" || v === "-" || v.toLowerCase() === "none";
+      };
+      var polishTennis = function (arr) {
+        return arr.map(function (m) {
+          var st = String(m.status_text || "");
+          var need = drawRe.test(String(m.home || "")) || drawRe.test(String(m.away || "")) ||
+                     voidRe.test(st) || (m.status === "live" && isBlankScore(m.home_score) && isBlankScore(m.away_score));
+          if (!need) return m;
+          var c = {}, k;
+          for (k in m) c[k] = m[k];
+          if (drawRe.test(String(c.home || ""))) c.home = "TBD";
+          if (drawRe.test(String(c.away || ""))) c.away = "TBD";
+          if (voidRe.test(st) || (m.status === "live" && isBlankScore(m.home_score) && isBlankScore(m.away_score))) {
+            c.home_score = null; c.away_score = null;
+          }
+          return c;
+        });
+      };
+      live = polishTennis(live); up = polishTennis(up); done = polishTennis(done);
+      h += '<div class="cc-note">🎾 ATP, WTA &amp; Challenger tours — the LIVE badge shows which set is in play (e.g. “2nd set”). Set-by-set points aren’t in the free widget feed, so open <b>📊 Full scorecard</b> on any card for the full score.</div>';
+    }
+    function group(title, icon, arr, k) {
+      if (!arr.length) return "";
+      var g = '<div class="ls-sub-title">' + icon + " " + title + ' <span class="n">' + arr.length + "</span></div>";
+      g += '<div class="ls-grid">';
+      g += arr.map(function (m) { return card(m, k); }).join("");
+      g += "</div>";
+      return g;
+    }
+    h += group("Live Now", "🔴", live, "live");
+    h += group("Upcoming Matches", "🕐", up, "up");
+    h += group("Recent Results", "✅", done, "done");
+    if (!live.length && !up.length && !done.length)
+      h += '<div class="ls-empty">No matches found for ' + sp.name + " right now.</div>";
+    return h;
+  }
+
+  function renderPills() {
+    var total = SPORTS.reduce(function (n, s) { return n + (liveCounts[s.id] || 0); }, 0);
+    var h = '<a class="ls-sport-pill' + (activeSport === "all" ? " active" : "") + '" href="live-scores.html">' +
+      "🏆 All Sports" + (total ? ' <span class="cnt">' + total + " live</span>" : "") + "</a>";
+    SPORTS.forEach(function (sp) {
+      var c = liveCounts[sp.id] || 0;
+      h += '<a class="ls-sport-pill' + (activeSport === sp.id ? " active" : "") + '" href="live-scores.html?sport=' + sp.id + '">' +
+        sp.emoji + " " + sp.name + (c ? ' <span class="cnt">' + c + " live</span>" : "") + "</a>";
+    });
+    sportsEl.innerHTML = h;
+  }
+
+  function stamp() {
+    updatedEl.textContent = "Last updated: " +
+      new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  }
+
+  var failStreak = 0;
+  /* 2026-10-12 think-228: overlap guard (additive) — concurrent load() calls race; skip if in-flight */
+  var loading = false;
+  function load() {
+    if (loading) return;   // pichla cycle abhi chal raha hai — skip, stale overwrite nahi
+    loading = true;
+    stateText.textContent = "Updating scores…";
+    var jobs = SPORTS.map(function (sp) {
+      return fetch(API + sp.id + "&limit=30&src=sawalai")
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (d) { return { sp: sp, matches: d.matches || [] }; })
+        .catch(function () { return { sp: sp, matches: null }; });
+    });
+    Promise.all(jobs).then(function (res) {
+      try {
+      var anyOk = res.some(function (r) { return r.matches !== null; });
+      if (!anyOk) {
+        failStreak++;
+        errEl.hidden = false;
+        errEl.textContent = "⚠️ Could not reach the live-score service. Keeping last scores on screen — retrying automatically.";
+        stateText.textContent = "Connection issue — retrying…";
+        setTimeout(load, 15000);
+        return;
+      }
+      failStreak = 0;
+      errEl.hidden = true;
+      var list = activeSport === "all" ? SPORTS : SPORTS.filter(function (s) { return s.id === activeSport; });
+      var h = "";
+      res.forEach(function (r) {
+        if (r.matches === null) return;
+        if (list.indexOf(r.sp) === -1 && activeSport !== "all") return;
+        if (activeSport !== "all" && r.sp.id !== activeSport) return;
+        h += sportSection(r.sp, r.matches);
+      });
+      sectionsEl.innerHTML = h || '<div class="ls-empty">No matches right now — please refresh.</div>';
+      renderPills();
+      stateText.textContent = "Auto-update on — every 60 seconds";
+      stamp();
+      if (activeSport === "all" || activeSport === "cricket") loadCricCentre();
+      } finally { loading = false; }
+    }, function () { loading = false; });
+  }
+
+  document.getElementById("ls-refresh").addEventListener("click", function () {
+    cricLoaded = false; cricFailed = false;
+    var box = document.getElementById("cric-centre");
+    if (box) box.innerHTML = "";
+    load();
+  });
+  renderPills();
+  load();
+  /* 2026-10-12 think-228: visibility-aware auto-refresh (additive) — background tab mein polling band, wapsi par foran refresh */
+  var refreshTimer = null;
+  function startAuto() { stopAuto(); refreshTimer = setInterval(load, 60000); }
+  function stopAuto() { if (refreshTimer) { clearInterval(refreshTimer); refreshTimer = null; } }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { stopAuto(); }
+    else { load(); startAuto(); }
+  });
+  if (!document.hidden) startAuto();
+})();
+</script>
+<script src="history.js?v=20261012p"></script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+</body>
+</html>
+
+<!-- ===== LIVE SCORES UPGRADES ===== -->
+<style>
+.live-dot{width:10px;height:10px;background:#ff330c;border-radius:50%;display:inline-block;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.match-card{transition:transform .3s !important}
+.match-card:hover{transform:scale(1.02) !important}
+</style>

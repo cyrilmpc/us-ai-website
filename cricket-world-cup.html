@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cricket World Cup Hub — Teams, Champions, History & Records | US AI</title>
+<meta name="description" content="Cricket World Cup hub: every ODI champion since 1975 and every T20 champion since 2007, team cards, world records, Pakistan's 1992 & 2009 triumphs and live scores. Free, no signup. — US AI">
+<link rel="canonical" href="https://www.usai-usa.com/cricket-world-cup.html">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<meta property="og:title" content="Cricket World Cup Hub — Teams, Champions, History & Records | US AI">
+<meta property="og:description" content="Every ODI champion since 1975, every T20 champion since 2007, records and live scores. Free on US AI.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+.wc-wrap{max-width:1020px;margin:0 auto;padding:0 16px;}
+.wc-hero{text-align:center;padding:46px 16px 30px;position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(135deg,#0d1026,#1a1440 45%,#0d2b1a 100%);border:1px solid rgba(99,102,241,.3);margin:18px 0 8px;}
+.wc-hero::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent 0deg,rgba(255,209,102,.12) 40deg,transparent 80deg,rgba(99,102,241,.14) 140deg,transparent 180deg,rgba(52,211,153,.1) 240deg,transparent 300deg);animation:wcspin 14s linear infinite;}
+@keyframes wcspin{to{transform:rotate(360deg)}}
+.wc-trophy{font-size:4.2rem;display:inline-block;position:relative;z-index:1;animation:wcbounce 2.6s ease-in-out infinite;filter:drop-shadow(0 6px 18px rgba(255,209,102,.45));}
+@keyframes wcbounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+.wc-hero h1{position:relative;z-index:1;font-size:clamp(1.6rem,4.5vw,2.6rem);margin:14px 0 8px;background:linear-gradient(90deg,#ffd166,#fff,#a78bfa,#ffd166);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wcshimmer 6s linear infinite;}
+@keyframes wcshimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.wc-hero p{position:relative;z-index:1;color:#c9cede;max-width:640px;margin:0 auto;line-height:1.7;}
+.wc-champ-banner{position:relative;z-index:1;display:inline-block;margin-top:14px;padding:10px 22px;border-radius:30px;background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.5);color:#ffd166;font-weight:800;animation:wcpulse 2.2s ease-in-out infinite;}
+@keyframes wcpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 rgba(255,209,102,.4)}50%{transform:scale(1.04);box-shadow:0 0 26px rgba(255,209,102,.35)}}
+.wc-search{position:sticky;top:64px;z-index:50;margin:18px auto;max-width:560px;display:flex;gap:8px;}
+.wc-search input{flex:1;padding:13px 18px;border-radius:30px;border:1px solid rgba(99,102,241,.4);background:#12152e;color:#fff;font-size:1rem;outline:none;}
+.wc-search input:focus{border-color:#a78bfa;box-shadow:0 0 18px rgba(167,139,250,.35);}
+.wc-sec-title{margin:34px 0 14px;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:10px;}
+.wc-sec-title .n{background:rgba(255,209,102,.15);border:1px solid rgba(255,209,102,.4);color:#ffd166;font-size:.75rem;border-radius:12px;padding:2px 10px;font-weight:800;}
+.wc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+.wc-card{background:#12152e;border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:18px 16px;animation:wcfloat 5s ease-in-out infinite;transition:transform .2s;}
+.wc-card:nth-child(odd){animation-delay:-2.5s;}
+@keyframes wcfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.wc-card:hover{transform:translateY(-4px) scale(1.02);border-color:rgba(255,209,102,.5);}
+.wc-card .flag{font-size:2.4rem;display:block;margin-bottom:8px;animation:wcflagspin 7s ease-in-out infinite;}
+@keyframes wcflagspin{0%,100%{transform:rotateY(0)}50%{transform:rotateY(24deg)}}
+.wc-card h3{margin:0 0 6px;color:#fff;font-size:1.02rem;}
+.wc-card p{margin:0;color:#9aa0c3;font-size:.86rem;line-height:1.65;}
+.wc-card .titles{color:#ffd166;font-weight:800;}
+.wc-card .thumb{width:100%;height:120px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block;}
+.wc-card a.cardlink{color:#a78bfa;font-weight:700;font-size:.86rem;text-decoration:none;display:inline-block;margin-top:8px;}
+.wc-card a.cardlink:hover{text-decoration:underline;}
+.wc-recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:8px;}
+.wc-fact{background:linear-gradient(135deg,#12152e,#1a1440);border:1px solid rgba(255,209,102,.3);border-radius:16px;padding:18px;animation:wcfloat 6s ease-in-out infinite;}
+.wc-fact b{color:#ffd166;}
+.wc-fact p{color:#c9cede;font-size:.9rem;line-height:1.7;margin:8px 0 0;}
+.wc-faq{max-width:860px;margin:36px auto;padding:0 16px;}
+.wc-faq details{margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03);}
+.wc-faq summary{cursor:pointer;font-weight:600;color:#fff;}
+.wc-faq p{margin:8px 0 0;color:#9aa0c3;line-height:1.7;}
+.wc-quiz{max-width:640px;margin:0 auto;background:#12152e;border:1px solid rgba(99,102,241,.3);border-radius:18px;padding:24px 20px;}
+.wc-quiz .q{font-weight:800;color:#fff;margin-bottom:14px;font-size:1.02rem;}
+.wc-quiz .opts{display:grid;gap:10px;}
+.wc-quiz .opt{padding:12px 16px;border-radius:12px;border:1px solid rgba(99,102,241,.4);background:rgba(99,102,241,.08);color:#fff;cursor:pointer;font-size:.92rem;text-align:left;}
+.wc-quiz .opt:hover{background:rgba(99,102,241,.22);}
+.wc-quiz .result{text-align:center;}
+.wc-quiz .result .flag{font-size:3rem;display:block;margin-bottom:10px;}
+.wc-quiz .result b{color:#ffd166;font-size:1.2rem;}
+.wc-quiz .result p{color:#c9cede;line-height:1.7;}
+.wc-quiz .restart{margin-top:12px;padding:10px 22px;border-radius:30px;border:1px solid rgba(255,209,102,.5);background:rgba(255,209,102,.12);color:#ffd166;font-weight:800;cursor:pointer;}
+@media(prefers-reduced-motion:reduce){.wc-trophy,.wc-card,.wc-fact,.wc-hero::before,.wc-card .flag{animation:none;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": "Cricket World Cup Hub",
+  "description": "Every ODI Cricket World Cup champion since 1975 and every T20 World Cup champion since 2007 — teams, records and history on US AI.",
+  "url": "https://www.usai-usa.com/cricket-world-cup.html",
+  "sport": "Cricket"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question","name": "Which country has won the most ODI Cricket World Cups?","acceptedAnswer": {"@type": "Answer","text": "Australia, with 6 ODI World Cup titles (1987, 1999, 2003, 2007, 2015 and 2023). India and West Indies have 2 ODI titles each."}},
+    {"@type": "Question","name": "Which teams have won the T20 World Cup?","acceptedAnswer": {"@type": "Answer","text": "India (2007, 2024), Pakistan (2009), England (2010, 2022), West Indies (2012, 2016), Sri Lanka (2014) and Australia (2021)."}},
+    {"@type": "Question","name": "When did Pakistan win the Cricket World Cup?","acceptedAnswer": {"@type": "Answer","text": "Pakistan won the ODI World Cup in 1992 under Imran Khan, beating England in the Melbourne final, and the T20 World Cup in 2009 under Younis Khan at Lord's."}},
+    {"@type": "Question","name": "Who has scored the most runs in Cricket World Cup history?","acceptedAnswer": {"@type": "Answer","text": "Sachin Tendulkar with 2,278 runs across six ODI World Cups (1992-2011) — the all-time record."}},
+    {"@type": "Question","name": "Where can I see live cricket scores?","acceptedAnswer": {"@type": "Answer","text": "US AI's Cricket Centre on the Live Scores page shows live cricket scores with venue, date and time, toss and squads — free, no login, auto-refreshing every 60 seconds."}}
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html"><img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="60px" alt="US AI logo" width="60" height="60" class="brand-logo"><span>US AI</span></a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="index.html#services">Services</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="live-scores.html">🏆 Live Scores</a>
+    <a href="worldcup.html">⚽ World Cup Hub</a>
+    <a href="cricket-world-cup.html" class="active">🏏 Cricket WC Hub</a>
+    <a href="index.html#articles">Articles</a>
+    <a href="builder.html">🏗️ Builder</a>
+    <a href="temp-box.html">📧 Temp Mail</a>
+    <a href="numbers.html">💎 Numbers</a>
+    <a href="purchases.html">🧾 Purchases</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+<main>
+<div class="wc-wrap">
+<div class="wc-hero">
+  <span class="wc-trophy">🏆</span>
+  <h1>Cricket World Cup Hub</h1>
+  <p>Every ODI champion since 1975 and every T20 champion since 2007 — teams, records, Pakistan's famous triumphs and live scores, all in one free hub.</p>
+  <div><span class="wc-champ-banner">🇦🇺 Australia — 2023 ODI Champions &nbsp;·&nbsp; 🇮🇳 India — 2024 T20 Champions</span></div>
+</div>
+<div class="wc-search">
+  <input type="search" id="wc-q" placeholder="🔎 Search teams, champions, records…" aria-label="Search teams, champions, records">
+</div>
+</div>
+<div class="wc-wrap">
+<h2 class="wc-sec-title">🏏 Teams <span class="n">10 teams · titles & best finishes</span></h2>
+<div class="wc-grid" id="wc-teams">
+  <div class="wc-card" data-search="australia champions 6 odi titles 2021 t20"><span class="flag">🇦🇺</span><h3>Australia <span class="titles">★★★★★★</span></h3><p><b class="titles">6 ODI titles:</b> 1987, 1999, 2003, 2007, 2015, 2023. Plus <b class="titles">1 T20:</b> 2021. The most successful side in World Cup history — three straight ODI crowns 1999-2007.</p></div>
+  <div class="wc-card" data-search="india champions 2 odi 1983 2011 2 t20 2007 2024"><span class="flag">🇮🇳</span><h3>India <span class="titles">★★</span></h3><p><b class="titles">2 ODI titles:</b> 1983, 2011. <b class="titles">2 T20:</b> 2007, 2024. Won at home in 2011 (Mumbai) and lifted the 2024 T20 crown unbeaten.</p></div>
+  <div class="wc-card" data-search="england champions 1 odi 2019 2 t20 2010 2022"><span class="flag">🏴󐁧󐁢󐁥󐁮󐁧󐁿</span><h3>England <span class="titles">★</span></h3><p><b class="titles">1 ODI title:</b> 2019. <b class="titles">2 T20:</b> 2010, 2022. Won the greatest ODI final ever at Lord's 2019 — tied game, tied super over, won on boundaries.</p></div>
+  <div class="wc-card" data-search="west indies champions 2 odi 1975 1979 2 t20 2012 2016"><span class="flag">🌴</span><h3>West Indies <span class="titles">★★</span></h3><p><b class="titles">2 ODI titles:</b> 1975, 1979. <b class="titles">2 T20:</b> 2012, 2016. The first-ever champions (1975) under Clive Lloyd — pace, power and calypso flair.</p></div>
+  <div class="wc-card" data-search="pakistan champions 1992 odi 2009 t20 imran khan"><span class="flag">🇵🇰</span><h3>Pakistan <span class="titles">★</span></h3><p><b class="titles">1 ODI title:</b> 1992. <b class="titles">1 T20:</b> 2009. Imran Khan's "cornered tigers" won 1992 in Melbourne; 2009 T20 crown came at Lord's. Also 2017 Champions Trophy winners.</p></div>
+  <div class="wc-card" data-search="sri lanka champions 1996 odi 2014 t20"><span class="flag">🇱🇰</span><h3>Sri Lanka <span class="titles">★</span></h3><p><b class="titles">1 ODI title:</b> 1996. <b class="titles">1 T20:</b> 2014. Arjuna Ranatunga's 1996 side changed one-day cricket forever with Sanath Jayasuriya's pinch-hitting.</p></div>
+  <div class="wc-card" data-search="new zealand runners-up 2015 2019 2021 finals"><span class="flag">🇳🇿</span><h3>New Zealand</h3><p>No title yet — but three finals in six years: ODI runners-up 2015 & 2019, T20 runners-up 2021. Cricket's most lovable near-misses.</p></div>
+  <div class="wc-card" data-search="south africa semi finals 2024 final"><span class="flag">🇿🇦</span><h3>South Africa</h3><p>No title yet — reached their first men's final at the 2024 T20 World Cup (runners-up to India). 428/5 vs Sri Lanka (2023) is the highest ODI WC total ever.</p></div>
+  <div class="wc-card" data-search="afghanistan rising 2016 west indies"><span class="flag">🇦🇫</span><h3>Afghanistan</h3><p>The fastest risers in the game — famously beat West Indies at the 2016 T20 World Cup and keep knocking on the semi-final door.</p></div>
+  <div class="wc-card" data-search="bangladesh quarter-final 2015"><span class="flag">🇧🇩</span><h3>Bangladesh</h3><p>Best finish: quarter-final of the 2015 ODI World Cup. Giant-killers who beat South Africa and West Indies in 2019.</p></div>
+</div>
+
+<h2 class="wc-sec-title">🏆 ODI Champions Wall <span class="n">1975–2023 · 6 winners</span></h2>
+<p style="color:#9aa0c3;line-height:1.7;max-width:720px;">Every nation that has lifted the ODI Cricket World Cup trophy. Australia's six stars lead the way — and Pakistan's 1992 cornered-tigers run is one of the great sporting stories ever told.</p>
+<div class="wc-grid" id="wc-champions">
+  <div class="wc-card" data-search="australia 6 titles 1987 1999 2003 2007 2015 2023"><span class="flag">🇦🇺</span><h3>Australia <span class="titles">★★★★★★</span></h3><p>1987, 1999, 2003, 2007, 2015, 2023. Won at home in 2015 and unbeaten as hosts; beat India in Ahmedabad in 2023.</p></div>
+  <div class="wc-card" data-search="india 2 titles 1983 2011 kapil dev dhoni"><span class="flag">🇮🇳</span><h3>India <span class="titles">★★</span></h3><p>1983, 2011. Kapil's Devils stunned the mighty West Indies at Lord's in 1983; Dhoni finished it with a six in Mumbai in 2011.</p></div>
+  <div class="wc-card" data-search="west indies 2 titles 1975 1979 clive lloyd"><span class="flag">🌴</span><h3>West Indies <span class="titles">★★</span></h3><p>1975, 1979. Winners of the very first World Cup at Lord's under Clive Lloyd, then again four years later.</p></div>
+  <div class="wc-card" data-search="pakistan 1 title 1992 imran khan cornered tigers"><span class="flag">🇵🇰</span><h3>Pakistan <span class="titles">★</span></h3><p>1992. Imran Khan's cornered tigers — nearly out in the group stage — roared back to beat England in the Melbourne final.</p></div>
+  <div class="wc-card" data-search="sri lanka 1 title 1996 ranatunga"><span class="flag">🇱🇰</span><h3>Sri Lanka <span class="titles">★</span></h3><p>1996. Arjuna Ranatunga's fearless side beat Australia in Lahore and reinvented one-day batting.</p></div>
+  <div class="wc-card" data-search="england 1 title 2019 super over"><span class="flag">🏴󐁧󐁢󐁥󐁮󐁧󐁿</span><h3>England <span class="titles">★</span></h3><p>2019. The greatest final ever — tied match, tied super over vs New Zealand; England won on boundary count at Lord's.</p></div>
+</div>
+
+<h2 class="wc-sec-title">⚡ T20 Champions Wall <span class="n">2007–2024 · 6 winners</span></h2>
+<div class="wc-grid" id="wc-t20">
+  <div class="wc-card" data-search="india 2 t20 titles 2007 2024 dhoni rohit"><span class="flag">🇮🇳</span><h3>India <span class="titles">★★</span></h3><p>2007, 2024. Won the first-ever T20 World Cup (Johannesburg 2007) and went unbeaten through 2024 in the Caribbean.</p></div>
+  <div class="wc-card" data-search="west indies 2 t20 titles 2012 2016 gayle"><span class="flag">🌴</span><h3>West Indies <span class="titles">★★</span></h3><p>2012, 2016. The only team to win it twice before 2022 — Carlos Brathwaite's four sixes sealed the 2016 final.</p></div>
+  <div class="wc-card" data-search="england 2 t20 titles 2010 2022"><span class="flag">🏴󐁧󐁢󐁥󐁮󐁧󐁿</span><h3>England <span class="titles">★★</span></h3><p>2010, 2022. White-ball kings — beat Pakistan in the 2022 Melbourne final to hold ODI and T20 crowns together.</p></div>
+  <div class="wc-card" data-search="pakistan 1 t20 title 2009 younis khan lords"><span class="flag">🇵🇰</span><h3>Pakistan <span class="titles">★</span></h3><p>2009. Younis Khan's men beat Sri Lanka in the Lord's final — Afridi's all-round show won the day.</p></div>
+  <div class="wc-card" data-search="sri lanka 1 t20 title 2014 sangakkara"><span class="flag">🇱🇰</span><h3>Sri Lanka <span class="titles">★</span></h3><p>2014. A farewell gift for Sangakkara and Jayawardene — beat India in the Dhaka final.</p></div>
+  <div class="wc-card" data-search="australia 1 t20 title 2021"><span class="flag">🇦🇺</span><h3>Australia <span class="titles">★</span></h3><p>2021. Completed the set in Dubai — the one ICC trophy missing from the cabinet, won vs New Zealand.</p></div>
+</div>
+
+<h2 class="wc-sec-title">🇵🇰 Pakistan's World Cup Story</h2>
+<div class="wc-recap">
+  <div class="wc-fact"><b>🏆 1992 — Cornered Tigers</b><p>Pakistan were almost out after five group games, then won everything. Inzamam's semi-final blitz vs New Zealand and Wasim Akram's magic in the final vs England — Imran Khan lifted the trophy in Melbourne.</p></div>
+  <div class="wc-fact"><b>⚡ 2009 — T20 Champions</b><p>Runners-up in 2007, champions in 2009: beat Sri Lanka in the Lord's final. Shahid Afridi was player of the match with an unbeaten fifty and 1 wicket.</p></div>
+  <div class="wc-fact"><b>🥇 2017 — Champions Trophy</b><p>Not a World Cup, but Pakistan's finest ODI day since 1992: Fakhar Zaman's century and a 180-run win over India in the Oval final.</p></div>
+  <div class="wc-fact"><b>🥈 2022 — So Close</b><p>Reached the T20 World Cup final in Melbourne but lost to England. Sam Curran's 3/12 decided a low-scoring final.</p></div>
+</div>
+
+<h2 class="wc-sec-title">📊 Records</h2>
+<div class="wc-grid">
+  <div class="wc-card" data-search="most runs tendulkar 2278"><span class="flag">🏏</span><h3>Most ODI WC Runs</h3><p><b class="titles">Sachin Tendulkar — 2,278 runs</b> across six World Cups (1992–2011). Six hundreds, fifteen fifties — the eternal record.</p></div>
+  <div class="wc-card" data-search="most wickets mcgrath 71"><span class="flag">🎯</span><h3>Most ODI WC Wickets</h3><p><b class="titles">Glenn McGrath — 71 wickets</b> (1996–2007). Metronome accuracy across four tournaments, best figures 7/15.</p></div>
+  <div class="wc-card" data-search="fastest century maxwell 40 balls 2023"><span class="flag">⚡</span><h3>Fastest WC Century</h3><p><b class="titles">Glenn Maxwell — 40 balls</b> vs Netherlands, Delhi 2023. 106 off 44 balls, the fastest hundred in World Cup history.</p></div>
+  <div class="wc-card" data-search="highest total south africa 428 2023"><span class="flag">💥</span><h3>Highest WC Total</h3><p><b class="titles">South Africa 428/5</b> vs Sri Lanka, Delhi 2023 — three centuries in one innings (de Kock, van der Dussen, Markram).</p></div>
+</div>
+
+<h2 class="wc-sec-title">📚 Learn &amp; Watch <span class="n">guides + live scores</span></h2>
+<div class="wc-grid" id="wc-learn">
+  <div class="wc-card" data-search="pakistan cricket history 1992 greatest moments"><img class="thumb" src="img/topic-pakistan-cricket-history.jpg" alt="Pakistan cricket history" loading="lazy"><h3>Pakistan Cricket History</h3><p>Greatest moments from the 1992 World Cup to today — relive the cornered-tigers era.</p><a class="cardlink" href="article-pakistan-cricket-history-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="pakistan greatest cricketers ranked afridi babar"><img class="thumb" src="img/topic-pakistan-greatest-cricketers.jpg" alt="Pakistan greatest cricketers" loading="lazy"><h3>Pakistan's Greatest Cricketers</h3><p>From Imran Khan and Wasim Akram to Shahid Afridi and Babar Azam — the legends ranked.</p><a class="cardlink" href="article-pakistan-greatest-cricketers-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="cricket bowling guide swing seam spin beginners"><img class="thumb" src="img/topic-cricket-bowling-guide.jpg" alt="Cricket bowling guide" loading="lazy"><h3>Cricket Bowling Guide</h3><p>Swing, seam, spin and pace variations explained simply for beginners.</p><a class="cardlink" href="article-cricket-bowling-guide-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="t20 batting tactics powerplay openers"><img class="thumb" src="img/topic-t20-batting-tactics.jpg" alt="T20 batting tactics" loading="lazy"><h3>T20 Batting Tactics</h3><p>How modern openers dominate powerplays — tactics decoded for the T20 era.</p><a class="cardlink" href="article-t20-batting-tactics-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="cricketer workout fast bowlers strength training"><img class="thumb" src="img/topic-cricketer-workout-fast-bowlers.jpg" alt="Cricketer workout plan" loading="lazy"><h3>Cricketer Workout Plan</h3><p>Strength training for fast bowlers: core stability, shoulder care and pace conditioning.</p><a class="cardlink" href="article-cricketer-workout-fast-bowlers-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="watch cricket live free legal streaming"><img class="thumb" src="img/topic-watch-cricket-live-legal.jpg" alt="Watch cricket live free" loading="lazy"><h3>Watch Cricket Live Free &amp; Legal</h3><p>Official free streams, broadcaster apps and trials — every legal option for 2026.</p><a class="cardlink" href="article-watch-cricket-live-legal-en.html">Read the guide →</a></div>
+  <div class="wc-card" data-search="cricket centre live scores venue toss squads"><span class="flag">🏏</span><h3>🏏 Cricket Centre — Live Scores</h3><p>Live matches with venue, date &amp; time, toss and squads. Auto-refresh every 60s — 100% free.</p><a class="cardlink" href="live-scores.html#Cricket-Centre">Watch live scores →</a></div>
+</div>
+
+<h2 class="wc-sec-title">🎯 Which Champion Are You?</h2>
+<div class="wc-quiz" id="wc-quiz">
+  <div id="wc-quiz-body"></div>
+</div>
+</div>
+<section class="wc-faq">
+  <h2 style="text-align:center;margin-bottom:18px;color:#fff;">❓ Frequently Asked Questions</h2>
+  <details><summary>Which country has won the most ODI Cricket World Cups?</summary><p>Australia, with 6 ODI World Cup titles (1987, 1999, 2003, 2007, 2015 and 2023). India and West Indies have 2 ODI titles each.</p></details>
+  <details><summary>Which teams have won the T20 World Cup?</summary><p>India (2007, 2024), Pakistan (2009), England (2010, 2022), West Indies (2012, 2016), Sri Lanka (2014) and Australia (2021).</p></details>
+  <details><summary>When did Pakistan win the Cricket World Cup?</summary><p>Pakistan won the ODI World Cup in 1992 under Imran Khan, beating England in the Melbourne final, and the T20 World Cup in 2009 under Younis Khan at Lord's.</p></details>
+  <details><summary>Who has scored the most runs in Cricket World Cup history?</summary><p>Sachin Tendulkar with 2,278 runs across six ODI World Cups (1992-2011) — the all-time record.</p></details>
+  <details><summary>Where can I see live cricket scores?</summary><p>US AI's Cricket Centre on the Live Scores page shows live cricket scores with venue, date and time, toss and squads — free, no login, auto-refreshing every 60 seconds.</p></details>
+</section>
+</main>
+<footer>
+  <p><b>US AI</b> — your free AI platform for questions, pictures, videos &amp; guides.</p>
+  <p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  <p class="tiny">Cricket World Cup data is a historical summary for fans — for live scores see <a href="live-scores.html">🏏 Live Scores</a>.</p>
+</footer>
+<script defer src="ui.js?v=20261013k"></script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+<script>
+(function(){
+"use strict";
+/* Live filter */
+var q=document.getElementById('wc-q');
+q.addEventListener('input',function(){
+  var s=q.value.trim().toLowerCase();
+  document.querySelectorAll('.wc-grid .wc-card').forEach(function(c){
+    var hit=!s||(c.getAttribute('data-search')||'').toLowerCase().indexOf(s)>-1||c.textContent.toLowerCase().indexOf(s)>-1;
+    c.style.display=hit?'':'none';
+  });
+});
+/* Quiz: Which Champion Are You? */
+var TEAMS={
+  australia:{flag:'🇦🇺',name:'Australia',desc:'The relentless winner. Six ODI World Cups and a T20 crown — you do not play finals, you collect them. Ruthless, professional and built for the biggest stage.'},
+  india:{flag:'🇮🇳',name:'India',desc:'The entertainer-king. Two ODI titles and two T20 crowns, won in front of a billion believers. You play with flair, passion and the loudest crowd on earth.'},
+  england:{flag:'🏴󐁧󐁢󐁥󐁮󐁧󐁿',name:'England',desc:'The reinvented powerhouse. From 2015 embarrassment to white-ball kings in seven years — you fear nothing, attack everything and won the greatest final ever.'},
+  westindies:{flag:'🌴',name:'West Indies',desc:'The original champion. First-ever World Cup winners with pace like fire and batting like music. Calypso cricket is forever.'},
+  pakistan:{flag:'🇵🇰',name:'Pakistan',desc:'The cornered tiger. Unpredictable, unstoppable on your day — 1992 ODI champions and 2009 T20 champions. Nobody does drama like you do.'},
+  srilanka:{flag:'🇱🇰',name:'Sri Lanka',desc:'The fearless innovator. 1996 world champions who reinvented one-day batting overnight. Small island, giant heart, eternal underdogs turned kings.'}
+};
+var QUIZ=[
+ {q:'Your ideal final is won by…',o:[['Relentless pressure all game','australia'],['A billion fans roaring','india'],['Fearless all-out attack','england'],['One moment of pure magic','pakistan']]},
+ {q:'Pick a cricketing value:',o:[['Winning mentality','australia'],['Flair and passion','india'],['Innovation and courage','england'],['Unpredictable genius','pakistan']]},
+ {q:'Your team is 5 down for not many. You…',o:[['Fight back with the tail','australia'],['Counter-attack with the youngsters','india'],['Keep swinging — no fear','england'],['Trust one genius to do it alone','westindies']]},
+ {q:'Choose a legend:',o:[['Ricky Ponting','australia'],['Sachin Tendulkar','india'],['Ben Stokes','england'],['Viv Richards','westindies']]},
+ {q:'Best way to win a World Cup?',o:[['Dominate every game','australia'],['Peak at the perfect moment','india'],['Revolutionise the format','srilanka'],['The cornered-tigers comeback','pakistan']]},
+ {q:'Your bowling attack is built on…',o:[['Metronome accuracy','australia'],['Mystery spin','srilanka'],['Raw pace','westindies'],['Reverse swing magic','pakistan']]},
+ {q:'Tournament motto:',o:[['Never lose a final','australia'],['Play for a billion','india'],['No fear cricket','england'],['Cornered tigers roar loudest','pakistan']]},
+ {q:'You would rather be known for…',o:[['The most trophies','australia'],['The greatest fans','india'],['The greatest final ever','england'],['The greatest comeback ever','pakistan']]},
+ {q:'Last over, 12 needed. What wins it?',o:[['Ice-cold finishing','australia'],['A young star goes big','india'],['Sixes from ball one','westindies'],['One miracle over','pakistan']]},
+ {q:'Pick a colour:',o:[['Green and gold','australia'],['Blue','india'],['Navy blue','england'],['Maroon','westindies']]}
+];
+var qi=0, scores={}, body=document.getElementById('wc-quiz-body');
+function renderQ(){
+  var item=QUIZ[qi], h='<div class="q">'+(qi+1)+'. '+item.q+'</div><div class="opts">';
+  item.o.forEach(function(opt,i){h+='<button class="opt" data-t="'+opt[1]+'">'+opt[0]+'</button>';});
+  body.innerHTML=h+'</div><p style="color:#8b90b5;font-size:.8rem;margin-top:10px;">Question '+(qi+1)+' of '+QUIZ.length+'</p>';
+  body.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-t'); scores[t]=(scores[t]||0)+1; qi++;
+      if(qi<QUIZ.length) renderQ(); else showResult();
+    });
+  });
+}
+function showResult(){
+  var best='australia',bn=-1;
+  Object.keys(scores).forEach(function(k){if(scores[k]>bn){bn=scores[k];best=k;}});
+  var t=TEAMS[best];
+  try{localStorage.setItem('cwc_quiz_team',best);}catch(e){}
+  body.innerHTML='<div class="result"><span class="flag">'+t.flag+'</span><b>You are '+t.name+'!</b><p>'+t.desc+'</p><button class="restart" id="wc-restart">↻ Play again</button></div>';
+  document.getElementById('wc-restart').addEventListener('click',function(){qi=0;scores={};renderQ();});
+}
+try{
+  var saved=localStorage.getItem('cwc_quiz_team');
+  if(saved&&TEAMS[saved]){
+    var t=TEAMS[saved];
+    body.innerHTML='<div class="result"><span class="flag">'+t.flag+'</span><b>Your champion: '+t.name+'</b><p>'+t.desc+'</p><button class="restart" id="wc-restart">↻ Play again</button></div>';
+    document.getElementById('wc-restart').addEventListener('click',function(){qi=0;scores={};renderQ();});
+  } else renderQ();
+}catch(e){renderQ();}
+})();
+</script>
+</body>
+</html>

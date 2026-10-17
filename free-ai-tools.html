@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Tools — Image & Text Generation | US AI</title>
+<meta name="description" content="Free AI tools: generate images and text with open-source AI. No signup, no cost. Plus premium AI services.">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<style>
+.ait-hero{text-align:center;padding:44px 20px 20px;position:relative;overflow:hidden;}
+.ait-hero img{width:120px;height:120px;border-radius:28px;animation:heroFloat 4s ease-in-out infinite;box-shadow:0 0 40px rgba(168,85,247,.4);}
+@keyframes heroFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+.ait-hero h1{font-size:2rem;margin:16px 0 8px;}
+.ait-hero h1 .grad{background:linear-gradient(90deg,#a855f7,#6366f1,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.ait-grid{max-width:960px;margin:14px auto 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px;}
+@media(max-width:640px){.ait-grid{grid-template-columns:1fr;}}
+.ait-card{border:1px solid var(--line);border-radius:18px;padding:20px;background:rgba(99,102,241,.05);position:relative;overflow:hidden;transition:transform .2s;}
+.ait-card:hover{transform:translateY(-4px);}
+.ait-card .pic{font-size:3rem;display:block;text-align:center;animation:cardBob 3.5s ease-in-out infinite;}
+@keyframes cardBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ait-card h3{margin:10px 0 6px;text-align:center;}
+.ait-card p{font-size:.88rem;color:var(--muted);text-align:center;margin:0 0 12px;}
+.ait-card .go{display:block;text-align:center;}
+.badge-free{position:absolute;top:10px;right:10px;background:#22c55e;color:#fff;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px;animation:badgePulse 2s ease-in-out infinite;}
+.badge-paid{position:absolute;top:10px;right:10px;background:#f59e0b;color:#fff;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px;animation:badgePulse 2s ease-in-out infinite;}
+.badge-soon{position:absolute;top:10px;right:10px;background:#64748b;color:#fff;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px;}
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.ait-card.soon{opacity:.75;}
+.gen-box{max-width:720px;margin:0 auto 30px;padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(168,85,247,.06);}
+.gen-box input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--text);font-size:1rem;margin-bottom:10px;box-sizing:border-box;}
+.gen-box .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
+.gen-box select{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--text);}
+#ait-img-out img{max-width:100%;border-radius:14px;display:block;margin:0 auto;}
+#ait-text-out{background:rgba(0,0,0,.25);border-radius:12px;padding:14px;white-space:pre-wrap;font-size:.92rem;line-height:1.6;min-height:60px;}
+</style>
+</head>
+<body>
+<nav class="nav"><a href="index.html" class="brand">US AI</a></nav>
+
+<div class="ait-hero">
+  <img src="img/icon-ai-chat-256.jpg" alt="Free AI Tools" loading="lazy">
+  <h1>🤖 <span class="grad">Free AI Tools</span></h1>
+  <p class="muted center">Open-source AI — images, text & more. 100% free, no signup.</p>
+</div>
+
+<div class="gen-box" id="ait-image-gen">
+  <h3 style="text-align:center;margin-top:0;">🎨 Free Image Generator</h3>
+  <input type="text" id="ait-prompt" placeholder="A sunset over mountains..." maxlength="200">
+  <div class="row">
+    <select id="ait-model"><option value="turbo" selected>⚡ Turbo (1 sec)</option><option value="flux">Flux (Best Quality)</option></select>
+    <button class="btn btn-primary" id="ait-gen-btn" type="button">Generate Free</button>
+  </div>
+  <div id="ait-img-out"><p class="muted center">Aapki tasveer yahan aayegi ✨</p></div>
+</div>
+
+<div class="gen-box" id="ait-text-gen">
+  <h3 style="text-align:center;margin-top:0;">💬 Free Text AI</h3>
+  <input type="text" id="ait-tprompt" placeholder="Write a poem about the sea..." maxlength="300">
+  <div class="row"><button class="btn btn-primary" id="ait-text-btn" type="button">Ask Free AI</button></div>
+  <div id="ait-text-out"><p class="muted">Jawab yahan aayega...</p></div>
+</div>
+
+<div class="ait-grid" id="ait-grid">
+  <div class="ait-card"><span class="badge-free">FREE</span><span class="pic">🎨</span><h3>AI Image Generator</h3><p>Text se tasveer banayein — bilkul free, 1 second mein.</p><span class="go"><a class="btn btn-primary" href="#ait-image-gen">Try Free →</a></span></div>
+  <div class="ait-card"><span class="badge-free">FREE</span><span class="pic">💬</span><h3>AI Text Writer</h3><p>Sawal poochein, kahani ya mazmoon likhwayein — free.</p><span class="go"><a class="btn btn-primary" href="#ait-text-gen">Try Free →</a></span></div>
+  <div class="ait-card soon"><span class="badge-soon">COMING SOON</span><span class="pic">🎥</span><h3>AI Video Generator</h3><p>Text se video — jald aa raha hai.</p><span class="go"><span class="muted">Coming Soon</span></span></div>
+  <div class="ait-card soon"><span class="badge-soon">COMING SOON</span><span class="pic">🎙️</span><h3>AI Voice Generator</h3><p>Text se awaz — jald aa raha hai.</p><span class="go"><span class="muted">Coming Soon</span></span></div>
+  <div class="ait-card soon"><span class="badge-soon">COMING SOON</span><span class="pic">🎵</span><h3>AI Music Maker</h3><p>Apni dhun banayein — jald aa raha hai.</p><span class="go"><span class="muted">Coming Soon</span></span></div>
+  <div class="ait-card"><span class="badge-paid">PAID</span><span class="pic">💎</span><h3>Premium AI Services</h3><p>Midjourney, ChatGPT Plus, Claude Pro — premium tools.</p><span class="go"><a class="btn btn-primary" href="paid-tools.html">See Premium →</a></span></div>
+</div>
+
+<footer><p><b>US AI</b> — free AI tools for everyone.</p><p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p></footer>
+
+<script>
+(function(){
+  var ib = document.getElementById("ait-gen-btn");
+  if(ib) ib.addEventListener("click", function(){
+    var p = document.getElementById("ait-prompt"), out = document.getElementById("ait-img-out");
+    var prompt = (p.value||"").trim();
+    if(!prompt){ out.innerHTML = '<p class="muted center">Pehle idea likhein ☝️</p>'; return; }
+    var md = document.getElementById("ait-model");
+    var url = "https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1024&height=1024&seed="+Math.floor(Math.random()*999999)+"&model="+(md.value||"turbo")+"&nologo=true";
+    out.innerHTML = '<p class="muted center">🎨 Ban rahi hai...</p>';
+    var img = new Image();
+    img.onload = function(){ out.innerHTML=""; out.appendChild(img); img.style.cssText="max-width:100%;border-radius:14px;display:block;margin:0 auto;"; };
+    img.onerror = function(){ out.innerHTML = '<p class="muted center">Dobara try karein 🔄</p>'; };
+    img.src = url; img.alt = prompt;
+  });
+  var tb = document.getElementById("ait-text-btn");
+  if(tb) tb.addEventListener("click", function(){
+    var p = document.getElementById("ait-tprompt"), out = document.getElementById("ait-text-out");
+    var prompt = (p.value||"").trim();
+    if(!prompt){ out.innerHTML = '<p class="muted">Pehle sawal likhein ☝️</p>'; return; }
+    out.innerHTML = '<p class="muted">Soch raha hai... 🤔</p>';
+    fetch("https://text.pollinations.ai/"+encodeURIComponent(prompt))
+      .then(function(r){ return r.text(); })
+      .then(function(t){ out.textContent = t; })
+      .catch(function(){ out.innerHTML = '<p class="muted">Dobara try karein 🔄</p>'; });
+  });
+})();
+</script>
+</body>
+</html>

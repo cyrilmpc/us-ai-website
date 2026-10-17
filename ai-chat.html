@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- prefetch-hints: added by sawalai-q-prefetch (page-speed) -->
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6366f1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AI Chat — US AI</title>
+<meta name="description" content="Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.">
+<link rel="canonical" href="https://www.usai-usa.com/ai-chat.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI Chat",
+  "description": "Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.",
+  "url": "https://www.usai-usa.com/ai-chat.html",
+  "provider": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "image": "https://www.usai-usa.com/img/og/ai-chat.png"
+}
+</script>
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<style>
+.sp-hero{max-width:900px;margin:0 auto;text-align:center;padding:30px 16px 4px;}
+.sp-hero img{width:120px;height:120px;border-radius:30px;box-shadow:0 10px 34px rgba(99,102,241,.45);border:2px solid rgba(167,139,250,.5);animation:pic3d 9s ease-in-out infinite,svcGlow 3.2s ease-in-out infinite,svcBob 2.4s ease-in-out infinite;}
+.sp-hero h1{font-size:1.9rem;margin:14px 0 6px;animation:heroTitleGlow 3.6s ease-in-out infinite;}
+@keyframes heroTitleGlow{0%,100%{text-shadow:0 0 0 rgba(168,85,247,0);}50%{text-shadow:0 0 18px rgba(168,85,247,.65);}}
+.sp-hero p{color:var(--muted);max-width:640px;margin:0 auto;line-height:1.65;}
+.sp-search{max-width:520px;margin:18px auto 4px;display:block;width:calc(100% - 32px);padding:12px 18px;border-radius:999px;border:1px solid rgba(99,102,241,.4);background:#0f1226;color:#fff;font-size:.95rem;}
+.sp-count{max-width:960px;margin:8px auto 0;padding:0 16px;color:var(--muted);font-size:.82rem;}
+.sp-layout{max-width:960px;margin:0 auto;}
+#sp-side{display:none;}
+@media(min-width:900px){
+  .sp-layout{display:flex;gap:20px;max-width:1240px;margin:0 auto;padding:0 16px;align-items:flex-start;}
+  .sp-layout .sp-main{flex:1;min-width:0;}
+  .sp-layout .sp-count,.sp-layout .sp-grid{max-width:none;margin-left:0;margin-right:0;padding:0;}
+  #sp-side{display:block;flex:none;width:350px;position:sticky;top:96px;background:linear-gradient(160deg,#141736,#0d1026);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:22px 18px;box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);max-height:calc(100vh - 120px);overflow-y:auto;}
+  #sp-side:empty{display:none;}
+}
+.sp-grid{max-width:960px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px;}
+.sp-card{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:16px 14px;transition:transform .15s,border-color .15s,box-shadow .15s;}
+.sp-card:hover{transform:translateY(-3px);border-color:rgba(99,102,241,.6);box-shadow:0 10px 26px rgba(99,102,241,.22);}
+.sp-card .pic{flex:none;width:68px;height:68px;border-radius:18px;object-fit:contain;background:#fff;padding:6px;box-shadow:0 4px 14px rgba(0,0,0,.4);animation:itemFloat 2.8s ease-in-out infinite;}
+.sp-grid .sp-card:nth-child(2n) .pic{animation-delay:-1.4s;}
+.sp-grid .sp-card:nth-child(3n) .pic{animation-delay:-.7s;}
+.sp-card .pic.ic{display:inline-flex;align-items:center;justify-content:center;font-size:1.7rem;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(168,85,247,.25));border:1px solid rgba(99,102,241,.35);padding:0;}
+.sp-card .pic.darkbg{background:linear-gradient(135deg,#1a1d3a,#2a2d5a);}
+.sp-card .tx{min-width:0;flex:1;}
+.sp-card .tx b{display:block;font-size:.95rem;margin-bottom:4px;}
+.sp-card .tx span{font-size:.82rem;color:var(--muted);line-height:1.5;display:block;}
+.sp-card .pr{display:inline-block;margin-top:7px;font-size:.85rem;font-weight:800;color:#a78bfa;}
+.sp-buy{flex:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#10b981,#34d399);color:#04241a;font-weight:800;font-size:.85rem;border:none;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.sp-buy:hover{filter:brightness(1.1);}
+.sp-open{flex:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;white-space:nowrap;}
+.sp-cta{text-align:center;margin:26px 0 40px;}
+.sp-cta .btn{font-size:1rem;padding:13px 34px;}
+.sp-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:26px;}
+@media(max-width:640px){.sp-grid{grid-template-columns:1fr;}.sp-hero img{width:96px;height:96px;}}
+@keyframes itemFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-6px) scale(1.06);}}
+/* one-screen chat: compact hero so chat box + Send input show at once (nothing removed) */
+.sp-hero{padding:12px 16px 2px;}
+.sp-hero img{width:72px;height:72px;border-radius:20px;}
+.sp-hero h1{font-size:1.35rem;margin:8px 0 4px;}
+.sp-hero p{font-size:.85rem;line-height:1.45;}
+.sp-search{margin:10px auto;}
+#inbox-chat{padding-top:6px;padding-bottom:6px;}
+
+/* buy modal */
+.buy-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:18px 12px;overflow-y:auto;}
+.buy-modal.open{display:flex;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;}to{opacity:1;}}
+.buy-bg{position:fixed;inset:0;background:rgba(5,5,20,.85);backdrop-filter:blur(6px);}
+.buy-box{position:relative;width:100%;max-width:520px;margin:auto;background:linear-gradient(160deg,#141736,#0d1026);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:24px 20px;animation:panelUp .3s ease;max-height:calc(100vh - 36px);overflow-y:auto;}
+@keyframes panelUp{from{opacity:0;transform:translateY(26px) scale(.98);}to{opacity:1;transform:none;}}
+.buy-x{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(99,102,241,.5);background:rgba(99,102,241,.15);color:#fff;font-size:1.1rem;cursor:pointer;}
+.buy-x:hover{background:rgba(239,68,68,.35);}
+.buy-head{display:flex;gap:12px;align-items:center;margin-bottom:16px;}
+.buy-head .pic{width:58px;height:58px;border-radius:16px;object-fit:contain;background:#fff;padding:5px;flex:none;animation:itemFloat 2.8s ease-in-out infinite;}
+.buy-head .pic.ic{display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(168,85,247,.25));padding:0;}
+.buy-head .pic.darkbg{background:linear-gradient(135deg,#1a1d3a,#2a2d5a);}
+.buy-head b{display:block;font-size:1.02rem;}
+.buy-head span{font-size:.82rem;color:var(--muted);}
+.buy-sec{margin:14px 0;}
+.buy-sec>span{display:block;font-weight:700;margin-bottom:8px;font-size:.9rem;}
+.buy-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.buy-pill{padding:9px 16px;border-radius:999px;border:1px solid rgba(99,102,241,.4);background:rgba(99,102,241,.08);color:#fff;cursor:pointer;font-size:.85rem;font-family:inherit;}
+.buy-pill.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;font-weight:700;}
+.buy-pill .off{font-size:.72rem;opacity:.85;}
+.buy-qty{display:inline-flex;align-items:center;gap:14px;}
+.buy-qty button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(99,102,241,.5);background:rgba(99,102,241,.12);color:#fff;font-size:1.2rem;cursor:pointer;}
+.buy-qty b{font-size:1.15rem;min-width:28px;text-align:center;}
+.buy-total{font-size:1.05rem;margin:16px 0;}
+.buy-total strong{color:#a78bfa;font-size:1.3rem;}
+.buy-go{width:100%;padding:13px;font-size:1rem;}
+.buy-box .fld{display:block;margin:10px 0;}
+
+/* HAR CHEEZ HAR TIME ANIMATED — buy panel kabhi static nahi */
+.buy-box{animation:panelUp .3s ease,buyGlow 3s ease-in-out infinite;}
+#sp-side{animation:sideGlow 3.4s ease-in-out infinite;}
+@keyframes buyGlow{0%,100%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);}50%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 70px rgba(168,85,247,.4);}}
+@keyframes sideGlow{0%,100%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);}50%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 64px rgba(99,102,241,.45);}}
+.buy-pill{animation:pillPulse 2.6s ease-in-out infinite;}
+.buy-pill.active{animation:pillPulse 2.6s ease-in-out infinite,activeGlow 2s ease-in-out infinite;}
+@keyframes pillPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+@keyframes activeGlow{0%,100%{filter:brightness(1);}50%{filter:brightness(1.25);}}
+.sp-buy{animation:buyBtnGlow 2.2s ease-in-out infinite;}
+@keyframes buyBtnGlow{0%,100%{box-shadow:0 0 0 rgba(52,211,153,0);transform:scale(1);}50%{box-shadow:0 0 20px rgba(52,211,153,.6);transform:scale(1.06);}}
+.sp-open{animation:openGlow 2.6s ease-in-out infinite;display:inline-block;}
+@keyframes openGlow{0%,100%{box-shadow:0 0 0 rgba(168,85,247,0);}50%{box-shadow:0 0 16px rgba(168,85,247,.55);}}
+.buy-total strong{display:inline-block;animation:pricePop 2.4s ease-in-out infinite;background:linear-gradient(90deg,#a78bfa,#f0abfc,#a78bfa);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+@keyframes pricePop{0%,100%{transform:scale(1);background-position:0% center;}50%{transform:scale(1.08);background-position:100% center;}}
+.buy-qty button{animation:qtyPulse 3s ease-in-out infinite;}
+@keyframes qtyPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.buy-qty b{display:inline-block;animation:pricePop 2.4s ease-in-out infinite;}
+.buy-go{animation:goGlow 2.4s ease-in-out infinite;}
+@keyframes goGlow{0%,100%{box-shadow:0 0 12px rgba(99,102,241,.35);transform:scale(1);}50%{box-shadow:0 0 28px rgba(168,85,247,.65);transform:scale(1.02);}}
+.pay-lock-ico{display:inline-block;animation:lockBounce 2s ease-in-out infinite;}
+@keyframes lockBounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-7px) scale(1.1);}}
+.buy-x{animation:qtyPulse 3.2s ease-in-out infinite;}
+.buy-head b{display:inline-block;animation:pricePop 3s ease-in-out infinite;}
+.buy-box .fld span{display:block;font-weight:700;margin-bottom:6px;font-size:.88rem;}
+.buy-box .fld input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(99,102,241,.35);background:#0a0d22;color:#fff;font-size:.95rem;font-family:inherit;box-sizing:border-box;}
+.center{text-align:center;}
+.tiny{font-size:.78rem;}
+.muted{color:var(--muted);}
+</style>
+    <meta property="og:image" content="https://www.usai-usa.com/img/og/ai-chat.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Chat — US AI">
+    <meta name="twitter:description" content="Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.">
+    <meta name="twitter:image" content="https://www.usai-usa.com/img/og/ai-chat.png">
+<meta property="og:title" content="AI Chat — US AI">
+<meta property="og:description" content="Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Chat",
+  "description": "Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.",
+  "url": "https://www.usai-usa.com/ai-chat.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/",
+    "logo": "https://www.usai-usa.com/img/logo.png"
+  },
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is AI Chat really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — free forever, no signup needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can I ask the AI Chat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ask questions, get explanations and ideas — and use the Picture Studio and Video Studio links to create pictures and videos too."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which languages does it support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "10 languages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — chat is free. An account is only needed for paid items like RDP, proxies and numbers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are AI answers always correct?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI can make mistakes — always verify important facts yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it help with homework, code, or math?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — ask it to explain lessons, write or fix code, and solve math problems step by step."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I speak instead of typing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — tap the microphone in the chat box and speak your question."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it remember my chat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your recent conversation stays in the chat box while this page is open — open a fresh page for a fresh chat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I change the language?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the language dropdown in the top menu — the AI understands and answers in 10 languages."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="34px" alt="US AI logo" width="34" height="34" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="temp-box.html">📧 Temp Mail</a>
+    <a href="numbers.html">💎 Numbers</a>
+    <a href="apps.html">📱 Apps</a>
+    <a href="purchases.html">🧾 Purchases</a>
+    <a href="builder.html">🏗️ Builder</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#articles">Articles</a>
+    <a href="about.html">About</a>
+  </div>
+  <a href="account.html" id="nav-account" class="nav-account-btn">👤 Account</a>
+  <button type="button" id="nav-theme" class="nav-icon-btn" title="Dark / Light mode" aria-label="Toggle theme">🌙</button>
+  <select id="nav-lang" class="nav-lang" aria-label="Language">
+    <option value="en">🌐 EN</option><option value="ur">اردو</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="hi">हिं</option><option value="ar">عر</option><option value="tr">TR</option><option value="pt">PT</option><option value="id">ID</option>
+  </select>
+  <div class="nav-search" id="nav-search">
+    <button type="button" id="nav-search-btn" aria-label="Search website">🔍</button>
+    <div class="nav-search-pop" id="nav-search-pop" style="display:none">
+      <input type="text" id="nav-search-input" placeholder="Search tools, articles, dramas..." autocomplete="off" aria-label="Search website">
+      <div class="gs-results" id="nav-search-results" style="display:none"></div>
+    </div>
+  </div>
+</nav>
+<div class="sp-hero">
+  <img src="img/icon-ai-chat-256.jpg" alt="AI Chat" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
+  <h1>AI Chat</h1>
+  <p>Ask anything and get instant smart answers — free forever, no signup needed. 10 languages, voice input, image questions and more.</p>
+</div>
+<input type="search" class="sp-search" id="sp-search" placeholder="🔍 Search AI Chat..." autocomplete="off" aria-label="Search">
+<!-- IN-BOX CHAT: asking happens right here — no more jump to the homepage -->
+<section class="section" id="inbox-chat" aria-label="Chat here">
+  <div class="chat-card">
+    <div class="chips">
+      <button class="chip" type="button" data-q="What is AI?">What is AI?</button>
+      <button class="chip" type="button" data-q="How can I earn money online?">How can I earn money online?</button>
+      <button class="chip" type="button" data-q="Who are you?">Who are you?</button>
+      <button class="chip" type="button" data-q="BMI calculator">BMI calculator</button>
+      <button class="chip" type="button" data-q="Write a haiku about the sea">Write a haiku about the sea</button>
+    </div>
+    <div class="chat-box" id="chat-box" aria-live="polite"></div>
+    <form class="chat-form" id="chat-form">
+      <input aria-label="Ask a question" type="text" id="chat-input" placeholder="Ask anything — 10 languages, voice & images supported…" autocomplete="off">
+      <button type="submit" class="btn btn-primary" aria-label="Send message">Send</button>
+    </form>
+  </div>
+</section>
+<div class="sp-layout">
+<div class="sp-main">
+<div class="sp-count" id="sp-count"></div>
+<div class="sp-grid" id="sp-grid"></div>
+</div>
+<aside id="sp-side" aria-label="Buy panel"><div id="sp-side-body"></div></aside>
+</div>
+<div class="sp-cta"><a class="btn btn-primary btn-glow" href="#inbox-chat">Start Chatting →</a><br><br><a href="compare-ai-chat.html" style="color:#a78bfa;font-size:.9rem;">📊 Compare: US AI Chat vs ChatGPT Plus (2026)</a></div>
+<section class="aichat-faq" style="max-width:860px;margin:36px auto;padding:0 16px">
+  <h2 style="text-align:center;margin-bottom:18px">❓ Frequently Asked Questions</h2>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Is AI Chat really free?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Yes — free forever, no signup needed.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">What can I ask the AI Chat?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Ask questions, get explanations and ideas — and use the Picture Studio and Video Studio links to create pictures and videos too.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Which languages does it support?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">10 languages.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Do I need an account?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">No — chat is free. An account is only needed for paid items like RDP, proxies and numbers.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Are AI answers always correct?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">AI can make mistakes — always verify important facts yourself.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Can it help with homework, code, or math?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Yes — ask it to explain lessons, write or fix code, and solve math problems step by step.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Can I speak instead of typing?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Yes — tap the microphone in the chat box and speak your question.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">Does it remember my chat?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Your recent conversation stays in the chat box while this page is open — open a fresh page for a fresh chat.</p>
+  </details>
+  <details style="margin-bottom:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.03)">
+    <summary style="cursor:pointer;font-weight:600">How do I change the language?</summary>
+    <p style="margin:8px 0 0;color:var(--muted)">Use the language dropdown in the top menu — the AI understands and answers in 10 languages.</p>
+  </details>
+</section>
+
+<footer>
+  <p><b>US AI</b> — your free AI platform for questions, pictures, videos &amp; guides.</p>
+  <p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  <p class="tiny">AI answers can be wrong — verify before making important decisions.</p>
+</footer>
+<script src="pay.js?v=20261012b"></script>
+<script src="shop.js?v=20261012b"></script>
+<script src="buy-panel.js?v=20261012a"></script>
+<script src="chat.js?v=20261013a"></script>
+<script defer src="site-search.js?v=20261012b"></script>
+<script defer src="ui.js?v=20261013k"></script>
+<script src="history.js?v=20261012p"></script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+<script>
+/* search filter + buy buttons */
+(function(){
+  var items = [{"ic": "\ud83d\udcac", "name": "Ask Anything", "desc": "Questions, homework, business ideas \u2014 answered instantly.", "open": "#inbox-chat"}, {"ic": "\ud83c\udf0d", "name": "10 Languages", "desc": "Urdu, English, Hindi, Turkish, Arabic and 5 more.", "open": "#inbox-chat"}, {"ic": "\ud83d\uddbc\ufe0f", "name": "Image Questions", "desc": "Describe any picture in words and ask about it.", "open": "#inbox-chat"}, {"ic": "\ud83c\udf99\ufe0f", "name": "Voice Input", "desc": "Speak your question \u2014 just tap the mic.", "open": "#inbox-chat"}, {"ic": "\ud83d\udcbb", "name": "Code Helper", "desc": "Write, fix and explain code in any language.", "open": "#inbox-chat"}, {"ic": "\ud83e\uddee", "name": "Math Solver", "desc": "Step-by-step solutions for any math problem.", "open": "#inbox-chat"}, {"ic": "\u270d\ufe0f", "name": "Creative Writing", "desc": "Stories, essays, poetry \u2014 in your style.", "open": "#inbox-chat"}, {"ic": "\ud83c\udf10", "name": "Translate Mode", "desc": "Instant translation between 10 languages.", "open": "#inbox-chat"}, {"ic": "\ud83d\udcda", "name": "Study Tutor", "desc": "Exam prep, summaries, quizzes \u2014 any subject.", "open": "#inbox-chat"}, {"ic": "\ud83d\udca1", "name": "Idea Generator", "desc": "Business, video & content ideas on demand.", "open": "#inbox-chat"}, {"ic": "\ud83e\uddd2", "name": "Kids Mode", "desc": "Simple, safe answers for young learners.", "open": "#inbox-chat"}, {"ic": "\ud83d\udcdc", "name": "Chat History", "desc": "Recent conversation kept while this page is open.", "open": "#inbox-chat"}];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function usd(n){var v=Number(n||0)/280;return "$"+(v>=100?Math.round(v).toLocaleString("en-US"):v.toFixed(2));}
+  function cardHTML(it, i){
+    var pic = it.pic
+      ? '<img class="pic'+(/\.svg(\?|$)/i.test(it.pic)?" darkbg":"")+'" src="'+esc(it.pic)+'" alt="'+esc(it.name)+'" loading="lazy" onerror="this.style.display=\'none\'">' 
+      : '<span class="pic ic">'+esc(it.ic||"✨")+"</span>";
+    var price = it.price ? '<span class="pr">'+esc(it.pricetxt||("from "+usd(it.price)+"/mo"))+"</span>" : "";
+    var btn = it.buy
+      ? '<button type="button" class="sp-buy" data-buy="'+i+'">🛒 Buy</button>'
+      : (it.open ? '<a class="sp-open" href="'+esc(it.open)+'">Open →</a>' : "");
+    return '<div class="sp-card" data-search="'+esc((it.name+" "+(it.desc||"")).toLowerCase())+'">'+pic+
+      '<div class="tx"><b>'+esc(it.name)+"</b><span>"+esc(it.desc||"")+"</span>"+price+"</div>"+btn+"</div>";
+  }
+  function render(filter){
+    var q = (filter||"").toLowerCase().trim();
+    var html = "", n = 0;
+    items.forEach(function(it, i){
+      if(!q || (it.name+" "+(it.desc||"")).toLowerCase().indexOf(q) > -1){ html += cardHTML(it, i); n++; }
+    });
+    document.getElementById("sp-grid").innerHTML = html || '<div class="sp-empty">No matches — try another word.</div>';
+    document.getElementById("sp-count").textContent = n + " / " + items.length + " shown";
+    bindBuys();
+  }
+  function bindBuys(){
+    document.querySelectorAll("[data-buy]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var it = items[parseInt(b.getAttribute("data-buy"),10)];
+        if(it && window.BuyPanel) window.BuyPanel.open(it);
+      });
+    });
+  }
+  document.getElementById("sp-search").addEventListener("input", function(e){ render(e.target.value); });
+  /* In-box chat: "Open" actions stay on THIS page — scroll to the embedded chat and focus the input. */
+  document.addEventListener("click", function(e){
+    var a = (e.target && e.target.closest) ? e.target.closest('a[href="#inbox-chat"]') : null;
+    if(!a) return;
+    e.preventDefault();
+    var t = document.getElementById("inbox-chat");
+    if(t) t.scrollIntoView({behavior:"smooth", block:"start"});
+    var p = document.getElementById("chat-input");
+    if(p) setTimeout(function(){ try{ p.focus({preventScroll:true}); }catch(_){ p.focus(); } }, 550);
+  });
+  render("");
+})();
+</script>
+</body>
+</html>

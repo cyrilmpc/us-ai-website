@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Purchases — US AI</title>
+<meta name="description" content="View everything you've bought on US AI — proxies, RDP, premium numbers, services and websites — with payment and order status. Login required.">
+<link rel="canonical" href="https://www.usai-usa.com/purchases.html">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<style>
+.pur-hero{max-width:900px;margin:0 auto;text-align:center;padding:34px 16px 6px;}
+.pur-hero img{width:110px;height:110px;border-radius:28px;box-shadow:0 10px 34px rgba(99,102,241,.4);animation:pic3d 8s ease-in-out infinite;}
+.pur-hero h1{font-size:1.9rem;margin:14px 0 6px;}
+.pur-wrap{max-width:1080px;margin:0 auto;padding:0 16px;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.stat{background:var(--card,#141a2e);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 10px;text-align:center;animation:picfloat 6s ease-in-out infinite;}
+.stat b{font-size:1.4rem;display:block;}
+.stat span{font-size:.78rem;color:var(--muted,#9aa3b2);}
+</style>
+    <meta property="og:image" content="https://www.usai-usa.com/img/og/purchases.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Purchases — US AI">
+    <meta name="twitter:image" content="https://www.usai-usa.com/img/og/purchases.png">
+<style>
+/* q-loading skeletons: additive loading states (page JS wipes them on render via innerHTML) */
+.qsk{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.qsc{height:118px;border-radius:14px;background:linear-gradient(100deg,rgba(139,144,184,.10) 40%,rgba(167,139,250,.22) 50%,rgba(139,144,184,.10) 60%);background-size:200% 100%;animation:qskshim 1.3s linear infinite}
+@keyframes qskshim{to{background-position:-200% 0}}
+.qspin{display:flex;align-items:center;justify-content:center;gap:12px;padding:36px 16px;color:#8b90b8;font:500 .95rem/1.4 system-ui,sans-serif}
+.qspin i{width:30px;height:30px;flex:none;border-radius:50%;border:3px solid rgba(139,144,184,.25);border-top-color:#a78bfa;animation:qskrot .8s linear infinite}
+@keyframes qskrot{to{transform:rotate(360deg)}}
+</style>
+<script type="application/ld+json">
+{
+  "@type": "WebPage",
+  "name": "My Purchases — US AI",
+  "description": "Your US AI dashboard — track orders, payment status, and delivery for RDP, proxies, subscriptions, and premium numbers.",
+  "url": "https://www.usai-usa.com/purchases.html",
+  "@context": "https://schema.org",
+  "publisher": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com"
+  },
+  "inLanguage": "en"
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="34px" alt="US AI logo" width="34" height="34" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="temp-box.html">📧 Temp Mail</a>
+    <a href="numbers.html">💎 Numbers</a>
+    <a href="apps.html">📱 Apps</a>
+    <a href="purchases.html" class="active">🧾 Purchases</a>
+    <a href="builder.html">🏗️ Builder</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#articles">Articles</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<main>
+<div class="pur-hero">
+  <img width="256" height="256" srcset="img/icon-purchases-256.jpg 256w, img/icon-purchases.jpg 1024w" sizes="(max-width:640px) 40vw, 300px" src="img/icon-purchases-256.jpg" alt="My purchases" loading="lazy">
+  <h1>🧾 My <span class="grad">Purchases</span></h1>
+  <p class="muted" style="max-width:600px;margin:0 auto;">Everything you've bought on US AI — proxies, RDP, premium numbers, services and websites — with payment &amp; order status.</p>
+</div>
+
+<div class="pur-wrap" id="pur-root"><div class="qspin" aria-hidden="true"><i></i><span>Loading your purchases…</span></div></div>
+</main>
+
+<footer>
+  <p><b>US AI</b> — your free AI platform for questions, pictures, videos &amp; guides.</p>
+  <p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  <p class="tiny">AI answers can be wrong — verify before making important decisions.</p>
+</footer>
+
+<script src="shop.js?v=20261012b"></script>
+<script defer src="ui.js?v=20261013k"></script>
+<script>
+(function () {
+  "use strict";
+  var root = document.getElementById("pur-root");
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function get(k, fb) { try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? fb : v; } catch (e) { return fb; } }
+  /* USD-first currency format (US AI rule: customer-facing prices in $, Rs as approx) */
+  function usdOf(n) { var v = Number(n || 0) / 280; return "$" + (v >= 100 ? Math.round(v).toLocaleString("en-US") : v.toFixed(2)); }
+  function rsOf(n) { return "Rs " + Math.round(Number(n || 0)).toLocaleString("en-PK"); }
+  function amtDisp(rs) { if (!rs || rs <= 0) return "—"; return usdOf(rs) + " (≈ " + rsOf(rs) + ")"; }
+  function parseRs(s) { var t = String(s == null ? "" : s).trim(); if (!t) return 0;
+    var n = parseFloat(t.replace(/[^0-9.]/g, "")) || 0;
+    return t.charAt(0) === "$" ? Math.round(n * 280) : Math.round(n); }
+
+  var user = (window.SawalShop && window.SawalShop.currentUser) ? window.SawalShop.currentUser() : null;
+  if (!user) {
+    root.innerHTML = '<div class="pay-lock"><div class="pay-lock-ico">🔒</div><h3>Login Required</h3>' +
+      '<p>Login to see everything you have purchased.</p>' +
+      '<a class="btn btn-primary btn-glow" href="account.html">Login / Create Free Account →</a></div>';
+    return;
+  }
+
+  var items = [];
+  /* shop orders: proxies, RDP, services */
+  get("sawalai_orders", []).forEach(function (o) {
+    if (!o || (o.account && o.account !== user.email && o.email !== user.email)) return;
+    items.push({
+      icon: o.kind === "Proxy" ? "🌐" : (o.kind === "RDP" ? "🖥️" : (o.type === "subscription" ? "📦" : "🛠️")),
+      title: o.kind ? (o.kind + " — " + (o.plan || "")) : ((o.item || "Order") + (o.plan ? " — " + o.plan : "")),
+      sub: [o.country, o.qty, o.duration, o.details].filter(Boolean).join(" · "),
+      rs: parseRs(o.total) || Number(o.amount) || 0, total: amtDisp(parseRs(o.total) || Number(o.amount) || 0), id: o.id || "", date: o.date || "",
+      tid: o.tid || "", payment: o.payment || "", status: o.status || ""
+    });
+  });
+  /* premium numbers */
+  get("pn_orders", []).forEach(function (o) {
+    if (!o || (o.email && o.email !== user.email)) return;
+    items.push({
+      icon: "💎", title: "Number — " + (o.plan || ""),
+      sub: o.country || "", rs: Number(o.price) || 0, total: amtDisp(Number(o.price) || 0),
+      id: o.id || "", date: o.date || "", tid: o.tid || "", payment: o.payment || "", status: ""
+    });
+  });
+  /* website builder requests */
+  get("wb_requests", []).forEach(function (r) {
+    if (!r || (r.email && r.email !== user.email)) return;
+    items.push({
+      icon: "🏗️", title: "Website — " + (r.name || ""),
+      sub: (r.plan || "") + (r.kind ? " · " + r.kind : ""),
+      rs: Number(r.price) || 0, total: amtDisp(Number(r.price) || 0),
+      id: r.id || "", date: r.date || "", tid: r.tid || "", payment: r.payment || "", status: r.status || ""
+    });
+  });
+
+  var head = '<p style="margin:14px 0 4px;">Hello, <b>' + esc(user.name || user.email) + '</b> 👋 — ' + items.length + ' purchase' + (items.length === 1 ? '' : 's') + ' found.</p>';
+  if (!items.length) {
+    root.innerHTML = head + '<div class="wb-empty" style="padding:40px 10px;">' +
+      '<p style="font-size:2rem;">🛒</p><p>No purchases yet.</p>' +
+      '<p><a class="btn btn-primary btn-glow" href="numbers.html">💎 Buy a Number</a> ' +
+      '<a class="btn btn-ghost" href="index.html#proxies">🌐 Buy Proxies</a></p></div>';
+    return;
+  }
+  /* 2026-10-12 callback status (additive): show "Callback requested" entries */
+  try {
+    var cbs = JSON.parse(localStorage.getItem("sawal_callbacks") || "[]");
+    cbs.forEach(function (c) {
+      if (!c) return;
+      items.push({
+        icon: "☎️", title: "Callback requested — " + (c.item || ""),
+        sub: (c.name || "") + (c.phone ? " · " + c.phone : "") + (c.time ? " · best time: " + c.time : ""),
+        rs: 0, total: "", id: "", date: c.date || "", tid: "", payment: "", status: c.status || "requested"
+      });
+    });
+  } catch (e) {}
+  /* dashboard stats */
+  var nPend = 0, nDone = 0, spent = 0;
+  items.forEach(function (o) {
+    var isPend = o.payment === "pending" || (!o.payment && o.tid);
+    var isDone = o.payment === "verified" || o.status === "active" || o.status === "ready" || o.status === "delivered";
+    if (isPend) nPend++; else if (isDone) nDone++;
+    if (isDone || isPend) { spent += Number(o.rs) || 0; }
+  });
+  var stats = '<div class="stat-grid" style="margin:16px 0;">' +
+    '<div class="stat"><b>🛒 ' + items.length + '</b><span>My orders</span></div>' +
+    '<div class="stat"><b>⏳ ' + nPend + '</b><span>Payment pending</span></div>' +
+    '<div class="stat"><b>✅ ' + nDone + '</b><span>Active / verified</span></div>' +
+    '<div class="stat"><b>' + amtDisp(spent) + '</b><span>Total spent</span></div></div>';
+  var cards = items.map(function (o) {
+    var pay = (o.payment === "pending" || (!o.payment && o.tid))
+      ? '<span class="pur-badge pur-pending">⏳ Payment pending verification' + (o.tid ? ' (TID ' + esc(o.tid) + ')' : '') + '</span>'
+      : (o.payment === "verified" ? '<span class="pur-badge pur-paid">✅ Payment verified</span>' : '');
+    var st = (o.status === "active" || o.status === "delivered") ? '<span class="pur-badge pur-active">✅ Active</span>'
+      : (o.status === "ready" ? '<span class="pur-badge pur-active">✅ Ready</span>'
+      : (o.status === "building" ? '<span class="pur-badge pur-pending">🔨 Building — we\'ll notify you when it\'s ready</span>'
+      : (o.status === "requested" ? '<span class="pur-badge pur-pending">☎️ Callback requested</span>' : '')));
+    return '<div class="pur-card"><h3>' + o.icon + ' ' + esc(o.title) + '</h3>' +
+      '<div class="pur-total">' + esc(o.total) + '</div>' +
+      (o.sub ? '<div class="pur-meta">' + esc(o.sub) + '</div>' : '') +
+      '<div class="pur-meta">Order: <b>' + esc(o.id) + '</b>' + (o.date ? ' · ' + esc(o.date) : '') + '</div>' +
+      '<div style="margin-top:8px;">' + pay + st + '</div></div>';
+  }).join("");
+  root.innerHTML = head + stats + '<div class="pur-grid">' + cards + '</div>' +
+    '<p class="tiny muted" style="margin-bottom:40px;">💡 Payments are verified manually within minutes of your JazzCash transfer. If a payment stays pending, contact us on WhatsApp with your Order ID.</p>' +
+    '<p class="tiny" style="margin:6px 0 40px;">⏩ <b>Faster updates:</b> <a href="index.html#community"><b>join our WhatsApp community</b></a> 💬 — members get order news first, plus <b>3 days of Pro FREE</b>.</p>';
+})();
+</script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+</body>
+</html>
