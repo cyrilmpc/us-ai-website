@@ -294,6 +294,25 @@ body.widget-open .left-rail .social-icons{display:none !important;}
 
 </style>
 
+
+<style>
+/* All Articles ticker animation */
+.allart-list.ticker{
+  overflow:hidden;
+  max-height:400px;
+}
+.allart-list.ticker .allart-track{
+  animation:allartScroll 30s linear infinite;
+}
+.allart-list.ticker:hover .allart-track{
+  animation-play-state:paused;
+}
+@keyframes allartScroll{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-50%);}
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
