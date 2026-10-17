@@ -626,6 +626,50 @@ function srand(seed){
     return (s - 1) / 2147483646;
   };
 }
+// REAL products database - popular items like Daraz/Amazon
+const REAL_PRODUCTS = [
+["Apple iPhone 15 Pro Max 256GB","Apple","Electronic Devices","photo-1592750475338-74b7b21085ab",999,1299],
+["Samsung Galaxy S24 Ultra 5G","Samsung","Electronic Devices","photo-1610945415295-d9bbf067e59c",899,1199],
+["Sony WH-1000XM5 Headphones","Sony","Electronic Devices","photo-1505740420928-5e560c06d30e",299,399],
+["Apple MacBook Air M3 Chip","Apple","Electronic Devices","photo-1517336714731-489689fd1ca8",1099,1299],
+["Apple AirPods Pro 2nd Gen","Apple","Electronic Devices","photo-1590658268037-6bf12165a8df",189,249],
+["Dyson V15 Detect Vacuum","Dyson","TV & Home Appliances","photo-1558317374-067fb5f30001",549,749],
+["Nike Air Max 270 Shoes","Nike","Men's Fashion","photo-1542291026-7eec264c27ff",129,179],
+["Adidas Ultraboost 22","Adidas","Sports & Outdoor","photo-1608231387042-66d1773070a5",149,199],
+["L'Oreal Paris Shampoo 400ml","L'Oreal","Health & Beauty","photo-1556228720-195a672e8a03",12,18],
+["Nivea Soft Face Cream","Nivea","Health & Beauty","photo-1620916566398-39f1143ab7be",15,22],
+["Dior Sauvage Eau de Parfum","Dior","Health & Beauty","photo-1596462502278-27bfdc403348",89,120],
+["Dove Beauty Soap Bar","Dove","Health & Beauty","photo-1600857544200-b2f666a9a2ec",5,8],
+["Maybelline Fit Me Lipstick","Maybelline","Health & Beauty","photo-1586495777744-4413f21062fa",9,14],
+["LEGO Technic Creator Set","LEGO","Babies & Toys","photo-1558060370-d644479cb6f7",59,89],
+["Hot Wheels 5-Pack Cars","Hot Wheels","Babies & Toys","photo-1596461404969-9ae70f2830c1",19,29],
+["Barbie Dreamhouse Doll","Barbie","Babies & Toys","photo-1560859251-d563a49c5e4a",29,39],
+["Instant Pot Duo 7-in-1 Cooker","Instant Pot","TV & Home Appliances","photo-1585515320310-259814833e62",89,129],
+["Philips Air Fryer XL","Philips","TV & Home Appliances","photo-1626074353765-517a681e40be",129,179],
+["Samsung 55 inch 4K Smart TV","Samsung","TV & Home Appliances","photo-1593359677879-a4bb92f829d1",499,699],
+["Zara Floral Summer Dress","Zara","Women's Fashion","photo-1595777457583-95e059d581b8",39,59],
+["Levi's 511 Slim Fit Jeans","Levi's","Men's Fashion","photo-1542272604-787c3835535d",59,89],
+["Puma RS-X Sneakers","Puma","Men's Fashion","photo-1600185365483-26d7a4cc7519",79,109],
+["Ray-Ban Aviator Sunglasses","Ray-Ban","Watches, Bags & Jewellery","photo-1572635196237-14b3f281503f",149,199],
+["Casio G-Shock Watch","Casio","Watches, Bags & Jewellery","photo-1524805444758-089113d48a6d",99,149],
+["Gucci Leather Handbag","Gucci","Watches, Bags & Jewellery","photo-1584917865442-de89df76afd3",1299,1599],
+["Harry Potter Complete Book Set","Bloomsbury","Books & Stationery","photo-1544716278-ca5e3f4abd8c",89,129],
+["Atomic Habits by James Clear","Avery","Books & Stationery","photo-1543002588-bfa74002ed7e",18,27],
+["Yamaha FG800 Acoustic Guitar","Yamaha","Musical Instruments","photo-1556449895-a33c9dba33dd",199,299],
+["Wilson Pro Staff Tennis Racket","Wilson","Sports & Outdoor","photo-1554068865-24cecd4e34b8",89,129],
+["Spalding NBA Basketball","Spalding","Sports & Outdoor","photo-1546519638-68e109498ffc",29,39],
+["Dell XPS 13 Plus Laptop","Dell","Electronic Devices","photo-1496181133206-80ce9b88a853",999,1199],
+["Canon EOS R50 Camera","Canon","Electronic Devices","photo-1516035069371-29a1b244cc32",599,799],
+["GoPro HERO12 Black","GoPro","Electronic Devices","photo-1564466809178-9f65e18518b6",349,449],
+["DJI Mini 4 Pro Drone","DJI","Electronic Devices","photo-1473968512647-3e447244af8f",449,599],
+["JBL Flip 6 Bluetooth Speaker","JBL","Electronic Devices","photo-1608043152269-423dbba4e7e1",99,129],
+["Logitech MX Master 3S Mouse","Logitech","Electronic Devices","photo-1527814050087-3793815479db",89,119],
+["Kindle Paperwhite 16GB","Amazon","Electronic Devices","photo-1544244015-0df4b3ffc6b0",139,169],
+["iPad Air 5th Gen 64GB","Apple","Electronic Devices","photo-1544244015-0df4b3ffc6b0",549,649],
+["Bose SoundLink Flex","Bose","Electronic Devices","photo-1608043152269-423dbba4e7e1",129,169],
+["Ninja AF101 Air Fryer","Ninja","TV & Home Appliances","photo-1570222094114-d054a817e56b",99,139],
+];
+
 function genProduct(id, forceCat){
   // Use REAL products first!
   const rid = parseInt(String(id).replace(/\D/g,'')) || 1;
