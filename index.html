@@ -170,6 +170,30 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 </style>
 
+
+<style>
+/* RDP, Proxy, Subscription: same size (user order) */
+.svc-card{
+  min-height:320px !important;
+  display:flex !important;
+  flex-direction:column !important;
+}
+.svc-card img{
+  width:100% !important;
+  height:170px !important;
+  object-fit:cover !important;
+}
+.svc-card .svc-body{
+  flex:1 !important;
+  display:flex !important;
+  flex-direction:column !important;
+}
+/* Subscription items same as RDP */
+.sub-grid .sub-item, #sub-grid > div{
+  min-height:120px !important;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
