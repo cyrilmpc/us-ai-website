@@ -962,7 +962,7 @@ function loadMore(){
   }
   const batchSize = 500; // 500 initial! // 300 products as user asked!
   const batch = genBatch(11 + jfyCount, batchSize);
-  batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
+  batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id || x.name === p.name)) displayedProducts.push(p); });
   document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
   jfyCount += batchSize;
   const total = Math.min(jfyCount + 10, MAX_PRODUCTS + 10);
