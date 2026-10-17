@@ -2711,7 +2711,7 @@ document.addEventListener('click', function(e){
     targets.forEach(function(sel){
       document.querySelectorAll(sel).forEach(function(el){
         el.style.opacity = op;
-        el.style.transition = 'opacity 0.25s';
+        // Don't override transition - preserve animations
         el.style.pointerEvents = op < 0.2 ? 'none' : '';
       });
     });
