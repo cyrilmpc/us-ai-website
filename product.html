@@ -381,7 +381,7 @@ function gp(pid,cat){
   if(passedNm){ try{ nm=decodeURIComponent(passedNm); }catch(e){ nm=""; } }
   if(!nm){
     const tname=cn.split(' ')[0];
-    nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" Pro Max Ultra";
+    nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" ";
   }
   // Realistic prices based on product type!
   const pranges={"Face Cream":[10,60],"Perfume":[20,150],"Cream":[10,60],"Smartphone":[200,800],"Laptop":[400,1500],"Headphones":[30,200],"Watch":[50,400],"Shoes":[30,150],"Sneakers":[30,150],"Shampoo":[5,30],"Teddy Bear":[10,50],"Book":[5,40],"Guitar":[100,800],"Camera":[200,900],"Drone":[150,600]};

@@ -817,7 +817,7 @@ function genProduct(id, forceCat){
   ];
   return {
     id: "p" + id,
-    name: b + " " + t[0] + " " + (1000 + Math.floor(r() * 9000)) + " Pro Max Ultra",
+    name: (b + " " + t[0]).trim() + ["", " - Pack of 2", " - 500ml", " - Large", " - Premium", " - Original"][Math.floor(r()*6)],
     price: price, old_price: oldP, discount: "-" + disc + "%",
     category: c[1], image: images[0], images: images,
     rating: rating, reviews: revs.toLocaleString()
