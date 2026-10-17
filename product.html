@@ -193,7 +193,41 @@ window.addEventListener('scroll',function(){
   }
 });
 </script>
-<div class="gm" onclick="openFS()"><img id="mImg" src=""></div>
+<div class="gm" onclick="openFS()" id="gmWrap" style="position:relative;overflow:hidden;cursor:zoom-in;">
+<img id="mImg" src="" style="transition:transform 0.3s;">
+<div id="zoomLens" style="display:none;position:absolute;border:2px solid #ff6b35;width:120px;height:120px;background:rgba(255,255,255,0.3);pointer-events:none;"></div>
+</div>
+<script>
+// Daraz-style hover zoom
+(function(){
+  const wrap = document.getElementById('gmWrap');
+  const img = document.getElementById('mImg');
+  const lens = document.getElementById('zoomLens');
+  if(!wrap || !img) return;
+  
+  wrap.addEventListener('mousemove', function(e){
+    const rect = wrap.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Show lens
+    lens.style.display = 'block';
+    lens.style.left = (x - 60) + 'px';
+    lens.style.top = (y - 60) + 'px';
+    
+    // Zoom image (2x)
+    const px = (x / rect.width) * 100;
+    const py = (y / rect.height) * 100;
+    img.style.transformOrigin = px + '% ' + py + '%';
+    img.style.transform = 'scale(2)';
+  });
+  
+  wrap.addEventListener('mouseleave', function(){
+    lens.style.display = 'none';
+    img.style.transform = 'scale(1)';
+  });
+})();
+</script>
 <div class="gt" id="thumbs"></div>
 </div>
 <div class="info">
@@ -408,7 +442,13 @@ function gp(pid,cat){
     if(passedIm){
       try{
         const pim = decodeURIComponent(passedIm);
-        imgs = [pim, pim, pim, pim, pim];
+        imgs = [
+        pim,
+        pim + (pim.includes('?') ? '&' : '?') + 'h=800&fit=crop&crop=entropy',
+        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=800&fit=crop&crop=top',
+        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=800&fit=crop&crop=bottom',
+        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=600&fit=crop'
+      ];
       }catch(e){}
     }
   }
