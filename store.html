@@ -338,6 +338,15 @@ button:active{transform:scale(.96)}
 .pc::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);transform:skewX(-20deg);transition:left .6s;pointer-events:none}
 .pc:hover::after{left:150%}
 .pc{position:relative;overflow:hidden}
+
+/* Wishlist badge pulse */
+#wishCount{animation:wishPulse 2s infinite}
+@keyframes wishPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+/* Cart badge */
+#cartCount{animation:wishPulse 2s infinite}
+/* Live viewers */
+#liveN{animation:liveBlink 3s infinite}
+@keyframes liveBlink{0%,100%{opacity:1}50%{opacity:.7}}
 </style>
 </head>
 <body>
