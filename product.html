@@ -159,8 +159,8 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
 <span>📍 Location</span><a href="javascript:void(0)" style="color:#3b82f6;">CHANGE</a>
 </div>
-<div style="margin-bottom:10px;">⚡ <b>Express Delivery</b> - Get by Tomorrow <span style="color:#22d3ee;">$5.99</span></div>
-<div style="margin-bottom:10px;">📦 <b>Standard Delivery</b> - Get in 2-4 days <span style="color:#22d3ee;">$2.99</span></div>
+<div style="margin-bottom:10px;">⚡ <b>Express Delivery</b> - Get by Tomorrow <span style="color:#22d3ee;">FREE</span></div>
+<div style="margin-bottom:10px;">📦 <b>Standard Delivery</b> - Get in 2-4 days <span style="color:#22d3ee;">FREE</span></div>
 <div>💵 <b>Cash on Delivery</b> Available</div>
 </div>
 </div>
@@ -175,7 +175,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="av">🏬</div>
 <div class="inf"><b>US AI Official Store</b><div>⭐ 4.8 | 12.5k followers | 98% positive</div><div>📍 Ships from: USA Warehouse</div></div>
 <button class="chat" onclick="alert('💬 Chat coming soon!')">💬 Chat</button><div style="display:flex;gap:16px;margin-top:12px;font-size:.85rem;color:#888;">
-<span>⭐ 93% Positive</span>
+<span>⭐ 98% Positive</span>
 <span>📦 100% Ship on Time</span>
 <span>💬 98% Response</span>
 </div>
@@ -246,7 +246,8 @@ function gp(pid,cat){
   let pra=[10,200];
   for(const kk in pranges){ if(nm.toLowerCase().includes(kk.toLowerCase())){ pra=pranges[kk]; break; } }
   const pr=(pra[0]+r()*(pra[1]-pra[0])).toFixed(2);
-  const op=(pr*1.3).toFixed(2), d=Math.floor(r()*25+5);
+  const op=(parseFloat(pr)*1.35).toFixed(2);
+  const d=Math.round((1-parseFloat(pr)/parseFloat(op))*100);
   const rt=(3.5+r()*1.5).toFixed(1), rv=Math.floor(r()*8000+20);
   // Use passed images from store (exact match!)
   const passedIms = up.get('ims');
@@ -296,7 +297,7 @@ function init(){
   let rel="";for(let i=1;i<=10;i++){const rp=gp('p'+(n+i*137),'');rel+=`<div class="pc" onclick="location.href='product.html?id=${rp.id}'"><img src="${rp.images[0]}" loading="lazy"><div class="i"><div class="t">${rp.name}</div><div class="p">$${rp.price}</div></div></div>`;}
   document.getElementById('rel').innerHTML=rel;
   // Big images (2-3 large)
-  document.getElementById('bigImgs').innerHTML=P.images.slice(0,3).map((im,i)=>`<img src="${im}" onclick="sI(${i});openFS()" loading="lazy">`).join('');
+  document.getElementById('bigImgs').innerHTML=(P.images||[]).slice(0,3).map((im,i)=>`<img src="${im}" onclick="sI(${i});openFS()" loading="lazy">`).join('');
 }
 function sI(i){fsi=i;document.getElementById('mImg').src=P.images[i];document.querySelectorAll('.gt img').forEach((t,j)=>t.classList.toggle('on',j===i));}
 function openFS(){document.getElementById('fsM').classList.add('open');uFS();}
