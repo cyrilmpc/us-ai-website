@@ -118,7 +118,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .pnot .tx b{color:#1e1b4b}
 
 /* Animated category images */
-.ct-img-wrap{width:80px;height:80px;border-radius:12px;margin:0 auto 8px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.ct-img-wrap{width:80px;height:80px;border-radius:12px;margin:0 auto 8px;border-radius:12px;overflow:hidden;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .ct-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;animation:ctImgFloat 3s ease-in-out infinite}
 @keyframes ctImgFloat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .ct:hover .ct-img-wrap img{transform:scale(1.25) rotate(5deg);animation:none}
@@ -740,7 +740,7 @@ function startNotifs(){
     setTimeout(() => pn.classList.remove('show'), 4000);
   }, 12000);
 }
-init();
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 </script>
 
 <!-- ===== PRODUCT DETAIL MODAL (Daraz style) ===== -->
