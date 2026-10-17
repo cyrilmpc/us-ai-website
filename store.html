@@ -174,6 +174,28 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .bdots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s}
 .bdots span.active{background:#fff;transform:scale(1.3)}
 @media(max-width:768px){.banners{height:140px}.bslide{font-size:1.3rem}}
+
+/* Toolbar: Sort + Filter */
+.toolbar{display:flex;gap:10px;align-items:center;justify-content:center;margin:15px auto;max-width:1200px;padding:0 16px;flex-wrap:wrap}
+.toolbar select,.toolbar button{padding:10px 16px;border:2px solid #8b5cf6;border-radius:12px;background:#1e1b4b;color:#fff;cursor:pointer;font-size:.9rem;outline:none}
+.toolbar select:hover,.toolbar button:hover{background:#2d2a5e}
+/* Wishlist heart */
+.wish{position:absolute;top:8px;right:8px;font-size:1.3rem;cursor:pointer;background:rgba(0,0,0,.5);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:5}
+.wish:hover{transform:scale(1.2)}
+.wish.active{color:#ef4444}
+/* Stock badge */
+.stock{position:absolute;bottom:8px;left:8px;background:#ef4444;color:#fff;font-size:.7rem;padding:4px 10px;border-radius:10px;font-weight:bold;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+/* Share btn */
+.share{position:absolute;top:8px;left:8px;font-size:1.1rem;cursor:pointer;background:rgba(0,0,0,.5);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:5}
+.share:hover{transform:scale(1.2)}
+/* Recently viewed */
+.recent{background:#1e1b4b;border-radius:16px;padding:15px;margin:15px auto;max-width:1200px;border:1px solid #2d2a5e}
+.recent h3{color:#a78bfa;margin-bottom:10px}
+.recent .plist{display:flex;gap:10px;overflow-x:auto;padding:5px}
+.recent .pmini{min-width:100px;cursor:pointer;text-align:center}
+.recent .pmini img{width:80px;height:80px;object-fit:cover;border-radius:10px}
+.recent .pmini div{font-size:.7rem;color:#888;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
 </style>
 </head>
 <body>
@@ -254,7 +276,24 @@ setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
 </div>
 
 <div class="sec">
-  <div class="sec-h">
+  <div class="toolbar">
+  <select id="sortSel" onchange="sortProducts(this.value)">
+    <option value="">🔀 Sort: Default</option>
+    <option value="low">💰 Price: Low to High</option>
+    <option value="high">💎 Price: High to Low</option>
+    <option value="rating">⭐ Top Rated</option>
+    <option value="discount">🏷️ Biggest Discount</option>
+  </select>
+  <select id="priceFilter" onchange="filterPrice(this.value)">
+    <option value="">💵 All Prices</option>
+    <option value="0-50">Under $50</option>
+    <option value="50-200">$50 - $200</option>
+    <option value="200-500">$200 - $500</option>
+    <option value="500-99999">Over $500</option>
+  </select>
+  <button onclick="showWishlist()">❤️ Wishlist (<span id="wishN">0</span>)</button>
+</div>
+<div class="sec-h">
     <h2>🎯 Just For You</h2>
   </div>
   <div class="pgrid" id="jfyG"></div>
@@ -391,10 +430,12 @@ function getPImgs(p){
 function cardHTML(p){
   cacheProd(p);
   const stars = "★".repeat(Math.floor(p.rating)) + "☆".repeat(5 - Math.floor(p.rating));
-  return `<div class="pc" onclick="openProduct('${p.id}','${(p.category||'').replace(/'/g,"")}')">
-    <div class="im">
+  return `<div class="pc" onclick="addRecent(window._prodCache[\'${p.id}\']);openProduct('${p.id}','${(p.category||'').replace(/'/g,"")}')">
+    <div class="im" style="position:relative;">
+      <span class="wish ${isWished(p.id) ? 'active' : ''}" onclick="toggleWish('${p.id}', this)">${isWished(p.id) ? '❤️' : '🤍'}</span>
+      <span class="share" onclick="shareProduct('${p.id}', this)">📤</span>
       <img src="${p.image}" onmouseover="phOver(this,'${p.id}')" onmouseout="phOut(this,'${p.id}','${p.image}')" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'">
-      <span class="off">${p.discount}</span>
+      <span class="off">${p.discount}</span>${Math.random() < 0.2 ? '<span class="stock">🔥 Only few left!</span>' : ''}
     </div>
     <div class="in">
       <div class="t">${p.name}</div>
@@ -812,6 +853,88 @@ function cacheProd(p){
   window._prodCache[p.id] = p;
   return p;
 }
+</script>
+<script>
+// ===== NEW FEATURES =====
+// Wishlist
+function toggleWish(pid, el){
+  event.stopPropagation();
+  let w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  const i = w.indexOf(pid);
+  if(i === -1){ w.push(pid); el.classList.add('active'); el.textContent = '❤️'; toast('❤️ Added to wishlist!'); }
+  else { w.splice(i, 1); el.classList.remove('active'); el.textContent = '🤍'; toast('🤍 Removed from wishlist!'); }
+  localStorage.setItem('wishlist', JSON.stringify(w));
+  document.getElementById('wishN').textContent = w.length;
+}
+function isWished(pid){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  return w.includes(pid);
+}
+function showWishlist(){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  if(w.length === 0){ toast('❤️ Wishlist is empty!'); return; }
+  const products = w.map(pid => window._prodCache[pid]).filter(p => p);
+  document.querySelector('.sec-h h2').innerHTML = '❤️ My Wishlist (' + products.length + ')';
+  document.getElementById('jfyG').innerHTML = products.map(cardHTML).join('');
+  document.getElementById('clearBtn').style.display = '';
+  toast('❤️ Showing wishlist!');
+}
+// Sort
+function sortProducts(mode){
+  if(!mode) return;
+  let sorted = [...displayedProducts];
+  if(mode === 'low') sorted.sort((a,b) => parseFloat(a.price) - parseFloat(b.price));
+  if(mode === 'high') sorted.sort((a,b) => parseFloat(b.price) - parseFloat(a.price));
+  if(mode === 'rating') sorted.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating));
+  if(mode === 'discount') sorted.sort((a,b) => parseInt(b.discount) - parseInt(a.discount));
+  document.getElementById('jfyG').innerHTML = sorted.map(cardHTML).join('');
+  toast('🔀 Sorted!');
+}
+// Price filter
+function filterPrice(range){
+  if(!range){
+    document.getElementById('jfyG').innerHTML = displayedProducts.map(cardHTML).join('');
+    return;
+  }
+  const [min, max] = range.split('-').map(Number);
+  const filtered = displayedProducts.filter(p => {
+    const pr = parseFloat(p.price);
+    return pr >= min && pr <= max;
+  });
+  document.getElementById('jfyG').innerHTML = filtered.map(cardHTML).join('');
+  toast(`💵 ${filtered.length} products in range!`);
+}
+// Share
+function shareProduct(pid, el){
+  event.stopPropagation();
+  const p = window._prodCache[pid];
+  const url = location.origin + location.pathname.replace('store.html','') + 'product.html?id=' + pid;
+  const text = `Check this: ${p.name} - $${p.price}`;
+  if(navigator.share){
+    navigator.share({title: p.name, text: text, url: url});
+  } else {
+    const wa = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+    window.open(wa, '_blank');
+  }
+  toast('📤 Share opened!');
+}
+// Recently viewed
+function addRecent(p){
+  let r = JSON.parse(localStorage.getItem('recent') || '[]');
+  r = r.filter(x => x.id !== p.id);
+  r.unshift({id: p.id, name: p.name, image: p.image, price: p.price});
+  r = r.slice(0, 10);
+  localStorage.setItem('recent', JSON.stringify(r));
+}
+</script>
+
+<script>
+// Update wishlist count on load
+(function(){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  const el = document.getElementById('wishN');
+  if(el) el.textContent = w.length;
+})();
 </script>
 </body>
 </html>
