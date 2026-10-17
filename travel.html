@@ -61,7 +61,16 @@
     <div class="search-row">
       <input type="text" id="fl-from" placeholder="From (e.g. New York)" list="cities">
       <input type="text" id="fl-to" placeholder="To (e.g. London)" list="cities">
-      <input type="date" id="fl-date">
+    </div>
+    <div class="search-row">
+      <input type="date" id="fl-date" aria-label="Departure date">
+      <input type="date" id="fl-return" aria-label="Return date (optional)">
+      <select id="fl-passengers" aria-label="Passengers">
+        <option value="1">1 Passenger</option>
+        <option value="2">2 Passengers</option>
+        <option value="3">3 Passengers</option>
+        <option value="4">4 Passengers</option>
+      </select>
     </div>
     <button class="search-btn" onclick="searchFlights()">🔍 Search Flights</button>
     <datalist id="cities">
@@ -80,8 +89,21 @@
     <p style="color:#a5b4fc;">Search live hotel prices — results open on Google Hotels with real rates.</p>
     <div class="search-row">
       <input type="text" id="ht-city" placeholder="Destination (e.g. Dubai)">
-      <input type="date" id="ht-checkin" aria-label="Check-in">
-      <input type="date" id="ht-checkout" aria-label="Check-out">
+      <input type="date" id="ht-checkin" aria-label="Check-in date">
+      <input type="date" id="ht-checkout" aria-label="Check-out date">
+    </div>
+    <div class="search-row">
+      <select id="ht-rooms" aria-label="Rooms">
+        <option value="1">1 Room</option>
+        <option value="2">2 Rooms</option>
+        <option value="3">3 Rooms</option>
+      </select>
+      <select id="ht-guests" aria-label="Guests">
+        <option value="2">2 Guests</option>
+        <option value="1">1 Guest</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+      </select>
     </div>
     <button class="search-btn" onclick="searchHotels()">🔍 Search Hotels</button>
   </div>
@@ -115,12 +137,17 @@ function searchFlights(){
   var from=document.getElementById('fl-from').value||'New York';
   var to=document.getElementById('fl-to').value||'London';
   var date=document.getElementById('fl-date').value;
-  var q='Flights from '+from+' to '+to+(date?' on '+date:'');
-  // Show animated preview
+  var ret=document.getElementById('fl-return').value;
+  var pax=document.getElementById('fl-passengers').value||'1';
+  var q='Flights from '+from+' to '+to;
+  if(date&&ret){q+=' on '+date+' through '+ret;}
+  else if(date){q+=' on '+date;}
+  if(pax!=='1'){q+=' for '+pax+' passengers';}
   document.getElementById('flight-results').innerHTML=
     '<div class="result-card"><div class="result-icon">✈️</div>'+
     '<div class="result-info"><h3>'+from+' → '+to+'</h3>'+
-    '<p>Opening Google Flights with live prices...</p></div>'+
+    '<p>'+(date?date:'Any date')+(ret?' → '+ret:'')+' • '+pax+' passenger(s)</p>'+
+    '<p style="color:#4ade80;">✓ Opening Google Flights — 100% real live prices</p></div>'+
     '<div class="result-price">LIVE</div></div>';
   setTimeout(function(){
     window.open('https://www.google.com/travel/flights?q='+encodeURIComponent(q),'_blank');
