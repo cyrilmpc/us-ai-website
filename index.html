@@ -2796,6 +2796,46 @@ document.addEventListener('click', function(e){
   💬 Join community
 </a>
 
+
+<script>
+// Articles: show 10, More button for rest (safe version)
+(function(){
+  function init(){
+    var grid = document.getElementById('articles-grid');
+    if(!grid) return;
+    // Wait for articles to load
+    var cards = grid.querySelectorAll('a.mini-art, .mini-art');
+    if(cards.length === 0){
+      setTimeout(init, 1000);
+      return;
+    }
+    if(cards.length <= 10) return;
+    // Hide beyond 10
+    for(var i = 10; i < cards.length; i++){
+      cards[i].style.display = 'none';
+      cards[i].setAttribute('data-hidden', '1');
+    }
+    // Add More button
+    if(document.getElementById('articles-more-btn')) return;
+    var btn = document.createElement('button');
+    btn.id = 'articles-more-btn';
+    btn.innerHTML = 'More Articles →';
+    btn.style.cssText = 'display:block;margin:20px auto;padding:12px 30px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:25px;font-size:1rem;font-weight:600;cursor:pointer;';
+    btn.onclick = function(){
+      var hidden = grid.querySelectorAll('[data-hidden="1"]');
+      var isShowing = btn.getAttribute('data-open') === '1';
+      hidden.forEach(function(c){ c.style.display = isShowing ? 'none' : ''; });
+      btn.setAttribute('data-open', isShowing ? '0' : '1');
+      btn.innerHTML = isShowing ? 'More Articles →' : '← Show Less';
+    };
+    grid.parentNode.insertBefore(btn, grid.nextSibling);
+  }
+  // Try multiple times
+  setTimeout(init, 2000);
+  setTimeout(init, 5000);
+})();
+</script>
+
 </body>
 </html>
 
