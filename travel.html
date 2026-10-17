@@ -260,6 +260,7 @@ function searchCars(){
     <div id="complete-details" style="background:#0f0d2a;padding:20px;border-radius:12px;margin:20px 0;text-align:left;"></div>
     <p>Our travel team will contact you on WhatsApp within 2 hours with the best live prices and payment details.</p>
     <button id="wa-send-btn" class="search-btn" style="background:#25D366;margin-bottom:10px;">📱 Send Booking on WhatsApp</button><br>
+    <a href="purchases.html" class="search-btn" style="display:inline-block;text-decoration:none;background:#7c3aed;margin-bottom:10px;">📦 Track My Booking</a><br>
     <button onclick="closeComplete()" class="search-btn" style="background:#555;">Done</button>
   </div>
 </div>
@@ -289,6 +290,17 @@ function submitBooking(e){
   var email=document.getElementById('bk-email').value;
   var phone=document.getElementById('bk-phone').value;
   var notes=document.getElementById('bk-notes').value||'—';
+  // Save order locally with tracking ID
+  var trackingId='TRV-'+Date.now().toString(36).toUpperCase();
+  currentBooking.trackingId=trackingId;
+  try{
+    var orders=JSON.parse(localStorage.getItem('usai_orders')||'[]');
+    orders.unshift({id:trackingId,kind:'Travel-'+currentBooking.type,
+      from:currentBooking.from,to:currentBooking.to,date:currentBooking.date,
+      details:currentBooking.extra,name:name,email:email,whatsapp:phone,
+      notes:notes,status:'Pending',date_created:new Date().toISOString()});
+    localStorage.setItem('usai_orders',JSON.stringify(orders));
+  }catch(e){}
   // Send via FormSubmit
   var data={_subject:'New Travel Booking: '+currentBooking.ref,
     BookingRef:currentBooking.ref, Type:currentBooking.type,
@@ -300,6 +312,8 @@ function submitBooking(e){
   // Show completion
   document.getElementById('booking-modal').style.display='none';
   document.getElementById('complete-details').innerHTML=
+    '<p style="font-size:1.3rem;color:#4ade80;"><b>🔍 Tracking ID: '+trackingId+'</b></p>'+
+    '<p style="color:#a5b4fc;">Save this ID to track your booking!</p>'+
     '<p><b>📋 Booking Ref:</b> '+currentBooking.ref+'</p>'+
     '<p><b>✈️ Type:</b> '+currentBooking.type+'</p>'+
     '<p><b>📍 Route:</b> '+currentBooking.from+' → '+currentBooking.to+'</p>'+
