@@ -232,7 +232,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 
 <header class="hdr">
   <div class="top-utils">
-    <a href="account.html" title="👤 Account">👤</a>
+    <a href="account.html" title="Account" id="accIcon">👤</a>
     <a href="javascript:void(0)" onclick="showCart()" title="🛒 Cart">🛒</a>
     <div class="more-menu">
       <a href="javascript:void(0)" onclick="toggleMore(event)" title="⋮ More">⋮</a>
@@ -1027,6 +1027,18 @@ function updateFlash(){
   el.textContent = `${hh}:${mm}:${ss}`;
 }
 setInterval(updateFlash, 1000);
+</script>
+
+<script>
+// Update account icon based on login
+(function(){
+  const logged = localStorage.getItem('usai_logged') === '1';
+  const el = document.getElementById('accIcon');
+  if(el && logged){
+    el.innerHTML = '<span style="font-size:.7rem;font-weight:bold;background:#10b981;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;">✓</span>';
+    el.title = 'Logged in ✓';
+  }
+})();
 </script>
 </body>
 </html>
