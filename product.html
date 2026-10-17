@@ -70,6 +70,20 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .fs .cl{position:absolute;top:20px;right:20px;color:#fff;font-size:2rem;cursor:pointer}
 .fs .ct2{position:absolute;bottom:20px;color:#fff;background:rgba(0,0,0,.6);padding:8px 20px;border-radius:20px}
 @media(max-width:768px){.top{grid-template-columns:1fr}.pg{grid-template-columns:repeat(2,1fr)}.gm{height:280px}}
+
+/* Seller card */
+.seller{background:linear-gradient(135deg,#2d2a5e,#1e1b4b);border-radius:14px;padding:18px;margin:14px 0;border:1px solid #8b5cf6;display:flex;align-items:center;gap:15px}
+.seller .av{width:60px;height:60px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.seller .inf{flex:1}
+.seller .inf b{font-size:1.05rem;color:#fff}
+.seller .inf div{color:#888;font-size:.85rem;margin-top:4px}
+.seller .chat{background:#10b981;color:#fff;border:none;padding:10px 22px;border-radius:20px;cursor:pointer;font-weight:bold}
+.seller .chat:hover{transform:scale(1.05)}
+/* Big images */
+.big-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.big-imgs img{width:100%;height:280px;object-fit:cover;border-radius:14px;cursor:pointer;transition:all .3s}
+.big-imgs img:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(139,92,246,.3)}
+@media(max-width:768px){.big-imgs{grid-template-columns:1fr}.big-imgs img{height:220px}}
 </style>
 </head>
 <body>
@@ -93,6 +107,15 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 </div>
 </div>
 <div class="sec"><h2>📝 Description</h2><p id="pDe"></p><div class="sp" id="pSp" style="margin-top:12px"></div></div>
+<div class="sec"><h2>🏪 Sold By</h2>
+<div class="seller">
+<div class="av">🏬</div>
+<div class="inf"><b>US AI Official Store</b><div>⭐ 4.8 | 12.5k followers | 98% positive</div><div>📍 Ships from: USA Warehouse</div></div>
+<button class="chat" onclick="alert('💬 Chat coming soon!')">💬 Chat</button>
+</div>
+<p style="color:#888;font-size:.85rem;margin-top:10px;">✅ Verified seller | 🚚 Fast shipping | ↩️ Easy returns</p>
+</div>
+<div class="sec"><h2>🖼️ Product Images</h2><div class="big-imgs" id="bigImgs"></div></div>
 <div class="sec"><h2>⭐ Customer Reviews</h2><div id="revs"></div></div>
 <div class="sec"><h2>🎯 Related Products</h2><div class="pg" id="rel"></div></div>
 </div>
@@ -141,6 +164,8 @@ function init(){
   document.getElementById('revs').innerHTML=rh;
   let rel="";for(let i=1;i<=10;i++){const rp=gp('p'+(n+i*137),'');rel+=`<div class="pc" onclick="location.href='product.html?id=${rp.id}'"><img src="${rp.images[0]}" loading="lazy"><div class="i"><div class="t">${rp.name}</div><div class="p">$${rp.price}</div></div></div>`;}
   document.getElementById('rel').innerHTML=rel;
+  // Big images (2-3 large)
+  document.getElementById('bigImgs').innerHTML=P.images.slice(0,3).map((im,i)=>`<img src="${im}" onclick="sI(${i});openFS()" loading="lazy">`).join('');
 }
 function sI(i){fsi=i;document.getElementById('mImg').src=P.images[i];document.querySelectorAll('.gt img').forEach((t,j)=>t.classList.toggle('on',j===i));}
 function openFS(){document.getElementById('fsM').classList.add('open');uFS();}
