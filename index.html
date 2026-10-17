@@ -132,6 +132,27 @@ a[href*="whatsapp"][class*="community"], .community-join {
 
 </style>
 
+
+<style>
+/* All Articles: continuous upward scroll */
+#allart-list.ticker{
+  overflow:hidden !important;
+  max-height:420px !important;
+  position:relative;
+}
+#allart-list.ticker .allart-track{
+  display:block;
+  animation:allartUp 25s linear infinite;
+}
+#allart-list.ticker:hover .allart-track{
+  animation-play-state:paused;
+}
+@keyframes allartUp{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-50%);}
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
