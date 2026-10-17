@@ -153,6 +153,23 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 </style>
 
+
+<style>
+/* Scroll fade for side widgets */
+#top-widgets, #top-widgets-right, #share-rail{
+  transition:opacity 0.4s ease;
+}
+.side-faded{
+  opacity:0.12 !important;
+  pointer-events:none !important;
+}
+/* Ensure Live Chat always visible */
+#lc-wrap{
+  opacity:1 !important;
+  pointer-events:auto !important;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -259,7 +276,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
     <div class="wx-now" id="wx-now"></div>
     <div class="wx-days" id="wx-days"></div>
   </div>
-  <div class="tw-card" id="wx-outfit" hidden style="margin-top:8px">
+  <div class="tw-card" id="wx-outfit" hidden style="margin-top:8px;display:none !important">
     <div class="tw-title">👕 <span>Dress for the Weather</span></div>
     <div id="wx-outfit-body"><div class="tiny muted">Checking…</div></div>
   </div>
@@ -280,7 +297,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
     <div class="spd-status" id="spd-status" aria-live="polite">Tap to run a ~3MB speed test</div>
     <button class="spd-retest" id="spd-retest" hidden>↻ Retest</button>
   </div>
-  <div class="tw-card jk-otd" id="jk-otd">
+  <div class="tw-card jk-otd" id="jk-otd" style="display:none !important">
     <div class="tw-title"><span class="jk-emo">😂</span> Joke of the Day <span class="wx-mini" id="jk-otd-date"></span></div>
     <div class="jk-otd-text" id="jk-otd-text">Loading today&rsquo;s laugh&hellip;</div>
     <a class="jk-otd-go" href="jokes.html">Tap for more laughs &rarr;</a>
@@ -304,7 +321,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
     </div>
   </div>
   <!-- ⏳ My Countdown chip — REMOVED 2026-10-13 per user order -->
-  <div class="tw-card">
+  <div class="tw-card" style="display:none !important">
     <div class="tw-title"><span class="tw-ico">💱</span> <span class="fx-name">Currency</span><span class="fx-mini" id="fx-mini">💱 $1 ≈ Rs 280</span></div>
     <div class="fx-body">
       <div class="fx-dir" id="fx-dir">USD → PKR</div>
@@ -313,7 +330,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
       <div class="fx-rate" id="fx-rate">1 USD = Rs 280 · just now</div>
     </div>
   </div>
-  <div class="tw-card">
+  <div class="tw-card" style="display:none !important">
     <div class="tw-title"><span class="tw-ico">🕌</span> <span class="pt-name">Prayer Times</span><span class="pt-mini" id="pt-mini">🕌 --</span></div>
     <div class="pt-body">
       <div class="pt-next-row">
@@ -2253,6 +2270,41 @@ document.addEventListener('click', function(e){
 </script>
 
 
+
+
+<script>
+// Scroll: fade side widgets down, restore on up
+(function(){
+  var lastY = 0;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY || 0;
+    var goingDown = y > lastY && y > 300;
+    ['top-widgets','top-widgets-right','share-rail'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      if(id === 'lc-wrap') return; // never fade Live Chat
+      if(goingDown) el.classList.add('side-faded');
+      else el.classList.remove('side-faded');
+    });
+    lastY = y;
+  }, {passive:true});
+  
+  // Expand widget -> hide sports icons below
+  document.addEventListener('click', function(e){
+    var title = e.target.closest('#top-widgets-right .tw-title');
+    if(!title) return;
+    var card = title.parentElement;
+    var isOpen = card.classList.contains('tw-open');
+    // Toggle
+    setTimeout(function(){
+      var sports = document.querySelectorAll('.sport-ico, #sports-float, .sports-col');
+      sports.forEach(function(s){
+        s.style.display = isOpen ? '' : 'none';
+      });
+    }, 100);
+  });
+})();
+</script>
 
 </body>
 </html>
