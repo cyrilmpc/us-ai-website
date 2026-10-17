@@ -48,14 +48,14 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 /* ===== CATEGORIES ===== */
 .cts{max-width:1200px;margin:0 auto;padding:0 16px}
 .cts h2{font-size:1.25rem;color:#fff;margin:18px 0 12px;display:flex;align-items:center;gap:8px}
-.ct-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+.ct-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
 .ct{background:#1e1b4b;border:1px solid #2d2a5e;border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(0,0,0,.06);animation:cardIn .5s backwards}
 .ct:nth-child(2n){animation-delay:.03s}.ct:nth-child(3n){animation-delay:.06s}.ct:nth-child(4n){animation-delay:.09s}
 @keyframes cardIn{from{opacity:0;transform:translateY(25px) scale(.95)}}
 .ct:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 12px 25px rgba(139,92,246,.4);background:linear-gradient(135deg,#2d2a5e,#1e1b4b)}
 .ct .e{font-size:2.1rem;display:block;margin-bottom:6px;transition:transform .3s}
 .ct:hover .e{transform:scale(1.25) rotate(-8deg)}
-.ct .t{font-size:.6rem;color:#a5b4fc;font-weight:500}
+.ct .t{font-size:.72rem;color:#a5b4fc;font-weight:500}
 /* ===== PRODUCT SECTIONS ===== */
 .sec{max-width:1200px;margin:0 auto;padding:0 16px}
 .sec-h{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px}
@@ -118,7 +118,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .pnot .tx b{color:#1e1b4b}
 
 /* Animated category images */
-.ct-img-wrap{width:45px;height:45px;margin:0 auto 8px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.ct-img-wrap{width:60px;height:60px;margin:0 auto 8px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .ct-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;animation:ctImgFloat 3s ease-in-out infinite}
 @keyframes ctImgFloat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .ct:hover .ct-img-wrap img{transform:scale(1.25) rotate(5deg);animation:none}
@@ -528,7 +528,7 @@ function init(){
   try {
     document.getElementById('ctGrid').innerHTML = CATS.map(c =>
       `<div class="ct" onclick="openCat('${c[1]}')">
-        <div class="ct-img-wrap"><img src="${c[0]}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200'"></div>
+        <div class="ct-img-wrap"><img src="${c[0]}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'"></div>
         <span class="t">${c[1]}</span>
       </div>`
     ).join('');
