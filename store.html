@@ -1171,10 +1171,42 @@ function doSearch(){
     related.forEach(p => results.push(p));
   }
 
-  // Render
-  let html = results.map(cardHTML).join('');
-  document.querySelector('.sec-h h2').innerHTML = `\uD83D\uDD0D Results for "${q}" (${results.length}+)`;
+  // DARAZ-STYLE: Dedicated search results page
+  // Hide homepage sections, show clean results
+  const hideSections = ['flashS', 'catS', 'bannerS'];
+  hideSections.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+  // Also hide by class for sections without IDs
+  document.querySelectorAll('.flash-sale, .categories, .hero-banner, .promo-banner').forEach(el => {
+    el.style.display = 'none';
+  });
+
+  // Build Daraz-like results header
+  let html = `
+  <div style="background:#1e1b4b;border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid #8b5cf6;">
+    <div style="font-size:1.1rem;font-weight:bold;color:#fff;">${results.length}+ items found for "${q}"</div>
+    <div style="display:flex;gap:12px;margin-top:10px;align-items:center;flex-wrap:wrap;">
+      <span style="color:#aaa;font-size:.85rem;">Sort By:</span>
+      <select onchange="sortResults(this.value)" style="background:#2d2a5e;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 12px;">
+        <option value="best">Best Match</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+      <button onclick="clearSearch()" style="background:#2d2a5e;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 12px;cursor:pointer;">← Back to Home</button>
+    </div>
+  </div>`;
+  html += results.map(cardHTML).join('');
+
+  // Store for sorting
+  window._searchResults = results;
+  window._searchQuery = q;
+
   document.getElementById('jfyG').innerHTML = html;
+  // Scroll to results
+  document.getElementById('jfyG').scrollIntoView({behavior:'smooth', block:'start'});
   document.getElementById('lmBtn').style.display = 'none';
   document.getElementById('clearBtn').style.display = '';
   toast(`Found ${results.length}+ results for "${q}"!`);
@@ -1234,20 +1266,43 @@ function showOrders(){
   const o = JSON.parse(localStorage.getItem('my_orders') || '[]');
   alert(o.length ? "📋 Your Orders:\n\n" + o.map(x => x.code + " - " + x.product + " ($" + x.price + ")").join('\n') : 'No orders yet! 🛒');
 }
+function sortResults(mode){
+  if(!window._searchResults) return;
+  let r = [...window._searchResults];
+  if(mode==='low') r.sort((a,b)=>parseFloat(a.price)-parseFloat(b.price));
+  else if(mode==='high') r.sort((a,b)=>parseFloat(b.price)-parseFloat(a.price));
+  else if(mode==='rating') r.sort((a,b)=>parseFloat(b.rating)-parseFloat(a.rating));
+  // Rebuild with header
+  let html = `
+  <div style="background:#1e1b4b;border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid #8b5cf6;">
+    <div style="font-size:1.1rem;font-weight:bold;color:#fff;">${r.length}+ items found for "${window._searchQuery}"</div>
+    <div style="display:flex;gap:12px;margin-top:10px;align-items:center;flex-wrap:wrap;">
+      <span style="color:#aaa;font-size:.85rem;">Sort By:</span>
+      <select onchange="sortResults(this.value)" style="background:#2d2a5e;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 12px;">
+        <option value="best">Best Match</option>
+        <option value="low" ${mode==='low'?'selected':''}>Price: Low to High</option>
+        <option value="high" ${mode==='high'?'selected':''}>Price: High to Low</option>
+        <option value="rating" ${mode==='rating'?'selected':''}>Top Rated</option>
+      </select>
+      <button onclick="clearSearch()" style="background:#2d2a5e;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 12px;cursor:pointer;">← Back to Home</button>
+    </div>
+  </div>`;
+  html += r.map(cardHTML).join('');
+  document.getElementById('jfyG').innerHTML = html;
+  window._searchResults = r;
+}
 function clearSearch(){
-  document.getElementById('q').value = '';
-  document.getElementById('clearBtn').style.display = 'none';
-  document.getElementById('lmBtn').style.display = '';
-  document.querySelector('.sec-h h2').innerHTML = '🎯 Just For You';
-  // Reset to initial products
-  jfyCount = 0;
-  displayedProducts = [];
-  document.getElementById('jfyG').innerHTML = '';
-  const flashBatch = genBatch(1, 10);
-  flashBatch.forEach(p => displayedProducts.push(p));
-  document.getElementById('flashG').innerHTML = flashBatch.map(cardHTML).join('');
-  loadMore();
-  toast("🔄 Reset! Fresh products loaded!");
+  document.getElementById('q').value='';
+  // Restore hidden sections
+  ['flashS', 'catS', 'bannerS'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = '';
+  });
+  document.querySelectorAll('.flash-sale, .categories, .hero-banner, .promo-banner').forEach(el => {
+    el.style.display = '';
+  });
+  // Reload default products
+  location.reload();
 }
 function toast(m){
   const t = document.getElementById('tst');
