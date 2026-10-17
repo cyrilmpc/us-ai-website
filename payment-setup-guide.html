@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Setup Guide | US AI (Owner Only)</title>
+<meta name="robots" content="noindex">
+<style>
+body{background:#0f0d2a;color:#fff;font-family:system-ui;padding:20px;max-width:800px;margin:0 auto}
+h1{color:#a5b4fc} h2{color:#4ade80}
+.step{background:#1e1b4b;padding:20px;border-radius:12px;margin:16px 0}
+code{background:#000;padding:2px 8px;border-radius:4px;color:#4ade80}
+.warn{background:#3b2f0b;border:1px solid #a16207;padding:16px;border-radius:10px;color:#fcd34d}
+</style>
+</head>
+<body>
+<h1>🔒 US AI Card Payment — Setup Guide</h1>
+<p><b>Owner only.</b> Ye page customer ko nazar nahi ayega.</p>
+
+<div class="warn">
+⚠️ <b>Status: SETUP MODE</b><br>
+Payment form ready hai (<code>payment.js</code>), lekin asal payments ke liye JazzCash merchant API keys chahiye.
+</div>
+
+<div class="step">
+<h2>Step 1: JazzCash Merchant Account</h2>
+<ol>
+<li>JazzCash Business portal par jao: <b>jazzcash.com.pk</b> → Merchant/Business</li>
+<li><b>Merchant Account</b> ke liye apply karo</li>
+<li>Apply karte waqt <b>"API Access"</b> zaroor mango (sirf hosted page nahi)</li>
+<li>Documents: CNIC, bank details, business proof</li>
+</ol>
+</div>
+
+<div class="step">
+<h2>Step 2: API Keys Hasil Karo</h2>
+<p>JazzCash se ye 3 cheezein milengi:</p>
+<ul>
+<li><code>Merchant ID</code></li>
+<li><code>Password</code></li>
+<li><code>Integrity Salt</code></li>
+</ul>
+<p>Ye <b>kisi ko mat dikhao</b> — sirf mujhe (Muse) secure tareeqe se do.</p>
+</div>
+
+<div class="step">
+<h2>Step 3: Main Integration Kar Dunga</h2>
+<ol>
+<li>Keys milne par <code>payment.js</code> mein <code>USAI_PAY.mode = 'live'</code> karunga</li>
+<li>Cloudflare Worker par secure backend lagayega (keys server par, site par nahi)</li>
+<li>Test payment kar ke verify karenge</li>
+<li>Phir har "Pay" button par card form khulega!</li>
+</ol>
+</div>
+
+<div class="step">
+<h2>Customer Kya Dekhega?</h2>
+<ul>
+<li>✅ <b>"🔒 US AI Secure Payment"</b> — hamari branding</li>
+<li>✅ Card number, expiry, CVV fields</li>
+<li>✅ <b>"💳 Pay Securely"</b> button</li>
+<li>❌ JazzCash ka naam <b>kahin nahi</b></li>
+<li>❌ Aapki details <b>kahin nahi</b></li>
+</ul>
+</div>
+
+<div class="step">
+<h2>Alternative: Agar JazzCash Merchant Na Mile</h2>
+<ul>
+<li><b>Keenu</b> (keenu.pk) — Pakistani gateway, card payments</li>
+<li><b>PayPro</b> — Pakistani gateway</li>
+<li>Dono ka process same hai — API keys lao, main laga dunga</li>
+</ul>
+</div>
+
+<p style="color:#888;font-size:.85rem;">Ye guide sirf owner ke liye hai. Isay public mat karo.</p>
+</body>
+</html>
