@@ -2528,7 +2528,7 @@ document.addEventListener('click', function(e){
   function collect(){
     fadeEls = [];
     // Left and right rails/widgets
-    document.querySelectorAll('#left-rail, .left-rail, #top-widgets-right, #lc-wrap').forEach(function(el){
+    document.querySelectorAll('#top-widgets, #top-widgets-right, #lc-wrap, #left-rail, .left-rail').forEach(function(el){
       fadeEls.push(el);
     });
   }
@@ -2563,6 +2563,24 @@ document.addEventListener('click', function(e){
   else window.addEventListener('load', collect);
   setTimeout(collect, 2000);
 })();
+</script>
+
+
+<script>
+// Hide airplane and compass icons in left rail
+setTimeout(function(){
+  document.querySelectorAll('#top-widgets button, #top-widgets a').forEach(function(el){
+    var txt = el.textContent || '';
+    if(txt.includes('✈') || txt.includes('🧭') || txt.includes('➤')){
+      // Check if it's not X or Facebook
+      if(!txt.includes('X') || txt.length > 3){
+        if(txt.includes('✈') || txt.includes('🧭')){
+          el.style.display = 'none';
+        }
+      }
+    }
+  });
+}, 2000);
 </script>
 
 </body>
