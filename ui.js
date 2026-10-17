@@ -1356,13 +1356,14 @@ window.sawalScrollBehavior = function () {
   }
 
   /* ---------- All Articles: compact sidebar index ---------- */
-  function initAllArticles(retry) {
+  function initAllArticles(attempt) {
     var list = document.getElementById("allart-list");
     var search = document.getElementById("allart-search");
     if (!list) return;
+    attempt = attempt || 0;
     if (typeof ARTICLES_INDEX === "undefined") {
-      // Retry after 1s (script may load late)
-      if (!retry) setTimeout(function(){ initAllArticles(true); }, 1000);
+      // Retry up to 5 times (script may load late)
+      if (attempt < 5) setTimeout(function(){ initAllArticles(attempt + 1); }, 1000 * (attempt + 1));
       return;
     }
     function esc(s) {
