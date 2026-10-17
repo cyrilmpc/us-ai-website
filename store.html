@@ -198,7 +198,13 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .recent .pmini div{font-size:.7rem;color:#888;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
 
 /* Top utility icons (animated) */
-.top-utils{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:101}
+.top-utils{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:101;align-items:center}
+.top-utils a{flex-shrink:0}
+.more-menu{position:relative}
+.more-dropdown{position:absolute;top:34px;right:0;background:#1e1b4b;border:1px solid #8b5cf6;border-radius:12px;padding:8px;display:none;flex-direction:column;gap:4px;min-width:140px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:200}
+.more-dropdown.open{display:flex}
+.more-dropdown a{width:100% !important;height:auto !important;padding:10px;font-size:.85rem !important;border-radius:8px;justify-content:flex-start !important;gap:8px;animation:none !important}
+.more-dropdown a:hover{transform:none !important}
 .top-utils a{width:28px;height:28px;background:rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.15);animation:utilFloat 3s ease-in-out infinite}
 .top-utils a:nth-child(2){animation-delay:.4s}
 .top-utils a:nth-child(3){animation-delay:.8s}
@@ -214,12 +220,27 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 
 <header class="hdr">
   <div class="top-utils">
-    <a href="account.html" title="👤 My Account">👤</a>
-    <a href="javascript:void(0)" onclick="showWishlist()" title="❤️ Wishlist">❤️</a>
+    <a href="account.html" title="👤 Account">👤</a>
     <a href="javascript:void(0)" onclick="showCart()" title="🛒 Cart">🛒</a>
-    <a href="track.html" title="📦 Track Order">📦</a>
-    <a href="index.html" title="🏠 Home">🏠</a>
+    <div class="more-menu">
+      <a href="javascript:void(0)" onclick="toggleMore(event)" title="⋮ More">⋮</a>
+      <div class="more-dropdown" id="moreDrop">
+        <a href="javascript:void(0)" onclick="showWishlist()">❤️ Wishlist</a>
+        <a href="track.html">📦 Track Order</a>
+        <a href="index.html">🏠 Home</a>
+      </div>
+    </div>
   </div>
+  <script>
+  function toggleMore(e){
+    e.stopPropagation();
+    document.getElementById('moreDrop').classList.toggle('open');
+  }
+  document.addEventListener('click', function(){
+    const d = document.getElementById('moreDrop');
+    if(d) d.classList.remove('open');
+  });
+  </script>
   <div class="hdr-in">
     <a href="index.html" class="logo" style="display:flex;align-items:center;gap:10px;">
       <img src="img/logo.png" alt="US AI" style="width:45px;height:45px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.3);animation:logoFloat 3s ease-in-out infinite;">
