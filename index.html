@@ -118,8 +118,16 @@ a[href*="whatsapp"][class*="community"], .community-join {
 .mini-art:nth-child(3n){animation-delay:1s;}
 .mini-art:nth-child(4n){animation-delay:1.5s;}
 @keyframes artFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-10px) scale(1.02);}
+}
+.mini-art{
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+}
+.mini-art:hover{
+  animation-play-state:paused;
+  transform:scale(1.03);
+  box-shadow:0 8px 25px rgba(100,100,255,0.4);
 }
 /* Scroll fade: hide side widgets when scrolled down */
 .side-faded{
