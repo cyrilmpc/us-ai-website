@@ -214,6 +214,21 @@ a[href*="whatsapp"][class*="community"], .community-join {
 [style*="bottom:"][style*="left:"]{margin:8px !important;}
 </style>
 
+
+<style>
+/* LEFT SIDE: User order - keep only X and Facebook, remove airplane/compass, smaller */
+/* Hide airplane and compass icons in left rail */
+#left-rail a[href*="telegram"], #left-rail button[title*="plane"],
+.left-rail a[href*="telegram"], .left-rail button[title*="plane"]{display:none !important;}
+/* Make remaining icons smaller */
+#left-rail a, #left-rail button, .left-rail a, .left-rail button{
+  width:36px !important;height:36px !important;font-size:1rem !important;
+}
+/* When top widget expands, hide below icons */
+body.widget-open #left-rail .social-icons,
+body.widget-open .left-rail .social-icons{display:none !important;}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
