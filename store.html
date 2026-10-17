@@ -226,6 +226,29 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .newsletter input{padding:12px 20px;border:2px solid #8b5cf6;border-radius:25px;background:#0f0c29;color:#fff;width:300px;max-width:80%;outline:none;margin-right:8px}
 .newsletter button{padding:12px 30px;background:linear-gradient(90deg,#8b5cf6,#3b82f6);border:none;border-radius:25px;color:#fff;font-weight:bold;cursor:pointer}
 .newsletter button:hover{transform:scale(1.05)}
+
+/* ===== MASTER ANIMATIONS ===== */
+.pc{animation:fadeUp .6s ease both}
+.pc:nth-child(2n){animation-delay:.05s}
+.pc:nth-child(3n){animation-delay:.1s}
+.pc:nth-child(4n){animation-delay:.15s}
+.pc:nth-child(5n){animation-delay:.2s}
+.pc:nth-child(6n){animation-delay:.25s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.pc:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 15px 35px rgba(139,92,246,.4);transition:all .3s}
+.pc .im img{transition:transform .5s}
+.pc:hover .im img{transform:scale(1.1)}
+.sec-h h2{animation:slideR .8s ease}
+@keyframes slideR{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+#lmBtn{animation:btnPulse 2s infinite;transition:all .3s}
+#lmBtn:hover{transform:scale(1.05)}
+@keyframes btnPulse{0%,100%{box-shadow:0 5px 20px rgba(59,130,246,.4)}50%{box-shadow:0 5px 30px rgba(139,92,246,.7)}}
+.ct{animation:fadeUp .5s ease both}
+.srch input{transition:all .3s}
+.srch input:focus{box-shadow:0 0 20px rgba(139,92,246,.5);transform:scale(1.02)}
+.toolbar select,.toolbar button{transition:all .3s}
+.toolbar select:hover,.toolbar button:hover{transform:translateY(-2px)}
+.newsletter{animation:fadeUp .8s ease}
 </style>
 </head>
 <body>
