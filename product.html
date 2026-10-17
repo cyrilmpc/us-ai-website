@@ -374,10 +374,32 @@ setTimeout(()=>{
 <div class="sec"><h2>💝 You may also like</h2><div class="pg" id="rel"></div></div>
 </div>
 <div class="md" id="lM"><div class="bx"><h2>🔑 Login</h2><input id="lE" type="email" placeholder="Email"><input id="lP" type="password" placeholder="Password"><button class="bl" onclick="dL()">Login</button><button class="bg" onclick="cL()">Cancel</button></div></div>
+<div class="md" id="aM"><div class="bx"><h2>📍 Delivery Address</h2>
+<div style="display:flex;gap:12px;align-items:center;background:#2d2a5e;border-radius:10px;padding:10px;margin-bottom:12px;">
+<img id="amImg" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+<div><div id="amName" style="font-size:.85rem;font-weight:bold;"></div><div id="amPrice" style="color:#a78bfa;font-weight:bold;"></div></div>
+</div>
+<input id="aName" placeholder="Full Name" style="width:100%;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#1a1840;color:#fff;">
+<input id="aPhone" placeholder="Phone Number" style="width:100%;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#1a1840;color:#fff;">
+<input id="aAddr" placeholder="Street Address" style="width:100%;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#1a1840;color:#fff;">
+<div style="display:flex;gap:8px;">
+<input id="aCity" placeholder="City" style="flex:1;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#1a1840;color:#fff;">
+<input id="aZip" placeholder="Postal Code" style="flex:1;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#1a1840;color:#fff;">
+</div>
+<button class="bl" onclick="saveAddr()">Continue to Payment →</button>
+<button class="bg" onclick="document.getElementById('aM').classList.remove('open')">Cancel</button>
+</div></div>
 <div class="md" id="pM"><div class="bx"><h2>💳 Payment</h2>
 <div style="display:flex;gap:12px;align-items:center;background:#2d2a5e;border-radius:10px;padding:10px;margin-bottom:12px;">
 <img id="pmImg" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
 <div><div id="pmName" style="font-size:.85rem;font-weight:bold;"></div><div id="pmPrice" style="color:#a78bfa;font-weight:bold;"></div></div>
+</div>
+<div id="orderSummary" style="background:#1a1840;border-radius:10px;padding:12px;margin-bottom:12px;font-size:.85rem;">
+<div style="display:flex;justify-content:space-between;margin:4px 0;"><span>Product Price:</span><span id="osPrice">$0</span></div>
+<div style="display:flex;justify-content:space-between;margin:4px 0;"><span>Delivery Fee:</span><span id="osShip">FREE</span></div>
+<div style="display:flex;justify-content:space-between;margin:4px 0;"><span>Tax (5%):</span><span id="osTax">$0</span></div>
+<div style="display:flex;justify-content:space-between;margin:8px 0 0;padding-top:8px;border-top:1px solid #444;font-weight:bold;font-size:1rem;"><span>Total:</span><span id="osTotal" style="color:#ff6b35;">$0</span></div>
+<div id="osAddr" style="margin-top:8px;font-size:.75rem;color:#aaa;"></div>
 </div>
 <div class="po sel" onclick="sP(this,'JazzCash')"><b>📱 JazzCash</b></div>
 <div class="po" onclick="sP(this,'EasyPaisa')"><b>💚 EasyPaisa</b></div>
@@ -442,13 +464,9 @@ function gp(pid,cat){
     if(passedIm){
       try{
         const pim = decodeURIComponent(passedIm);
-        imgs = [
-        pim,
-        pim + (pim.includes('?') ? '&' : '?') + 'h=800&fit=crop&crop=entropy',
-        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=800&fit=crop&crop=top',
-        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=800&fit=crop&crop=bottom',
-        pim + (pim.includes('?') ? '&' : '?') + 'w=800&h=600&fit=crop'
-      ];
+        const _rel = ["photo-1441986300917-64674bd600d8","photo-1523275335684-37898b6baf30","photo-1505740420928-5e560c06d30e","photo-1560343090-f0409e92791a","photo-1585386959984-a4155224a1ad"];
+      imgs = [pim];
+      for(let _k=0;_k<4;_k++){ imgs.push("https://images.unsplash.com/"+_rel[Math.floor(Math.random()*_rel.length)]+"?w=800"); }
       }catch(e){}
     }
   }
@@ -525,12 +543,34 @@ function fsN(d){fsi=(fsi+d+P.images.length)%P.images.length;uFS();}
 function uFS(){document.getElementById('fsImg').src=P.images[fsi];document.getElementById('fsCt').textContent=(fsi+1)+" / "+P.images.length;}
 function addC(){let c=parseInt(localStorage.getItem('cart_n')||'0')+1;localStorage.setItem('cart_n',c);alert("🛒 Added!");}
 function buyN(){
+  document.getElementById('amImg').src=P.images[0];
+  document.getElementById('amName').textContent=P.name;
+  document.getElementById('amPrice').textContent="$"+P.price;
   document.getElementById('pmImg').src=P.images[0];
   document.getElementById('pmName').textContent=P.name;
   document.getElementById('pmPrice').textContent="$"+P.price;
-  if(!log)document.getElementById('lM').classList.add('open');else document.getElementById('pM').classList.add('open');
+  if(!log)document.getElementById('lM').classList.add('open');
+  else document.getElementById('aM').classList.add('open');
 }
-function dL(){if(document.getElementById('lE').value&&document.getElementById('lP').value){localStorage.setItem('usai_logged','1');log=true;cL();document.getElementById('pM').classList.add('open');}else alert("Enter email+password!");}
+function saveAddr(){
+  const nm=document.getElementById('aName').value.trim();
+  const ph=document.getElementById('aPhone').value.trim();
+  const ad=document.getElementById('aAddr').value.trim();
+  const ct=document.getElementById('aCity').value.trim();
+  if(!nm||!ph||!ad||!ct){ alert("Please fill all address fields!"); return; }
+  window._orderAddr = {name:nm, phone:ph, addr:ad, city:ct, zip:document.getElementById('aZip').value.trim()};
+  localStorage.setItem('usai_addr', JSON.stringify(window._orderAddr));
+  const price=parseFloat(P.price)||0;
+  const tax=price*0.05;
+  const total=price+tax;
+  document.getElementById('osPrice').textContent="$"+price.toFixed(2);
+  document.getElementById('osTax').textContent="$"+tax.toFixed(2);
+  document.getElementById('osTotal').textContent="$"+total.toFixed(2);
+  document.getElementById('osAddr').textContent="📍 "+nm+", "+ad+", "+ct;
+  document.getElementById('aM').classList.remove('open');
+  document.getElementById('pM').classList.add('open');
+}
+function dL(){if(document.getElementById('lE').value&&document.getElementById('lP').value){localStorage.setItem('usai_logged','1');log=true;cL();document.getElementById('aM').classList.add('open');}else alert("Enter email+password!");}
 function cL(){document.getElementById('lM').classList.remove('open');}
 function sP(e,m){document.querySelectorAll('.po').forEach(o=>o.classList.remove('sel'));e.classList.add('sel');pm=m;}
 function cP(){const c="USAI-"+Math.random().toString(36).substr(2,8).toUpperCase();const o=JSON.parse(localStorage.getItem('my_orders')||'[]');o.push({code:c,product:P.name,price:P.price,method:pm,date:new Date().toISOString()});localStorage.setItem('my_orders',JSON.stringify(o));document.getElementById('pM').classList.remove('open');alert("✅ Order: "+c+"\nPayment: "+pm);}
