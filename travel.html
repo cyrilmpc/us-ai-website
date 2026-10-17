@@ -246,7 +246,16 @@ function searchCars(){
       <div class="search-row"><input type="email" id="bk-email" placeholder="Email" required></div>
       <div class="search-row"><input type="tel" id="bk-phone" placeholder="WhatsApp Number" required></div>
       <div class="search-row"><textarea id="bk-notes" placeholder="Special requests (optional)" rows="3" style="width:100%;padding:12px;border-radius:10px;background:#0f0d2a;color:#fff;border:1px solid #555;"></textarea></div>
-      <button type="submit" class="search-btn" style="width:100%;">✅ Confirm Booking Request</button>
+      
+      <!-- PAYMENT SECTION -->
+      <div style="background:#0f0d2a;padding:16px;border-radius:12px;margin:16px 0;border:2px solid #4ade80;">
+        <h3 style="margin:0 0 10px;color:#4ade80;">💰 Payment via JazzCash</h3>
+        <p style="color:#a5b4fc;font-size:.9rem;margin:8px 0;">1. Send payment to: <b style="color:#fff;">0300-1234567</b> (US AI)</p>
+        <p style="color:#a5b4fc;font-size:.9rem;margin:8px 0;">2. Enter your Transaction ID (TID) below:</p>
+        <div class="search-row"><input type="text" id="bk-tid" placeholder="JazzCash TID (e.g. 12345678901)" required style="border-color:#4ade80;"></div>
+      </div>
+      
+      <button type="submit" class="search-btn" style="width:100%;">✅ Confirm Booking & Pay</button>
       <button type="button" onclick="closeBooking()" style="width:100%;margin-top:10px;padding:10px;background:none;border:1px solid #555;color:#fff;border-radius:10px;cursor:pointer;">Cancel</button>
     </form>
   </div>
@@ -290,6 +299,7 @@ function submitBooking(e){
   var email=document.getElementById('bk-email').value;
   var phone=document.getElementById('bk-phone').value;
   var notes=document.getElementById('bk-notes').value||'—';
+  var tid=document.getElementById('bk-tid').value;
   // Save order locally with tracking ID
   var trackingId='TRV-'+Date.now().toString(36).toUpperCase();
   currentBooking.trackingId=trackingId;
@@ -298,7 +308,7 @@ function submitBooking(e){
     orders.unshift({id:trackingId,kind:'Travel-'+currentBooking.type,
       from:currentBooking.from,to:currentBooking.to,date:currentBooking.date,
       details:currentBooking.extra,name:name,email:email,whatsapp:phone,
-      notes:notes,status:'Pending',date_created:new Date().toISOString()});
+      notes:notes,tid:tid,status:'Pending',date_created:new Date().toISOString()});
     localStorage.setItem('usai_orders',JSON.stringify(orders));
   }catch(e){}
   // Send via FormSubmit
@@ -319,10 +329,11 @@ function submitBooking(e){
     '<p><b>📍 Route:</b> '+currentBooking.from+' → '+currentBooking.to+'</p>'+
     '<p><b>📅 Date:</b> '+currentBooking.date+'</p>'+
     '<p><b>👤 Name:</b> '+name+'</p>'+
-    '<p><b>📱 WhatsApp:</b> '+phone+'</p>';
+    '<p><b>📱 WhatsApp:</b> '+phone+'</p>'+
+    '<p><b>💰 JazzCash TID:</b> '+tid+'</p>';
   document.getElementById('order-complete').style.display='block';
   // Setup WhatsApp button
-  var waMsg='🧳 *NEW TRAVEL BOOKING*\n\n📋 Ref: '+currentBooking.ref+'\n✈️ Type: '+currentBooking.type+'\n📍 Route: '+currentBooking.from+' → '+currentBooking.to+'\n📅 Date: '+currentBooking.date+'\n👤 Name: '+name+'\n📧 Email: '+email+'\n📱 WhatsApp: '+phone+'\n📝 Notes: '+notes;
+  var waMsg='🧳 *NEW TRAVEL BOOKING (PAID)*\n\n📋 Ref: '+currentBooking.ref+'\n✈️ Type: '+currentBooking.type+'\n📍 Route: '+currentBooking.from+' → '+currentBooking.to+'\n📅 Date: '+currentBooking.date+'\n👤 Name: '+name+'\n📧 Email: '+email+'\n📱 WhatsApp: '+phone+'\n📝 Notes: '+notes+'\n💰 JazzCash TID: '+tid;
   document.getElementById('wa-send-btn').onclick=function(){
     window.open('https://wa.me/923254746678?text='+encodeURIComponent(waMsg),'_blank');
   };
