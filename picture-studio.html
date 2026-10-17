@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- prefetch-hints: added by sawalai-q-prefetch (page-speed) -->
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6366f1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AI Picture Studio — US AI</title>
+<meta name="description" content="Describe any picture and watch AI paint it in Full HD — free, in any language. Portraits, logos, anime, 3D and more.">
+<link rel="canonical" href="https://www.usai-usa.com/picture-studio.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI Picture Studio",
+  "description": "Describe any picture and watch AI paint it in Full HD — free, in any language. Portraits, logos, anime, 3D and more.",
+  "url": "https://www.usai-usa.com/picture-studio.html",
+  "provider": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "image": "https://www.usai-usa.com/img/og/picture-studio.png"
+}
+</script>
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<style>
+.sp-hero{max-width:900px;margin:0 auto;text-align:center;padding:30px 16px 4px;}
+.sp-hero img{width:120px;height:120px;border-radius:30px;box-shadow:0 10px 34px rgba(99,102,241,.45);border:2px solid rgba(167,139,250,.5);animation:pic3d 9s ease-in-out infinite,svcGlow 3.2s ease-in-out infinite,svcBob 2.4s ease-in-out infinite;}
+.sp-hero h1{font-size:1.9rem;margin:14px 0 6px;animation:heroTitleGlow 3.6s ease-in-out infinite;}
+@keyframes heroTitleGlow{0%,100%{text-shadow:0 0 0 rgba(168,85,247,0);}50%{text-shadow:0 0 18px rgba(168,85,247,.65);}}
+.sp-hero p{color:var(--muted);max-width:640px;margin:0 auto;line-height:1.65;}
+.sp-search{max-width:520px;margin:18px auto 4px;display:block;width:calc(100% - 32px);padding:12px 18px;border-radius:999px;border:1px solid rgba(99,102,241,.4);background:#0f1226;color:#fff;font-size:.95rem;}
+.sp-count{max-width:960px;margin:8px auto 0;padding:0 16px;color:var(--muted);font-size:.82rem;}
+.sp-layout{max-width:960px;margin:0 auto;}
+#sp-side{display:none;}
+@media(min-width:900px){
+  .sp-layout{display:flex;gap:20px;max-width:1240px;margin:0 auto;padding:0 16px;align-items:flex-start;}
+  .sp-layout .sp-main{flex:1;min-width:0;}
+  .sp-layout .sp-count,.sp-layout .sp-grid{max-width:none;margin-left:0;margin-right:0;padding:0;}
+  #sp-side{display:block;flex:none;width:350px;position:sticky;top:96px;background:linear-gradient(160deg,#141736,#0d1026);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:22px 18px;box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);max-height:calc(100vh - 120px);overflow-y:auto;}
+  #sp-side:empty{display:none;}
+}
+.sp-grid{max-width:960px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px;}
+.sp-card{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:16px 14px;transition:transform .15s,border-color .15s,box-shadow .15s;}
+.sp-card:hover{transform:translateY(-3px);border-color:rgba(99,102,241,.6);box-shadow:0 10px 26px rgba(99,102,241,.22);}
+.sp-card .pic{flex:none;width:68px;height:68px;border-radius:18px;object-fit:contain;background:#fff;padding:6px;box-shadow:0 4px 14px rgba(0,0,0,.4);animation:itemFloat 2.8s ease-in-out infinite;}
+.sp-grid .sp-card:nth-child(2n) .pic{animation-delay:-1.4s;}
+.sp-grid .sp-card:nth-child(3n) .pic{animation-delay:-.7s;}
+.sp-card .pic.ic{display:inline-flex;align-items:center;justify-content:center;font-size:1.7rem;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(168,85,247,.25));border:1px solid rgba(99,102,241,.35);padding:0;}
+.sp-card .pic.darkbg{background:linear-gradient(135deg,#1a1d3a,#2a2d5a);}
+.sp-card .tx{min-width:0;flex:1;}
+.sp-card .tx b{display:block;font-size:.95rem;margin-bottom:4px;}
+.sp-card .tx span{font-size:.82rem;color:var(--muted);line-height:1.5;display:block;}
+.sp-card .pr{display:inline-block;margin-top:7px;font-size:.85rem;font-weight:800;color:#a78bfa;}
+.sp-buy{flex:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#10b981,#34d399);color:#04241a;font-weight:800;font-size:.85rem;border:none;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.sp-buy:hover{filter:brightness(1.1);}
+.sp-open{flex:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;white-space:nowrap;}
+.sp-cta{text-align:center;margin:26px 0 40px;}
+.sp-cta .btn{font-size:1rem;padding:13px 34px;}
+.sp-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:26px;}
+@media(max-width:640px){.sp-grid{grid-template-columns:1fr;}.sp-hero img{width:96px;height:96px;}}
+@keyframes itemFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-6px) scale(1.06);}}
+/* one-screen studio: compact hero + form so everything shows at once (nothing removed) */
+.sp-hero{padding:12px 16px 2px;}
+.sp-hero img{width:72px;height:72px;border-radius:20px;}
+.sp-hero h1{font-size:1.35rem;margin:8px 0 4px;}
+.sp-hero p{font-size:.85rem;line-height:1.45;}
+.sp-search{margin:10px auto;}
+#inbox-studio{padding-top:6px;padding-bottom:6px;}
+#inbox-studio .studio-card{padding:12px 14px;}
+#inbox-studio .studio-out{min-height:70px;}
+
+/* free-thinker 2026-10-15: how-it-works strip (additive, kuch remove nahi) */
+.ps-steps{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:14px auto 0;padding:0 16px;}
+.ps-step{flex:1 1 200px;max-width:260px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:12px 10px;text-align:center;font-size:.82rem;color:var(--muted);line-height:1.5;animation:itemFloat 3s ease-in-out infinite;}
+.ps-step:nth-child(2){animation-delay:-1s;}
+.ps-step:nth-child(3){animation-delay:-2s;}
+.ps-step .n{display:inline-flex;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-weight:800;font-size:.8rem;align-items:center;justify-content:center;margin-bottom:6px;}
+.ps-step b{display:block;color:#fff;font-size:.88rem;margin-bottom:4px;}
+
+/* PQA-studios 2026-10-12: row-2 controls share width on desktop so Generate stays on the row (additive) */
+@media(min-width:900px){
+  #inbox-studio .studio-row select{flex:1 1 0;min-width:0;}
+  #inbox-studio .studio-row .btn-primary{flex:none;align-self:center;}
+}
+
+/* buy modal */
+.buy-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:18px 12px;overflow-y:auto;}
+.buy-modal.open{display:flex;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;}to{opacity:1;}}
+.buy-bg{position:fixed;inset:0;background:rgba(5,5,20,.85);backdrop-filter:blur(6px);}
+.buy-box{position:relative;width:100%;max-width:520px;margin:auto;background:linear-gradient(160deg,#141736,#0d1026);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:24px 20px;animation:panelUp .3s ease;max-height:calc(100vh - 36px);overflow-y:auto;}
+@keyframes panelUp{from{opacity:0;transform:translateY(26px) scale(.98);}to{opacity:1;transform:none;}}
+.buy-x{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(99,102,241,.5);background:rgba(99,102,241,.15);color:#fff;font-size:1.1rem;cursor:pointer;}
+.buy-x:hover{background:rgba(239,68,68,.35);}
+.buy-head{display:flex;gap:12px;align-items:center;margin-bottom:16px;}
+.buy-head .pic{width:58px;height:58px;border-radius:16px;object-fit:contain;background:#fff;padding:5px;flex:none;animation:itemFloat 2.8s ease-in-out infinite;}
+.buy-head .pic.ic{display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(168,85,247,.25));padding:0;}
+.buy-head .pic.darkbg{background:linear-gradient(135deg,#1a1d3a,#2a2d5a);}
+.buy-head b{display:block;font-size:1.02rem;}
+.buy-head span{font-size:.82rem;color:var(--muted);}
+.buy-sec{margin:14px 0;}
+.buy-sec>span{display:block;font-weight:700;margin-bottom:8px;font-size:.9rem;}
+.buy-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.buy-pill{padding:9px 16px;border-radius:999px;border:1px solid rgba(99,102,241,.4);background:rgba(99,102,241,.08);color:#fff;cursor:pointer;font-size:.85rem;font-family:inherit;}
+.buy-pill.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;font-weight:700;}
+.buy-pill .off{font-size:.72rem;opacity:.85;}
+.buy-qty{display:inline-flex;align-items:center;gap:14px;}
+.buy-qty button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(99,102,241,.5);background:rgba(99,102,241,.12);color:#fff;font-size:1.2rem;cursor:pointer;}
+.buy-qty b{font-size:1.15rem;min-width:28px;text-align:center;}
+.buy-total{font-size:1.05rem;margin:16px 0;}
+.buy-total strong{color:#a78bfa;font-size:1.3rem;}
+.buy-go{width:100%;padding:13px;font-size:1rem;}
+.buy-box .fld{display:block;margin:10px 0;}
+
+/* HAR CHEEZ HAR TIME ANIMATED — buy panel kabhi static nahi */
+.buy-box{animation:panelUp .3s ease,buyGlow 3s ease-in-out infinite;}
+#sp-side{animation:sideGlow 3.4s ease-in-out infinite;}
+@keyframes buyGlow{0%,100%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);}50%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 70px rgba(168,85,247,.4);}}
+@keyframes sideGlow{0%,100%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(99,102,241,.15);}50%{box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 64px rgba(99,102,241,.45);}}
+.buy-pill{animation:pillPulse 2.6s ease-in-out infinite;}
+.buy-pill.active{animation:pillPulse 2.6s ease-in-out infinite,activeGlow 2s ease-in-out infinite;}
+@keyframes pillPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+@keyframes activeGlow{0%,100%{filter:brightness(1);}50%{filter:brightness(1.25);}}
+.sp-buy{animation:buyBtnGlow 2.2s ease-in-out infinite;}
+@keyframes buyBtnGlow{0%,100%{box-shadow:0 0 0 rgba(52,211,153,0);transform:scale(1);}50%{box-shadow:0 0 20px rgba(52,211,153,.6);transform:scale(1.06);}}
+.sp-open{animation:openGlow 2.6s ease-in-out infinite;display:inline-block;}
+@keyframes openGlow{0%,100%{box-shadow:0 0 0 rgba(168,85,247,0);}50%{box-shadow:0 0 16px rgba(168,85,247,.55);}}
+.buy-total strong{display:inline-block;animation:pricePop 2.4s ease-in-out infinite;background:linear-gradient(90deg,#a78bfa,#f0abfc,#a78bfa);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+@keyframes pricePop{0%,100%{transform:scale(1);background-position:0% center;}50%{transform:scale(1.08);background-position:100% center;}}
+.buy-qty button{animation:qtyPulse 3s ease-in-out infinite;}
+@keyframes qtyPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.buy-qty b{display:inline-block;animation:pricePop 2.4s ease-in-out infinite;}
+.buy-go{animation:goGlow 2.4s ease-in-out infinite;}
+@keyframes goGlow{0%,100%{box-shadow:0 0 12px rgba(99,102,241,.35);transform:scale(1);}50%{box-shadow:0 0 28px rgba(168,85,247,.65);transform:scale(1.02);}}
+.pay-lock-ico{display:inline-block;animation:lockBounce 2s ease-in-out infinite;}
+@keyframes lockBounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-7px) scale(1.1);}}
+.buy-x{animation:qtyPulse 3.2s ease-in-out infinite;}
+.buy-head b{display:inline-block;animation:pricePop 3s ease-in-out infinite;}
+.buy-box .fld span{display:block;font-weight:700;margin-bottom:6px;font-size:.88rem;}
+.buy-box .fld input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(99,102,241,.35);background:#0a0d22;color:#fff;font-size:.95rem;font-family:inherit;box-sizing:border-box;}
+.center{text-align:center;}
+.tiny{font-size:.78rem;}
+.muted{color:var(--muted);}
+</style>
+    <meta property="og:image" content="https://www.usai-usa.com/img/og/picture-studio.png">
+    <meta property="og:title" content="AI Picture Studio — US AI">
+    <meta property="og:description" content="Describe any picture and watch AI paint it in Full HD — free, in any language. Portraits, logos, anime, 3D and more.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Picture Studio — US AI">
+    <meta name="twitter:description" content="Describe any picture and watch AI paint it in Full HD — free, in any language.">
+    <meta name="twitter:image" content="https://www.usai-usa.com/img/og/picture-studio.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI Picture Studio — US AI",
+  "description": "Describe any picture and watch AI paint it in Full HD — free, in any language. Portraits, logos, anime, 3D and more.",
+  "url": "https://www.usai-usa.com/picture-studio.html",
+  "provider": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com"
+  },
+  "areaServed": "Worldwide",
+  "serviceType": "AI Picture Studio — US AI"
+}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="34px" alt="US AI logo" width="34" height="34" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="trailers.html">Trailers</a>
+    <a href="temp-box.html">📧 Temp Mail</a>
+    <a href="numbers.html">💎 Numbers</a>
+    <a href="apps.html">📱 Apps</a>
+    <a href="purchases.html">🧾 Purchases</a>
+    <a href="builder.html">🏗️ Builder</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#articles">Articles</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+<div class="sp-hero">
+  <img src="img/icon-picture-studio-256.jpg" alt="AI Picture Studio" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
+  <h1>AI Picture Studio</h1>
+  <p>Describe any picture and watch AI paint it in Full HD — free, in any language. Portraits, logos, anime, 3D and more.</p>
+</div>
+<input type="search" class="sp-search" id="sp-search" placeholder="🔍 Search AI Picture Studio..." autocomplete="off" aria-label="Search">
+<!-- IN-BOX STUDIO: picture generation happens right here — no more jump to the homepage -->
+<section class="section" id="inbox-studio" aria-label="Create pictures here">
+  <div class="chat-card studio-card">
+    <div class="studio-row">
+      <input aria-label="Image prompt" type="text" id="studio-prompt" placeholder="A cute robot reading a book in a library..." maxlength="200" autocomplete="off">
+      <button class="btn btn-ghost" id="studio-surprise" type="button" title="Random idea">🎲</button>
+    </div>
+    <div class="studio-row">
+      <select id="studio-style" aria-label="Image style" title="Pick an art style — realistic, anime, 3D, watercolor and 18 more">
+        <option value="realistic">Realistic Photo</option>
+        <option value="cartoon">Kids Cartoon</option>
+        <option value="digital-art">Digital Art</option>
+        <option value="anime">Anime</option>
+        <option value="3d">3D Render</option>
+        <option value="painting">Oil Painting</option>
+        <option value="islamic-art">Islamic Art</option>
+        <option value="watercolor">Watercolor</option>
+        <option value="sketch">Pencil Sketch</option>
+        <option value="product">Product Photo</option>
+        <option value="pixel">Pixel Art</option>
+        <option value="neon">Neon Glow</option>
+        <option value="cinematic">Cinematic</option>
+        <option value="vector">Flat Vector</option>
+        <option value="vintage">Vintage Photo</option>
+        <option value="lowpoly">Low Poly</option>
+        <option value="double-exposure">Double Exposure</option>
+        <option value="papercraft">Paper Cut Art</option>
+        <option value="clay">Clay Art</option>
+        <option value="graffiti">Graffiti Mural</option>
+        <option value="miniature">Miniature</option>
+      </select>
+      <select id="studio-model" aria-label="AI model" title="Turbo = fastest, Flux = sharper detail. Both 100% free.">
+        <option value="turbo" selected>⚡ Turbo (Fastest, Free)</option>
+        <option value="flux">Flux (Best Quality, Free)</option>
+      </select>
+      <select id="studio-size" aria-label="Image size" title="Output dimensions — Full HD default, 4K available.">
+        <option value="1920x1080" selected>Full HD</option>
+        <option value="3840x2160">4K Ultra HD</option>
+        <option value="1024x1024">Square</option>
+        <option value="2160x2160">Square 4K</option>
+        <option value="1024x1792">Portrait</option>
+        <option value="2160x3840">Portrait 4K</option>
+        <option value="1792x1024">Landscape</option>
+      </select>
+      <button class="btn btn-primary" id="studio-btn" type="button">Generate</button>
+    </div>
+    <div class="studio-out" id="studio-out" aria-live="polite">
+      <p class="muted center">Your picture will appear here ✨</p>
+    </div>
+    <p class="tiny center">Free AI picture generation. Keep prompts family-friendly.</p>
+  </div>
+  <div class="ps-steps" aria-label="How it works">
+    <div class="ps-step"><span class="n">1</span><b>✍️ Describe</b><span>Type any idea in your own words — Urdu or English.</span></div>
+    <div class="ps-step"><span class="n">2</span><b>🎨 Pick style</b><span>Choose from 21 styles, sizes up to 4K, and two free AI models.</span></div>
+    <div class="ps-step"><span class="n">3</span><b>⬇️ Generate &amp; download</b><span>Hit Generate — your HD picture appears in seconds, free forever.</span></div>
+  </div>
+</section>
+<div class="sp-layout">
+<div class="sp-main">
+<div class="sp-count" id="sp-count"></div>
+<div class="sp-grid" id="sp-grid"></div>
+</div>
+<aside id="sp-side" aria-label="Buy panel"><div id="sp-side-body"></div></aside>
+</div>
+<div class="sp-cta"><a class="btn btn-primary btn-glow" href="#inbox-studio">Create Pictures →</a></div>
+<section class="cmp-link" style="max-width:960px;margin:18px auto;padding:16px;text-align:center;border:1px solid var(--line);border-radius:18px;background:rgba(99,102,241,.06);">
+<p style="margin:0;font-size:.92rem;">⚖️ <b>Compare:</b> <a href="compare-picture-studio-midjourney.html">US AI Picture Studio vs Midjourney (2026) — honest $0 vs $10/mo comparison</a></p>
+</section>
+<section class="cmp-link" style="max-width:960px;margin:18px auto;padding:16px;text-align:center;border:1px solid var(--line);border-radius:18px;background:rgba(99,102,241,.06);">
+<p style="margin:0;font-size:.92rem;">🎥 <b>Want motion?</b> <a href="video-studio.html">Animate any picture into a video in AI Video Studio →</a></p>
+</section>
+<footer>
+  <p><b>US AI</b> — your free AI platform for questions, pictures, videos &amp; guides.</p>
+  <p class="tiny"><a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  <p class="tiny">AI answers can be wrong — verify before making important decisions.</p>
+</footer>
+<script src="pay.js?v=20261012b"></script>
+<script src="shop.js?v=20261012b"></script>
+<script src="buy-panel.js?v=20261012a"></script>
+<script defer src="ui.js?v=20261013k"></script>
+<script src="history.js?v=20261012p"></script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+<script>
+/* search filter + buy buttons */
+(function(){
+  var items = [{"ic": "\ud83c\udfa8", "name": "Text to Picture", "desc": "Type a description \u2014 get a stunning HD picture.", "open": "#inbox-studio"}, {"ic": "\ud83d\udd8c\ufe0f", "name": "Art Styles", "desc": "Realistic, anime, 3D, oil painting & more.", "open": "#inbox-studio"}, {"ic": "\ud83d\udc64", "name": "Portrait Mode", "desc": "Beautiful realistic portraits from text.", "open": "#inbox-studio"}, {"ic": "\ud83c\udff7\ufe0f", "name": "Logo Maker", "desc": "Unique logos for your brand or channel.", "open": "#inbox-studio"}, {"ic": "\ud83e\ude84", "name": "Background Remover", "desc": "One tap \u2014 clean transparent background.", "open": "#inbox-studio"}, {"ic": "\u2728", "name": "Photo Enhancer", "desc": "Sharpen & upscale your old photos.", "open": "#inbox-studio"}, {"ic": "\ud83c\udf0d", "name": "Any Language", "desc": "Describe in Urdu or English \u2014 AI understands.", "open": "#inbox-studio"}, {"ic": "\ud83d\uddbc\ufe0f", "name": "Wallpaper Maker", "desc": "4K wallpapers for phone & desktop.", "open": "#inbox-studio"}, {"ic": "\ud83c\udfad", "name": "Anime Style", "desc": "Your ideas as anime art.", "open": "#inbox-studio"}, {"ic": "\ud83e\uddca", "name": "3D Render", "desc": "Product shots & 3D scenes from text.", "open": "#inbox-studio"}, {"ic": "\ud83d\udcbe", "name": "Download Free", "desc": "Save every creation to your device.", "open": "#inbox-studio"}, {"ic": "\u26a1", "name": "Pro Upgrade", "desc": "4K quality, 50 pictures at once, priority.", "open": "#inbox-studio"}, {"ic": "🕌", "name": "Islamic Art", "desc": "Beautiful geometric & calligraphy art.", "open": "#inbox-studio"}, {"ic": "🧑‍🎨", "name": "Avatar Maker", "desc": "Cool profile pictures & avatars from your description.", "open": "#inbox-studio"}, {"ic": "⭐", "name": "Sticker Maker", "desc": "Fun custom stickers for chats & social media.", "open": "#inbox-studio"}, {"ic": "🖍️", "name": "Coloring Pages", "desc": "Printable coloring sheets for kids — any theme.", "open": "#inbox-studio"}, {"ic": "👕", "name": "T-Shirt Design", "desc": "Original tee graphics you can print & sell.", "open": "#inbox-studio"}, {"ic": "🎬", "name": "Thumbnail Maker", "desc": "Eye-catching YouTube thumbnails in seconds.", "open": "#inbox-studio"}, {"ic": "😂", "name": "Meme Generator", "desc": "Funny meme images from your wildest ideas.", "open": "#inbox-studio"}, {"ic": "🗯️", "name": "Comic Strip", "desc": "Your story told as a fun comic scene.", "open": "#inbox-studio"}, {"ic": "📜", "name": "Poster Maker", "desc": "Event & party posters with bold designs.", "open": "#inbox-studio"}, {"ic": "\ud83c\udf0c", "name": "Double Exposure", "desc": "Silhouette blended with a dreamy scene.", "open": "#inbox-studio"}, {"ic": "🧑‍💼", "name": "AI Headshot Studio", "desc": "Studio-quality LinkedIn headshots & passport photos from your description.", "open": "#inbox-studio"}];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function usd(n){var v=Number(n||0)/280;return "$"+(v>=100?Math.round(v).toLocaleString("en-US"):v.toFixed(2));}
+  function cardHTML(it, i){
+    var pic = it.pic
+      ? '<img class="pic'+(/\.svg(\?|$)/i.test(it.pic)?" darkbg":"")+'" src="'+esc(it.pic)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">' 
+      : '<span class="pic ic">'+esc(it.ic||"✨")+"</span>";
+    var price = it.price ? '<span class="pr">'+esc(it.pricetxt||("from "+usd(it.price)+"/mo"))+"</span>" : "";
+    var btn = it.buy
+      ? '<button type="button" class="sp-buy" data-buy="'+i+'">🛒 Buy</button>'
+      : (it.open ? '<a class="sp-open" href="'+esc(it.open)+'">Open →</a>' : "");
+    return '<div class="sp-card" data-search="'+esc((it.name+" "+(it.desc||"")).toLowerCase())+'">'+pic+
+      '<div class="tx"><b>'+esc(it.name)+"</b><span>"+esc(it.desc||"")+"</span>"+price+"</div>"+btn+"</div>";
+  }
+  function render(filter){
+    var q = (filter||"").toLowerCase().trim();
+    var html = "", n = 0;
+    items.forEach(function(it, i){
+      if(!q || (it.name+" "+(it.desc||"")).toLowerCase().indexOf(q) > -1){ html += cardHTML(it, i); n++; }
+    });
+    document.getElementById("sp-grid").innerHTML = html || '<div class="sp-empty">No matches — try another word.</div>';
+    document.getElementById("sp-count").textContent = n + " / " + items.length + " shown";
+    bindBuys();
+  }
+  function bindBuys(){
+    document.querySelectorAll("[data-buy]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var it = items[parseInt(b.getAttribute("data-buy"),10)];
+        if(it && window.BuyPanel) window.BuyPanel.open(it);
+      });
+    });
+  }
+  document.getElementById("sp-search").addEventListener("input", function(e){ render(e.target.value); });
+  /* In-box studio: "Open" actions stay on THIS page — scroll to the embedded widget,
+     apply a smart preset for the tapped card, and focus the prompt. */
+  var INBOX_PRESETS = {
+    "Portrait Mode": {size:"1024x1792"},
+    "Wallpaper Maker": {size:"1792x1024"},
+    "Logo Maker": {style:"digital-art", size:"1024x1024"},
+    "Anime Style": {style:"anime"},
+    "3D Render": {style:"3d"},
+    "Art Styles": {style:"digital-art"},
+    "Avatar Maker": {style:"digital-art", size:"1024x1024"},
+    "Sticker Maker": {style:"cartoon", size:"1024x1024"},
+    "Coloring Pages": {style:"sketch", size:"1024x1024"},
+    "T-Shirt Design": {style:"digital-art", size:"1024x1024"},
+    "Thumbnail Maker": {style:"digital-art", size:"1792x1024"},
+    "Meme Generator": {style:"cartoon", size:"1024x1024"},
+    "Comic Strip": {style:"cartoon", size:"1792x1024"},
+    "Poster Maker": {style:"digital-art", size:"1024x1792"},
+    "Islamic Art": {style:"islamic-art", size:"1024x1024"},
+    "Double Exposure": {style:"double-exposure", size:"1024x1024"},
+    "AI Headshot Studio": {style:"realistic", size:"1024x1792"}
+  };
+  document.addEventListener("click", function(e){
+    var a = (e.target && e.target.closest) ? e.target.closest('a[href="#inbox-studio"]') : null;
+    if(!a) return;
+    e.preventDefault();
+    var card = a.closest(".sp-card");
+    var nm = (card && card.querySelector(".tx b")) ? card.querySelector(".tx b").textContent.trim() : "";
+    var pr = INBOX_PRESETS[nm];
+    if(pr){
+      var st = document.getElementById("studio-style"), sz = document.getElementById("studio-size");
+      if(pr.style && st) st.value = pr.style;
+      if(pr.size && sz) sz.value = pr.size;
+    }
+    var t = document.getElementById("inbox-studio");
+    if(t) t.scrollIntoView({behavior:"smooth", block:"start"});
+    var p = document.getElementById("studio-prompt");
+    if(p) setTimeout(function(){ try{ p.focus({preventScroll:true}); }catch(_){ p.focus(); } }, 550);
+  });
+  render("");
+})();
+/* FREE image generation via Pollinations.ai (open-source models, zero cost, no API key) */
+(function(){
+  var btn = document.getElementById("studio-btn");
+  if(!btn || btn.dataset.freewired) return;
+  btn.dataset.freewired = "1";
+  var STYLE_PRE = {realistic:"ultra realistic photograph, ",cartoon:"kids cartoon style, ", "digital-art":"digital art, ",anime:"anime style, ","3d":"3d render, ",painting:"oil painting, ","islamic-art":"islamic geometric art, ",watercolor:"watercolor painting, ",sketch:"pencil sketch, ",product:"professional product photo, ",pixel:"pixel art, ",neon:"neon glow art, ",cinematic:"cinematic film still, ",vector:"flat vector illustration, ",vintage:"vintage photograph, ",lowpoly:"low poly 3d, ","double-exposure":"double exposure photography, ",papercraft:"paper cut craft art, ",clay:"clay art miniature, ",graffiti:"graffiti mural art, ",miniature:"miniature diorama, "};
+  btn.addEventListener("click", function(){
+    var p = document.getElementById("studio-prompt");
+    var prompt = (p && p.value || "").trim();
+    var out = document.getElementById("studio-out");
+    if(!prompt){ if(out) out.innerHTML = '<p class="muted center">Pehle apna idea likhein ☝️</p>'; if(p) p.focus(); return; }
+    var st = document.getElementById("studio-style");
+    var sz = document.getElementById("studio-size");
+    var styleKey = st ? st.value : "realistic";
+    var full = (STYLE_PRE[styleKey]||"") + prompt;
+    var w = 1024, h = 1024;
+    if(sz && sz.value){ var m = String(sz.value).match(/(\d+)x(\d+)/); if(m){ w=+m[1]; h=+m[2]; } }
+    if(w > 3840) w = 3840; if(h > 3840) h = 3840;
+    var seed = Math.floor(Math.random()*999999);
+    var md = document.getElementById("studio-model");
+    var model = (md && md.value) || "turbo";
+    var url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(full) + "?width="+w+"&height="+h+"&seed="+seed+"&model="+model+"&nologo=true";
+    if(out) out.innerHTML = '<p class="muted center">🎨 Ban rahi hai... thoda intezar karein</p>';
+    var img = new Image();
+    img.alt = prompt; img.style.cssText = "max-width:100%;border-radius:14px;display:block;margin:0 auto;";
+    img.onload = function(){
+      if(out) out.innerHTML = "";
+      if(out){ out.appendChild(img);
+        var d = document.createElement("a");
+        d.href = url; d.download = "usai-picture.jpg"; d.className = "btn btn-primary"; d.style.marginTop = "10px"; d.textContent = "⬇️ Download Free";
+        out.appendChild(d);
+        var t = document.createElement("p"); t.className = "tiny muted center"; t.style.marginTop = "6px";
+        t.textContent = "100% free • Open-source AI • Koi signup nahi";
+        out.appendChild(t);
+      }
+    };
+    img.onerror = function(){ if(out) out.innerHTML = '<p class="muted center">Kuch masla hua — dobara try karein 🔄</p>'; };
+    img.src = url;
+  });
+})();
+</script>
+</body>
+</html>
+
+<!-- ===== PICTURE STUDIO UPGRADES ===== -->
+<style>
+.gen-btn{background:linear-gradient(135deg,#ff330c,#ff6b35);color:#fff;border:none;padding:15px 40px;border-radius:30px;font-size:1.1rem;cursor:pointer;transition:transform .3s;box-shadow:0 4px 15px rgba(255,51,12,.3)}
+.gen-btn:hover{transform:scale(1.05);box-shadow:0 6px 25px rgba(255,51,12,.5)}
+</style>
+
+<!-- ===== SPEED BOOST PACK ===== -->
+<style>
+.preset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:15px 0}
+.preset-btn{background:#1a1a2e;border:2px solid #333;color:#fff;padding:12px;border-radius:12px;cursor:pointer;transition:all .2s;font-size:.85rem}
+.preset-btn:hover{border-color:#f59e0b;transform:translateY(-3px);box-shadow:0 5px 15px rgba(245,158,11,.3)}
+.batch-bar{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}
+.speed-badge{background:#22c55e;color:#fff;padding:3px 12px;border-radius:15px;font-size:.75rem;font-weight:bold}
+</style>
+<div class="preset-grid" id="presetGrid"></div>
+<script>
+// One-click style presets for SPEED!
+const PRESETS=[
+  {n:"📸 Photorealistic", p:"photorealistic, ultra detailed, 8k, professional photography"},
+  {n:"🎨 Digital Art", p:"digital art, vibrant colors, detailed illustration"},
+  {n:"🌅 Cinematic", p:"cinematic lighting, film still, dramatic"},
+  {n:"✨ Fantasy", p:"fantasy art, magical, ethereal lighting"},
+  {n:"🏢 Product", p:"product photography, studio lighting, white background"},
+  {n:"🌸 Anime", p:"anime style, vibrant, detailed"},
+];
+document.getElementById('presetGrid').innerHTML=PRESETS.map((pr,i)=>
+  `<button class="preset-btn" onclick="applyPreset(${i})">${pr.n}<br><span class="speed-badge">1-CLICK</span></button>`
+).join('');
+function applyPreset(i){
+  const input=document.querySelector('input[type="text"], textarea');
+  if(input){ input.value=PRESETS[i].p+" "; input.focus(); }
+  showToast && showToast('⚡ Style applied! Add your subject!');
+}
+// Preconnect for speed
+['https://image.pollinations.ai'].forEach(u=>{
+  const l=document.createElement('link'); l.rel='preconnect'; l.href=u; document.head.appendChild(l);
+});
+console.log('⚡ Speed boost active!');
+</script>

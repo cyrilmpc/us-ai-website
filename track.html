@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Your Order - US AI Mega Store</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f5f5;min-height:100vh}
+.header{background:#fff;padding:15px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.header h1{color:#ff330c;font-size:1.5rem}
+.container{max-width:600px;margin:30px auto;padding:20px}
+.search-box{background:#fff;border-radius:15px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}
+.search-box h2{margin-bottom:20px;color:#333}
+.search-box input{width:100%;padding:15px;border:2px solid #ff330c;border-radius:25px;font-size:1.1rem;text-align:center;margin-bottom:15px;text-transform:uppercase}
+.search-box input:focus{outline:none;box-shadow:0 0 15px rgba(255,51,12,.3)}
+.search-box button{background:#ff330c;color:#fff;border:none;padding:15px 40px;border-radius:25px;font-size:1.1rem;cursor:pointer;font-weight:bold}
+.search-box button:hover{background:#e62e0b}
+.result{margin-top:20px;display:none}
+.order-card{background:#fff;border-radius:15px;padding:25px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.order-card h3{color:#ff330c;margin-bottom:15px}
+.status-badge{display:inline-block;background:#4caf50;color:#fff;padding:8px 20px;border-radius:20px;font-weight:bold;margin:10px 0}
+.timeline{margin-top:20px;border-left:3px solid #ff330c;padding-left:20px}
+.timeline-item{margin-bottom:15px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-28px;top:5px;width:12px;height:12px;background:#ff330c;border-radius:50%}
+.timeline-item .time{font-size:.8rem;color:#888}
+.error{background:#ffebee;color:#c62828;padding:15px;border-radius:10px;text-align:center;display:none;margin-top:20px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.order-card{animation:fadeIn .5s ease}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🛍️ US AI Mega Store</h1>
+  <p>Order Tracking</p>
+</div>
+<div class="container">
+  <div class="search-box">
+    <h2>📦 Track Your Order</h2>
+    <p style="color:#888;margin-bottom:15px">Enter your tracking code (e.g. USAI-XXXXXXX)</p>
+    <input type="text" id="trackCode" placeholder="USAI-XXXXXXXX" maxlength="20">
+    <br>
+    <button onclick="trackOrder()">🔍 Track Order</button>
+  </div>
+  <div class="error" id="errorBox"></div>
+  <div class="result" id="resultBox">
+    <div class="order-card">
+      <h3 id="oProduct">Product</h3>
+      <p><b>Tracking Code:</b> <span id="oCode" style="color:#ff330c;font-weight:bold"></span></p>
+      <p><b>Price:</b> $<span id="oPrice"></span></p>
+      <div class="status-badge" id="oStatus">Status</div>
+      <h4 style="margin-top:15px">📍 Tracking History:</h4>
+      <div class="timeline" id="oTimeline"></div>
+    </div>
+  </div>
+</div>
+<script>
+const API = "https://usai-permanent-workers.usai-api.workers.dev";
+async function trackOrder(){
+  const code = document.getElementById('trackCode').value.trim().toUpperCase();
+  if(!code){ alert("Please enter tracking code!"); return; }
+  document.getElementById('errorBox').style.display='none';
+  document.getElementById('resultBox').style.display='none';
+  try{
+    const r = await fetch(API+"/api/track?code="+encodeURIComponent(code));
+    const d = await r.json();
+    if(!d.ok){ throw new Error(d.msg||"Not found"); }
+    const o = d.order;
+    document.getElementById('oProduct').textContent = "🛍️ "+o.product;
+    document.getElementById('oCode').textContent = o.code;
+    document.getElementById('oPrice').textContent = o.price;
+    document.getElementById('oStatus').textContent = "📦 "+o.status;
+    document.getElementById('oTimeline').innerHTML = o.history.map(h=>
+      `<div class="timeline-item"><b>${h.status}</b><div class="time">${new Date(h.time).toLocaleString()}</div>${h.note?`<div>${h.note}</div>`:''}</div>`
+    ).join('');
+    document.getElementById('resultBox').style.display='block';
+  }catch(e){
+    document.getElementById('errorBox').textContent = "❌ "+e.message;
+    document.getElementById('errorBox').style.display='block';
+  }
+}
+document.getElementById('trackCode').addEventListener('keypress',e=>{ if(e.key==='Enter') trackOrder(); });
+// Auto-fill from URL
+const p = new URLSearchParams(location.search).get('code');
+if(p){ document.getElementById('trackCode').value=p; trackOrder(); }
+</script>
+</body>
+</html>

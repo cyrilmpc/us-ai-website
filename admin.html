@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Admin — US AI</title>
+<meta name="description" content="US AI owner admin panel. Not listed publicly.">
+<link rel="canonical" href="https://www.usai-usa.com/admin.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+<style>
+.adm-wrap{max-width:1120px;margin:0 auto;padding:0 16px 60px;}
+.adm-hero{text-align:center;padding:28px 16px 8px;}
+.adm-hero h1{font-size:1.8rem;margin:10px 0 6px;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0;}
+.stat{background:var(--card,#141a2e);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 10px;text-align:center;animation:picfloat 6s ease-in-out infinite;}
+.stat b{font-size:1.5rem;display:block;}
+.stat span{font-size:.78rem;color:var(--muted,#9aa3b2);}
+.pend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:14px 0;}
+.pend-card{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.35);border-radius:16px;padding:16px;animation:picfloat 7s ease-in-out infinite;}
+.pend-card .tid-big{font-family:monospace;font-size:1.5rem;font-weight:800;letter-spacing:.1em;color:#fbbf24;}
+.ord-table{width:100%;border-collapse:collapse;font-size:.85rem;}
+.ord-table th,.ord-table td{border-bottom:1px solid rgba(255,255,255,.07);padding:10px 8px;text-align:left;vertical-align:top;}
+.ord-table th{color:var(--muted,#9aa3b2);font-weight:600;font-size:.72rem;text-transform:uppercase;}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:700;}
+.b-pend{background:rgba(251,191,36,.15);color:#fbbf24;}
+.b-paid{background:rgba(52,211,153,.15);color:#34d399;}
+.b-done{background:rgba(96,165,250,.15);color:#60a5fa;}
+.b-rej{background:rgba(248,113,113,.15);color:#f87171;}
+.b-tag{background:rgba(167,139,250,.15);color:#a78bfa;}
+.btn-s{padding:5px 12px;border-radius:999px;border:0;font-weight:700;font-size:.75rem;cursor:pointer;margin:2px;}
+.btn-ok{background:#34d399;color:#04241a;}
+.btn-no{background:#f87171;color:#2a0a0a;}
+.btn-blue{background:#60a5fa;color:#0a1a2a;}
+.btn-ghost2{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);}
+.lock-box{max-width:420px;margin:40px auto;text-align:center;background:var(--card,#141a2e);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 24px;}
+.lock-box input[type=password]{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0b0f1e;color:#fff;font-size:1.2rem;text-align:center;letter-spacing:.4em;margin:12px 0;}
+.note-box{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.3);border-radius:14px;padding:14px 16px;font-size:.85rem;margin:18px 0;}
+.tid{font-family:monospace;background:rgba(255,255,255,.06);padding:2px 8px;border-radius:6px;}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0;}
+.toolbar input[type=text],.toolbar select{background:#0b0f1e;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:.85rem;}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:12px 0;}
+.form-grid input{background:#0b0f1e;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem;width:100%;box-sizing:border-box;}
+.sec-card{background:var(--card,#141a2e);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;margin:18px 0;}
+.sec-card h2{margin:0 0 6px;font-size:1.15rem;}
+.copy-btn{cursor:pointer;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:3px 10px;font-size:.72rem;margin-left:8px;}
+@media(max-width:700px){.ord-table th:nth-child(4),.ord-table td:nth-child(4){display:none;}}
+</style>
+    <meta property="og:image" content="https://www.usai-usa.com/img/hero/hero-admin.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Owner Admin — US AI">
+<meta name="twitter:description" content="US AI owner admin panel. Not listed publicly.">
+<meta name="twitter:image" content="https://www.usai-usa.com/img/hero/hero-admin.svg">
+
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="34px" alt="US AI logo" width="34" height="34" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="account.html">👤 Account</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+<div class="adm-wrap" id="adm-root"></div>
+</main>
+
+<footer>
+  <p><b>US AI</b> — owner area. Not for public use.</p>
+</footer>
+
+<script src="shop.js?v=20261012b"></script>
+<script src="owner.js?v=20261011a"></script>
+<script src="admin-ai.js?v=20261016a"></script>
+<script defer src="ui.js?v=20261013k"></script>
+<script>
+(function () {
+  "use strict";
+  var root = document.getElementById("adm-root");
+  var O = window.SawalOwner;
+
+  function esc(s) { return String(s == null ? "" : s).replace(/</g, "&lt;"); }
+
+  /* ---------- gate ---------- */
+  if (!O.isOwner()) {
+    var loggedEmail = "";
+    try { var u0 = window.SawalShop && SawalShop.currentUser(); loggedEmail = u0 ? u0.email : ""; } catch (e) {}
+    if (!O.isOwnerEmail(loggedEmail)) {
+      root.innerHTML =
+        '<div class="lock-box"><h2>🔒 Owner Only</h2>' +
+        '<p class="muted">This page is only for the website owner. Please <a href="account.html">login</a> with the owner account first.</p>' +
+        '<p class="tiny muted">Ye page Google ya menu me nahi hai — sirf aap jante hain.</p></div>';
+      return;
+    }
+    root.innerHTML =
+      '<div class="lock-box"><h2>🛡️ Owner Verification</h2>' +
+      '<p class="muted">Enter your 6-digit owner PIN to unlock the admin panel on this device.</p>' +
+      '<input aria-label="Owner PIN" id="pin-in" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="off">' +
+      '<div><button class="btn-s btn-ok" id="pin-go" style="font-size:1rem;padding:10px 34px;">Unlock</button></div>' +
+      '<label class="tiny muted" style="display:block;margin-top:10px;"><input type="checkbox" id="pin-remember"> Remember this device (no PIN next time)</label>' +
+      '<p class="muted tiny" id="pin-msg"></p>' +
+      '<p class="tiny muted">🔐 PIN sirf is browser me check hota hai — kahin bheja nahi jata, koi aur nahi dekh sakta.</p></div>';
+    document.getElementById("pin-go").addEventListener("click", function () {
+      var v = document.getElementById("pin-in").value;
+      var rem = document.getElementById("pin-remember").checked;
+      O.verify(v, rem).then(function (ok) {
+        if (ok) { location.reload(); }
+        else { document.getElementById("pin-msg").textContent = "Wrong PIN. Try again."; }
+      });
+    });
+    return;
+  }
+
+  /* ---------- data ---------- */
+  function allOrders() {
+    var out = [];
+    try {
+      var a = JSON.parse(localStorage.getItem("sawalai_orders") || "[]");
+      var b = JSON.parse(localStorage.getItem("pn_orders") || "[]");
+      var c = JSON.parse(localStorage.getItem("wb_requests") || "[]");
+      var m = JSON.parse(localStorage.getItem("sawalai_manual_orders") || "[]");
+      a.forEach(function (o) { o._src = "shop"; out.push(o); });
+      b.forEach(function (o) { o._src = "numbers"; out.push(o); });
+      c.forEach(function (o) { o._src = "builder"; out.push(o); });
+      m.forEach(function (o) { o._src = "manual"; o._manual = true; out.push(o); });
+    } catch (e) {}
+    (window.__queueOrders || []).forEach(function (o) {
+      if (!out.some(function (x) { return x.id === o.id; })) { o._src = "queue"; o._auto = true; out.push(o); }
+    });
+    out.sort(function (x, y) { return new Date(y.date) - new Date(x.date); });
+    return out;
+  }
+  function verifs() {
+    try { return JSON.parse(localStorage.getItem("sawalai_verifs") || "{}"); } catch (e) { return {}; }
+  }
+  function saveVerifs(v) { try { localStorage.setItem("sawalai_verifs", JSON.stringify(v)); } catch (e) {} }
+  function payState(o) {
+    var v = verifs()[o.id];
+    if (v === "paid") return "paid";
+    if (v === "delivered") return "delivered";
+    if (v === "rejected") return "rejected";
+    if (o.tid) return "pending";
+    return "nopay";
+  }
+  function badge(s) {
+    if (s === "paid") return '<span class="badge b-paid">✅ Paid</span>';
+    if (s === "delivered") return '<span class="badge b-done">📦 Delivered</span>';
+    if (s === "rejected") return '<span class="badge b-rej">❌ Rejected</span>';
+    if (s === "pending") return '<span class="badge b-pend">⏳ Verify payment</span>';
+    return '<span class="badge b-pend">—</span>';
+  }
+  function amt(o) { return parseInt(String(o.total || o.amount || "0").replace(/[^\d]/g, ""), 10) || 0; }
+  /* Owner sees Rs (JazzCash verification); customers see USD */
+  function dispRs(o) {
+    var s = String(o.total || o.amount || "");
+    var mRs = s.match(/Rs\s*([\d,]+)/);
+    if (mRs) return "Rs " + parseInt(mRs[1].replace(/,/g, ""), 10).toLocaleString("en-PK");
+    var mUsd = s.match(/\$\s*([\d.]+)/);
+    if (mUsd) return "Rs " + Math.round(parseFloat(mUsd[1]) * 280).toLocaleString("en-PK");
+    var n = parseInt(s.replace(/[^\d]/g, ""), 10) || 0;
+    return "Rs " + n.toLocaleString("en-PK");
+  }
+
+  var q = "", fstat = "all";
+
+  function filtered() {
+    var orders = allOrders();
+    if (fstat !== "all") orders = orders.filter(function (o) { return payState(o) === fstat; });
+    if (q) {
+      var needle = q.toLowerCase();
+      orders = orders.filter(function (o) {
+        return [o.id, o.tid, o.name, o.whatsapp, o.email, o.kind, o.plan, o.item, o.details]
+          .join(" ").toLowerCase().indexOf(needle) !== -1;
+      });
+    }
+    return orders;
+  }
+
+  function render() {
+    var orders = allOrders();
+    var nPend = 0, nPaid = 0, nDel = 0, nRej = 0, rev = 0, pendRev = 0;
+    orders.forEach(function (o) {
+      var s = payState(o);
+      if (s === "pending") { nPend++; pendRev += amt(o); }
+      else if (s === "paid") { nPaid++; rev += amt(o); }
+      else if (s === "delivered") { nDel++; rev += amt(o); }
+      else if (s === "rejected") nRej++;
+    });
+    var pendOrders = orders.filter(function (o) { return payState(o) === "pending"; });
+
+    /* pending spotlight */
+    var pendHtml = pendOrders.length ? pendOrders.map(function (o) {
+      return '<div class="pend-card"><div><b>' + esc(o.id) + "</b> · " + esc(o.kind || o.plan || o.item || "Order") + "</div>" +
+        '<div style="margin:8px 0;"><span class="tid-big">' + esc(o.tid || "—") + '</span><button class="copy-btn" data-copy="' + esc(o.tid || "") + '">📋 Copy TID</button></div>' +
+        '<div class="tiny">💰 <b>' + esc(dispRs(o)) + "</b> · 👤 " + esc(o.name || o.account || "—") +
+        (o.whatsapp ? ' · <a href="https://wa.me/' + esc(String(o.whatsapp).replace(/[^\d]/g, "")) + '" target="_blank" rel="noopener" style="color:#34d399;">📱 ' + esc(o.whatsapp) + "</a>" : "") + "</div>" +
+        '<div style="margin-top:10px;"><button class="btn-s btn-ok" data-v="paid" data-id="' + esc(o.id) + '">✅ Verify Paid</button>' +
+        '<button class="btn-s btn-no" data-v="rejected" data-id="' + esc(o.id) + '">Reject</button></div></div>';
+    }).join("") : '<p class="muted">Koi pending payment nahi — sab clear! 🎉</p>';
+
+    /* table */
+    var rows = filtered().map(function (o) {
+      var s = payState(o);
+      var tags = (o._auto ? ' <span class="badge b-tag">auto</span>' : "") + (o._manual ? ' <span class="badge b-tag">manual</span>' : "");
+      var cust = esc(o.name || o.account || "—") + "<br><span class='tiny muted'>" + esc(o.whatsapp || o.email || "") + "</span>";
+      var item = "<strong>" + esc(o.kind || o.plan || o.item || "Order") + "</strong>" + tags + "<br><span class='tiny muted'>" +
+        esc([o.plan, o.country, o.service, o.details, o.type].filter(Boolean).join(" · ")) + "</span>";
+      var tid = o.tid ? '<span class="tid">' + esc(o.tid) + "</span>" : "<span class='muted'>—</span>";
+      var acts = "";
+      if (s === "pending") acts = '<button class="btn-s btn-ok" data-v="paid" data-id="' + esc(o.id) + '">✅</button><button class="btn-s btn-no" data-v="rejected" data-id="' + esc(o.id) + '">✖</button>';
+      else if (s === "paid") acts = '<button class="btn-s btn-blue" data-v="delivered" data-id="' + esc(o.id) + '">📦 Delivered</button>';
+      else acts = "<span class='tiny muted'>done</span>";
+      return "<tr><td><b>" + esc(o.id) + "</b><br><span class='tiny muted'>" +
+        (o.date ? new Date(o.date).toLocaleDateString() : "") + "</span></td><td>" + cust + "</td><td>" + item +
+        "</td><td>" + esc(o.total || o.amount || "") + "</td><td>" + tid + "</td><td>" + badge(s) + "</td><td>" + acts + "</td></tr>";
+    }).join("");
+
+    root.innerHTML =
+      '<div class="adm-hero"><h1>🛡️ Owner <span class="grad">Admin Panel</span></h1>' +
+      '<p class="muted">Orders, payments &amp; verification — visible only to you.</p></div>' +
+      '<div class="stat-grid">' +
+      '<div class="stat"><b>' + orders.length + '</b><span>Total orders</span></div>' +
+      '<div class="stat"><b>⏳ ' + nPend + '</b><span>Pending verification</span></div>' +
+      '<div class="stat"><b>Rs ' + pendRev.toLocaleString() + '</b><span>Pending amount</span></div>' +
+      '<div class="stat"><b>✅ ' + nPaid + ' · 📦 ' + nDel + '</b><span>Paid / Delivered</span></div>' +
+      '<div class="stat"><b>Rs ' + rev.toLocaleString() + '</b><span>Verified revenue</span></div>' +
+      "</div>" +
+
+      '<div class="sec-card" id="usai-ai-section"><h2>🤖 AI Assistant <span class="tiny muted">(free • private • sirf aap)</span></h2>' +
+      '<p class="tiny muted">Website control karein — Roman Urdu me baat karein. Bahar koi nahi dekh sakta.</p>' +
+      '<div id="usai-ai-mount"></div></div>' +
+
+      '<div class="sec-card"><h2>💰 Price Sources <span class="tiny muted">(sirf aap dekh sakte hain)</span></h2>' +
+      '<p class="tiny muted">Har item ki price kis website se li gayi — poori detail. Customer ko ye kabhi nazar nahi aata.</p>' +
+      '<div id="adm-psrc"><p class="muted">Loading…</p></div></div>' +
+
+      '<div class="sec-card"><h2>⏳ Pending Verifications</h2>' +
+      '<p class="tiny muted">JazzCash app me TID check karen, phir ✅ Verify dabayen.</p>' +
+      '<div class="pend-grid">' + pendHtml + "</div></div>" +
+
+      '<div class="sec-card"><h2>☎️ Callback Requests</h2>' +
+      '<p class="tiny muted">Device-local (this browser). Real customer requests also arrive via email + WhatsApp.</p>' +
+      '<div id="adm-cb"><p class="muted">Loading…</p></div></div>' +
+      '<div class="sec-card"><h2>📋 All Orders</h2>' +
+      '<div class="toolbar"><input aria-label="Search orders" type="text" id="adm-q" placeholder="🔍 Search ID / TID / customer…" value="' + esc(q) + '" style="flex:1;min-width:200px;">' +
+      '<select aria-label="Filter by order status" id="adm-f"><option value="all">All statuses</option><option value="pending">⏳ Pending</option><option value="paid">✅ Paid</option><option value="delivered">📦 Delivered</option><option value="rejected">❌ Rejected</option></select>' +
+      '<button class="btn-s btn-ghost2" id="adm-csv">📥 Export CSV</button></div>' +
+      (filtered().length
+        ? '<div style="overflow-x:auto;"><table class="ord-table"><tr><th>Order</th><th>Customer</th><th>Item</th><th>Amount</th><th>TID</th><th>Payment</th><th>Action</th></tr>' + rows + "</table></div>"
+        : '<p class="muted">No orders match.</p>') + "</div>" +
+
+      '<div class="sec-card"><h2>➕ Add Order Manually</h2>' +
+      '<p class="tiny muted">Email/WhatsApp par aayi order yahan add karen taake track ho sake.</p>' +
+      '<div class="form-grid"><input aria-label="Order ID" id="m-id" placeholder="Order ID * (e.g. PN-ABC123)"><input aria-label="Item" id="m-item" placeholder="Item * (e.g. WhatsApp OTP — USA)">' +
+      '<input aria-label="Amount" id="m-amt" placeholder="Amount * (e.g. Rs 1,499)"><input aria-label="Transaction ID" id="m-tid" placeholder="TID (11 digits)" inputmode="numeric">' +
+      '<input aria-label="Customer name" id="m-name" placeholder="Customer name"><input aria-label="Customer WhatsApp" id="m-wa" placeholder="Customer WhatsApp"></div>' +
+      '<button class="btn-s btn-ok" id="m-add" style="font-size:.9rem;padding:9px 26px;">Add Order</button> <span class="tiny muted" id="m-msg"></span></div>' +
+
+      '<div class="note-box">📌 <b>Alerts:</b> har order par email <b>rehmanmaher500@gmail.com</b> aur WhatsApp <b>+92 325 4746678</b> par foran notification aata hai (kisi bhi device se). <span class="badge b-tag">auto</span> wali orders email watcher se aayi hain. 🔐 Ye panel aur PIN sirf is browser me hain — kahin upload nahi hote.</div>' +
+      '<p><button class="btn-s btn-no" id="adm-lock">🔒 Lock admin panel</button> ' +
+      '<a class="btn-s btn-ghost2" href="purchases.html" style="text-decoration:none;display:inline-block;">🧾 My Purchases</a> ' +
+      '<a class="btn-s btn-ghost2" href="account.html" style="text-decoration:none;display:inline-block;">👤 Account</a></p>';
+
+        /* callbacks table (device-local) */
+    try {
+      var cbs = JSON.parse(localStorage.getItem("sawal_callbacks") || "[]");
+      var cbEl = document.getElementById("adm-cb");
+      if (cbEl) {
+        cbEl.innerHTML = cbs.length
+          ? '<div style="overflow-x:auto;"><table class="ord-table"><tr><th>Date</th><th>Name</th><th>Phone</th><th>Item</th><th>Best time</th></tr>' +
+            cbs.map(function (c) {
+              return "<tr><td>" + esc((c.date || "").slice(0, 10)) + "</td><td>" + esc(c.name) + "</td><td>" + esc(c.phone) + "</td><td>" + esc(c.item) + "</td><td>" + esc(c.time) + "</td></tr>";
+            }).join("") + "</table></div>"
+          : '<p class="muted">No callback requests on this device yet.</p>';
+      }
+    } catch (e) {}
+    /* price sources — owner only */
+    fetch("data/price-sources.json?v=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; }).then(function (ps) {
+        var el = document.getElementById("adm-psrc");
+        if (!el) return;
+        if (!ps || !ps.items || !ps.items.length) { el.innerHTML = '<p class="muted">No price data.</p>'; return; }
+        var rows = ps.items.map(function (it, idx) {
+          var src = it.source_url
+            ? '<a href="' + esc(it.source_url) + '" target="_blank" rel="noopener">' + esc(it.source) + " ↗</a>"
+            : esc(it.source);
+          var detail = '<div class="psrc-detail" id="psrc-d' + idx + '" style="display:none;padding:10px 4px 4px;">' +
+            '<p class="tiny"><b>Item:</b> ' + esc(it.name) + " (" + esc(it.page || "") + ")</p>" +
+            '<p class="tiny"><b>Our price:</b> ' + esc(it.our_price) + " &nbsp;·&nbsp; <b>Their price:</b> " + esc(it.source_price) + " &nbsp;·&nbsp; <b>×</b> " + esc(it.mult || "—") + "</p>" +
+            '<p class="tiny"><b>Source:</b> ' + src + "</p>" +
+            (it.source_url
+              ? '<a class="btn-s btn-ok" href="' + esc(it.source_url) + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;margin-top:6px;">🛒 Buy from source website →</a> <span class="tiny muted">order aane par yahan se khareed kar customer ko deliver karen</span>'
+              : '<span class="tiny muted">Ye aapki apni price hai — source website nahi.</span>') +
+            "</div>";
+          return "<tr class='psrc-row' data-i='" + idx + "' style='cursor:pointer;'><td><b>" + esc(it.name) + "</b> <span class='tiny muted'>▾</span><br><span class='tiny muted'>" + esc(it.page || "") + "</span>" + detail + "</td>" +
+            "<td><b>" + esc(it.our_price) + "</b></td><td>" + src + "</td>" +
+            "<td>" + esc(it.source_price) + "</td><td>" + esc(it.mult || "") + "</td></tr>";
+        }).join("");
+        el.innerHTML = '<p class="tiny muted">Rule: <b>' + esc(ps.rule || "") + '</b> · Updated: ' + esc(ps.updated || "") + "<br>Kisi item par <b>click</b> karen — poori detail khulegi.</p>" +
+          '<div style="overflow-x:auto;"><table class="ord-table"><tr><th>Item ▾</th><th>Our Price</th><th>Source Website</th><th>Their Price</th><th>×</th></tr>' +
+          rows + "</table></div>";
+        el.querySelectorAll(".psrc-row").forEach(function (tr) {
+          tr.addEventListener("click", function (e) {
+            if (e.target.tagName === "A") return;
+            var d = tr.querySelector(".psrc-detail");
+            if (d) d.style.display = d.style.display === "none" ? "block" : "none";
+          });
+        });
+      });
+
+    /* wire up */
+    var qi = document.getElementById("adm-q"), fs = document.getElementById("adm-f");
+    fs.value = fstat;
+    qi.addEventListener("input", function () { q = qi.value; renderKeep(); });
+    fs.addEventListener("change", function () { fstat = fs.value; render(); });
+    function renderKeep() {
+      /* re-render table only, keep focus in search box */
+      var pos = qi.selectionStart;
+      render();
+      var nq = document.getElementById("adm-q");
+      nq.focus(); nq.setSelectionRange(pos, pos);
+    }
+    root.querySelectorAll("button[data-v]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = verifs(); v[b.getAttribute("data-id")] = b.getAttribute("data-v");
+        saveVerifs(v); render();
+      });
+    });
+    root.querySelectorAll("button[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = b.getAttribute("data-copy");
+        if (navigator.clipboard) navigator.clipboard.writeText(t);
+        b.textContent = "✅ Copied"; setTimeout(function () { b.textContent = "📋 Copy TID"; }, 1500);
+      });
+    });
+    document.getElementById("adm-csv").addEventListener("click", function () {
+      var lines = ["Order ID,Date,Customer,WhatsApp,Email,Item,Amount,TID,Status"];
+      allOrders().forEach(function (o) {
+        lines.push([o.id, o.date || "", o.name || o.account || "", o.whatsapp || "", o.email || "",
+          (o.kind || o.plan || o.item || ""), (o.total || o.amount || ""), o.tid || "", payState(o)]
+          .map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(","));
+      });
+      var blob = new Blob([lines.join("\n")], { type: "text/csv" });
+      var aEl = document.createElement("a");
+      aEl.href = URL.createObjectURL(blob); aEl.download = "sawalai-orders.csv"; aEl.click();
+    });
+    document.getElementById("m-add").addEventListener("click", function () {
+      var id = document.getElementById("m-id").value.trim(),
+        item = document.getElementById("m-item").value.trim(),
+        amtV = document.getElementById("m-amt").value.trim();
+      var msg = document.getElementById("m-msg");
+      if (!id || !item || !amtV) { msg.textContent = "Order ID, Item aur Amount zaroori hain."; return; }
+      var arr;
+      try { arr = JSON.parse(localStorage.getItem("sawalai_manual_orders") || "[]"); } catch (e) { arr = []; }
+      if (arr.some(function (x) { return x.id === id; }) || allOrders().some(function (x) { return x.id === id; })) {
+        msg.textContent = "Ye Order ID pehle se maujood hai."; return;
+      }
+      arr.push({
+        id: id, item: item, total: amtV,
+        tid: document.getElementById("m-tid").value.trim() || null,
+        name: document.getElementById("m-name").value.trim(),
+        whatsapp: document.getElementById("m-wa").value.trim(),
+        date: new Date().toISOString(), status: "Pending"
+      });
+      try { localStorage.setItem("sawalai_manual_orders", JSON.stringify(arr)); } catch (e) {}
+      msg.textContent = "✅ Order add ho gayi."; render();
+    });
+    document.getElementById("adm-lock").addEventListener("click", function () {
+      O.lock(); location.reload();
+    });
+
+    /* 🤖 AI Assistant — mount after owner unlock */
+    try {
+      if (window.USAI_AI) {
+        USAI_AI.injectCSS();
+        var aiMount = document.getElementById("usai-ai-mount");
+        if (aiMount) USAI_AI.mount(aiMount);
+      }
+    } catch (e) {}
+  }
+
+  /* load the auto order queue (cross-device), then render */
+  function boot() {
+    fetch("data/order-queue.json?v=" + Date.now()).then(function (r) {
+      return r.ok ? r.json() : { orders: [] };
+    }).catch(function () { return { orders: [] }; }).then(function (q2) {
+      window.__queueOrders = (q2 && q2.orders) || [];
+      render();
+    });
+  }
+  boot();
+})();
+</script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+</body>
+</html>
+
+<!-- ===== ORDER TRACKING MANAGEMENT ===== -->
+<div style="background:#fff;border-radius:15px;padding:25px;margin:20px;box-shadow:0 4px 15px rgba(0,0,0,.1)">
+  <h2 style="color:#ff330c;margin-bottom:20px">📦 Order Tracking Management</h2>
+  <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+    <input type="text" id="admTrackCode" placeholder="Enter tracking code (USAI-XXX)" style="flex:1;min-width:200px;padding:12px;border:2px solid #ff330c;border-radius:10px;font-size:1rem">
+    <button onclick="admFindOrder()" style="background:#ff330c;color:#fff;border:none;padding:12px 30px;border-radius:10px;cursor:pointer;font-weight:bold">🔍 Find</button>
+  </div>
+  <div id="admOrderInfo" style="display:none">
+    <h3 id="admProd" style="margin-bottom:10px"></h3>
+    <p><b>Current Status:</b> <span id="admCurrStatus" style="background:#4caf50;color:#fff;padding:5px 15px;border-radius:15px"></span></p>
+    <div style="margin-top:15px">
+      <label><b>Update Status:</b></label><br>
+      <select id="admNewStatus" style="width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ddd;font-size:1rem">
+        <option>Order Received</option>
+        <option>Payment Confirmed</option>
+        <option>Packing</option>
+        <option>Shipped</option>
+        <option>In Transit</option>
+        <option>Out for Delivery</option>
+        <option>Delivered</option>
+        <option>Cancelled</option>
+      </select>
+      <input type="text" id="admNote" placeholder="Note (optional) - e.g. 'Product is in Karachi now'" style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd">
+      <input type="password" id="admPin" placeholder="Owner PIN" style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd">
+      <button onclick="admUpdateStatus()" style="background:#4caf50;color:#fff;border:none;padding:15px 40px;border-radius:10px;cursor:pointer;font-weight:bold;font-size:1rem">✅ Update Status</button>
+    </div>
+    <div id="admHistory" style="margin-top:20px"></div>
+  </div>
+</div>
+<script>
+const TAPI="https://usai-permanent-workers.usai-api.workers.dev";
+let admOrder=null;
+async function admFindOrder(){
+  const code=document.getElementById('admTrackCode').value.trim().toUpperCase();
+  if(!code){alert("Enter code!");return;}
+  const r=await fetch(TAPI+"/api/track?code="+code);
+  const d=await r.json();
+  if(!d.ok){alert("Not found!");return;}
+  admOrder=d.order;
+  document.getElementById('admProd').textContent="🛍️ "+admOrder.product+" ("+admOrder.code+")";
+  document.getElementById('admCurrStatus').textContent=admOrder.status;
+  document.getElementById('admNewStatus').value=admOrder.status;
+  document.getElementById('admHistory').innerHTML="<h4>History:</h4>"+admOrder.history.map(h=>`<div style="padding:8px;border-bottom:1px solid #eee"><b>${h.status}</b> - ${new Date(h.time).toLocaleString()}${h.note?"<br>"+h.note:""}</div>`).join('');
+  document.getElementById('admOrderInfo').style.display='block';
+}
+async function admUpdateStatus(){
+  const pin=document.getElementById('admPin').value;
+  const status=document.getElementById('admNewStatus').value;
+  const note=document.getElementById('admNote').value;
+  if(!pin){alert("Enter PIN!");return;}
+  const r=await fetch(TAPI+"/api/track/update",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:admOrder.code,status:status,note:note,pin:pin})});
+  const d=await r.json();
+  if(!d.ok){alert("Error: "+d.msg);return;}
+  alert("✅ Status updated to: "+status);
+  admFindOrder();
+}
+</script>

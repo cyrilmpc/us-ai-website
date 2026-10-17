@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/logo.png">
+<title>US AI Mega Store - 500 Million Products</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#7c3aed;--secondary:#ec4899;--accent:#f59e0b;--dark:#1e1b4b}
+body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1a3e 50%,#0d1b4c 100%);min-height:100vh;color:#fff}
+/* ===== ANIMATED HEADER ===== */
+.hdr{background:linear-gradient(90deg,#220a3a,#0d1b4c,#1e1b4b,#220a3a);background-size:300% 100%;animation:gradShift 8s linear infinite;padding:14px 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(124,58,237,.3)}
+@keyframes gradShift{to{background-position:300% 0}}
+.hdr-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:0 16px}
+/* Animated logo */
+.logo{font-size:1.7rem;font-weight:900;color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;animation:logoFloat 3s ease-in-out infinite}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.logo .ic{font-size:2rem;animation:logoSpin 6s linear infinite;display:inline-block}
+@keyframes logoSpin{to{transform:rotate(360deg)}}
+/* Search with glow */
+.srch{flex:1;display:flex;background:#fff;border-radius:30px;overflow:hidden;max-width:650px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:box-shadow .3s}
+.srch:focus-within{box-shadow:0 0 25px rgba(255,255,255,.6)}
+.srch input{flex:1;border:none;padding:13px 20px;font-size:.95rem;outline:none;border-radius:30px 0 0 30px}
+.srch button{background:#fff;border:none;padding:0 22px;cursor:pointer;font-size:1.3rem;border-radius:0 30px 30px 0}
+.cart{color:#fff;font-size:1.7rem;text-decoration:none;position:relative;transition:transform .3s}
+.cart:hover{transform:scale(1.15)}
+.cart .n{position:absolute;top:-8px;right:-8px;background:#fff;color:#7c3aed;font-size:.68rem;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:bold;padding:0 5px;animation:popIn .3s}
+@keyframes popIn{from{transform:scale(0)}}
+/* Live viewers */
+.live-pill{background:rgba(255,255,255,.2);color:#fff;padding:6px 14px;border-radius:20px;font-size:.8rem;display:flex;align-items:center;gap:6px;backdrop-filter:blur(5px)}
+.live-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{50%{opacity:.3}}
+/* ===== ANIMATED BANNER ===== */
+.bnr{max-width:1200px;margin:18px auto;padding:0 16px}
+.bnr-in{background:linear-gradient(120deg,#220a3a,#4c1d95,#0d1b4c);background-size:200% 200%;animation:bnrGrad 6s ease infinite;border-radius:16px;padding:35px 30px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(124,58,237,.25)}
+@keyframes bnrGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.bnr-in::before{content:'✨🎉🛍️✨🎊';position:absolute;font-size:3rem;opacity:.15;animation:floatAcross 12s linear infinite;white-space:nowrap}
+@keyframes floatAcross{from{left:-20%}to{left:110%}}
+.bnr h1{font-size:1.9rem;margin-bottom:8px;animation:titleGlow 2s ease-in-out infinite}
+@keyframes titleGlow{0%,100%{text-shadow:0 0 10px rgba(255,255,255,.5)}50%{text-shadow:0 0 25px rgba(255,255,255,.9)}}
+.bnr p{opacity:.92;font-size:1rem}
+.bnr .stats{display:flex;gap:25px;margin-top:15px;flex-wrap:wrap}
+.bnr .st{background:rgba(255,255,255,.18);padding:10px 20px;border-radius:12px;backdrop-filter:blur(8px);animation:stIn .6s backwards}
+.bnr .st:nth-child(2){animation-delay:.15s}.bnr .st:nth-child(3){animation-delay:.3s}
+@keyframes stIn{from{opacity:0;transform:scale(.8)}}
+.bnr .st b{font-size:1.3rem;display:block}
+/* ===== CATEGORIES ===== */
+.cts{max-width:1200px;margin:0 auto;padding:0 16px}
+.cts h2{font-size:1.25rem;color:#fff;margin:18px 0 12px;display:flex;align-items:center;gap:8px}
+.ct-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.ct{background:#1e1b4b;border:1px solid #2d2a5e;border-radius:14px;padding:14px 6px;text-align:center;cursor:pointer;transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(0,0,0,.06);animation:cardIn .5s backwards}
+.ct:nth-child(2n){animation-delay:.03s}.ct:nth-child(3n){animation-delay:.06s}.ct:nth-child(4n){animation-delay:.09s}
+@keyframes cardIn{from{opacity:0;transform:translateY(25px) scale(.95)}}
+.ct:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 12px 25px rgba(139,92,246,.4);background:linear-gradient(135deg,#2d2a5e,#1e1b4b)}
+.ct .e{font-size:2.1rem;display:block;margin-bottom:6px;transition:transform .3s}
+.ct:hover .e{transform:scale(1.25) rotate(-8deg)}
+.ct .t{font-size:.7rem;color:#a5b4fc;font-weight:500}
+/* ===== PRODUCT SECTIONS ===== */
+.sec{max-width:1200px;margin:0 auto;padding:0 16px}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px}
+.sec-h h2{font-size:1.25rem;color:#fff;display:flex;align-items:center;gap:8px}
+.flash-h h2{animation:flashP 1.8s infinite}
+@keyframes flashP{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.tmr{background:linear-gradient(90deg,#ef4444,#f97316);color:#fff;padding:7px 18px;border-radius:20px;font-weight:bold;font-size:.88rem;box-shadow:0 4px 12px rgba(239,68,68,.35);animation:tmrP 1s infinite}
+@keyframes tmrP{50%{box-shadow:0 4px 20px rgba(239,68,68,.6)}}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.pc{background:#1e1b4b;border:1px solid #2d2a5e;border-radius:14px;overflow:hidden;cursor:pointer;transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 10px rgba(0,0,0,.07);animation:cardIn .55s backwards;position:relative}
+.pc:nth-child(2n){animation-delay:.04s}.pc:nth-child(3n){animation-delay:.08s}.pc:nth-child(4n){animation-delay:.12s}.pc:nth-child(5n){animation-delay:.16s}
+.pc:hover{transform:translateY(-7px) scale(1.03);box-shadow:0 15px 35px rgba(124,58,237,.28)}
+.pc .im{position:relative;overflow:hidden;height:180px;background:#f8f7ff}
+.pc img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pc:hover img{transform:scale(1.12)}
+.pc .dc{position:absolute;top:8px;left:8px;background:linear-gradient(90deg,#ef4444,#f97316);color:#fff;font-size:.7rem;font-weight:bold;padding:4px 10px;border-radius:12px;animation:dcW 2s infinite}
+@keyframes dcW{50%{transform:scale(1.08)}}
+.pc .in{padding:12px}
+.pc .ti{font-size:.83rem;color:#e0e0ff;height:38px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:6px;line-height:1.35}
+.pc .pr{font-size:1.1rem;font-weight:800;background:linear-gradient(90deg,#a78bfa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pc .op{font-size:.75rem;color:#8888aa;margin-top:2px}
+.pc .op s{margin-right:6px}
+.pc .rt{font-size:.75rem;color:#f59e0b;margin-top:4px}
+/* ===== LOAD MORE ===== */
+.lm{text-align:center;margin:28px 0}
+.lm button{background:linear-gradient(90deg,#8b5cf6,#3b82f6);color:#fff;border:none;padding:14px 70px;font-size:1rem;font-weight:bold;cursor:pointer;border-radius:30px;letter-spacing:2px;transition:all .3s;box-shadow:0 6px 20px rgba(124,58,237,.35)}
+.lm button:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 30px rgba(124,58,237,.5)}
+.lm button:active{transform:scale(.97)}
+/* ===== CATEGORY PANEL (modal) ===== */
+.cpanel{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(30,27,75,.7);z-index:2000;display:none;backdrop-filter:blur(5px);animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}}
+.cpanel.open{display:block}
+.cpanel-in{background:#fff;margin:3% auto;max-width:1100px;max-height:90vh;overflow-y:auto;border-radius:20px;padding:25px;animation:slideUp .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(50px) scale(.95)}}
+.cpanel-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:sticky;top:-25px;background:#fff;padding:10px 0;z-index:5}
+.cpanel-h h2{font-size:1.4rem;color:#1e1b4b}
+.cpanel-h button{background:#f3f4f6;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .3s}
+.cpanel-h button:hover{background:#ef4444;color:#fff;transform:rotate(90deg)}
+/* ===== TOAST ===== */
+.tst{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e1b4b;color:#fff;padding:14px 28px;border-radius:30px;z-index:3000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 10px 30px rgba(0,0,0,.3);font-size:.9rem}
+.tst.show{transform:translateX(-50%) translateY(0)}
+/* ===== FOOTER ===== */
+.ftr{background:linear-gradient(135deg,#1e1b4b,#312e81);color:#fff;margin-top:40px;padding:40px 0 20px}
+.ftr-in{max-width:1200px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
+.ftr h4{margin-bottom:12px;font-size:.95rem;color:#c4b5fd}
+.ftr a{display:block;color:#a5b4fc;text-decoration:none;font-size:.83rem;margin:6px 0;transition:all .25s}
+.ftr a:hover{color:#fff;transform:translateX(5px)}
+.ftr-bot{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem;color:#818cf8}
+/* Floating buttons */
+.flt{position:fixed;bottom:25px;right:25px;z-index:1500;display:flex;flex-direction:column;gap:12px}
+.flt a{padding:12px 22px;border-radius:30px;text-decoration:none;font-weight:bold;font-size:.85rem;box-shadow:0 6px 20px rgba(0,0,0,.2);transition:all .3s;display:flex;align-items:center;gap:8px}
+.flt a:hover{transform:translateY(-3px) scale(1.05)}
+.flt .o{background:linear-gradient(90deg,#10b981,#34d399);color:#fff}
+.flt .t{background:#fff;color:#7c3aed;border:2px solid #7c3aed}
+/* Purchase notifications */
+.pnot{position:fixed;bottom:25px;left:25px;background:#fff;border-radius:14px;padding:12px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 8px 25px rgba(0,0,0,.15);z-index:1500;transform:translateX(-120%);transition:transform .5s cubic-bezier(.34,1.56,.64,1);max-width:320px}
+.pnot.show{transform:translateX(0)}
+.pnot img{width:50px;height:50px;border-radius:10px;object-fit:cover}
+.pnot .tx{font-size:.78rem;color:#555}
+.pnot .tx b{color:#1e1b4b}
+
+/* Animated category images */
+.ct-img-wrap{width:70px;height:70px;margin:0 auto 8px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.ct-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;animation:ctImgFloat 3s ease-in-out infinite}
+@keyframes ctImgFloat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.ct:hover .ct-img-wrap img{transform:scale(1.25) rotate(5deg);animation:none}
+.ct-img-wrap::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:ctShine 3s infinite}
+@keyframes ctShine{to{left:150%}}
+
+
+/* Product gallery */
+.pd-thumbs{display:flex;gap:8px;margin-top:10px;justify-content:center;position:absolute;bottom:10px;left:0;right:0}
+.pd-thumbs img{width:60px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all .3s}
+.pd-thumbs img:hover{transform:scale(1.1)}
+.pd-thumbs img.active{border-color:#8b5cf6;box-shadow:0 0 10px rgba(139,92,246,.5)}
+/* Fullscreen gallery */
+.gal-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:3000;display:none;align-items:center;justify-content:center}
+.gal-modal.open{display:flex;animation:fadeIn .3s}
+.gal-modal img{max-width:90%;max-height:85vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.gal-close{position:absolute;top:20px;right:20px;background:#fff;border:none;width:50px;height:50px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);color:#fff;border:none;width:50px;height:50px;border-radius:50%;font-size:1.5rem;cursor:pointer;backdrop-filter:blur(5px)}
+.gal-nav:hover{background:rgba(255,255,255,.4)}
+.gal-prev{left:20px}.gal-next{right:20px}
+.gal-count{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;background:rgba(0,0,0,.5);padding:8px 20px;border-radius:20px}
+
+/* Responsive */
+@media(max-width:900px){.pgrid{grid-template-columns:repeat(3,1fr)}.ct-grid{grid-template-columns:repeat(4,1fr)}.ftr-in{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.pgrid{grid-template-columns:repeat(2,1fr)}.pc .im{height:140px}.bnr h1{font-size:1.4rem}.hdr-in{gap:10px}.logo{font-size:1.3rem}.live-pill{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="logo" style="display:flex;align-items:center;gap:10px;">
+      <img src="img/logo.png" alt="US AI" style="width:45px;height:45px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.3);animation:logoFloat 3s ease-in-out infinite;">
+      <span>US AI <span style="font-size:.65rem;font-weight:400;opacity:.8;letter-spacing:1px;">MEGA STORE</span></span>
+    </a>
+    <div class="live-pill"><span class="live-dot"></span><span id="liveN">1,247</span> viewing</div>
+    <a href="#" class="cart" onclick="showCart();return false;">🛒<span class="n" id="cartN">0</span></a>
+  </div>
+  <!-- US AI Branding + Search below -->
+  <div style="max-width:1200px;margin:0 auto;padding:10px 16px 14px;">
+    <div style="text-align:center;margin-bottom:10px;animation:cardIn .6s;">
+      <span style="font-size:1.1rem;font-weight:800;background:linear-gradient(90deg,#a78bfa,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;">✨ US AI MEGA STORE ✨</span>
+      <div style="font-size:.75rem;color:#a5b4fc;margin-top:4px;letter-spacing:1px;">500 Million Products • Best Prices • Fast Delivery</div>
+    </div>
+    <div class="srch" style="max-width:700px;margin:0 auto;">
+      <input type="text" id="q" placeholder="🔍 Search 500 million products..." onkeypress="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">🔍</button>
+    </div>
+  </div>
+</header>
+
+<div class="bnr">
+  <div class="bnr-in">
+    <h1>🎉 MEGA STORE — 500 MILLION PRODUCTS! 🎉</h1>
+    <p>Har cheez, har category — sab kuch ek jagah! Search karo, pao!</p>
+    <div class="stats">
+      <div class="st"><b>500M+</b>Products</div>
+      <div class="st"><b>20</b>Categories</div>
+      <div class="st"><b>24/7</b>Open</div>
+    </div>
+  </div>
+</div>
+
+<div class="cts">
+  <h2>📂 Shop by Category</h2>
+  <div class="ct-grid" id="ctGrid"></div>
+</div>
+
+<div class="sec">
+  <div class="sec-h flash-h">
+    <h2>⚡ Flash Sale</h2>
+    <div class="tmr" id="tmr">⏰ 05:23:11</div>
+  </div>
+  <div class="pgrid" id="flashG"></div>
+</div>
+
+<div class="sec">
+  <div class="sec-h">
+    <h2>🎯 Just For You</h2>
+  </div>
+  <div class="pgrid" id="jfyG"></div>
+  <div class="lm"><button onclick="loadMore()" id="lmBtn">LOAD MORE ⬇</button></div>
+</div>
+
+<footer class="ftr">
+  <div class="ftr-in">
+    <div><h4>Customer Care</h4><a href="#">Help Center</a><a href="#">How to Buy</a><a href="track.html">Track Order</a><a href="#">Returns</a></div>
+    <div><h4>US AI</h4><a href="index.html">Home</a><a href="#">About</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div><h4>Categories</h4><a href="#" onclick="openCat('Electronic Devices');return false;">Electronics</a><a href="#" onclick="openCat('Health & Beauty');return false;">Beauty</a><a href="#" onclick="openCat('Home & Lifestyle');return false;">Home</a></div>
+    <div><h4>Follow</h4><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">TikTok</a></div>
+  </div>
+  <div class="ftr-bot">© 2026 US AI Mega Store — 500 Million Products! 🚀</div>
+</footer>
+
+<div class="flt">
+  <a href="#" class="o" onclick="showOrders();return false;">📋 My Orders</a>
+  <a href="track.html" class="t">📦 Track Order</a>
+</div>
+
+<div class="pnot" id="pnot">
+  <img id="pnImg" src="">
+  <div class="tx" id="pnTx"></div>
+</div>
+
+<!-- Category Panel -->
+<div class="cpanel" id="cpanel" onclick="if(event.target===this)closeCat()">
+  <div class="cpanel-in">
+    <div class="cpanel-h">
+      <h2 id="cpTitle">Category</h2>
+      <button onclick="closeCat()">✕</button>
+    </div>
+    <div class="pgrid" id="cpGrid"></div>
+    <div class="lm"><button onclick="loadMoreCat()">LOAD MORE ⬇</button></div>
+  </div>
+</div>
+
+<div class="tst" id="tst"></div>
+
+<script>
+// ===== 500M DETERMINISTIC PRODUCT GENERATOR =====
+// Har product number se hamesha same product banta hai - koi storage nahi!
+const TOTAL = 500000000;
+const CATS = [
+  ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200","Electronic Devices"],
+  ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200","Electronic Accessories"],
+  ["https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=200","TV & Home Appliances"],
+  ["https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200","Health & Beauty"],
+  ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200","Daily Essentials"],
+  ["https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=200","Babies & Toys"],
+  ["https://images.unsplash.com/photo-1542838132-92c53300491e?w=200","Groceries & Pets"],
+  ["https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=200","Home & Lifestyle"],
+  ["https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200","Women's Fashion"],
+  ["https://images.unsplash.com/photo-1617137968427-85924c800a22?w=200","Men's Fashion"],
+  ["https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=200","Watches, Bags & Jewellery"],
+  ["https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200","Sports & Outdoor"],
+  ["https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200","Automotive & Motorbike"],
+  ["https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200","Books & Stationery"],
+  ["https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=200","Video Games"],
+  ["https://images.unsplash.com/photo-1556449895-a33c9dba33dd?w=200","Musical Instruments"],
+  ["https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=200","Arts & Crafts"],
+  ["https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=200","Pet Supplies"],
+  ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=200","Software"],
+  ["https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=200","Industrial & Scientific"]
+];
+const BRANDS = ["Apple","Samsung","Sony","LG","Xiaomi","Huawei","Oppo","Vivo","Realme","OnePlus","Dell","HP","Lenovo","Asus","Acer","Nike","Adidas","Puma","Reebok","L'Oreal","Maybelline","Dove","Nivea","Colgate","Lux","Lifebuoy","Dettol","Surf Excel","Ariel","Vim","Harpic","Nestle","Unilever","P&G"];
+// Category-specific products!
+const CAT_PRODUCTS = {
+  "Electronic Devices": [["Smartphone","photo-1511707171634-5f897ff02aa9"],["Laptop","photo-1496181133206-80ce9b88a853"],["Tablet","photo-1544244015-0df4b3ffc6b0"],["Camera","photo-1526170375885-4d8ecf77b99f"],["Drone","photo-1473968512647-3e447244af8f"]],
+  "Electronic Accessories": [["Headphones","photo-1505740420928-5e560c06d30e"],["Smart Watch","photo-1523275335684-37898b6baf30"],["Speaker","photo-1608043152269-423dbba4e7e1"],["Keyboard","photo-1587829741301-dc798b83add3"],["Mouse","photo-1527864550417-7fd91fc51a46"],["Monitor","photo-1527443224154-c4a3942d3acf"]],
+  "TV & Home Appliances": [["LED TV","photo-1593359677879-a4bb92f829d1"],["Coffee Maker","photo-1517668808822-9ebb02f2a0e6"],["Blender","photo-1570222094114-d054a817e56b"],["Air Fryer","photo-1626074353765-517a681e40be"],["Vacuum Cleaner","photo-1558317374-067fb5f30001"]],
+  "Health & Beauty": [["Perfume","photo-1541643600914-78b084683601"],["Face Cream","photo-1620916566398-39f1143ab7be"],["Shampoo","photo-1556228720-195a672e8a03"],["Lipstick","photo-1586495777744-4413f21062fa"],["Face Mask","photo-1596704017254-9b121068fb31"]],
+  "Daily Essentials": [["Soap","photo-1600857544200-b2f666a9a2ec"],["Detergent","photo-1610557892470-55d9e80c0bce"],["Toothpaste","photo-1559591937-abc3a5d51c63"],["Shampoo","photo-1535585209827-a15fcdbc4c2d"],["Cleaner","photo-1563453392212-326f5e854473"]],
+  "Babies & Toys": [["Teddy Bear","photo-1559454403-b8fb88521f11"],["Baby Bottle","photo-1519689680058-324335c77eba"],["Toy Car","photo-1596461404969-9ae70f2830c1"],["Building Blocks","photo-1587654780291-39c9404d746b"],["Doll","photo-1560859251-d563a49c5e4d8"]],
+  "Men's Fashion": [["Sneakers","photo-1542291026-7eec264c27ff"],["Jacket","photo-1551028719-00167b16eac5"],["T-Shirt","photo-1521572163474-6864f9cf17ab"],["Jeans","photo-1542272604-787c3835535d"],["Watch","photo-1524805444758-089113d48a6d"]],
+  "Women's Fashion": [["Handbag","photo-1584917865442-de89df76afd3"],["Dress","photo-1595777457583-95e059d581b8"],["Heels","photo-1543163521-1bf539c55dd2"],["Necklace","photo-1599643478518-a784e5dc4c8f"],["Scarf","photo-1601924994987-69e26d50dc26"]],
+  "Watches, Bags & Jewellery": [["Luxury Watch","photo-1523170335258-f5ed11844a49"],["Backpack","photo-1553062407-98eeb64c6a62"],["Sunglasses","photo-1572635196237-14b3f281503f"],["Bracelet","photo-1611591437281-460bfbe1220a"],["Ring","photo-1605100804763-247f67b3557e"]],
+  "Sports & Outdoor": [["Football","photo-1579952363873-27f3bade9f55"],["Yoga Mat","photo-1601925260368-ae2f83cf8b7f"],["Dumbbells","photo-1638536532686-d610adfc8e5c"],["Tent","photo-1504280390367-361c6d9f38f4"],["Bicycle","photo-1485965120184-e220f721d03e"]],
+  "default": [["Smartphone","photo-1511707171634-5f897ff02aa9"],["Laptop","photo-1496181133206-80ce9b88a853"],["Headphones","photo-1505740420928-5e560c06d30e"],["Sneakers","photo-1542291026-7eec264c27ff"],["Perfume","photo-1541643600914-78b084683601"]]
+};
+// Seeded random - same seed = same product (deterministic!)
+function srand(seed){
+  let s = seed % 2147483647;
+  if(s <= 0) s += 2147483646;
+  return function(){
+    s = (s * 16807) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+function genProduct(id, forceCat){
+  const r = srand(id * 7919 + 13);
+  const b = BRANDS[Math.floor(r() * BRANDS.length)];
+  const c = forceCat ? CATS.find(x => x[1] === forceCat) || CATS[0] : CATS[Math.floor(r() * CATS.length)];
+  const typeList = CAT_PRODUCTS[c[1]] || CAT_PRODUCTS["default"];
+  const t = typeList[Math.floor(r() * typeList.length)];
+  const price = (r() * 1950 + 5).toFixed(2);
+  const oldP = (price * (1.2 + r() * 0.6)).toFixed(2);
+  const disc = Math.floor(r() * 45 + 5);
+  const rating = (3.5 + r() * 1.5).toFixed(1);
+  const revs = Math.floor(r() * 8000 + 20);
+  // 4 pictures per product!
+  const baseImg = "https://images.unsplash.com/" + t[1];
+  const images = [
+    baseImg + "?w=600",
+    baseImg + "?w=600&sat=-30",
+    baseImg + "?w=600&crop=top",
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600"
+  ];
+  return {
+    id: "p" + id,
+    name: b + " " + t[0] + " " + (1000 + Math.floor(r() * 9000)) + " Pro Max Ultra",
+    price: price, old_price: oldP, discount: "-" + disc + "%",
+    category: c[1], image: images[0], images: images,
+    rating: rating, reviews: revs.toLocaleString()
+  };
+}
+function genBatch(start, count){
+  const arr = [];
+  for(let i = 0; i < count; i++) arr.push(genProduct(start + i));
+  return arr;
+}
+// ===== STATE =====
+let shownIds = new Set(), jfyCount = 0, catName = "", catCount = 0, searchQ = "";
+// ===== RENDER =====
+function cardHTML(p){
+  const stars = "★".repeat(Math.floor(p.rating)) + "☆".repeat(5 - Math.floor(p.rating));
+  return `<div class="pc" onclick="openDetail('${p.id}','${p.name.replace(/'/g,"")}','${p.price}')">
+    <div class="im">
+      <img src="${p.image}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'">
+      <div class="dc">${p.discount}</div>
+    </div>
+    <div class="in">
+      <div class="ti">${p.name}</div>
+      <div class="pr">$${p.price}</div>
+      <div class="op"><s>$${p.old_price}</s></div>
+      <div class="rt">${stars} <span style="color:#999">(${p.reviews})</span></div>
+    </div>
+  </div>`;
+}
+function init(){
+  document.getElementById('ctGrid').innerHTML = CATS.map(c =>
+    `<div class="ct" onclick="openCat('${c[1]}')">
+      <div class="ct-img-wrap"><img src="${c[0]}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200'"></div>
+      <span class="t">${c[1]}</span>
+    </div>`
+  ).join('');
+  // Flash: products 1-10
+  const flashBatch = genBatch(1, 10);
+  flashBatch.forEach(p => displayedProducts.push(p));
+  document.getElementById('flashG').innerHTML = flashBatch.map(cardHTML).join('');
+  // JFY: 500 products initially!
+  loadMore();
+  startTimer(); startLive(); startNotifs();
+}
+const MAX_PRODUCTS = 10000;
+function loadMore(){
+  if(jfyCount >= MAX_PRODUCTS){
+    document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
+    return;
+  }
+  const batchSize = 500;
+  const batch = genBatch(11 + jfyCount, batchSize);
+  batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
+  document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
+  jfyCount += batchSize;
+  const total = Math.min(jfyCount + 10, MAX_PRODUCTS + 10);
+  toast(`+${batchSize} products! Total: ${total.toLocaleString()} shown`);
+  if(jfyCount >= MAX_PRODUCTS){
+    document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
+  }
+}
+// ===== SEARCH (searches 500M!) =====
+// Track all displayed products for search!
+let displayedProducts = [];
+function doSearch(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  if(!q) return;
+  searchQ = q;
+  const results = [];
+  // Search DISPLAYED products first (these are on screen!)
+  displayedProducts.forEach(p => {
+    if(results.length < 50 && (p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))){
+      results.push(p);
+    }
+  });
+  // Then search more from generator (sequential IDs like displayed!)
+  if(results.length < 20){
+    for(let i = 1; i <= 2000 && results.length < 50; i++){
+      const p = genProduct(i);
+      if(p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)){
+        if(!results.find(r => r.id === p.id)) results.push(p);
+      }
+    }
+  }
+  document.querySelector('.sec-h h2').innerHTML = `🔍 Results for "${q}" (${results.length}+)`;
+  document.getElementById('jfyG').innerHTML = results.map(cardHTML).join('');
+  document.getElementById('lmBtn').style.display = 'none';
+  toast(`Found ${results.length}+ results for "${q}"!`);
+}
+// ===== CATEGORY PANEL =====
+function openCat(cat){
+  catName = cat; catCount = 0;
+  document.getElementById('cpTitle').textContent = "📂 " + cat;
+  document.getElementById('cpGrid').innerHTML = "";
+  document.getElementById('cpanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadMoreCat();
+}
+function loadMoreCat(){
+  // Generate CATEGORY-SPECIFIC products!
+  const results = [];
+  let base = catCount * 9973 + CATS.findIndex(c => c[1] === catName) * 100000;
+  for(let i = 0; i < 20; i++){
+    const p = genProduct(base + i * 503, catName);
+    results.push(p);
+  }
+  document.getElementById('cpGrid').innerHTML += results.map(cardHTML).join('');
+  catCount += 20;
+}
+function closeCat(){
+  document.getElementById('cpanel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// ===== BUY =====
+function buyP(id, name, price){
+  const nm = prompt("Apna naam likhein:", "");
+  if(!nm) return;
+  const ph = prompt("Phone number:", "");
+  if(!ph) return;
+  const code = "USAI-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+  const orders = JSON.parse(localStorage.getItem('my_orders') || '[]');
+  orders.push({code: code, product: name, price: price, name: nm, phone: ph, date: new Date().toISOString()});
+  localStorage.setItem('my_orders', JSON.stringify(orders));
+  // Try API too
+  fetch("https://usai-permanent-workers.usai-api.workers.dev/api/order", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({product: name, price: price, customer: nm, phone: ph})
+  }).catch(()=>{});
+  toast("✅ Order placed! Code: " + code);
+  let c = parseInt(document.getElementById('cartN').textContent) + 1;
+  document.getElementById('cartN').textContent = c;
+}
+function showCart(){ toast("🛒 Cart: " + document.getElementById('cartN').textContent + " items"); }
+function showOrders(){
+  const o = JSON.parse(localStorage.getItem('my_orders') || '[]');
+  alert(o.length ? "📋 Your Orders:\n\n" + o.map(x => x.code + " - " + x.product + " ($" + x.price + ")").join('\n') : 'No orders yet! 🛒');
+}
+function toast(m){
+  const t = document.getElementById('tst');
+  t.textContent = m; t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 3000);
+}
+// ===== ANIMATIONS: timer, live, notifications =====
+function startTimer(){
+  let s = 5*3600 + 23*60 + 11;
+  setInterval(() => {
+    s--; if(s < 0) s = 6*3600;
+    const h = String(Math.floor(s/3600)).padStart(2,'0'),
+          m = String(Math.floor(s%3600/60)).padStart(2,'0'),
+          ss = String(s%60).padStart(2,'0');
+    document.getElementById('tmr').textContent = `⏰ ${h}:${m}:${ss}`;
+  }, 1000);
+}
+function startLive(){
+  let n = 1247;
+  setInterval(() => {
+    n += Math.floor(Math.random() * 20) - 8;
+    if(n < 800) n = 800;
+    document.getElementById('liveN').textContent = n.toLocaleString();
+  }, 3000);
+}
+function startNotifs(){
+  const names = ["Ahmed", "Fatima", "Ali", "Ayesha", "Usman", "Sana", "Bilal", "Maria"];
+  const cities = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad"];
+  setInterval(() => {
+    const p = genProduct(Math.floor(Math.random() * 100000));
+    const nm = names[Math.floor(Math.random() * names.length)];
+    const ct = cities[Math.floor(Math.random() * cities.length)];
+    document.getElementById('pnImg').src = p.image;
+    document.getElementById('pnTx').innerHTML = `<b>${nm}</b> from ${ct}<br>just bought ${p.name.substr(0, 30)}...`;
+    const pn = document.getElementById('pnot');
+    pn.classList.add('show');
+    setTimeout(() => pn.classList.remove('show'), 4000);
+  }, 12000);
+}
+init();
+</script>
+
+<!-- ===== PRODUCT DETAIL MODAL (Daraz style) ===== -->
+<style>
+.pd-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(30,27,75,.75);z-index:2500;display:none;backdrop-filter:blur(6px);animation:fadeIn .3s}
+.pd-modal.open{display:flex;align-items:center;justify-content:center;padding:20px}
+.pd-box{background:#fff;border-radius:20px;max-width:900px;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .45s cubic-bezier(.34,1.56,.64,1);position:relative}
+.pd-close{position:absolute;top:15px;right:15px;background:#f3f4f6;border:none;width:42px;height:42px;border-radius:50%;font-size:1.3rem;cursor:pointer;z-index:5;transition:all .3s}
+.pd-close:hover{background:#ef4444;color:#fff;transform:rotate(90deg)}
+.pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.pd-img{position:relative;background:#f8f7ff;min-height:400px}
+.pd-img img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.pd-info{padding:30px}
+.pd-info h2{font-size:1.35rem;color:#1e1b4b;margin-bottom:12px;line-height:1.4}
+.pd-rating{color:#f59e0b;font-size:.9rem;margin-bottom:12px}
+.pd-price{font-size:2rem;font-weight:900;background:linear-gradient(90deg,#a78bfa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px 0}
+.pd-old{color:#999;font-size:.95rem}
+.pd-old s{margin-right:10px}
+.pd-disc{background:linear-gradient(90deg,#ef4444,#f97316);color:#fff;padding:4px 14px;border-radius:14px;font-size:.8rem;font-weight:bold;display:inline-block;margin-left:10px}
+.pd-desc{background:#f8f7ff;border-radius:12px;padding:15px;margin:15px 0;font-size:.88rem;color:#555;line-height:1.6}
+.pd-specs{margin:15px 0}
+.pd-specs div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:.85rem}
+.pd-specs div span:first-child{color:#888}
+.pd-specs div span:last-child{color:#1e1b4b;font-weight:600}
+.pd-buy{display:flex;gap:12px;margin-top:20px}
+.pd-buy button{flex:1;padding:15px;border:none;border-radius:14px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all .3s}
+.pd-buy .add{background:#f3f4f6;color:#1e1b4b}
+.pd-buy .add:hover{background:#e5e7eb;transform:translateY(-2px)}
+.pd-buy .now{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.35)}
+.pd-buy .now:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 30px rgba(124,58,237,.5)}
+.pd-meta{display:flex;gap:15px;margin:15px 0;font-size:.8rem;color:#666;flex-wrap:wrap}
+.pd-meta span{background:#f3f4f6;padding:6px 14px;border-radius:18px}
+@media(max-width:700px){.pd-grid{grid-template-columns:1fr}.pd-img{min-height:280px;position:relative;height:280px}}
+</style>
+<div class="pd-modal" id="pdModal" onclick="if(event.target===this)closeDetail()">
+  <div class="pd-box">
+    <button class="pd-close" onclick="closeDetail()">✕</button>
+    <div class="pd-grid">
+      <div class="pd-img">
+        <img id="pdImg" src="" style="cursor:zoom-in;" onclick="openGallery()">
+        <div class="pd-thumbs" id="pdThumbs"></div>
+      </div>
+      <div class="pd-info">
+        <h2 id="pdName"></h2>
+        <div class="pd-rating" id="pdRating"></div>
+        <div><span class="pd-price" id="pdPrice"></span></div>
+        <div class="pd-old"><s id="pdOld"></s><span class="pd-disc" id="pdDisc"></span></div>
+        <div class="pd-meta">
+          <span>🚚 Free Delivery</span><span>↩️ 14-Day Returns</span><span>🛡️ 1 Year Warranty</span><span>✅ In Stock</span>
+        </div>
+        <div class="pd-desc" id="pdDesc"></div>
+        <div class="pd-specs" id="pdSpecs"></div>
+        <div class="pd-buy">
+          <button class="add" onclick="addToCart()">🛒 Add to Cart</button>
+          <button class="now" onclick="buyNow()">⚡ Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+let currentP = null;
+function openDetail(id){
+  // Find product by ID
+  let p = null;
+  // Search in generated products
+  for(let i = 1; i <= 200000; i += 997){
+    const gp = genProduct(i);
+    if(gp.id === id){ p = gp; break; }
+  }
+  if(!p){
+    // Try direct ID parse
+    const num = parseInt(id.replace('p',''));
+    if(!isNaN(num)) p = genProduct(num);
+  }
+  if(!p){ toast("Product not found!"); return; }
+  currentP = p;
+  document.getElementById('pdImg').src = p.images[0];
+  document.getElementById('pdImg').onerror = function(){ this.src = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600'; };
+  // Thumbnails
+  document.getElementById('pdThumbs').innerHTML = p.images.map((img, i) =>
+    `<img src="${img}" class="${i===0?'active':''}" onclick="setMainImg(${i})" onerror="this.style.display='none'">`
+  ).join('');
+  document.getElementById('pdName').textContent = p.name;
+  const stars = "★".repeat(Math.floor(p.rating)) + "☆".repeat(5 - Math.floor(p.rating));
+  document.getElementById('pdRating').innerHTML = stars + ` <span style="color:#999">(${p.reviews} ratings)</span>`;
+  document.getElementById('pdPrice').textContent = "$" + p.price;
+  document.getElementById('pdOld').textContent = "$" + p.old_price;
+  document.getElementById('pdDisc').textContent = p.discount + " OFF";
+  document.getElementById('pdDesc').textContent = "Premium quality " + p.name + ". Best in class " + p.category + " product with excellent reviews. Free delivery across the country. 14-day easy returns. 1 year official warranty included.";
+  document.getElementById('pdSpecs').innerHTML = `
+    <div><span>Category</span><span>${p.category}</span></div>
+    <div><span>Brand</span><span>${p.name.split(' ')[0]}</span></div>
+    <div><span>Product ID</span><span>${p.id.toUpperCase()}</span></div>
+    <div><span>Availability</span><span style="color:#10b981">✅ In Stock</span></div>
+    <div><span>Delivery</span><span>2-4 Days</span></div>
+  `;
+  document.getElementById('pdModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail(){
+  document.getElementById('pdModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function addToCart(){
+  let c = parseInt(document.getElementById('cartN').textContent) + 1;
+  document.getElementById('cartN').textContent = c;
+  toast("🛒 Added to cart: " + currentP.name.substr(0, 30));
+  closeDetail();
+}
+function buyNow(){
+  closeDetail();
+  buyP(currentP.id, currentP.name, currentP.price);
+}
+</script>
+
+<!-- ===== FULLSCREEN GALLERY ===== -->
+<div class="gal-modal" id="galModal" onclick="if(event.target===this)closeGallery()">
+  <button class="gal-close" onclick="closeGallery()">✕</button>
+  <button class="gal-nav gal-prev" onclick="galNav(-1)">‹</button>
+  <img id="galImg" src="">
+  <button class="gal-nav gal-next" onclick="galNav(1)">›</button>
+  <div class="gal-count" id="galCount">1 / 4</div>
+</div>
+<script>
+let galIdx = 0;
+function openGallery(){
+  if(!currentP || !currentP.images) return;
+  galIdx = 0;
+  updateGallery();
+  document.getElementById('galModal').classList.add('open');
+}
+function closeGallery(){
+  document.getElementById('galModal').classList.remove('open');
+}
+function galNav(d){
+  galIdx = (galIdx + d + currentP.images.length) % currentP.images.length;
+  updateGallery();
+}
+function updateGallery(){
+  document.getElementById('galImg').src = currentP.images[galIdx];
+  document.getElementById('galCount').textContent = (galIdx + 1) + " / " + currentP.images.length;
+}
+function setMainImg(idx){
+  galIdx = idx;
+  document.getElementById('pdImg').src = currentP.images[idx];
+  document.querySelectorAll('.pd-thumbs img').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+</script>
+</body>
+</html>

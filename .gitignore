@@ -1,0 +1,7 @@
+__pycache__/
+hidden_files/
+img-raw/
+tools/
+*.pyc
+.upload-lock/
+node_modules/

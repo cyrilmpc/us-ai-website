@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movies - US AI Mega Store | 5 Million Movies</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh}
+.header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px;text-align:center;position:sticky;top:0;z-index:100}
+.header h1{font-size:1.8rem;background:linear-gradient(90deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{color:#888;margin-top:5px}
+.badge5m{background:#ef4444;color:#fff;padding:5px 15px;border-radius:20px;font-weight:bold;display:inline-block;margin-top:10px;animation:pulse 2s infinite}
+@keyframes pulse{50%{transform:scale(1.05)}}
+.section{max-width:1200px;margin:20px auto;padding:0 15px}
+.section h2{font-size:1.3rem;margin-bottom:15px;padding-left:10px;border-left:4px solid #ef4444}
+.cat-bar{display:flex;gap:10px;overflow-x:auto;padding:10px 0;margin-bottom:20px}
+.cat-btn{background:#1a1a2e;border:1px solid #333;color:#fff;padding:10px 20px;border-radius:25px;cursor:pointer;white-space:nowrap;transition:all .3s}
+.cat-btn:hover,.cat-btn.active{background:#ef4444;border-color:#ef4444;transform:translateY(-2px)}
+.movie-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px}
+.movie-card{background:#1a1a2e;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .3s;position:relative}
+.movie-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 10px 30px rgba(239,68,68,.3)}
+.movie-card img{width:100%;height:220px;object-fit:cover}
+.movie-card .info{padding:10px}
+.movie-card .title{font-weight:bold;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.movie-card .meta{font-size:.75rem;color:#888;margin-top:5px}
+.movie-card .rating{color:#f59e0b;font-size:.8rem}
+.new-badge{position:absolute;top:8px;right:8px;background:#22c55e;color:#fff;font-size:.7rem;padding:3px 10px;border-radius:10px;font-weight:bold;animation:pulse 2s infinite}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1000;overflow-y:auto}
+.modal-content{max-width:700px;margin:30px auto;background:#1a1a2e;border-radius:15px;overflow:hidden;animation:slideUp .3s;position:relative}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}}
+.modal-hero{position:relative;height:300px;background-size:cover;background-position:center}
+.modal-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(transparent,#1a1a2e)}
+.modal-body{padding:25px}
+.modal-body h2{font-size:1.5rem;margin-bottom:10px}
+.detail-row{display:flex;margin:10px 0;font-size:.9rem}
+.detail-row b{width:120px;color:#f59e0b;flex-shrink:0}
+.trailer-btn{display:inline-block;background:#ef4444;color:#fff;padding:12px 30px;border-radius:25px;text-decoration:none;font-weight:bold;margin-top:15px}
+.trailer-btn:hover{background:#dc2626}
+.close-btn{position:absolute;top:15px;right:15px;background:#000000aa;color:#fff;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;z-index:1}
+.loading{text-align:center;padding:40px;color:#888;grid-column:1/-1}
+@media(max-width:600px){.movie-grid{grid-template-columns:repeat(3,1fr);gap:10px}.movie-card img{height:160px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🎬 US AI Movies</h1>
+  <p>Hollywood • Bollywood • Pakistani • Turkish • Korean</p>
+  <div class="badge5m">🎬 5 MILLION Movies!</div>
+</div>
+<div class="section">
+  <h2>🆕 New Movies</h2>
+  <div class="movie-grid" id="newGrid"><div class="loading">Loading...</div></div>
+</div>
+<div class="section">
+  <h2>🎭 Categories</h2>
+  <div class="cat-bar" id="catBar"></div>
+  <div class="movie-grid" id="movieGrid"><div class="loading">Select a category...</div></div>
+</div>
+<div class="section">
+  <h2>🎪 New Trailers</h2>
+  <div class="movie-grid" id="trailerGrid"><div class="loading">Loading...</div></div>
+</div>
+<div class="modal" id="movieModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-hero" id="mHero"></div>
+    <div class="modal-body">
+      <h2 id="mTitle"></h2>
+      <div id="mMeta" style="color:#888;margin-bottom:15px"></div>
+      <div class="detail-row"><b>🎭 Cast:</b><span id="mCast"></span></div>
+      <div class="detail-row"><b>🎬 Director:</b><span id="mDirector"></span></div>
+      <div class="detail-row"><b>💰 Budget:</b><span id="mBudget"></span></div>
+      <div class="detail-row"><b>📅 Release:</b><span id="mRelease"></span></div>
+      <div class="detail-row"><b>⭐ Rating:</b><span id="mRating"></span></div>
+      <div class="detail-row"><b>📝 Story:</b><span id="mSynopsis"></span></div>
+      <a href="#" id="mTrailer" class="trailer-btn" target="_blank">▶️ Watch Trailer on YouTube</a>
+    </div>
+  </div>
+</div>
+<script>
+const API="https://usai-permanent-workers.usai-api.workers.dev";
+
+// ===== LOCAL MOVIES (10,000 - drama style!) =====
+let LOCAL_MOVIES = [];
+async function loadLocalMovies(){
+  try{
+    const r = await fetch('data/movies-data.json');
+    LOCAL_MOVIES = await r.json();
+    console.log('Local movies loaded:', LOCAL_MOVIES.length);
+    // Show local movies in grids
+    showLocal('newGrid', LOCAL_MOVIES.filter(m=>m.isNew).slice(0,24));
+    showLocal('trailerGrid', LOCAL_MOVIES.filter(m=>m.hasTrailer).slice(0,24));
+  }catch(e){ console.log('Local load failed, using API'); }
+}
+function showLocal(gridId, movies){
+  const g = document.getElementById(gridId);
+  if(g && movies.length>0) g.innerHTML = movies.map(movieCard).join('');
+}
+function selectCatLocal(cat){
+  const filtered = LOCAL_MOVIES.filter(m=>m.category===cat).slice(0,48);
+  if(filtered.length>0){
+    document.getElementById('movieGrid').innerHTML = filtered.map(movieCard).join('');
+    return true;
+  }
+  return false;
+}
+// Override selectCat to try local first
+const origSelectCat = selectCat;
+selectCat = async function(cat, btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(LOCAL_MOVIES.length>0 && selectCatLocal(cat)) return;
+  return origSelectCat(cat, btn);
+};
+// Load local first
+loadLocalMovies();
+
+async function loadNew(){
+  try{
+    const r=await fetch(API+"/api/movies/new");
+    const d=await r.json();
+    document.getElementById('newGrid').innerHTML=d.movies.map(movieCard).join('')||'<div class="loading">No new movies</div>';
+  }catch(e){document.getElementById('newGrid').innerHTML='<div class="loading">Error loading</div>';}
+}
+async function loadCats(){
+  try{
+    const r=await fetch(API+"/api/movies/categories");
+    const d=await r.json();
+    const icons={Hollywood:"🎬",Bollywood:"💃",Pakistani:"🇵🇰",Turkish:"🇹🇷",Korean:"🇰🇷",English:"🇬🇧"};
+    document.getElementById('catBar').innerHTML=d.categories.map(c=>
+      `<button class="cat-btn" onclick="selectCat('${c.name}',this)">${icons[c.name]||'🎬'} ${c.name}</button>`
+    ).join('');
+  }catch(e){}
+}
+async function selectCat(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('movieGrid').innerHTML='<div class="loading">Loading '+cat+'...</div>';
+  const r=await fetch(API+"/api/movies?category="+encodeURIComponent(cat)+"&limit=24");
+  const d=await r.json();
+  document.getElementById('movieGrid').innerHTML=d.movies.map(movieCard).join('');
+}
+async function loadTrailers(){
+  try{
+    const r=await fetch(API+"/api/movies?limit=30");
+    const d=await r.json();
+    const wt=d.movies.filter(m=>m.hasTrailer).slice(0,12);
+    document.getElementById('trailerGrid').innerHTML=wt.map(movieCard).join('');
+  }catch(e){}
+}
+function movieCard(m){
+  const safe=JSON.stringify(m).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
+  return `<div class="movie-card" data-movie='${safe}' onclick='showDetail(this)'>
+    ${m.isNew?'<span class="new-badge">NEW</span>':''}
+    <img src="${m.poster}" alt="" loading="lazy">
+    <div class="info"><div class="title">${m.title}</div>
+    <div class="meta">${m.year} | ${m.category}</div>
+    <div class="rating">⭐ ${m.rating}</div></div></div>`;
+}
+function showDetail(el){
+  const m=JSON.parse(el.getAttribute('data-movie').replace(/&#39;/g,"'").replace(/&quot;/g,'"'));
+  document.getElementById('mHero').style.backgroundImage=`url(${m.poster})`;
+  document.getElementById('mTitle').textContent=m.title;
+  document.getElementById('mMeta').textContent=`${m.year} | ${m.category}`;
+  document.getElementById('mCast').textContent=m.cast.join(', ');
+  document.getElementById('mDirector').textContent=m.director;
+  document.getElementById('mBudget').textContent=m.budget;
+  document.getElementById('mRelease').textContent=new Date(m.release).toLocaleDateString();
+  document.getElementById('mRating').textContent=`⭐ ${m.rating}/10`;
+  document.getElementById('mSynopsis').textContent=m.synopsis;
+  document.getElementById('mTrailer').href=m.trailerUrl;
+  document.getElementById('movieModal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('movieModal').style.display='none';document.body.style.overflow='auto';}
+document.getElementById('movieModal').addEventListener('click',e=>{if(e.target.id==='movieModal')closeModal();});
+loadNew();loadCats();loadTrailers();
+</script>
+</body>
+</html>
+
+<!-- ===== LOAD MORE ===== -->
+<style>
+.load-more-btn{display:block;margin:20px auto;background:#ef4444;color:#fff;border:none;padding:12px 40px;border-radius:25px;font-size:1rem;cursor:pointer;font-weight:bold}
+.load-more-btn:hover{background:#dc2626}
+</style>
+<script>
+// Load more functionality
+let moviePage=1, trailerPage=1;
+async function loadMoreMovies(){
+  moviePage++;
+  const cat = document.querySelector('.cat-btn.active');
+  const url = cat ? API+"/api/movies?category="+encodeURIComponent(cat.textContent.replace(/^[^\s]+\s/,''))+"&page="+moviePage+"&limit=24" : API+"/api/movies?page="+moviePage+"&limit=24";
+  const r=await fetch(url);
+  const d=await r.json();
+  document.getElementById('movieGrid').innerHTML+=d.movies.map(movieCard).join('');
+}
+// Add load more buttons after grids
+document.addEventListener('DOMContentLoaded',()=>{
+  const mg=document.getElementById('movieGrid');
+  const btn1=document.createElement('button');
+  btn1.className='load-more-btn'; btn1.textContent='Load More Movies ⬇️';
+  btn1.onclick=loadMoreMovies;
+  mg.after(btn1);
+});
+</script>
+
+<!-- ===== FINAL TOUCHES ===== -->
+<style>
+.skeleton{background:linear-gradient(90deg,#1a1a2e 25%,#2a2a4e 50%,#1a1a2e 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:12px;height:220px}
+@keyframes shimmer{to{background-position:-200% 0}}
+#backTopM{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:#ef4444;color:#fff;border:none;border-radius:50%;font-size:1.3rem;cursor:pointer;display:none;z-index:999}
+</style>
+<button id="backTopM" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+window.onscroll=()=>{document.getElementById('backTopM').style.display=window.scrollY>500?'block':'none';};
+</script>
