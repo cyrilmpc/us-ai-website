@@ -720,6 +720,8 @@ function expandQ(q){
   for(const k in KW){ if(q.includes(k)) qs=qs.concat(KW[k]); }
   return qs;
 }
+  return qs;
+}
 
 function doSearch(){
   const qraw = document.getElementById('q').value.trim().toLowerCase();
