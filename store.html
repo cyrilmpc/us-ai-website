@@ -398,7 +398,7 @@ html{scroll-behavior:smooth}
       <div style="font-size:.75rem;color:#a5b4fc;margin-top:4px;letter-spacing:1px;">500 Million Products • Best Prices • Fast Delivery</div>
     </div>
     <div class="srch" style="max-width:700px;margin:0 auto;">
-      <input type="text" id="q" placeholder="🔍 Search 500 million products..." onkeypress="if(event.key==='Enter')doSearch()">
+      <input type="text" id="q" placeholder="🔍 Search 500 million products..." onkeypress="if(event.key==='Enter')doSearch()"><div id="searchSugg" style="position:absolute;top:100%;left:0;right:0;background:#1e1b4b;border:1px solid #2d2a5e;border-radius:0 0 12px 12px;display:none;z-index:1000;max-height:300px;overflow-y:auto;"></div>
       <button onclick="doSearch()">🔍</button>
       <button onclick="clearSearch()" id="clearBtn" style="display:none;background:#ef4444;color:#fff;" title="Clear search">✕</button>
     </div>
@@ -1304,6 +1304,25 @@ setInterval(updateFlash, 1000);
 </script>
 <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️</button>
 <script>window.addEventListener("scroll",()=>{document.getElementById("topBtn").classList.toggle("show",window.scrollY>500);});</script>
+
+<script>
+// Search suggestions
+const SUGGESTIONS = ["iPhone","Samsung Galaxy","Nike shoes","Dove soap","LEGO","Perfume","Headphones","Laptop","Watch","Shampoo","Lipstick","Camera","Drone","Backpack","Sunglasses"];
+document.getElementById('q').addEventListener('input', function(){
+  const v = this.value.toLowerCase().trim();
+  const box = document.getElementById('searchSugg');
+  if(!box) return;
+  if(v.length < 2){ box.style.display='none'; return; }
+  const matches = SUGGESTIONS.filter(s => s.toLowerCase().includes(v)).slice(0,8);
+  if(matches.length === 0){ box.style.display='none'; return; }
+  box.innerHTML = matches.map(s => `<div onclick="document.getElementById('q').value='${s}';doSearch();document.getElementById('searchSugg').style.display='none';" style="padding:10px 16px;cursor:pointer;border-bottom:1px solid #2d2a5e;" onmouseover="this.style.background='#2d2a5e'" onmouseout="this.style.background=''">🔍 ${s}</div>`).join('');
+  box.style.display = 'block';
+});
+document.addEventListener('click', function(e){
+  const box = document.getElementById('searchSugg');
+  if(box && !e.target.closest('#q') && !e.target.closest('#searchSugg')) box.style.display='none';
+});
+</script>
 </body>
 </html><div class="mini-search" id="miniSearch">
   <a href="index.html" style="text-decoration:none;"><img src="img/logo.png" style="width:28px;height:28px;border-radius:8px;" alt="US AI"></a>
