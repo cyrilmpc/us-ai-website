@@ -656,10 +656,10 @@ function init(){
   try { startLive(); } catch(e){}
   try { startNotifs(); } catch(e){}
 }
-const MAX_PRODUCTS = 10000;
+const MAX_PRODUCTS = 1000000; // 1 MILLION!
 function loadMore(){
   if(jfyCount >= MAX_PRODUCTS){
-    document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
+    document.getElementById('lmBtn').textContent = '✅ All 1,000,000 Loaded!';
     return;
   }
   const batchSize = 300; // 300 products as user asked!
@@ -670,7 +670,7 @@ function loadMore(){
   const total = Math.min(jfyCount + 10, MAX_PRODUCTS + 10);
   toast(`+${batchSize} products! Total: ${total.toLocaleString()} shown`);
   if(jfyCount >= MAX_PRODUCTS){
-    document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
+    document.getElementById('lmBtn').textContent = '✅ All 1,000,000 Loaded!';
   }
 }
 // ===== SEARCH (searches 500M!) =====
