@@ -977,15 +977,22 @@ function doSearch(){
   if(!q) return;
   searchQ = q;
   const results = [];
-  // Search DISPLAYED products first (these are on screen!)
+  // EXACT title match first!
+  const qLower = q.toLowerCase();
   displayedProducts.forEach(p => {
-    if(results.length < 50 && (p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))){
+    if(p.name.toLowerCase() === qLower && results.length < 200){
+      if(!results.find(r => r.id === p.id)) results.push(p);
+    }
+  });
+  // Then partial matches in DISPLAYED products
+  displayedProducts.forEach(p => {
+    if(results.length < 200 && (p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))){
       results.push(p);
     }
   });
   // Then search more from generator (sequential IDs like displayed!)
   if(results.length < 20){
-    for(let i = 1; i <= 50000 && results.length < 50; i++){
+    for(let i = 1; i <= 200000 && results.length < 200; i++){
       const p = genProduct(i);
       if(qlist.some(kw=>p.name.toLowerCase().includes(kw)) || p.category.toLowerCase().includes(q)){
         if(!results.find(r => r.id === p.id)) results.push(p);
