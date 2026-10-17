@@ -128,6 +128,9 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <a href="index.html" class="logo"><img src="img/logo.png">US AI</a>
 <button class="back" onclick="if(history.length>1){history.back();}else{location.href='store.html';}">← Back</button>
 </div></header>
+<div style="max-width:1200px;margin:0 auto;padding:10px 16px;font-size:.85rem;color:#888;">
+<a href="store.html" style="color:#60a5fa;">Home</a> > <span id="crumbCat">Category</span> > <span id="crumbName">Product</span>
+</div>
 <div class="main">
 <div class="top">
 <div>
@@ -140,7 +143,14 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="pr" id="pP"></div>
 <div class="old"><s id="pO"></s> <span class="dc" id="pD"></span></div>
 <div class="mt"><span>🚚 Free Delivery</span><span>↩️ 14-Day Returns</span><span>🛡️ 1yr Warranty</span><span>✅ In Stock</span></div>
-<div class="buy"><button class="bc" onclick="addC()">🛒 Add to Cart</button><button class="bn" onclick="buyN()">⚡ Buy Now</button></div>
+<div class="buy"><button class="bc" onclick="addC()">🛒 Add to Cart</button><div style="display:flex;align-items:center;gap:10px;margin:12px 0;">
+<span style="color:#888;">Qty:</span>
+<button onclick="chQty(-1)" style="width:30px;height:30px;border:1px solid #444;background:#1e1b4b;color:#fff;border-radius:6px;cursor:pointer;font-size:1.1rem;">-</button>
+<b id="qtyN">1</b>
+<button onclick="chQty(1)" style="width:30px;height:30px;border:1px solid #444;background:#1e1b4b;color:#fff;border-radius:6px;cursor:pointer;font-size:1.1rem;">+</button>
+</div>
+<script>let _q=1;function chQty(d){_q=Math.max(1,Math.min(10,_q+d));document.getElementById('qtyN').textContent=_q;}</script>
+<button class="bn" onclick="buyN()">⚡ Buy Now</button></div>
 </div>
 </div>
 <div class="sec"><h2>📝 Description</h2><p id="pDe"></p><div class="sp" id="pSp" style="margin-top:12px"></div></div>
@@ -164,7 +174,11 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="seller">
 <div class="av">🏬</div>
 <div class="inf"><b>US AI Official Store</b><div>⭐ 4.8 | 12.5k followers | 98% positive</div><div>📍 Ships from: USA Warehouse</div></div>
-<button class="chat" onclick="alert('💬 Chat coming soon!')">💬 Chat</button>
+<button class="chat" onclick="alert('💬 Chat coming soon!')">💬 Chat</button><div style="display:flex;gap:16px;margin-top:12px;font-size:.85rem;color:#888;">
+<span>⭐ 93% Positive</span>
+<span>📦 100% Ship on Time</span>
+<span>💬 98% Response</span>
+</div>
 </div>
 <p style="color:#888;font-size:.85rem;margin-top:10px;">✅ Verified seller | 🚚 Fast shipping | ↩️ Easy returns</p>
 </div>
