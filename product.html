@@ -494,6 +494,7 @@ function dL(){if(document.getElementById('lE').value&&document.getElementById('l
 function cL(){document.getElementById('lM').classList.remove('open');}
 function sP(e,m){document.querySelectorAll('.po').forEach(o=>o.classList.remove('sel'));e.classList.add('sel');pm=m;}
 function cP(){const c="USAI-"+Math.random().toString(36).substr(2,8).toUpperCase();const o=JSON.parse(localStorage.getItem('my_orders')||'[]');o.push({code:c,product:P.name,price:P.price,method:pm,date:new Date().toISOString()});localStorage.setItem('my_orders',JSON.stringify(o));document.getElementById('pM').classList.remove('open');alert("✅ Order: "+c+"\nPayment: "+pm);}
+}
 init();
 </script>
 
