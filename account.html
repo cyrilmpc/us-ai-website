@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — US AI</title>
+<meta name="description" content="Create your free US AI account to track orders, view order history and manage your purchases.">
+<link rel="canonical" href="https://www.usai-usa.com/account.html">
+<link rel="stylesheet" href="style.min.css?v=20261013c">
+<link rel="icon" type="image/png" href="favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S86YFGTHYS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());try{if(localStorage.getItem("sawalai_cookies")!=="no"){gtag('config','G-S86YFGTHYS');}}catch(e){}</script>
+    <meta property="og:image" content="https://www.usai-usa.com/img/og/account.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Account — US AI">
+    <meta name="twitter:image" content="https://www.usai-usa.com/img/og/account.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "My Account",
+  "description": "Create your free US AI account to track orders, view order history and manage your purchases.",
+  "url": "https://www.usai-usa.com/account.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "US AI",
+    "url": "https://www.usai-usa.com/",
+    "logo": "https://www.usai-usa.com/img/logo.png"
+  }
+}
+</script>
+<style>
+/* referral pay-it-forward card shimmer (ADD-only) */
+@keyframes referProg{from{box-shadow:0 0 0 rgba(167,139,250,0);}to{box-shadow:0 0 22px rgba(167,139,250,.55);}}
+/* login-ux: show/hide password (ADD-only, think-245) */
+.pw-wrap{position:relative;display:block;}
+.pw-wrap input{padding-right:44px;}
+.pw-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;font-size:1.05rem;padding:4px 6px;line-height:1;}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="nav">
+  <a class="brand" href="index.html">
+    <img src="img/logo.png" srcset="img/logo-120.png 120w, img/logo.png 512w" sizes="60px" alt="US AI logo" width="60" height="60" class="brand-logo">
+    <span>US AI</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <a href="index.html#demo">AI Chat</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#proxies">🌐 Proxies</a>
+    <a href="index.html#rdp">🖥️ RDP</a>
+    <a href="index.html#articles">Articles</a>
+                <a href="builder.html">🏗️ Builder</a>
+<a href="temp-box.html">📧 Temp Mail</a>
+<a href="numbers.html">💎 Numbers</a>
+    <a href="purchases.html">🧾 Purchases</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+<section class="section" id="account">
+  <h1 style="text-align:center;font-size:1.7rem;margin-bottom:8px;">👤 My Account</h1>
+  <p class="muted center" id="account-sub">Create a free account to track all your orders.</p>
+
+  <div id="auth-box">
+    <div class="auth-tabs">
+      <button class="ent-pill active" id="tab-login" type="button">Login</button>
+      <button class="ent-pill" id="tab-signup" type="button">Sign Up</button>
+    </div>
+    <div class="chat-card auth-card" id="login-card">
+      <h3>Welcome back</h3>
+      <div id="gbtn-wrap" hidden style="margin-bottom:14px;">
+        <div id="gbtn" style="display:flex;justify-content:center;"></div>
+        <p class="tiny muted center" style="margin:8px 0;">— or —</p>
+      </div>
+      <form id="login-form">
+        <label class="fld"><span>Email</span><input type="email" id="login-email" autocomplete="email" required placeholder="you@email.com"></label>
+        <label class="fld"><span>Password</span><span class="pw-wrap"><input type="password" id="login-pass" autocomplete="current-password" required placeholder="Your password"><button type="button" class="pw-eye" aria-label="Show password">👁</button></span></label>
+        <button class="btn btn-primary btn-glow" type="submit" style="width:100%;">Login</button>
+        <p class="tiny muted center" id="login-msg" style="margin-top:10px;"></p>
+        <p class="tiny center"><a href="#" id="forgot-link">Forgot password?</a></p>
+      </form>
+    </div>
+    <div class="chat-card auth-card" id="reset-card" hidden>
+      <h3>🔑 Reset Password</h3>
+      <p class="tiny muted center">Device-local account — reset works on this device only.</p>
+      <div id="reset-step1">
+        <label class="fld"><span>Account email</span><input type="email" id="rs-email" placeholder="you@email.com" autocomplete="email" autocapitalize="none" enterkeyhint="next"></label>
+        <button class="btn btn-primary" id="rs-next" type="button" style="width:100%;">Continue</button>
+      </div>
+      <div id="reset-step2" hidden>
+        <p class="tiny muted center" id="rs-info"></p>
+        <label class="fld"><span>Your full name (as registered)</span><input type="text" id="rs-name" placeholder="Full name" autocomplete="name" autocapitalize="words" enterkeyhint="next"></label>
+        <label class="fld"><span>New password</span><span class="pw-wrap"><input type="password" id="rs-pass" minlength="4" placeholder="Min. 4 characters" autocomplete="new-password" enterkeyhint="done"><button type="button" class="pw-eye" aria-label="Show password">👁</button></span></label>
+        <button class="btn btn-primary" id="rs-done" type="button" style="width:100%;">Set New Password</button>
+      </div>
+      <p class="tiny muted center" id="reset-msg" style="margin-top:10px;"></p>
+      <p class="tiny center"><a href="#" id="reset-back">← Back to login</a></p>
+    </div>
+    <div class="chat-card auth-card" id="signup-card" hidden>
+      <h3>Create free account</h3>
+      <form id="signup-form">
+        <label class="fld"><span>Full name</span><input type="text" id="su-name" required placeholder="Your name" autocomplete="name" autocapitalize="words" enterkeyhint="next"></label>
+        <label class="fld"><span>Email</span><input type="email" id="su-email" required placeholder="you@email.com" autocomplete="email" autocapitalize="none" enterkeyhint="next"></label>
+        <label class="fld"><span>Password</span><span class="pw-wrap"><input type="password" id="su-pass" required minlength="4" placeholder="Min. 4 characters" autocomplete="new-password" enterkeyhint="done"><button type="button" class="pw-eye" aria-label="Show password">👁</button></span></label>
+        <label class="fld"><span>Password hint <i class="tiny muted">(optional — shown if you forget your password)</i></span><input type="text" id="su-hint" maxlength="80" placeholder="e.g. my pet's name"></label>
+        <button class="btn btn-primary btn-glow" type="submit" style="width:100%;">Create Account</button>
+        <p class="tiny muted center" id="signup-msg" style="margin-top:10px;"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="dash-box" hidden>
+    <div class="chat-card auth-card" style="max-width:640px;">
+      <h3 id="dash-hello">Hello</h3>
+      <p class="tiny muted center" id="dash-email"></p>
+      <p class="tiny muted center">Your orders are saved on this device — sign in here any time to see what you bought.</p>
+      <div style="text-align:center;margin:12px 0;">
+        <a class="btn btn-ghost" href="index.html#proxies">🌐 Buy Proxies</a>
+        <a class="btn btn-ghost" href="index.html#rdp">🖥️ Buy RDP</a>
+        <a class="btn btn-ghost" href="services.html">🛠️ Services</a>
+        <a class="btn btn-ghost" href="purchases.html">📊 Purchase Dashboard</a>
+        <button class="btn btn-ghost" id="logout-btn" type="button">Logout</button>
+      </div>
+    </div>
+    <div id="refer-pending-reminder" style="max-width:640px;margin:0 auto;"></div>
+    <div class="chat-card" style="max-width:640px;margin:18px auto;" id="owner-card" hidden>
+      <h3>🛡️ Owner Admin</h3>
+      <div id="owner-body"></div>
+    </div>
+    
+    <!-- ACCOUNT BACKUP/RESTORE -->
+    <div class="chat-card" style="max-width:640px;margin:18px auto;" id="backup-card">
+      <h3>💾 Account Backup</h3>
+      <p class="tiny muted">Apna account save karo — kisi bhi browser/domain par wapis lao. Kabhi account nahi ghayab hoga!</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;">
+        <button class="btn btn-primary" id="backup-export" type="button">📥 Backup Download Karo</button>
+        <button class="btn btn-ghost" id="backup-import-btn" type="button">📤 Backup Restore Karo</button>
+        <input type="file" id="backup-import" accept=".json" style="display:none;">
+      </div>
+      <p class="tiny muted center" id="backup-msg" style="margin-top:8px;"></p>
+    </div>
+    <script>
+    (function(){
+      var expBtn = document.getElementById("backup-export");
+      var impBtn = document.getElementById("backup-import-btn");
+      var impInput = document.getElementById("backup-import");
+      var msg = document.getElementById("backup-msg");
+      
+      if(expBtn){
+        expBtn.addEventListener("click", function(){
+          try {
+            var data = {
+              version: 1,
+              date: new Date().toISOString(),
+              users: localStorage.getItem("sawalai_users"),
+              session: localStorage.getItem("sawalai_session"),
+              orders: localStorage.getItem("sawalai_orders"),
+              owner_device: localStorage.getItem("sawalai_owner_device"),
+              owner_ok: sessionStorage.getItem("sawalai_owner_ok")
+            };
+            var blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "usai-account-backup-" + new Date().toISOString().slice(0,10) + ".json";
+            a.click();
+            msg.textContent = "✅ Backup download ho gaya! Mehfooz rakho.";
+            msg.style.color = "#34d399";
+          } catch(e) {
+            msg.textContent = "❌ Backup fail: " + e.message;
+            msg.style.color = "#f87171";
+          }
+        });
+      }
+      
+      if(impBtn && impInput){
+        impBtn.addEventListener("click", function(){ impInput.click(); });
+        impInput.addEventListener("change", function(){
+          var file = impInput.files[0];
+          if(!file) return;
+          var reader = new FileReader();
+          reader.onload = function(){
+            try {
+              var data = JSON.parse(reader.result);
+              if(data.users) localStorage.setItem("sawalai_users", data.users);
+              if(data.session) localStorage.setItem("sawalai_session", data.session);
+              if(data.orders) localStorage.setItem("sawalai_orders", data.orders);
+              if(data.owner_device) localStorage.setItem("sawalai_owner_device", data.owner_device);
+              if(data.owner_ok) sessionStorage.setItem("sawalai_owner_ok", data.owner_ok);
+              msg.textContent = "✅ Account restore ho gaya! Page refresh karo.";
+              msg.style.color = "#34d399";
+              setTimeout(function(){ location.reload(); }, 1500);
+            } catch(e) {
+              msg.textContent = "❌ Restore fail: ghalat file";
+              msg.style.color = "#f87171";
+            }
+          };
+          reader.readAsText(file);
+        });
+      }
+    })();
+    </script>
+
+    <div class="chat-card" style="max-width:640px;margin:18px auto;">
+      <h3>📦 My Orders</h3>
+      <div id="orders-list"></div>
+    </div>
+    <div class="chat-card" style="max-width:640px;margin:18px auto;">
+      <h3>🕘 Recent Tools</h3>
+      <p class="tiny muted">Tools you've used — saved on this device.</p>
+      <div id="tools-history"></div>
+    </div>
+  </div>
+  <p class="center"><a class="btn btn-ghost" href="index.html">← Back to home</a></p>
+</section>
+</main>
+
+<footer>
+  <p><b>US AI</b> — your free AI platform for questions, pictures, videos &amp; guides.</p>
+  <p class="tiny"><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  <p class="tiny">AI answers can be wrong — verify before making important decisions.</p>
+</footer>
+
+<script src="shop.js?v=20261012b"></script>
+<script src="owner.js?v=20261011a"></script>
+<script src="history.js?v=20261012p"></script>
+<script src="refer.js?v=20261012b"></script>
+<script src="pro.js?v=20261012ad"></script>
+<script defer src="pro-account-card.js?v=20261011x"></script>
+<script>
+(function () {
+  var S = window.SawalShop;
+  var tabLogin = document.getElementById("tab-login"), tabSignup = document.getElementById("tab-signup");
+  var loginCard = document.getElementById("login-card"), signupCard = document.getElementById("signup-card");
+  function showTab(which) {
+    var isLogin = which === "login";
+    loginCard.hidden = !isLogin; signupCard.hidden = isLogin;
+    tabLogin.classList.toggle("active", isLogin); tabSignup.classList.toggle("active", !isLogin);
+    var shown = isLogin ? loginCard : signupCard;
+    shown.classList.remove("tab-enter"); void shown.offsetWidth; shown.classList.add("tab-enter");
+  }
+  tabLogin.addEventListener("click", function () { showTab("login"); });
+  tabSignup.addEventListener("click", function () { showTab("signup"); });
+
+  document.getElementById("signup-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("su-name").value.trim();
+    var email = document.getElementById("su-email").value.trim().toLowerCase();
+    var pass = document.getElementById("su-pass").value;
+    var hint = document.getElementById("su-hint").value.trim();
+    var msg = document.getElementById("signup-msg");
+    var pwHash = S.hashPw(pass);
+    // Try cloud API first (permanent), fallback to local
+    msg.textContent = "Creating account...";
+    S.apiSignup(name, email, pwHash).then(function(res){
+      if (res.ok) {
+        msg.innerHTML = "✅ Account created! (Cloud saved ☁️)";
+        if (typeof paintDash === "function") paintDash();
+        setTimeout(function(){ location.reload(); }, 1200);
+      } else {
+        // Fallback to local
+        var users = S.getUsers();
+        if (users[email]) { msg.textContent = "This email already has an account — please login."; return; }
+        users[email] = { name: name, pw: pwHash, hint: hint };
+        S.saveUsers(users); S.setSession(email);
+        msg.innerHTML = "✅ Account created! (Local)";
+        if (typeof paintDash === "function") paintDash();
+      }
+    }).catch(function(){
+      var users = S.getUsers();
+      users[email] = { name: name, pw: S.hashPw(pass), hint: hint };
+      S.saveUsers(users); S.setSession(email);
+      if (typeof paintDash === "function") paintDash();
+    });
+    return;
+    /* start 7-day free Pro trial */
+    try { if (window.SawalPro) window.SawalPro.startTrial(email); } catch (e) {}
+    /* referral: welcome bonus + claim token for inviter */
+    try {
+      if (window.SawalReferral) {
+        var ref = window.SawalReferral.onSignup(email);
+        if (ref) {
+          var waText = encodeURIComponent("🎉 I joined US AI with your invite! My claim token: " + ref.token + " — enter it in your Invite Friends > More to get your reward!");
+          msg.innerHTML = "✅ Account created! 🎉 <b>7 days of Pro FREE</b> activated!<br><span class='tiny'>WhatsApp this token to your inviter so they get their reward:<br><b>" + ref.token + "</b> <a class='btn btn-ghost' style='font-size:.75rem;padding:5px 12px;margin-top:4px' target='_blank' rel='noopener' href='https://wa.me/?text=" + waText + "'>📱 WhatsApp it</a></span>";
+          msg.innerHTML += "<br>🎁 +3 more days of Pro FREE — <a href=\"index.html#community\"><b>join our WhatsApp group</b></a> 💬";
+          /* (A) pay-it-forward card: invitee gets their OWN invite link at peak motivation */
+          try {
+            var myCode = (window.SawalReferral && window.SawalReferral.myCode) ? window.SawalReferral.myCode(email) : null;
+            if (myCode) {
+              var myLink = location.origin + "/?ref=" + myCode;
+              var pfText = encodeURIComponent("&#128293; I got 7 days of US AI Pro FREE — 3 invites unlock &#129351; 30 days Pro for you too! ");
+              msg.innerHTML += '<div style="margin-top:14px;padding:14px;border:1px dashed #a78bfa;border-radius:12px;background:rgba(99,102,241,.08);animation:referProg 2.2s ease-in-out infinite alternate;">' +
+                '<p style="margin:0 0 8px;font-size:.9rem"><b>&#128293; Your turn!</b> 3 invites unlock <b>&#129351; 30 days Pro</b>. Your invite link is ready:</p>' +
+                '<div style="display:flex;gap:8px"><input readonly value="' + myLink.replace(/&/g, "&amp;").replace(/"/g, "&quot;") +
+                '" style="flex:1;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--text);font-size:.78rem">' +
+                '<a class="btn btn-primary" style="font-size:.8rem;padding:9px 16px" target="_blank" rel="noopener" href="https://wa.me/?text=' + pfText + encodeURIComponent(myLink) + '">&#128241; Share</a></div>' +
+                '<p class="tiny muted" style="margin:8px 0 0">They get 7 days Pro FREE too — everybody wins &#127881;</p></div>';
+            }
+          } catch (e2) {}
+          paintDash();
+          return;
+        }
+      }
+    } catch (e) {}
+    msg.innerHTML = "✅ Account created! 🎉 <b>7 days of Pro FREE</b> activated!<br>🎁 +3 more days of Pro FREE — <a href=\"index.html#community\"><b>join our WhatsApp group</b></a> 💬";
+    paintDash();
+  });
+  document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("login-email").value.trim().toLowerCase();
+    var pass = document.getElementById("login-pass").value;
+    var msg = document.getElementById("login-msg");
+    var pwHash = S.hashPw(pass);
+    msg.textContent = "Logging in...";
+    // Try cloud API first
+    S.apiLogin(email, pwHash).then(function(res){
+      if (res.ok) {
+        msg.textContent = "✅ Logged in! (Cloud ☁️)";
+        paintDash(); setTimeout(function(){ location.reload(); }, 800);
+      } else {
+        // Fallback to local
+        localLogin();
+      }
+    }).catch(function(){ localLogin(); });
+    return;
+    function localLogin(){
+    var u = S.getUsers()[email];
+    if (!u) { msg.textContent = "No account with this email — please sign up first."; return; }
+    if (u.google && !u.pw) { msg.textContent = "This account uses Google login — please use the Google button above."; return; }
+    if (u.pw !== pwHash) {
+      var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); };
+      msg.innerHTML = "Wrong email or password." + (u.hint ? " Hint: " + esc(u.hint) : " (No hint saved — try the Google login instead.)") +
+        ' <a href="#" id="login-forgot-now">Forgot password? Reset it →</a>';
+      document.getElementById("login-forgot-now").addEventListener("click", function (e) {
+        e.preventDefault(); document.getElementById("forgot-link").click();
+      });
+      return;
+    }
+    S.setSession(email);
+    paintDash();
+    } // end localLogin
+  });
+  document.getElementById("logout-btn").addEventListener("click", function () {
+    S.clearSession(); location.reload();
+  });
+  function paintDash() {
+    var u = S.currentUser();
+    document.getElementById("auth-box").hidden = !!u;
+    document.getElementById("dash-box").hidden = !u;
+    if (!u) return;
+    /* ?next= redirect: Buy flow se aaye to wapis bhejo */
+    try {
+      var next = new URLSearchParams(location.search).get("next");
+      if (next && next.charAt(0) === "/") { location.href = next; return; }
+    } catch (e) {}
+    document.getElementById("dash-hello").textContent = "Hello, " + u.name + " 👋";
+    document.getElementById("dash-email").textContent = u.email;
+    document.getElementById("account-sub").textContent = "Your orders and purchases live here.";
+    paintOwner(u);
+    /* (C1) persistent pending-token reminder: invitee's unclaimed referral token */
+    try {
+      var pendBox = document.getElementById("refer-pending-reminder");
+      if (pendBox) {
+        var myPend = [];
+        try {
+          (JSON.parse(localStorage.getItem("sawalai_pending_claims") || "[]")).forEach(function (p) {
+            if (p && String(p.email || "").toLowerCase() === String(u.email || "").toLowerCase()) myPend.push(p);
+          });
+        } catch (e4) {}
+        if (myPend.length) {
+          var tok0 = myPend[0].token;
+          var waTok = encodeURIComponent("🎉 I joined US AI with your invite! My claim token: " + tok0 + " — enter it in your Invite Friends > More to get your reward!");
+          pendBox.innerHTML = '<div style="margin:12px 0;padding:12px 14px;border:1px solid #f59e0b;border-radius:12px;background:rgba(245,158,11,.08);">' +
+            '<p style="margin:0 0 8px;font-size:.88rem"><b>📤 Your invite isn\'t counted yet!</b> Send this token to your inviter so they get their reward:<br><b style="font-size:1.05rem;letter-spacing:.08em">' + String(tok0).replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</b></p>' +
+            '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            '<button type="button" id="pend-copy" class="btn btn-ghost" style="font-size:.8rem;padding:8px 16px;">📋 Copy token</button>' +
+            '<a class="btn btn-primary" style="font-size:.8rem;padding:8px 16px" target="_blank" rel="noopener" href="https://wa.me/?text=' + waTok + '">📱 WhatsApp inviter</a>' +
+            '</div></div>';
+          document.getElementById("pend-copy").addEventListener("click", function () {
+            var done2 = function (okc) { document.getElementById("pend-copy").textContent = okc ? "✅ Copied!" : "⚠️ Copy failed"; };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(tok0).then(function () { done2(true); }, function () { done2(false); });
+            } else { done2(false); }
+          });
+        } else { pendBox.innerHTML = ""; }
+      }
+    } catch (e5) {}
+    var list = document.getElementById("orders-list");
+    /* match orders by account email, or by the email typed on a guest order */
+    var mine = S.getOrders().filter(function (o) {
+      return (o.account || "guest") === u.email ||
+        (o.email && String(o.email).toLowerCase() === u.email);
+    });
+    if (!mine.length) {
+      list.innerHTML = '<p class="muted">No orders yet. <a href="index.html#proxies">Buy proxies / RDP</a> or <a href="services.html">order a service</a>.</p>';
+      renderHistory();
+      return;
+    }
+    list.innerHTML = "";
+    mine.forEach(function (o) {
+      var d = document.createElement("div");
+      d.className = "order-item";
+      var detail = [];
+      if (o.plan) detail.push(o.plan);
+      if (o.country && o.country !== "—") detail.push(o.country);
+      if (o.qty && o.qty !== "—") detail.push("× " + o.qty);
+      if (o.duration && o.duration !== "—") detail.push("(" + o.duration + ")");
+      if (o.details && o.details !== "—") detail.push(o.details);
+      d.innerHTML = '<div><span class="oid">' + o.id + '</span> <span class="badge-pending">' + (o.status || "Pending") + "</span></div>" +
+        "<div><strong>" + o.kind + "</strong> — " + (detail.join(", ") || o.kind) + "</div>" +
+        '<div class="tiny muted">Total: <strong>' + o.total + "</strong> · " + new Date(o.date).toLocaleDateString() + "</div>";
+      list.appendChild(d);
+    });
+    renderHistory();
+  }
+  /* ---- owner: PIN gate + admin icon (owner email only) ---- */
+  function paintOwner(u) {
+    var card = document.getElementById("owner-card"), body = document.getElementById("owner-body");
+    if (!card || !window.SawalOwner || !SawalOwner.isOwnerEmail(u.email)) { if (card) card.hidden = true; return; }
+    card.hidden = false;
+    if (SawalOwner.isOwner()) {
+      body.innerHTML = '<p class="tiny muted">Owner mode unlocked on this device.</p>' +
+        '<div style="text-align:center;"><a class="btn btn-primary btn-glow" href="admin.html" style="font-size:1.05rem;padding:12px 30px;">🛡️ Open Admin Panel</a></div>';
+      return;
+    }
+    body.innerHTML = '<p class="tiny muted">Enter your 6-digit owner PIN to unlock the admin panel on this device.</p>' +
+      '<div style="display:flex;gap:8px;justify-content:center;align-items:center;">' +
+      '<input aria-label="Owner PIN" id="owner-pin" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#0b0f1e;color:#fff;font-size:1.1rem;text-align:center;letter-spacing:.35em;width:170px;" autocomplete="off">' +
+      '<button class="btn btn-primary" id="owner-unlock" type="button">Unlock</button></div>' +
+      '<label class="tiny muted center" style="display:block;margin-top:8px;"><input type="checkbox" id="owner-remember"> Remember this device</label>' +
+      '<p class="tiny muted center" id="owner-msg" style="margin-top:8px;"></p>';
+    document.getElementById("owner-unlock").addEventListener("click", function () {
+      var rem = document.getElementById("owner-remember").checked;
+      SawalOwner.verify(document.getElementById("owner-pin").value, rem).then(function (ok) {
+        if (ok) { paintOwner(u); }
+        else { document.getElementById("owner-msg").textContent = "Wrong PIN. Try again."; }
+      });
+    });
+  }
+  /* ---- recent tools history (device-local) ---- */
+  function renderHistory() {
+    var box = document.getElementById("tools-history");
+    if (!box || !window.SawalHistory) { if (box) box.innerHTML = '<p class="muted">No tool usage yet.</p>'; return; }
+    var items = window.SawalHistory.get().slice(-15).reverse();
+    if (!items.length) { box.innerHTML = '<p class="muted">You have not used any tool yet. <a href="tools.html">Try the tools</a>.</p>'; return; }
+    box.innerHTML = "";
+    items.forEach(function (it) {
+      var d = document.createElement("div");
+      d.className = "order-item";
+      var when = new Date(it.ts);
+      d.innerHTML = '<div><strong>' + it.n.replace(/</g, "&lt;") + "</strong></div>" +
+        '<div class="tiny muted"><a href="' + it.u.replace(/"/g, "") + '">' + it.u.replace(/</g, "&lt;") + "</a> · " + when.toLocaleDateString() + " " + when.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) + "</div>";
+      box.appendChild(d);
+    });
+  }
+  paintDash();
+
+  /* ---- forgot password: email → verify name → new password (device-local) ---- */
+  (function () {
+    var loginCard = document.getElementById("login-card"), resetCard = document.getElementById("reset-card");
+    var rsEmail = "";
+    function bindRsGoSignup() {
+      var a = document.getElementById("rs-gosignup");
+      if (a) a.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("reset-card").hidden = true;
+        document.getElementById("login-card").hidden = false;
+        document.getElementById("reset-msg").textContent = "";
+      });
+    }
+    document.getElementById("forgot-link").addEventListener("click", function (e) {
+      e.preventDefault(); loginCard.hidden = true; resetCard.hidden = false;
+      document.getElementById("reset-step1").hidden = false;
+      document.getElementById("reset-step2").hidden = true;
+      document.getElementById("reset-msg").textContent = "";
+    });
+    document.getElementById("reset-back").addEventListener("click", function (e) {
+      e.preventDefault(); resetCard.hidden = true; loginCard.hidden = false;
+    });
+    document.getElementById("rs-next").addEventListener("click", function () {
+      var email = document.getElementById("rs-email").value.trim().toLowerCase();
+      var msg = document.getElementById("reset-msg");
+      var u = S.getUsers()[email];
+      if (!u) { msg.innerHTML = 'No account with this email on this device. <a href="#" id="rs-gosignup">Create a new account →</a>'; bindRsGoSignup(); return; }
+      if (u.google && !u.pw) { msg.textContent = "This account uses Google login — no password to reset. Use the Google button."; return; }
+      rsEmail = email;
+      document.getElementById("reset-step1").hidden = true;
+      document.getElementById("reset-step2").hidden = false;
+      document.getElementById("rs-info").textContent =
+        (u.hint ? "Hint: " + u.hint + " — " : "") + "Enter your full name exactly as registered to set a new password.";
+      msg.textContent = "";
+    });
+    document.getElementById("rs-done").addEventListener("click", function () {
+      var msg = document.getElementById("reset-msg");
+      var users = S.getUsers(), u = users[rsEmail];
+      if (!u) { msg.textContent = "Something went wrong — start over."; return; }
+      var nm = document.getElementById("rs-name").value.trim().toLowerCase();
+      var np = document.getElementById("rs-pass").value;
+      if (!nm || u.name.toLowerCase() !== nm) { msg.textContent = "Name does not match our record."; return; }
+      if (!np || np.length < 4) { msg.textContent = "Password must be at least 4 characters."; return; }
+      u.pw = S.hashPw(np); S.saveUsers(users);
+      document.getElementById("rs-email").value = "";
+      document.getElementById("rs-name").value = "";
+      document.getElementById("rs-pass").value = "";
+      msg.innerHTML = '✅ Password updated! <button type="button" class="btn btn-primary btn-sm" id="rs-login-now" style="margin-top:8px;">Login now →</button>';
+      document.getElementById("reset-step2").hidden = true;
+      document.getElementById("rs-login-now").addEventListener("click", function () {
+        document.getElementById("reset-card").hidden = true;
+        document.getElementById("login-card").hidden = false;
+        var le = document.getElementById("login-email");
+        if (le) le.value = rsEmail;
+        document.getElementById("reset-msg").textContent = "";
+      });
+    });
+  })();
+})();
+
+/* ---------- Google Sign-In (device-local account from Google identity) ---------- */
+(function () {
+  var S = window.SawalShop;
+  var cid = S && S.googleClientId;
+  if (!cid) return; /* not configured yet — button stays hidden */
+  function decodeJwt(t) {
+    try {
+      var p = t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+      return JSON.parse(atob(p));
+    } catch (e) { return null; }
+  }
+  window.sawalGoogleCb = function (resp) {
+    var data = decodeJwt(resp.credential || "");
+    if (!data || !data.email) return;
+    var email = String(data.email).toLowerCase();
+    var users = S.getUsers();
+    if (!users[email]) users[email] = { name: data.name || email.split("@")[0], google: true, pic: data.picture || "" };
+    else { users[email].google = true; if (data.picture) users[email].pic = data.picture; }
+    S.saveUsers(users); S.setSession(email);
+    location.reload();
+  };
+  function boot() {
+    if (!window.google || !google.accounts || !google.accounts.id) { setTimeout(boot, 400); return; }
+    document.getElementById("gbtn-wrap").hidden = false;
+    google.accounts.id.initialize({ client_id: cid, callback: window.sawalGoogleCb });
+    google.accounts.id.renderButton(document.getElementById("gbtn"),
+      { theme: "filled_blue", size: "large", width: 280, text: "continue_with" });
+  }
+  var s = document.createElement("script");
+  s.src = "https://accounts.google.com/gsi/client"; s.async = true; s.defer = true;
+  s.onload = boot; document.head.appendChild(s);
+})();
+</script>
+<script>
+/* login-ux: password visibility toggle (think-245) */
+(function(){document.querySelectorAll(".pw-eye").forEach(function(b){
+b.addEventListener("click",function(){
+var inp=b.parentElement.querySelector("input");if(!inp)return;
+var show=inp.type==="password";inp.type=show?"text":"password";
+b.textContent=show?"🙈":"👁";b.setAttribute("aria-label",show?"Hide password":"Show password");});});})();
+</script>
+<script data-nav-toggle>
+(function(){var b=document.querySelector('.nav-toggle');if(!b||b.dataset.done)return;b.dataset.done='1';
+function close(){document.body.classList.remove('nav-open');b.textContent='☰';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}
+b.addEventListener('click',function(e){e.stopPropagation();var o=document.body.classList.toggle('nav-open');b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(document.body.classList.contains('nav-open')&&(!e.target.closest('.nav')||e.target.closest('.nav-links a')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+
+<script>
+(function(){
+  // SMART: If no session but backup reminder exists, show restore prompt
+  try {
+    var hasSession = localStorage.getItem("sawalai_session");
+    var hasUsers = localStorage.getItem("sawalai_users");
+    var dismissed = sessionStorage.getItem("backup_prompt_dismissed");
+    
+    if(!hasSession && !hasUsers && !dismissed){
+      // Check if this looks like a returning user (has visited before)
+      var visited = localStorage.getItem("usai_visited_before");
+      if(visited){
+        // Show prominent restore banner
+        var banner = document.createElement("div");
+        banner.style.cssText = "background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;padding:14px 20px;border-radius:12px;margin:16px auto;max-width:640px;text-align:center;font-weight:600;box-shadow:0 4px 20px rgba(245,158,11,.4);";
+        banner.innerHTML = "⚠️ <b>Account nahi mila!</b> Agar aapka pehle account tha to <b>Backup Restore</b> karo.<br>" +
+          "<button onclick="document.getElementById('backup-card').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:#f97316;border:0;padding:8px 20px;border-radius:8px;font-weight:700;margin-top:8px;cursor:pointer;">📤 Restore Karo</button> " +
+          "<button onclick="this.parentElement.remove();sessionStorage.setItem('backup_prompt_dismissed','1')" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:8px;margin-top:8px;cursor:pointer;margin-left:8px;">Naya Account</button>";
+        var main = document.querySelector("main") || document.body;
+        main.insertBefore(banner, main.firstChild);
+      }
+      localStorage.setItem("usai_visited_before", "1");
+    }
+  } catch(e){}
+})();
+</script>
+
+</body>
+</html>
+
+<!-- ===== ACCOUNT UPGRADES ===== -->
+<style>
+.auth-card{animation:authIn .5s ease-out}
+@keyframes authIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.profile-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#ff330c,#ff6b35);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;margin:0 auto}
+</style>
