@@ -949,7 +949,7 @@ function cardHTML(p){
     </div>
     <div class="in">
       <div class="t">${p.name}</div>
-      <div class="pr"><span class="np">$${p.price}</span> <s class="op">$${p.old_price}</s></div>
+      <div class="pr"><span class="np">$${p.price}</span> <s class="op">$${p.old_price || p.oldPrice || ""}</s></div>
       <div class="rt">${stars} <span>(${p.reviews})</span></div>
     </div>
   </div>`;
@@ -1044,12 +1044,11 @@ function genFromQuery(q, count){
       brand: brand,
       category: cat,
       price: price,
-      oldPrice: Math.floor(price * 1.3),
+      oldPrice: Math.floor(price * 1.3), old_price: Math.floor(price * 1.3).toFixed(2),
       rating: (4 + Math.random()).toFixed(1),
       reviews: Math.floor(Math.random() * 1000 + 100).toLocaleString(),
       image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
-      images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"]
-    });
+      images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"], old_price: (parseFloat(price)*1.3).toFixed(2)});
   }
   return arr;
 }
@@ -1114,7 +1113,21 @@ function doSearch(){
 
   // Sort by score (highest first)
   scored.sort((a,b) => b.s - a.s);
-  let results = scored.slice(0, 200).map(x => x.p);
+  let allResults = scored.map(x => x.p);
+  
+  // DEDUP: Limit to max 5 variations per base product (remove "Redmi Premium 6/11/16" duplicates)
+  const baseCount = {};
+  const deduped = [];
+  for(const pr of allResults){
+    // Get base name (remove trailing numbers/variants)
+    const base = (pr.name||'').toLowerCase().replace(/\s*(\d+|pack of \d+|large|small|premium|original)$/g, '').trim();
+    baseCount[base] = (baseCount[base] || 0) + 1;
+    if(baseCount[base] <= 5){
+      deduped.push(pr);
+    }
+    if(deduped.length >= 200) break;
+  }
+  let results = deduped;
 
   // Fallback: if no results with strict matching, try loose substring search
   if(results.length === 0){
