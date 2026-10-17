@@ -642,7 +642,10 @@ function openProduct(id, cat){
   const pc = pr ? pr.price : '';
   const im = pr ? encodeURIComponent(pr.image) : '';
   const ims = pr && pr.images ? encodeURIComponent(JSON.stringify(pr.images)) : '';
-  window.open('product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc + '&im=' + im + '&ims=' + ims, '_blank');
+  const url = 'product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc + '&im=' + im + '&ims=' + ims;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  if(isMobile){ location.href = url; }
+  else { window.open(url, '_blank'); }
 }
 // Product images for hover
 function getPImgs(p){
@@ -695,7 +698,7 @@ function loadMore(){
     document.getElementById('lmBtn').textContent = '✅ All 2,000,000 Loaded!';
     return;
   }
-  const batchSize = 300; // 300 products as user asked!
+  const batchSize = 500; // 500 initial! // 300 products as user asked!
   const batch = genBatch(11 + jfyCount, batchSize);
   batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
   document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
