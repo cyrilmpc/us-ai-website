@@ -158,6 +158,22 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 .side-icons a:hover{transform:scale(1.15)}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @media(max-width:768px){.side-icons{right:8px}.side-icons a{width:42px;height:42px;font-size:1.2rem}}
+
+/* Animated Banner Carousel */
+.banners{position:relative;max-width:1200px;margin:20px auto;overflow:hidden;border-radius:20px;height:200px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.bslide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1s;font-size:2rem;font-weight:900;text-align:center;animation:bannerZoom 8s ease-in-out infinite}
+.bslide.active{opacity:1}
+.bslide:nth-child(1){background:linear-gradient(90deg,#8b5cf6,#3b82f6)}
+.bslide:nth-child(2){background:linear-gradient(90deg,#ef4444,#f97316)}
+.bslide:nth-child(3){background:linear-gradient(90deg,#10b981,#22d3ee)}
+.bslide:nth-child(4){background:linear-gradient(90deg,#f59e0b,#ef4444)}
+@keyframes bannerZoom{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.bslide span{animation:bounce 2s ease-in-out infinite;display:inline-block}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.bdots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+.bdots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s}
+.bdots span.active{background:#fff;transform:scale(1.3)}
+@media(max-width:768px){.banners{height:140px}.bslide{font-size:1.3rem}}
 </style>
 </head>
 <body>
@@ -183,6 +199,33 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
       <button onclick="clearSearch()" id="clearBtn" style="display:none;background:#ef4444;color:#fff;" title="Clear search">✕</button>
     </div>
   </div>
+
+<!-- Animated Banners -->
+<div class="banners" id="banners">
+  <div class="bslide active"><span>🎉 MEGA SALE! Up to 70% OFF! 🎉</span></div>
+  <div class="bslide"><span>⚡ Flash Deals - Limited Time! ⚡</span></div>
+  <div class="bslide"><span>🆓 Free Delivery on All Orders! 🆓</span></div>
+  <div class="bslide"><span>💎 500 Million Products! 💎</span></div>
+  <div class="bdots" id="bdots"></div>
+</div>
+<script>
+// Banner rotation
+let bIdx = 0;
+const slides = document.querySelectorAll('.bslide');
+const dotsDiv = document.getElementById('bdots');
+slides.forEach((_, i) => {
+  const d = document.createElement('span');
+  d.className = i === 0 ? 'active' : '';
+  d.onclick = () => showSlide(i);
+  dotsDiv.appendChild(d);
+});
+function showSlide(i){
+  bIdx = i;
+  slides.forEach((s, j) => s.classList.toggle('active', j === i));
+  document.querySelectorAll('.bdots span').forEach((d, j) => d.classList.toggle('active', j === i));
+}
+setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
+</script>
 </header>
 
 <div class="bnr">
