@@ -710,7 +710,7 @@ function doSearch(){
   if(results.length < 20){
     for(let i = 1; i <= 5000 && results.length < 50; i++){
       const p = genProduct(i);
-      if(p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)){
+      if(qlist.some(kw=>p.name.toLowerCase().includes(kw)) || p.category.toLowerCase().includes(q)){
         if(!results.find(r => r.id === p.id)) results.push(p);
       }
     }
