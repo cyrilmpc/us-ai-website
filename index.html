@@ -1873,10 +1873,22 @@ body:JSON.stringify({name:document.getElementById("rq-name").value,email:documen
 })();
 </script>
 
-<section class="section" id="game-day">
-  <h2>🎮 <span class="grad">Game of the Day</span></h2>
-  <div class="grid" style="max-width:320px;margin:0 auto;"><div class="card" id="gd-card" style="padding:12px;"><p class="muted center">Picking today&apos;s game…</p></div></div>
+
+<section class="section" id="game-day" style="padding:12px 0;">
+  <div style="display:flex;gap:12px;justify-content:center;align-items:stretch;flex-wrap:wrap;max-width:700px;margin:0 auto;">
+    <div class="card" style="flex:1;min-width:280px;max-width:340px;padding:12px;text-align:center;">
+      <h3 style="font-size:1rem;margin:0 0 8px;">🎮 Game of the Day</h3>
+      <div id="gd-card-compact"></div>
+      <button class="btn btn-ghost" onclick="document.getElementById('game-day-full').scrollIntoView()" style="font-size:.8rem;padding:6px 12px;">Play</button>
+    </div>
+    <div class="card" style="flex:1;min-width:280px;max-width:340px;padding:12px;text-align:center;">
+      <h3 style="font-size:1rem;margin:0 0 8px;">💬 Quick Feedback</h3>
+      <p class="tiny muted" style="font-size:.75rem;">Share your experience!</p>
+      <button class="btn btn-ghost" id="feedback-btn-compact" style="font-size:.8rem;padding:6px 12px;">Give Feedback</button>
+    </div>
+  </div>
 </section>
+
 <style>
 #gd-card .tx b{display:block;margin:8px 0 6px;font-size:1.1rem;}
 #gd-card .tx span{display:block;margin-bottom:12px;color:var(--muted);line-height:1.6;}
