@@ -166,7 +166,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <script>
 // Seeded generator (same as store)
 function sr(s){let x=s%2147483647;if(x<=0)x+=2147483646;return function(){x=(x*16807)%2147483647;return (x-1)/2147483646;};}
-const BR=["Apple","Samsung","Sony","LG","Xiaomi","Huawei","Oppo","Vivo","Realme","OnePlus","Dell","HP","Lenovo","Nike","Adidas","Puma","Nivea","Dove","L'Oreal","Maybelline"];
+const BR=["Apple","Samsung","Sony","LG","Xiaomi","Huawei","Oppo","Vivo","Realme","OnePlus","Dell","HP","Lenovo","Asus","Acer","Nike","Adidas","Puma","Reebok","L'Oreal","Maybelline","Dove","Nivea","Colgate","Lux","Lifebuoy","Dettol","Surf Excel","Ariel","Vim","Harpic","Nestle","Unilever","P&G"];
 const IMGS=["photo-1441986300917-64674bd600d8","photo-1523275335684-37898b6baf30","photo-1505740420928-5e560c06d30e","photo-1542291026-7eec264c27ff","photo-1541643600914-78b084683601","photo-1560343090-f0409e92791a","photo-1585386959984-a4155224a1ad","photo-1595950653106-6c9ebd614d3a"];
 function gp(pid,cat){
   const n=parseInt(pid.replace(/\D/g,''))||1;
@@ -176,7 +176,9 @@ function gp(pid,cat){
   const rt=(3.5+r()*1.5).toFixed(1),rv=Math.floor(r()*8000+20);
   const imgs=[];for(let i=0;i<5;i++)imgs.push("https://images.unsplash.com/"+IMGS[Math.floor(r()*IMGS.length)]+"?w=800");
   const cn=cat&&cat.length>3?decodeURIComponent(cat):"General";
-  let nm=b+" "+cn.split(' ')[0]+" "+(1000+Math.floor(r()*9000))+" Pro";
+  // Match store naming: Brand + Type + Number + Pro Max Ultra
+  const tname=cn.split(' ')[0];
+  let nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" Pro Max Ultra";
   return{id:pid,name:nm,price:pr,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
 }
 const up=new URLSearchParams(location.search);
