@@ -465,7 +465,7 @@ function loadMore(){
     document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
     return;
   }
-  const batchSize = 600; // 100 more!
+  const batchSize = 120; // Fewer initial, more in Load More!
   const batch = genBatch(11 + jfyCount, batchSize);
   batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
   document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
@@ -817,12 +817,18 @@ function setMainImg(idx){
 window.addEventListener('scroll', function(){
   const hdr = document.querySelector('.hdr');
   const mini = document.getElementById('miniSearch');
+  const toolbar = document.querySelector('.toolbar');
+  const banners = document.getElementById('banners');
   if(window.scrollY > 300){
     if(hdr) hdr.classList.add('shrink');
     if(mini) mini.classList.add('show');
+    if(toolbar) toolbar.style.display = 'none';
+    if(banners) banners.style.display = 'none';
   } else {
     if(hdr) hdr.classList.remove('shrink');
     if(mini) mini.classList.remove('show');
+    if(toolbar) toolbar.style.display = '';
+    if(banners) banners.style.display = '';
   }
 });
 </script>
