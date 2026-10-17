@@ -246,6 +246,49 @@
   ]
 }
 </script>
+
+<style>
+/* COMPACT PROXY PAGE - both boxes fit on one screen - user order */
+.proxy-container, .proxy-layout, [class*="proxy"][class*="container"]{
+  max-width:1200px !important;
+  margin:0 auto !important;
+}
+/* Make both boxes side by side and compact */
+.proxy-grid, .proxy-boxes{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:15px !important;
+  align-items:start !important;
+}
+/* Reduce padding and font sizes */
+.proxy-box, .config-box, .price-box{
+  padding:12px !important;
+  font-size:0.85rem !important;
+}
+.proxy-box h2, .proxy-box h3{
+  font-size:1rem !important;
+  margin:0 0 8px 0 !important;
+}
+.proxy-box p{
+  font-size:0.8rem !important;
+  line-height:1.4 !important;
+  margin:0 0 8px 0 !important;
+}
+/* Compact form elements */
+.proxy-box input, .proxy-box select{
+  padding:6px 8px !important;
+  font-size:0.85rem !important;
+  margin:0 0 8px 0 !important;
+}
+/* Compact price table */
+.price-table, .price-list table{
+  font-size:0.75rem !important;
+}
+.price-table th, .price-table td{
+  padding:4px 6px !important;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
