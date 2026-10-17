@@ -2747,6 +2747,51 @@ document.addEventListener('click', function(e){
 // Articles limit removed - showing all (user will confirm)
 </script>
 
+
+<script>
+// Left widgets expand/collapse
+(function(){
+  document.querySelectorAll('#top-widgets .tw-card').forEach(function(card){
+    var title = card.querySelector('.tw-title');
+    if(!title) return;
+    // Skip if already has handler
+    if(title.dataset.lh) return;
+    title.dataset.lh = '1';
+    title.style.cursor = 'pointer';
+    title.addEventListener('click', function(e){
+      // Don't trigger if clicking a button/link inside
+      if(e.target.closest('button, a, input')) return;
+      card.classList.toggle('expanded');
+      var isExp = card.classList.contains('expanded');
+      // Hide/show share rail
+      setTimeout(function(){
+        var anyOpen = false;
+        document.querySelectorAll('#top-widgets .tw-card.expanded').forEach(function(c){
+          anyOpen = true;
+        });
+        var rail = document.getElementById('share-rail');
+        if(rail) rail.style.display = anyOpen ? 'none' : '';
+      }, 100);
+    });
+  });
+})();
+</script>
+<style>
+/* Left widgets collapsed by default, expand on click */
+#top-widgets .tw-card > div:not(.tw-title){
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease;
+}
+#top-widgets .tw-card.expanded > div:not(.tw-title){
+  max-height:500px;
+}
+/* First card (weather) starts expanded */
+#top-widgets .tw-card:first-child{
+  /* Keep as is - user can click to collapse */
+}
+</style>
+
 </body>
 </html>
 
