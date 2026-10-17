@@ -2617,23 +2617,23 @@ setTimeout(function(){
   setTimeout(hideAC, 1000);
   setTimeout(hideAC, 3000);
   
-  // When left widget expands, hide X and f below
+  // When left widget expands, hide share buttons below (position-based)
   document.addEventListener('click', function(e){
-    var title = e.target.closest('#top-widgets .tw-title');
-    if(title){
+    var card = e.target.closest('#top-widgets .tw-card');
+    if(card){
       setTimeout(function(){
         var anyOpen = false;
         document.querySelectorAll('#top-widgets .tw-card').forEach(function(c){
-          var body = c.querySelector('div:not(.tw-title)');
-          if(body && body.offsetHeight > 100) anyOpen = true;
+          if(c.offsetHeight > 120) anyOpen = true;
         });
-        document.querySelectorAll('#top-widgets button').forEach(function(el){
-          var t = (el.textContent || '').trim();
-          if(t === 'X' || t === 'f'){
+        // Hide ALL small circular buttons in top-widgets when expanded
+        document.querySelectorAll('#top-widgets button, #top-widgets a').forEach(function(el){
+          // Share buttons are small (<60px) and not part of widget cards
+          if(el.offsetHeight < 60 && el.offsetHeight > 20 && !el.closest('.tw-card')){
             el.style.display = anyOpen ? 'none' : '';
           }
         });
-      }, 150);
+      }, 200);
     }
   });
 })();
