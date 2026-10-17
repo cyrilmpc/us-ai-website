@@ -133,10 +133,7 @@ window.sawalScrollBehavior = function () {
     rail.setAttribute("aria-label", "Share this page");
     rail.innerHTML =
       '<a href="https://twitter.com/intent/tweet?url=' + url + '&text=' + title + '" target="_blank" rel="noopener" title="Share on X" aria-label="Share on X" class="sh sh-x">𝕏</a>' +
-      '<a href="https://www.facebook.com/sharer/sharer.php?u=' + url + '" target="_blank" rel="noopener" title="Share on Facebook" aria-label="Share on Facebook" class="sh sh-fb">f</a>' +
-      '<a href="https://t.me/share/url?url=' + url + '&text=' + title + '" target="_blank" rel="noopener" title="Share on Telegram" aria-label="Share on Telegram" class="sh sh-tg">&#9992;</a>' +
-      '<a href="https://wa.me/?text=' + title + '%20' + url + '" target="_blank" rel="noopener" title="Share on WhatsApp" aria-label="Share on WhatsApp" class="sh sh-wa">✆</a>' +
-      '<button type="button" title="Copy link" aria-label="Copy link" class="sh sh-copy" id="sh-copy">⧉</button>';
+      '<a href="https://www.facebook.com/sharer/sharer.php?u=' + url + '" target="_blank" rel="noopener" title="Share on Facebook" aria-label="Share on Facebook" class="sh sh-fb">f</a>';
     document.body.appendChild(rail);
     var copyBtn = document.getElementById("sh-copy");
     copyBtn.addEventListener("click", function () {

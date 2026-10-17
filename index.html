@@ -2542,7 +2542,7 @@ document.addEventListener('click', function(e){
   function collect(){
     fadeEls = [];
     // Left and right rails/widgets
-    document.querySelectorAll('#top-widgets, #top-widgets-right, #lc-wrap, #left-rail, .left-rail, [id*="left"], [class*="left-rail"]').forEach(function(el){
+    document.querySelectorAll('#top-widgets, #top-widgets-right, #lc-wrap, #share-rail').forEach(function(el){
       fadeEls.push(el);
     });
   }
@@ -2637,6 +2637,24 @@ setTimeout(function(){
     }
   });
 })();
+</script>
+
+
+<script>
+// When left widget expands, hide share-rail
+document.addEventListener('click', function(e){
+  var card = e.target.closest('#top-widgets .tw-card');
+  if(card){
+    setTimeout(function(){
+      var anyOpen = false;
+      document.querySelectorAll('#top-widgets .tw-card').forEach(function(c){
+        if(c.offsetHeight > 150) anyOpen = true;
+      });
+      var rail = document.getElementById('share-rail');
+      if(rail) rail.style.display = anyOpen ? 'none' : '';
+    }, 200);
+  }
+});
 </script>
 
 </body>
