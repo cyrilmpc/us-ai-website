@@ -1142,6 +1142,28 @@ function doSearch(){
     });
   }
 
+  // DARAZ-STYLE: Add related products from same category (different pictures/prices/styles)
+  if(results.length > 0 && results.length < 50){
+    const mainCat = results[0].category;
+    const relatedSeen = new Set(results.map(r => (r.name||'').toLowerCase()));
+    const related = [];
+    // Get diverse products from same category
+    for(let i = 0; i < 100 && related.length < 20; i++){
+      const rp = genProduct(100000 + i * 137);
+      const key = (rp.name||'').toLowerCase();
+      if(!relatedSeen.has(key) && !seen.has(key)){
+        // Only add if same category (related) but different product
+        if(rp.category === mainCat){
+          relatedSeen.add(key);
+          seen.add(key);
+          related.push(rp);
+        }
+      }
+    }
+    // Add related products after main results
+    related.forEach(p => results.push(p));
+  }
+
   // Render
   let html = results.map(cardHTML).join('');
   document.querySelector('.sec-h h2').innerHTML = `\uD83D\uDD0D Results for "${q}" (${results.length}+)`;
