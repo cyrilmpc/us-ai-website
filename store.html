@@ -617,6 +617,22 @@ init();
 .pd-meta{display:flex;gap:15px;margin:15px 0;font-size:.8rem;color:#666;flex-wrap:wrap}
 .pd-meta span{background:#f3f4f6;padding:6px 14px;border-radius:18px}
 @media(max-width:700px){.pd-grid{grid-template-columns:1fr}.pd-img{min-height:280px;position:relative;height:280px}}
+
+/* Shrink header on scroll */
+.hdr{transition:all .4s}
+.hdr.shrink{padding:6px 0}
+.hdr.shrink .logo img{width:28px;height:28px}
+.hdr.shrink .logo span{font-size:1rem}
+.hdr.shrink .hnav{display:none}
+.hdr.shrink .live-pill{display:none}
+.hdr.shrink .srch{max-width:500px}
+.hdr.shrink .srch input{padding:8px 15px;font-size:.85rem}
+/* Mini sticky search */
+.mini-search{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,#220a3a,#0d1b4c);padding:8px 16px;z-index:200;display:none;box-shadow:0 4px 20px rgba(0,0,0,.4);animation:slideDown .3s}
+.mini-search.show{display:flex;align-items:center;gap:10px}
+.mini-search input{flex:1;padding:10px 18px;border:2px solid #8b5cf6;border-radius:25px;background:#1e1b4b;color:#fff;outline:none;font-size:.9rem}
+.mini-search button{background:linear-gradient(90deg,#8b5cf6,#3b82f6);border:none;color:#fff;padding:10px 20px;border-radius:20px;cursor:pointer;font-weight:bold}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 </style>
 <div class="pd-modal" id="pdModal" onclick="if(event.target===this)closeDetail()">
   <div class="pd-box">
@@ -743,5 +759,26 @@ function setMainImg(idx){
   <a href="track.html" title="📦 Track Order">📦</a>
   <a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="⬆️ Top">⬆️</a>
 </div>
+
+<!-- Mini Search (shows on scroll) -->
+<div class="mini-search" id="miniSearch">
+  <a href="index.html" style="text-decoration:none;font-size:1.5rem;">🏠</a>
+  <input type="text" id="mq" placeholder="🔍 Search..." onkeypress="if(event.key==='Enter'){document.getElementById('q').value=this.value;doSearch();}">
+  <button onclick="document.getElementById('q').value=document.getElementById('mq').value;doSearch();">🔍</button>
+</div>
+<script>
+// Shrink header + show mini search on scroll
+window.addEventListener('scroll', function(){
+  const hdr = document.querySelector('.hdr');
+  const mini = document.getElementById('miniSearch');
+  if(window.scrollY > 300){
+    if(hdr) hdr.classList.add('shrink');
+    if(mini) mini.classList.add('show');
+  } else {
+    if(hdr) hdr.classList.remove('shrink');
+    if(mini) mini.classList.remove('show');
+  }
+});
+</script>
 </body>
 </html>
