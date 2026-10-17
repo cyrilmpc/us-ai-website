@@ -465,7 +465,7 @@ rh+=`</div></div>
 const rnames=["Ahmed K.","Fatima S.","Ali R.","Ayesha M."];
 const rtexts=["Excellent quality! Highly recommended. Delivery was fast too.","Very good product, exactly as described. Will buy again!","Good value for money. Satisfied with purchase.","Amazing! Exceeded my expectations. 5 stars!"];
 for(let i=0;i<4;i++){
-  const st=4+Math.floor(nr()*2);
+  const st=4+Math.floor(Math.random()*2);
   rh+=`<div style="margin:16px 0;padding-bottom:16px;border-bottom:1px solid #1e1b4b;">
 <div style="color:#fbbf24;">`+"★".repeat(st)+`</div>
 <div style="color:#888;font-size:.8rem;margin:4px 0;">`+rnames[i]+`</div>
