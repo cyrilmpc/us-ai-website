@@ -182,7 +182,15 @@ const CATIMG = {
   "Babies & Toys":"photo-1559454403-b8fb88521f11",
   "default":"photo-1441986300917-64674bd600d8"
 };
-function catImg(cat){
+function catImg(cat, pname){
+  // First check product name!
+  const nm = (pname||"").toLowerCase();
+  if(nm.includes("face cream")||nm.includes("perfume")||nm.includes("shampoo")||nm.includes("lipstick")) return CATIMG["Health & Beauty"];
+  if(nm.includes("headphone")||nm.includes("smartphone")||nm.includes("laptop")||nm.includes("camera")) return CATIMG["Electronic Devices"];
+  if(nm.includes("teddy")||nm.includes("toy")||nm.includes("doll")) return CATIMG["Babies & Toys"];
+  if(nm.includes("shoe")||nm.includes("sneaker")) return "photo-1542291026-7eec264c27ff";
+  if(nm.includes("watch")) return "photo-1523275335684-37898b6baf30";
+  // Then check category
   for(const k in CATIMG){ if(cat.toLowerCase().includes(k.split(' ')[0].toLowerCase())) return CATIMG[k]; }
   return CATIMG["default"];
 }
@@ -211,7 +219,7 @@ function gp(pid,cat){
   const op=(pr*1.3).toFixed(2), d=Math.floor(r()*25+5);
   const rt=(3.5+r()*1.5).toFixed(1), rv=Math.floor(r()*8000+20);
   // Category-matching images!
-  const cimg=catImg(cn);
+  const cimg=catImg(cn, nm);
   const imgs=[];
   for(let i=0;i<5;i++){
     imgs.push("https://images.unsplash.com/"+(i<3?cimg:IMGS[Math.floor(r()*IMGS.length)])+"?w=800");
