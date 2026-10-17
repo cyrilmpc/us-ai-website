@@ -325,6 +325,19 @@ footer a:hover{color:#a78bfa;transform:translateX(5px)}
 .sec-h h2{position:relative;display:inline-block}
 .sec-h h2::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:3px;background:linear-gradient(90deg,#8b5cf6,#3b82f6);transition:width .4s}
 .sec-h:hover h2::after{width:100%}
+
+/* Skeleton loading */
+.pc.loading{background:linear-gradient(90deg,#1e1b4b 25%,#2d2a5e 50%,#1e1b4b 75%);background-size:200% 100%;animation:skelLoad 1.2s infinite;min-height:280px}
+@keyframes skelLoad{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Button press effect */
+button:active{transform:scale(.96)}
+/* Smooth image fade-in */
+.pc img{animation:imgFade .5s ease}
+@keyframes imgFade{from{opacity:0}to{opacity:1}}
+/* Card shine on hover */
+.pc::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);transform:skewX(-20deg);transition:left .6s;pointer-events:none}
+.pc:hover::after{left:150%}
+.pc{position:relative;overflow:hidden}
 </style>
 </head>
 <body>
