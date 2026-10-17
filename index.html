@@ -2838,6 +2838,16 @@ window.addEventListener('load', function(){
         bodies.forEach(function(b){
           b.style.display = isHidden ? '' : 'none';
         });
+        // Hide share rail if any widget expanded
+        setTimeout(function(){
+          var anyOpen = false;
+          document.querySelectorAll('#top-widgets .tw-card').forEach(function(cd){
+            var b = cd.querySelector(':scope > div:not(.tw-title)');
+            if(b && b.style.display !== 'none') anyOpen = true;
+          });
+          var rail = document.getElementById('share-rail');
+          if(rail) rail.style.display = anyOpen ? 'none' : '';
+        }, 100);
       });
     });
   }, 2500);
