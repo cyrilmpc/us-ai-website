@@ -108,6 +108,30 @@ a[href*="whatsapp"][class*="community"], .community-join {
 #choose-sub-card { max-width: 900px !important; margin: 0 auto !important; }
 #choose-sub-card .sub-grid { max-height: 400px; overflow-y: auto; }
 </style>
+
+<style>
+/* Articles: gentle float animation */
+.mini-art{
+  animation:artFloat 4s ease-in-out infinite;
+}
+.mini-art:nth-child(2n){animation-delay:0.5s;}
+.mini-art:nth-child(3n){animation-delay:1s;}
+.mini-art:nth-child(4n){animation-delay:1.5s;}
+@keyframes artFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+/* Scroll fade: hide side widgets when scrolled down */
+.side-faded{
+  opacity:0.15 !important;
+  pointer-events:none !important;
+  transition:opacity 0.4s ease !important;
+}
+#top-widgets, #top-widgets-right, #share-rail{
+  transition:opacity 0.4s ease;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -2206,6 +2230,22 @@ document.addEventListener('click', function(e){
   }
 });
 </script>
+
+<script>
+// Scroll fade: fade side widgets when scrolled past hero
+window.addEventListener('scroll', function(){
+  var y = window.scrollY || window.pageYOffset;
+  var faded = y > 400;
+  ['top-widgets','top-widgets-right','share-rail'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){
+      if(faded) el.classList.add('side-faded');
+      else el.classList.remove('side-faded');
+    }
+  });
+}, {passive:true});
+</script>
+
 </body>
 </html>
 
