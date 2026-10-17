@@ -2223,7 +2223,7 @@ document.addEventListener('click', function(e){
 
 <!-- ===== LIVE CHAT WIDGET ===== -->
 <style>
-#lc-fab{position:fixed;bottom:90px;right:20px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6366f1);border:none;cursor:pointer;z-index:9999;box-shadow:0 4px 20px rgba(139,92,246,.5);font-size:1.8rem;display:flex;align-items:center;justify-content:center;transition:transform .2s;}
+#lc-fab{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6366f1);border:none;cursor:pointer;z-index:9999;box-shadow:0 4px 20px rgba(139,92,246,.5);font-size:1.8rem;display:flex;align-items:center;justify-content:center;transition:transform .2s;}
 #lc-fab:hover{transform:scale(1.1);}
 #lc-win{display:none;position:fixed;bottom:160px;right:20px;width:340px;max-width:calc(100vw - 40px);height:450px;max-height:calc(100vh - 200px);background:#1e1b4b;border:1px solid #8b5cf6;border-radius:16px;z-index:10000;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);}
 #lc-win.open{display:flex;}
@@ -2244,7 +2244,10 @@ document.addEventListener('click', function(e){
 #lc-login-prompt{text-align:center;padding:20px;color:#aaa;}
 #lc-login-prompt button{background:#8b5cf6;color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;margin-top:10px;}
 </style>
+<div style="position:fixed;bottom:90px;right:20px;z-index:9999;display:flex;flex-direction:column;align-items:center;gap:4px;">
 <button id="lc-fab" onclick="toggleLC()" title="Live Chat">💬</button>
+<span style="background:#8b5cf6;color:#fff;font-size:.65rem;font-weight:bold;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.3);">Live Chat</span>
+</div>
 <div id="lc-win">
   <div id="lc-head">
     <div id="lc-avatar">🤖</div>
