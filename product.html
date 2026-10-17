@@ -218,11 +218,27 @@ function gp(pid,cat){
   const pr=(pra[0]+r()*(pra[1]-pra[0])).toFixed(2);
   const op=(pr*1.3).toFixed(2), d=Math.floor(r()*25+5);
   const rt=(3.5+r()*1.5).toFixed(1), rv=Math.floor(r()*8000+20);
-  // Category-matching images!
-  const cimg=catImg(cn, nm);
-  const imgs=[];
-  for(let i=0;i<5;i++){
-    imgs.push("https://images.unsplash.com/"+(i<3?cimg:IMGS[Math.floor(r()*IMGS.length)])+"?w=800");
+  // Use passed images from store (exact match!)
+  const passedIms = up.get('ims');
+  const passedIm = up.get('im');
+  let imgs;
+  if(passedIms){
+    try{ imgs = JSON.parse(decodeURIComponent(passedIms)); }catch(e){ imgs = null; }
+  }
+  if(!imgs || !imgs.length){
+    if(passedIm){
+      try{
+        const pim = decodeURIComponent(passedIm);
+        imgs = [pim, pim, pim, pim, pim];
+      }catch(e){}
+    }
+  }
+  if(!imgs || !imgs.length){
+    const cimg=catImg(cn, nm);
+    imgs=[];
+    for(let i=0;i<5;i++){
+      imgs.push("https://images.unsplash.com/"+(i<3?cimg:IMGS[Math.floor(r()*IMGS.length)])+"?w=800");
+    }
   }
   const passedPr=up.get('pr');
   let pr_use=passedPr||pr;

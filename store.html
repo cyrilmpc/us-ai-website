@@ -537,7 +537,7 @@ const CAT_PRODUCTS = {
   "Men's Fashion": [["Sneakers","photo-1542291026-7eec264c27ff"],["Jacket","photo-1551028719-00167b16eac5"],["T-Shirt","photo-1521572163474-6864f9cf17ab"],["Jeans","photo-1542272604-787c3835535d"],["Watch","photo-1524805444758-089113d48a6d"]],
   "Women's Fashion": [["Handbag","photo-1584917865442-de89df76afd3"],["Dress","photo-1595777457583-95e059d581b8"],["Heels","photo-1543163521-1bf539c55dd2"],["Necklace","photo-1599643478518-a784e5dc4c8f"],["Scarf","photo-1601924994987-69e26d50dc26"]],
   "Watches, Bags & Jewellery": [["Luxury Watch","photo-1523170335258-f5ed11844a49"],["Backpack","photo-1553062407-98eeb64c6a62"],["Sunglasses","photo-1572635196237-14b3f281503f"],["Bracelet","photo-1611591437281-460bfbe1220a"],["Ring","photo-1605100804763-247f67b3557e"]],
-  "Sports & Outdoor": [["Football","photo-1579952363873-27f3bade9f55"],["Yoga Mat","photo-1601925260368-ae2f83cf8b7f"],["Dumbbells","photo-1638536532686-d610adfc8e5c"],["Tent","photo-1504280390367-361c6d9f38f4"],["Bicycle","photo-1485965120184-e220f721d03e"]],
+  "Sports & Outdoor": [["Football","photo-1579952363873-27f3bade9f55"],["Yoga Mat","photo-1601925260368-ae2f83cf8b7f"],["Dumbbells","photo-1638536532686-d610adfc8e5c"],["Tent","photo-1504280390367-361c6d9f38f4"],["Bicycle","photo-1485965120184-e220f721d03e"],["Tennis Racket","photo-1554068865-24cecd4e34b8"],["Basketball","photo-1546519638-68e109498ffc"],["Yoga Mat","photo-1601925260368-ae2f83cf8b7f"],["Dumbbells","photo-1638536532686-d610adfc8e5c"],["Cycling Helmet","photo-1557803175-2358fb1a4a4f"]],
   "Automotive & Motorbike": [["Car","photo-1494976388531-d1058494cdd8"],["Motorbike","photo-1558981403-c5f9899a28bc"],["Car Tire","photo-1578844251758-2f71da64c96f"],["Car Seat","photo-1503376780353-7e6692767b70"],["Helmet","photo-1557803175-2358fb1a4a4f"],["Car Wash","photo-1607860108855-64acf2078ed9"],["Engine Oil","photo-1486262715619-67b85e0b08d3"],["Car Light","photo-1492144534655-ae79c964c9d7"],["Bike Gloves","photo-1558981403-c5f9899a28bc"],["Car Cover","photo-1494976388531-d1058494cdd8"],["Air Freshener","photo-1503376780353-7e6692767b70"],["Car Charger","photo-1578844251758-2f71da64c96f"]],
 "Books & Stationery": [["Book","photo-1544716278-ca5e3f4abd8c"],["Notebook","photo-1531346878377-a5be20888e57"],["Pen Set","photo-1583485088034-697b5bc54ccd"],["Pencil Box","photo-1456735190827-d1262f71b8aef"],["Diary","photo-1531346878377-a5be20888e57"],["Highlighter","photo-1583485088034-697b5bc54ccd"],["Sticky Notes","photo-1456735190827-d1262f71b8aef"],["Backpack","photo-1553062407-98eeb64c6a62"],["Calculator","photo-1564473185-78e5d0e1e0e0"],["Glue Stick","photo-1583485088034-697b5bc54ccd"],["Scissors","photo-1456735190827-d1262f71b8aef"],["Ruler Set","photo-1531346878377-a5be20888e57"]],
 "Video Games": [["Game Controller","photo-1592840496694-26d035b52b48"],["Gaming Console","photo-1606813907291-d86efa9b94db"],["Video Game","photo-1552820728-8b83bb6b773f"],["Gaming Headset","photo-1599669454699-248893623440"],["Gaming Keyboard","photo-1587829741301-dc798b83add3"],["Gaming Mouse","photo-1527814050087-3793815479db"],["VR Headset","photo-1622979135225-d2ba269cf1d2"],["Game Disc","photo-1552820728-8b83bb6b773f"],["Gaming Chair","photo-1592840496694-26d035b52b48"],["Arcade Stick","photo-1606813907291-d86efa9b94db"],["Game Card","photo-1552820728-8b83bb6b773f"],["Streaming Mic","photo-1590602847861-f357a9332bbc"]],
@@ -565,9 +565,12 @@ function genProduct(id, forceCat){
   const c = forceCat ? CATS.find(x => x[1] === forceCat) || CATS[0] : CATS[Math.floor(r() * CATS.length)];
   const typeList = CAT_PRODUCTS[c[1]] || CAT_PRODUCTS["default"];
   const t = typeList[Math.floor(r() * typeList.length)];
-  const price = (r() * 1950 + 5).toFixed(2);
+  const priceRanges = {"Smartphone":[200,800],"Laptop":[400,1500],"Perfume":[20,150],"Shampoo":[5,30],"Teddy Bear":[10,50],"Car":[5000,30000],"Book":[5,40],"Guitar":[100,800]};
+  let pr = [5, 500];
+  for(const k in priceRanges){ if(t[0].toLowerCase().includes(k.toLowerCase())){ pr = priceRanges[k]; break; } }
+  const price = (pr[0] + r() * (pr[1] - pr[0])).toFixed(2);
   const oldP = (price * (1.2 + r() * 0.6)).toFixed(2);
-  const disc = Math.floor(r() * 45 + 5);
+  const disc = Math.floor(r() * 25 + 5); // 5-30% realistic
   const rating = (3.5 + r() * 1.5).toFixed(1);
   const revs = Math.floor(r() * 8000 + 20);
   // 4 pictures per product!
@@ -598,7 +601,9 @@ function openProduct(id, cat){
   const pr = window._prodCache[id];
   const nm = pr ? encodeURIComponent(pr.name) : '';
   const pc = pr ? pr.price : '';
-  window.open('product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc, '_blank');
+  const im = pr ? encodeURIComponent(pr.image) : '';
+  const ims = pr && pr.images ? encodeURIComponent(JSON.stringify(pr.images)) : '';
+  window.open('product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc + '&im=' + im + '&ims=' + ims, '_blank');
 }
 // Product images for hover
 function getPImgs(p){
@@ -651,7 +656,7 @@ function loadMore(){
     document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
     return;
   }
-  const batchSize = 50; // 50 initial as user asked!
+  const batchSize = 300; // 300 products as user asked!
   const batch = genBatch(11 + jfyCount, batchSize);
   batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
   document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
