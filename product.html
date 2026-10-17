@@ -142,8 +142,8 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <div class="top">
 <div>
 <div style="display:flex;gap:8px;margin-bottom:10px;">
-<button id="tabVideo" onclick="showTab('video')" style="padding:8px 20px;border:1px solid #444;border-radius:8px;background:#1e1b4b;color:#fff;cursor:pointer;">🎬 Video</button>
-<button id="tabPhotos" onclick="showTab('photos')" style="padding:8px 20px;border:none;border-radius:8px;background:#f97316;color:#fff;font-weight:bold;cursor:pointer;">🖼️ Photos</button>
+<button id="tabVideo" style="display:none" onclick="showTab('video')" style="padding:8px 20px;border:1px solid #444;border-radius:8px;background:#1e1b4b;color:#fff;cursor:pointer;">🎬 Video</button>
+<button id="tabPhotos" style="display:none" onclick="showTab('photos')" style="padding:8px 20px;border:none;border-radius:8px;background:#f97316;color:#fff;font-weight:bold;cursor:pointer;">🖼️ Photos</button>
 </div>
 <div id="videoWrap" style="display:none;margin-bottom:12px;position:relative;">
 <video id="pVideo" controls playsinline preload="metadata" style="width:100%;max-height:400px;border-radius:12px;background:#000;">
@@ -152,6 +152,12 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 </div>
 <script>
 function showTab(t){
+  // Show BOTH video and photos together!
+  var vw=document.getElementById('videoWrap');
+  var gm=document.querySelector('.gm');
+  if(vw) vw.style.display='block';
+  if(gm) gm.style.display='block';
+  return;
   var vw=document.getElementById('videoWrap');
   var gm=document.querySelector('.gm');
   var gt=document.querySelector('.gt');
