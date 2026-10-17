@@ -575,13 +575,20 @@ function genProduct(id, forceCat){
   const revs = Math.floor(r() * 8000 + 20);
   // 4 pictures per product!
   const baseImg = "https://images.unsplash.com/" + t[1];
-  const images = [
-    baseImg + "?w=800",
-    "https://images.unsplash.com/" + t[1] + "?w=800&sat=-40",
-    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800",
-    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
-    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"
-  ];
+  const images = [baseImg + "?w=800"];
+  // Add 4 DIFFERENT images from same category!
+  const usedIdx = new Set([typeList.indexOf(t)]);
+  let tries = 0;
+  while(images.length < 5 && tries < 20){
+    const ri = Math.floor(r() * typeList.length);
+    if(!usedIdx.has(ri)){
+      usedIdx.add(ri);
+      images.push("https://images.unsplash.com/" + typeList[ri][1] + "?w=800");
+    }
+    tries++;
+  }
+  // Fallback if not enough
+  while(images.length < 5) images.push(baseImg + "?w=800");
   return {
     id: "p" + id,
     name: b + " " + t[0] + " " + (1000 + Math.floor(r() * 9000)) + " Pro Max Ultra",
