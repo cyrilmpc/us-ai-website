@@ -489,5 +489,8 @@ init();
 © US AI 2026 - All rights reserved
 </div>
 </footer>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);border:none;border-radius:50%;color:#fff;font-size:1.5rem;cursor:pointer;display:none;z-index:99;box-shadow:0 8px 20px rgba(139,92,246,.4);">⬆️</button>
+<script>window.addEventListener("scroll",function(){var b=document.getElementById("topBtn");if(b)b.style.display=window.scrollY>500?"block":"none";});</script>
 </body>
 </html>
