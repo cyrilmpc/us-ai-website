@@ -855,6 +855,29 @@ const BRAND_CAT = {
 "Hasbro":["Babies & Toys"],"Mattel":["Babies & Toys"],
 };
 
+
+// Category image pools - 5 similar product shots per category (Daraz-style multi-angle feel)
+const CAT_IMGS = {
+  'phone': ['photo-1592750475338-74b7b21085ab','photo-1511707171634-5f897ff02aa9','photo-1598327105666-5b89351aff97','photo-1580910051074-3eb694886505','photo-1567581935884-3349723552ca'],
+  'laptop': ['photo-1496181133206-80ce9b88a853','photo-1525547719571-a2d4ac4d4aed','photo-1588872657578-7efd1f1555ed','photo-1603302576837-37561b2e2302','photo-1541807084-5c52b6b3adef'],
+  'shoe': ['photo-1542291026-7eec264c27ff','photo-1549298916-b41d501d3772','photo-1595950653106-6c9ebd614d3a','photo-1600185365483-26d7a4cc7514','photo-1560769629-975ec94e6a86'],
+  'watch': ['photo-1523275335684-37898b6baf30','photo-1524805444758-089113d48a6d','photo-1546868871-7041c2a55e12','photo-1434056886845-dac89ffe9b56','photo-1508057198894-247b23fe5ade'],
+  'headphone': ['photo-1505740420928-5e560c06d30e','photo-1583394838336-acd977736f90','photo-1484704849700-f032a568e944','photo-1545127398-14699f92334b','photo-1572536147248-ac59a8abfa4b3'],
+  'camera': ['photo-1516035069371-29a1b244cc32','photo-1526170375885-4d8ecf77b99f','photo-1502920917128-1aa500764cbd','photo-1495121605193-b116b5b9c5fe0','photo-1500634245200-e5245c7574ef'],
+  'default': ['photo-1441986300917-64674bd600d8','photo-1523275335684-37898b6baf30','photo-1505740420928-5e560c06d30e','photo-1560343090-f0409e92791a','photo-1585386959984-a4155224a1ad']
+};
+function getCatPool(cat, name){
+  const c = (cat||'').toLowerCase();
+  const n = (name||'').toLowerCase();
+  if(c.includes('phone')||n.includes('iphone')||n.includes('samsung')||n.includes('mobile')) return CAT_IMGS['phone'];
+  if(c.includes('laptop')||c.includes('computer')||n.includes('laptop')||n.includes('macbook')) return CAT_IMGS['laptop'];
+  if(c.includes('shoe')||c.includes('footwear')||n.includes('shoe')||n.includes('slipper')||n.includes('sandal')||n.includes('nike')||n.includes('adidas')) return CAT_IMGS['shoe'];
+  if(c.includes('watch')||n.includes('watch')) return CAT_IMGS['watch'];
+  if(n.includes('headphone')||n.includes('earbud')||n.includes('airpod')) return CAT_IMGS['headphone'];
+  if(n.includes('camera')) return CAT_IMGS['camera'];
+  return CAT_IMGS['default'];
+}
+
 function genProduct(id, forceCat){
   // Use REAL products first!
   const rid = parseInt(String(id).replace(/\D/g,'')) || 1;
@@ -865,13 +888,11 @@ function genProduct(id, forceCat){
     const price = rp[4];
     const oldP = rp[5];
     const img = "https://images.unsplash.com/" + rp[3] + "?w=800";
-    const images = [
-  img,
-  img + "&fit=crop&crop=entropy&w=600&h=600",
-  img + "&fit=crop&crop=top&w=800&h=600",
-  img + "&fit=crop&crop=bottom&w=800&h=600",
-  img + "&fit=crop&w=800&h=800&crop=center"
-];
+    const _pool = getCatPool(p.category, p.name);
+const images = [img];
+for(let _pi=0; _pi<4; _pi++){
+  images.push("https://images.unsplash.com/" + _pool[(_pi+1) % _pool.length] + "?w=800");
+}
     return {id:'p'+rid, name:rp[0], brand:rp[1], category:rp[2], price:price.toFixed(2), old_price:oldP.toFixed(2), discount:'-'+disc+'%', rating:(4+r()).toFixed(1), reviews:Math.floor(r()*5000+100).toLocaleString(), image:img, images:images};
   }
 
