@@ -244,7 +244,7 @@ function getDesc(nm, cat){
 <div class="qa"><div class="q">Q: Return policy?</div><div class="a">A: 14-day easy returns!</div></div>
 </div>
 <div class="sec"><h2>⭐ Customer Reviews</h2><div id="revs"></div></div>
-<div class="sec"><h2>🎯 Related Products</h2><div class="pg" id="rel"></div></div>
+<div class="sec"><h2>💝 You may also like</h2><div class="pg" id="rel"></div></div>
 </div>
 <div class="md" id="lM"><div class="bx"><h2>🔑 Login</h2><input id="lE" type="email" placeholder="Email"><input id="lP" type="password" placeholder="Password"><button class="bl" onclick="dL()">Login</button><button class="bg" onclick="cL()">Cancel</button></div></div>
 <div class="md" id="pM"><div class="bx"><h2>💳 Payment</h2>
@@ -403,5 +403,50 @@ function sP(e,m){document.querySelectorAll('.po').forEach(o=>o.classList.remove(
 function cP(){const c="USAI-"+Math.random().toString(36).substr(2,8).toUpperCase();const o=JSON.parse(localStorage.getItem('my_orders')||'[]');o.push({code:c,product:P.name,price:P.price,method:pm,date:new Date().toISOString()});localStorage.setItem('my_orders',JSON.stringify(o));document.getElementById('pM').classList.remove('open');alert("✅ Order: "+c+"\nPayment: "+pm);}
 init();
 </script>
+
+<footer style="background:#0f0d2e;margin-top:40px;padding:40px 20px 20px;border-top:1px solid #2d2a5e;">
+<div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;">
+<div>
+<h4 style="color:#fff;margin-bottom:12px;">Customer Care</h4>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:.9rem;">
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">Help Center</a>
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">How to Buy</a>
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">Returns & Refunds</a>
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">Contact Us</a>
+</div>
+</div>
+<div>
+<h4 style="color:#fff;margin-bottom:12px;">US AI</h4>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:.9rem;">
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">About Us</a>
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">Terms & Conditions</a>
+<a href="javascript:void(0)" style="color:#888;text-decoration:none;">Privacy Policy</a>
+<a href="store.html" style="color:#888;text-decoration:none;">All Products</a>
+</div>
+</div>
+<div>
+<h4 style="color:#fff;margin-bottom:12px;">Payment Methods</h4>
+<div style="display:flex;gap:8px;flex-wrap:wrap;font-size:.8rem;">
+<span style="background:#1e1b4b;padding:6px 12px;border-radius:6px;color:#888;">💵 COD</span>
+<span style="background:#1e1b4b;padding:6px 12px;border-radius:6px;color:#888;">💳 VISA</span>
+<span style="background:#1e1b4b;padding:6px 12px;border-radius:6px;color:#888;">💳 Mastercard</span>
+<span style="background:#1e1b4b;padding:6px 12px;border-radius:6px;color:#888;">📱 JazzCash</span>
+<span style="background:#1e1b4b;padding:6px 12px;border-radius:6px;color:#888;">📱 EasyPaisa</span>
+</div>
+</div>
+<div>
+<h4 style="color:#fff;margin-bottom:12px;">Follow Us</h4>
+<div style="display:flex;gap:12px;font-size:1.5rem;">
+<a href="javascript:void(0)" style="text-decoration:none;">📘</a>
+<a href="javascript:void(0)" style="text-decoration:none;">🐦</a>
+<a href="javascript:void(0)" style="text-decoration:none;">📸</a>
+<a href="javascript:void(0)" style="text-decoration:none;">📺</a>
+</div>
+</div>
+</div>
+<div style="text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #2d2a5e;color:#666;font-size:.85rem;">
+© US AI 2026 - All rights reserved
+</div>
+</footer>
 </body>
 </html>
