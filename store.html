@@ -523,7 +523,10 @@ function genBatch(start, count){
 let shownIds = new Set(), jfyCount = 0, catName = "", catCount = 0, searchQ = "";
 // ===== RENDER =====
 function openProduct(id, cat){
-  window.open('product.html?id=' + id + '&cat=' + encodeURIComponent(cat || ''), '_blank');
+  const pr = window._prodCache[id];
+  const nm = pr ? encodeURIComponent(pr.name) : '';
+  const pc = pr ? pr.price : '';
+  window.open('product.html?id=' + id + '&cat=' + encodeURIComponent(cat || '') + '&nm=' + nm + '&pr=' + pc, '_blank');
 }
 // Product images for hover
 function getPImgs(p){

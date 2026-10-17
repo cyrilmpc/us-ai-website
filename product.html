@@ -176,10 +176,17 @@ function gp(pid,cat){
   const rt=(3.5+r()*1.5).toFixed(1),rv=Math.floor(r()*8000+20);
   const imgs=[];for(let i=0;i<5;i++)imgs.push("https://images.unsplash.com/"+IMGS[Math.floor(r()*IMGS.length)]+"?w=800");
   const cn=cat&&cat.length>3?decodeURIComponent(cat):"General";
-  // Match store naming: Brand + Type + Number + Pro Max Ultra
-  const tname=cn.split(' ')[0];
-  let nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" Pro Max Ultra";
-  return{id:pid,name:nm,price:pr,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
+  // Use passed name if available (exact match for search!)
+  const passedNm=up.get('nm');
+  const passedPr=up.get('pr');
+  let nm;
+  if(passedNm){ try{ nm=decodeURIComponent(passedNm); }catch(e){ nm=""; } }
+  if(!nm){
+    const tname=cn.split(' ')[0];
+    nm=b+" "+tname+" "+(1000+Math.floor(r()*9000))+" Pro Max Ultra";
+  }
+  let pr_use=passedPr||pr;
+  return{id:pid,name:nm,price:pr_use,old_price:op,discount:"-"+d+"%",category:cn,images:imgs,rating:rt,reviews:rv.toLocaleString()};
 }
 const up=new URLSearchParams(location.search);
 const pid=up.get('id')||'p1', cat=up.get('cat')||'';
