@@ -1101,7 +1101,31 @@ function doSearch(){
 
   // Sort by score (highest first)
   scored.sort((a,b) => b.s - a.s);
-  const results = scored.slice(0, 200).map(x => x.p);
+  let results = scored.slice(0, 200).map(x => x.p);
+
+  // Fallback: if no results with strict matching, try loose substring search
+  if(results.length === 0){
+    const loose = [];
+    const seenLoose = new Set();
+    function addLoose(p){
+      if(!p || !p.id) return;
+      const key = (p.name||'').toLowerCase();
+      if(seenLoose.has(key) || seen.has(key)) return;
+      const pn = (p.name||'').toLowerCase();
+      const pc = (p.category||'').toLowerCase();
+      if(pn.includes(qLower) || pc.includes(qLower)){
+        seenLoose.add(key);
+        loose.push(p);
+      }
+    }
+    displayedProducts.forEach(addLoose);
+    if(loose.length < 20){
+      for(let i = 1; i <= 50000 && loose.length < 50; i++){
+        addLoose(genProduct(i));
+      }
+    }
+    results = loose.slice(0, 200);
+  }
 
   // Generate from query if still few results
   if(results.length < 10){
