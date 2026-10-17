@@ -2771,23 +2771,7 @@ document.addEventListener('click', function(e){
 </style>
 
 
-<script>
-// Left widgets: click title to toggle (event delegation)
-document.addEventListener('click', function(e){
-  var title = e.target.closest('#top-widgets .tw-title');
-  if(!title) return;
-  if(e.target.closest('button, a, input')) return;
-  var card = title.closest('.tw-card');
-  if(!card) return;
-  card.classList.toggle('expanded');
-  // Hide share rail if any expanded
-  setTimeout(function(){
-    var anyOpen = document.querySelector('#top-widgets .tw-card.expanded') !== null;
-    var rail = document.getElementById('share-rail');
-    if(rail) rail.style.display = anyOpen ? 'none' : '';
-  }, 50);
-});
-</script>
+
 
 
 <!-- Join Community button - user requested -->
@@ -2837,34 +2821,27 @@ document.addEventListener('click', function(e){
 </script>
 
 
+
+
+
 <script>
-// ULTRA SIMPLE left widget toggle
-setTimeout(function(){
-  var titles = document.querySelectorAll('#top-widgets .tw-title');
-  titles.forEach(function(t){
-    t.style.cursor = 'pointer';
-    t.onclick = function(e){
-      if(e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.tagName === 'INPUT') return;
-      var card = t.parentElement;
-      var contents = card.querySelectorAll(':scope > div:not(.tw-title)');
-      contents.forEach(function(c){
-        if(c.style.display === 'none'){
-          c.style.display = '';
-        } else {
-          c.style.display = 'none';
-        }
+// CLEAN: Left widget toggle
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    document.querySelectorAll('#top-widgets .tw-card > .tw-title').forEach(function(title){
+      title.style.cursor = 'pointer';
+      title.addEventListener('click', function(e){
+        if(e.target.closest('button,a,input,select')) return;
+        var card = title.parentElement;
+        var bodies = card.querySelectorAll(':scope > div:not(.tw-title)');
+        var isHidden = bodies.length > 0 && bodies[0].style.display === 'none';
+        bodies.forEach(function(b){
+          b.style.display = isHidden ? '' : 'none';
+        });
       });
-      // Toggle share rail
-      var anyVisible = false;
-      document.querySelectorAll('#top-widgets .tw-card').forEach(function(cd){
-        var vis = cd.querySelector(':scope > div:not(.tw-title)');
-        if(vis && vis.style.display !== 'none') anyVisible = true;
-      });
-      var rail = document.getElementById('share-rail');
-      if(rail) rail.style.display = anyVisible ? 'none' : '';
-    };
-  });
-}, 2000);
+    });
+  }, 2500);
+});
 </script>
 
 </body>
