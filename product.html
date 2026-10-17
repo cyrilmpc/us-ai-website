@@ -149,7 +149,62 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 <b id="qtyN">1</b>
 <button onclick="chQty(1)" style="width:30px;height:30px;border:1px solid #444;background:#1e1b4b;color:#fff;border-radius:6px;cursor:pointer;font-size:1.1rem;">+</button>
 </div>
-<script>let _q=1;function chQty(d){_q=Math.max(1,Math.min(10,_q+d));document.getElementById('qtyN').textContent=_q;}</script>
+<script>let _q=1;function chQty(d){_q=Math.max(1,Math.min(10,_q+d));document.getElementById('qtyN').textContent=_q;}
+// Detailed descriptions by type (Daraz style!)
+function getDesc(nm, cat){
+  const n = nm.toLowerCase();
+  let bullets = [], para = "", benefits = [];
+  
+  if(n.includes("shampoo")){
+    bullets = [
+      "💧 Deep Cleansing: Removes dirt, oil and buildup for fresh hair.",
+      "✨ Shine & Smooth: Leaves hair silky, soft and manageable.",
+      "🌿 Natural Ingredients: Gentle formula safe for daily use.",
+      "💪 Strong Roots: Nourishes scalp for healthier hair growth.",
+      "🚫 No Harsh Chemicals: Sulfate-free, paraben-free formula."
+    ];
+    para = "Transform your hair care routine with this premium shampoo. Infused with natural extracts, it deeply cleanses while nourishing your scalp and strands. Suitable for all hair types, it leaves your hair feeling fresh, soft and full of life after every wash.";
+    benefits = ["Deep Cleansing - Removes impurities", "Natural Shine - Healthy glow", "Gentle Care - Daily use safe"];
+  } else if(n.includes("face cream") || n.includes("cream")){
+    bullets = [
+      "💧 Deep Hydration: Locks in moisture for 24 hours.",
+      "✨ Brightening: Evens skin tone and fades dark spots.",
+      "🌿 Natural Formula: Gentle on all skin types.",
+      "💪 Anti-Aging: Reduces fine lines and wrinkles.",
+      "☀️ Daily Protection: Shields skin from damage."
+    ];
+    para = "Discover radiant skin with this luxurious face cream. Formulated with hydrating ingredients, it penetrates deep to nourish and revitalize. Your skin will feel softer, look brighter, and glow with health.";
+    benefits = ["24h Hydration", "Brighter Skin", "Anti-Aging"];
+  } else if(n.includes("perfume")){
+    bullets = [
+      "🌸 Long Lasting: 8-12 hour fragrance.",
+      "✨ Premium Notes: Top, heart and base notes.",
+      "💎 Elegant Bottle: Beautiful design.",
+      "🎁 Perfect Gift: Loved by everyone."
+    ];
+    para = "Experience luxury with this exquisite perfume. A captivating blend of notes creates an unforgettable scent that lasts all day.";
+    benefits = ["Long Lasting", "Premium Quality", "Elegant"];
+  } else {
+    bullets = [
+      "✅ Premium Quality: Top-grade materials.",
+      "✨ Best Performance: Exceeds expectations.",
+      "💪 Durable: Built to last.",
+      "🎁 Great Value: Worth every penny."
+    ];
+    para = "Premium " + nm + ". Top quality with excellent reviews. Designed for durability and performance, this product delivers exceptional value.";
+    benefits = ["Premium Quality", "Durable", "Great Value"];
+  }
+  
+  let html = '<ul style="list-style:none;padding:0;">';
+  bullets.forEach(b => { html += '<li style="margin:8px 0;">' + b + '</li>'; });
+  html += '</ul><p style="margin:16px 0;line-height:1.6;">' + para + '</p>';
+  html += '<h4>✨ Key Benefits:</h4><ul style="list-style:none;padding:0;">';
+  benefits.forEach(b => { html += '<li style="margin:6px 0;">✓ ' + b + '</li>'; });
+  html += '</ul>';
+  return html;
+}
+
+</script>
 <button class="bn" onclick="buyN()">⚡ Buy Now</button></div>
 </div>
 </div>
@@ -292,7 +347,38 @@ function init(){
   document.getElementById('pDe').textContent=`Premium ${P.name}. Top quality with excellent reviews. Durable build, premium materials. Official warranty included. Free delivery.`;
   document.getElementById('pSp').innerHTML=`<div><span>Product ID</span><span>${P.id.toUpperCase()}</span></div><div><span>Brand</span><span>${P.name.split(' ')[0]}</span></div><div><span>Warranty</span><span>1 Year</span></div><div><span>Delivery</span><span>2-4 Days</span></div><div><span>Returns</span><span>14 Days</span></div>`;
   const nn=["Ahmed K.","Fatima S.","Ali R.","Ayesha M."],tt=["Excellent! Highly recommended.","Great quality, fast delivery.","Value for money!","Original, works perfectly."];
-  let rh="";for(let i=0;i<4;i++){const nr=sr(n*31+i);rh+=`<div class="ri"><div class="n">${nn[i]}</div><div class="s">${"★".repeat(4+Math.floor(nr()*2))}</div><div class="t">${tt[i]}</div></div>`;}
+  let rh=`
+<div style="display:flex;gap:30px;margin-bottom:20px;flex-wrap:wrap;">
+<div style="text-align:center;">
+<div style="font-size:2.5rem;font-weight:bold;">4.8<span style="font-size:1.2rem;color:#888;">/5</span></div>
+<div style="color:#fbbf24;font-size:1.5rem;">★★★★★</div>
+<div style="color:#888;font-size:.85rem;">`+P.reviews+` Ratings</div>
+</div>
+<div style="flex:1;min-width:200px;">`;
+const dist=[[5,85],[4,10],[3,3],[2,1],[1,1]];
+dist.forEach(d=>{
+  rh+=`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.85rem;">
+<span style="color:#fbbf24;">`+"★".repeat(d[0])+`</span>
+<div style="flex:1;height:8px;background:#2d2a5e;border-radius:4px;overflow:hidden;">
+<div style="height:100%;width:`+d[1]+`%;background:#fbbf24;"></div>
+</div>
+<span style="color:#888;">`+d[1]+`%</span></div>`;
+});
+rh+=`</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin:16px 0;padding-bottom:10px;border-bottom:1px solid #2d2a5e;">
+<b>Product Reviews</b>
+<div style="font-size:.85rem;color:#888;">Sort: Relevance | Filter: All star</div>
+</div>`;
+const rnames=["Ahmed K.","Fatima S.","Ali R.","Ayesha M."];
+const rtexts=["Excellent quality! Highly recommended. Delivery was fast too.","Very good product, exactly as described. Will buy again!","Good value for money. Satisfied with purchase.","Amazing! Exceeded my expectations. 5 stars!"];
+for(let i=0;i<4;i++){
+  const st=4+Math.floor(nr()*2);
+  rh+=`<div style="margin:16px 0;padding-bottom:16px;border-bottom:1px solid #1e1b4b;">
+<div style="color:#fbbf24;">`+"★".repeat(st)+`</div>
+<div style="color:#888;font-size:.8rem;margin:4px 0;">`+rnames[i]+`</div>
+<div style="margin:8px 0;">`+rtexts[i]+`</div>
+</div>`;
+}</div><div class="s">${"★".repeat(4+Math.floor(nr()*2))}</div><div class="t">${tt[i]}</div></div>`;}
   document.getElementById('revs').innerHTML=rh;
   let rel="";for(let i=1;i<=10;i++){const rp=gp('p'+(n+i*137),'');rel+=`<div class="pc" onclick="location.href='product.html?id=${rp.id}'"><img src="${rp.images[0]}" loading="lazy"><div class="i"><div class="t">${rp.name}</div><div class="p">$${rp.price}</div></div></div>`;}
   document.getElementById('rel').innerHTML=rel;
