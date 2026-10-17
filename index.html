@@ -205,6 +205,15 @@ a[href*="whatsapp"][class*="community"], .community-join {
 @keyframes lcRotate{0%,85%{transform:rotate(0deg) scale(1);}90%{transform:rotate(360deg) scale(1.1);}100%{transform:rotate(360deg) scale(1);}}
 </style>
 
+
+<style>
+/* LEFT SIDE: Fix icon overlap below Join community */
+#left-rail, .left-rail{padding-bottom:20px !important;}
+#left-rail > *:last-child, .left-rail > *:last-child{margin-bottom:0 !important;}
+/* Ensure no overlapping at bottom left */
+[style*="bottom:"][style*="left:"]{margin:8px !important;}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
