@@ -60,11 +60,7 @@
 @keyframes ticker-scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 </style>
 
-<style>
-/* Fix overlapping sidebar icons */
-.a11y-btn, [aria-label*="ccessibility"] { position: relative !important; z-index: 1 !important; margin: 4px 0 !important; }
-.sidebar-widget { position: relative !important; z-index: 2 !important; margin-bottom: 8px !important; }
-</style>
+
 
 <style>
 #proxy-order-form { max-width: 650px; margin: 0 auto; }
@@ -80,6 +76,17 @@
 }
 .svc-card, .box-card { text-align: center !important; }
 .svc-card .svc-body, .box-card .box-body { text-align: center !important; }
+</style>
+
+<style>
+/* LEFT SIDEBAR ICON FIX - prevent overlap */
+#left-rail, .left-rail, #side-rail, .side-rail,
+[id*="left"][id*="rail"], [class*="left"][class*="rail"] { display:flex !important; flex-direction:column !important; gap:12px !important; align-items:center !important; }
+#left-rail a, #left-rail button, .left-rail a, .left-rail button,
+.side-rail a, .side-rail button { margin:0 !important; flex-shrink:0 !important; }
+/* Ensure circular buttons don't overlap */
+button[style*="border-radius:50%"], a[style*="border-radius:50%"],
+button[style*="border-radius:999px"], a[style*="border-radius:999px"] { margin:6px 0 !important; }
 </style>
 </head>
 <body>
