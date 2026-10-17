@@ -2728,41 +2728,7 @@ document.addEventListener('click', function(e){
 
 
 <script>
-// Articles: show only 10, rest in More
-(function(){
-  function limitArticles(){
-    var grid = document.getElementById('articles-grid');
-    if(!grid) return;
-    var cards = grid.querySelectorAll('.mini-art');
-    if(cards.length <= 10) return;
-    
-    // Hide beyond 10
-    for(var i=10; i<cards.length; i++){
-      cards[i].style.display = 'none';
-      cards[i].classList.add('art-hidden');
-    }
-    
-    // Add More button if not exists
-    if(!document.getElementById('art-more-btn')){
-      var btn = document.createElement('button');
-      btn.id = 'art-more-btn';
-      btn.textContent = 'More Articles →';
-      btn.style.cssText = 'display:block;margin:15px auto;padding:10px 25px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:25px;font-size:.9rem;font-weight:600;cursor:pointer;';
-      btn.onclick = function(){
-        var hidden = grid.querySelectorAll('.art-hidden');
-        var showing = btn.dataset.show === '1';
-        hidden.forEach(function(c){
-          c.style.display = showing ? 'none' : '';
-        });
-        btn.dataset.show = showing ? '0' : '1';
-        btn.textContent = showing ? 'More Articles →' : '← Show Less';
-      };
-      grid.parentNode.appendChild(btn);
-    }
-  }
-  setTimeout(limitArticles, 1000);
-  setTimeout(limitArticles, 3000);
-})();
+// Articles limit removed - showing all (user will confirm)
 </script>
 
 </body>
