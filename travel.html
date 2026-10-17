@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel — Flights, Hotels & Cars | US AI</title>
+<meta name="description" content="Search live flights, hotels and rental cars. Real prices from Google Flights, Google Hotels and top travel sites.">
+<link rel="stylesheet" href="style.css">
+<style>
+.travel-hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#1e3a8a,#7c3aed,#db2777);border-radius:20px;margin:20px;color:#fff;animation:heroGlow 4s ease-in-out infinite}
+@keyframes heroGlow{0%,100%{box-shadow:0 0 30px rgba(124,58,237,.4)}50%{box-shadow:0 0 60px rgba(219,39,119,.6)}}
+.travel-hero h1{font-size:2.2rem;margin:0;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.travel-tabs{display:flex;gap:10px;justify-content:center;margin:20px;flex-wrap:wrap}
+.travel-tab{padding:12px 28px;border-radius:30px;border:2px solid #7c3aed;background:#1e1b4b;color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s}
+.travel-tab.active{background:linear-gradient(135deg,#7c3aed,#db2777);transform:scale(1.05);box-shadow:0 5px 20px rgba(124,58,237,.5)}
+.travel-tab:hover{transform:scale(1.05)}
+.travel-panel{display:none;max-width:800px;margin:0 auto;padding:20px}
+.travel-panel.active{display:block;animation:fadeIn .5s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.travel-card{background:#1e1b4b;border:1px solid #444;border-radius:16px;padding:24px;margin:16px 0}
+.travel-card h2{margin-top:0;color:#a5b4fc}
+.search-row{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.search-row input,.search-row select{flex:1;min-width:150px;padding:12px;border-radius:10px;border:1px solid #555;background:#0f0d2a;color:#fff;font-size:1rem}
+.search-btn{padding:12px 32px;border-radius:30px;border:none;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;transition:transform .2s}
+.search-btn:hover{transform:scale(1.05)}
+.result-card{background:#0f0d2a;border:1px solid #555;border-radius:12px;padding:16px;margin:12px 0;display:flex;gap:16px;align-items:center;animation:slideIn .5s}
+@keyframes slideIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+.result-icon{font-size:3rem;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.result-info{flex:1}
+.result-info h3{margin:0 0 4px;color:#fff}
+.result-info p{margin:4px 0;color:#a5b4fc;font-size:.9rem}
+.result-price{font-size:1.4rem;font-weight:800;color:#4ade80}
+.book-btn{padding:10px 20px;border-radius:20px;border:none;background:#4ade80;color:#000;font-weight:700;cursor:pointer}
+.book-btn:hover{transform:scale(1.05)}
+.live-badge{display:inline-block;background:#ef4444;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:700;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+</style>
+</head>
+<body>
+<nav><a href="index.html">← US AI Home</a></nav>
+
+<div class="travel-hero">
+  <h1>✈️ 🏨 🚗 Travel</h1>
+  <p>Flights, Hotels & Rental Cars — <span class="live-badge">● LIVE PRICES</span></p>
+  <p style="font-size:.9rem;opacity:.8;">Real-time prices from Google Flights, Google Hotels & top travel sites</p>
+</div>
+
+<div class="travel-tabs">
+  <button class="travel-tab active" onclick="showPanel('flights')">✈️ Flights</button>
+  <button class="travel-tab" onclick="showPanel('hotels')">🏨 Hotels</button>
+  <button class="travel-tab" onclick="showPanel('cars')">🚗 Cars</button>
+</div>
+
+<!-- FLIGHTS PANEL -->
+<div class="travel-panel active" id="panel-flights">
+  <div class="travel-card">
+    <h2>✈️ Find Your Flight <span class="live-badge">● LIVE</span></h2>
+    <p style="color:#a5b4fc;">Search live flight prices — results open on Google Flights with real fares.</p>
+    <div class="search-row">
+      <input type="text" id="fl-from" placeholder="From (e.g. New York)" list="cities">
+      <input type="text" id="fl-to" placeholder="To (e.g. London)" list="cities">
+      <input type="date" id="fl-date">
+    </div>
+    <button class="search-btn" onclick="searchFlights()">🔍 Search Flights</button>
+    <datalist id="cities">
+      <option value="New York"><option value="London"><option value="Dubai">
+      <option value="Karachi"><option value="Lahore"><option value="Paris">
+      <option value="Tokyo"><option value="Singapore"><option value="Istanbul">
+    </datalist>
+  </div>
+  <div id="flight-results"></div>
+</div>
+
+<!-- HOTELS PANEL -->
+<div class="travel-panel" id="panel-hotels">
+  <div class="travel-card">
+    <h2>🏨 Find Your Hotel <span class="live-badge">● LIVE</span></h2>
+    <p style="color:#a5b4fc;">Search live hotel prices — results open on Google Hotels with real rates.</p>
+    <div class="search-row">
+      <input type="text" id="ht-city" placeholder="Destination (e.g. Dubai)">
+      <input type="date" id="ht-checkin" aria-label="Check-in">
+      <input type="date" id="ht-checkout" aria-label="Check-out">
+    </div>
+    <button class="search-btn" onclick="searchHotels()">🔍 Search Hotels</button>
+  </div>
+  <div id="hotel-results"></div>
+</div>
+
+<!-- CARS PANEL -->
+<div class="travel-panel" id="panel-cars">
+  <div class="travel-card">
+    <h2>🚗 Rent a Car <span class="live-badge">● LIVE</span></h2>
+    <p style="color:#a5b4fc;">Search rental cars — results open on Kayak with live prices.</p>
+    <div class="search-row">
+      <input type="text" id="car-city" placeholder="Pickup city (e.g. Los Angeles)">
+      <input type="date" id="car-pickup" aria-label="Pickup date">
+      <input type="date" id="car-dropoff" aria-label="Drop-off date">
+    </div>
+    <button class="search-btn" onclick="searchCars()">🔍 Search Cars</button>
+  </div>
+  <div id="car-results"></div>
+</div>
+
+<script>
+function showPanel(name){
+  document.querySelectorAll('.travel-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.travel-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function searchFlights(){
+  var from=document.getElementById('fl-from').value||'New York';
+  var to=document.getElementById('fl-to').value||'London';
+  var date=document.getElementById('fl-date').value;
+  var q='Flights from '+from+' to '+to+(date?' on '+date:'');
+  // Show animated preview
+  document.getElementById('flight-results').innerHTML=
+    '<div class="result-card"><div class="result-icon">✈️</div>'+
+    '<div class="result-info"><h3>'+from+' → '+to+'</h3>'+
+    '<p>Opening Google Flights with live prices...</p></div>'+
+    '<div class="result-price">LIVE</div></div>';
+  setTimeout(function(){
+    window.open('https://www.google.com/travel/flights?q='+encodeURIComponent(q),'_blank');
+  },800);
+}
+
+function searchHotels(){
+  var city=document.getElementById('ht-city').value||'Dubai';
+  var ci=document.getElementById('ht-checkin').value;
+  var co=document.getElementById('ht-checkout').value;
+  document.getElementById('hotel-results').innerHTML=
+    '<div class="result-card"><div class="result-icon">🏨</div>'+
+    '<div class="result-info"><h3>Hotels in '+city+'</h3>'+
+    '<p>Opening Google Hotels with live rates...</p></div>'+
+    '<div class="result-price">LIVE</div></div>';
+  setTimeout(function(){
+    var q='hotels in '+city;
+    window.open('https://www.google.com/travel/hotels?q='+encodeURIComponent(q),'_blank');
+  },800);
+}
+
+function searchCars(){
+  var city=document.getElementById('car-city').value||'Los Angeles';
+  document.getElementById('car-results').innerHTML=
+    '<div class="result-card"><div class="result-icon">🚗</div>'+
+    '<div class="result-info"><h3>Rental cars in '+city+'</h3>'+
+    '<p>Opening Kayak with live car prices...</p></div>'+
+    '<div class="result-price">LIVE</div></div>';
+  setTimeout(function(){
+    window.open('https://www.kayak.com/cars/'+encodeURIComponent(city),'_blank');
+  },800);
+}
+</script>
+
+<footer style="text-align:center;padding:20px;color:#666;">
+  <p>Live prices via Google Flights, Google Hotels & Kayak • <a href="index.html">US AI Home</a></p>
+</footer>
+</body>
+</html>

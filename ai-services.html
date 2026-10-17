@@ -179,94 +179,12 @@
 <div class="as-hero" id="main" tabindex="-1">
   <img src="img/icon-ai-chat-256.jpg" alt="AI Services" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
   <h1>🤖 AI Services</h1>
-  <p>Five AI-powered services in one place — the AI that <b>books your flights</b>, <b>saves your money</b>, <b>sorts your email</b>, <b>manages your calendar</b> and <b>builds your fitness plans</b>. Every box below has free tools you can use right now, plus a paid concierge when you want us to do it all for you.</p>
+  <p>Four AI-powered services in one place — the AI that <b>saves your money</b>, <b>sorts your email</b>, <b>manages your calendar</b> and <b>builds your fitness plans</b>. Every box below has free tools you can use right now, plus a paid concierge when you want us to do it all for you.</p>
 </div>
 <div class="as-wrap">
 <div class="as-main">
 
-<!-- ============ BOX 1: AI FLIGHT BOOKING ============ -->
-<section class="as-box" id="box-flights" aria-label="AI flight booking">
-  <div class="as-boxhead">
-    <span class="bpic">✈️</span>
-    <div><h2>AI Flight Booking — <i>books reservations</i></h2>
-    <p>Tell us where you want to go. Our AI compares real fares across Google Flights, Booking.com and airline sites, then books the cheapest ticket for you — one flat all-in price, no hidden fees.<br>💯 What you see is what you pay — JazzCash-secured, with human help on WhatsApp.</p></div>
-  </div>
-  <div class="as-book" aria-label="Flight search">
-    <h3>🔍 Find your flight</h3>
-    <div class="as-book-row">
-      <input type="text" id="fl-from" list="fl-cities" placeholder="From city (e.g. New York)" autocomplete="off" aria-label="From city">
-      <input type="text" id="fl-to" list="fl-cities" placeholder="To city (e.g. London)" autocomplete="off" aria-label="To city">
-      <input type="date" id="fl-date" aria-label="Travel date">
-      <datalist id="fl-cities">
-        <option value="New York"></option><option value="Los Angeles"></option><option value="Chicago"></option>
-        <option value="Miami"></option><option value="Toronto"></option><option value="London"></option>
-        <option value="Madrid"></option><option value="Tokyo"></option><option value="Dubai"></option>
-      </datalist>
-      <button type="button" class="as-free-btn" id="fl-go">🔍 Search Flights</button>
-    </div>
-    <p class="as-book-tip" id="fl-tip" aria-live="polite"></p>
-  <div class="as-trust" aria-label="Trust badges">
-    <span>🔒 Secure payment via JazzCash</span>
-    <span>💯 No hidden fees — all-in price</span>
-    <a href="https://wa.me/923254746678" target="_blank" rel="noopener">🎧 Human help on WhatsApp</a>
-  </div>
-  </div>
-  <input type="search" class="as-search" id="search-flights" placeholder="🔍 Filter routes..." autocomplete="off" aria-label="Filter routes">
-  <div class="as-count" id="count-flights"></div>
-  <div class="as-grid" id="grid-flights"><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div></div></div>
-  <div class="as-free" aria-label="Free flight tools">
-    <h2>🆓 Free Flight Tools</h2>
-    <p class="sub">Free forever — the paid booking is only if you want us to book it for you.</p>
-    <div class="as-freegrid">
-      <div class="as-freecard">
-        <div class="fh"><span class="fic">🔔</span><b>Fare Alerts — free</b></div>
-        <p>Get a WhatsApp alert when your route drops below your target price. Set it once, we watch the fare.</p>
-        <div class="as-form">
-          <input type="text" id="fa-route" placeholder="Route, e.g. JFK → LAX" aria-label="Route">
-          <input type="tel" id="fa-phone" placeholder="WhatsApp number" aria-label="WhatsApp number">
-          <button type="button" class="as-free-btn" id="fa-go">Set Alert</button>
-        </div>
-      </div>
-      <div class="as-freecard">
-        <div class="fh"><span class="fic">📖</span><b>Route Guide — free</b></div>
-        <p>Cheapest-day secrets for popular USA routes, written from real fare data.</p>
-        <details><summary>Read the guide →</summary>
-          <ul>
-            <li><b>Fly Tuesday/Wednesday:</b> midweek departures are usually 15–25% cheaper than Friday/Sunday.</li>
-            <li><b>Book 3–6 weeks out:</b> domestic USA fares bottom out in this window; too early or too late costs more.</li>
-            <li><b>Compare nearby airports:</b> check EWR vs JFK, or MDW vs ORD — a 40-minute train can save $60.</li>
-            <li><b>Set alerts early:</b> fares move daily; a fare alert beats checking by hand every time.</li>
-          </ul>
-        </details>
-      </div>
-      <div class="as-freecard">
-        <div class="fh"><span class="fic">🧳</span><b>Packing Checklist — free</b></div>
-        <p>Never pay a baggage fee or forget a charger again.</p>
-        <details><summary>Show checklist →</summary>
-          <ul>
-            <li>Passport/ID + boarding pass (screenshot, not just the app).</li>
-            <li>Charger + power bank under 100Wh (carry-on only).</li>
-            <li>One change of clothes in your personal item.</li>
-            <li>Snacks — airport prices are 3x.</li>
-            <li>Empty water bottle — fill after security.</li>
-          </ul>
-        </details>
-      </div>
-      <div class="as-freecard">
-        <div class="fh"><span class="fic">💺</span><b>Seat Picker Tips — free</b></div>
-        <p>Where to sit without paying extra.</p>
-        <details><summary>Show tips →</summary>
-          <ul>
-            <li><b>Exit rows</b> are free at check-in on many airlines if unassigned seats remain.</li>
-            <li><b>Front of the wing</b> = quieter ride; back = faster deplaning is a myth.</li>
-            <li><b>Avoid the last row</b> — seats often don't recline and sit by the lavatory.</li>
-          </ul>
-        </details>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- BOX 1 (Flight Booking) moved to travel.html by user order 2026-10-17 -->
 <!-- ============ BOX 2: AI MONEY SAVER ============ -->
 <section class="as-box" id="box-money" aria-label="AI money saver">
   <div class="as-boxhead">
