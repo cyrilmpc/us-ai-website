@@ -262,6 +262,25 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 #cpanel{transition:all .4s}
 #cpanel.open{animation:slideUp .4s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+
+/* More animations */
+.ct{transition:all .3s;position:relative;overflow:hidden}
+.ct::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);transition:left .5s}
+.ct:hover::before{left:100%}
+.ct:hover{transform:translateY(-5px) scale(1.03)}
+.bslide{animation:bannerZoom 6s ease-in-out infinite}
+.flash-timer{animation:timerGlow 2s infinite}
+@keyframes timerGlow{0%,100%{box-shadow:0 0 10px rgba(239,68,68,.4)}50%{box-shadow:0 0 25px rgba(239,68,68,.8)}}
+.wish,.share{transition:all .3s}
+.wish:hover{transform:scale(1.3) rotate(-10deg)}
+.share:hover{transform:scale(1.3) rotate(10deg)}
+.top-utils a{transition:all .3s}
+.side-icons a{transition:all .3s}
+.mini-search{animation:slideDown .4s ease}
+.stock{animation:stockBlink 1.5s infinite}
+@keyframes stockBlink{0%,100%{opacity:1}50%{opacity:.6}}
+.badge-hot{animation:hotPulse 1.2s infinite}
+@keyframes hotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 </style>
 </head>
 <body>
