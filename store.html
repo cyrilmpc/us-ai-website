@@ -314,11 +314,6 @@ setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
   </div>
 </div>
 
-<div class="cts">
-  <h2>📂 Shop by Category</h2>
-  <div class="ct-grid" id="ctGrid"></div>
-</div>
-
 <div class="sec">
   <div class="sec-h flash-h">
     <h2>⚡ Flash Sale <span class="flash-timer">⏰ <span id="flashTime">05:23:11</span></span></h2>
@@ -328,7 +323,12 @@ setInterval(() => showSlide((bIdx + 1) % slides.length), 4000);
 </div>
 
 <div class="sec">
-  <div class="toolbar">
+  <div class="cts">
+  <h2>📂 Shop by Category</h2>
+  <div class="ct-grid" id="ctGrid"></div>
+</div>
+
+<div class="toolbar">
   <select id="sortSel" onchange="sortProducts(this.value)">
     <option value="">🔀 Sort: Default</option>
     <option value="low">💰 Price: Low to High</option>
@@ -896,6 +896,170 @@ function setMainImg(idx){
 
 <!-- Mini Search (shows on scroll) -->
 <div class="mini-search" id="miniSearch">
+  <a href="index.html" style="text-decoration:none;"><img src="img/logo.png" style="width:28px;height:28px;border-radius:8px;" alt="US AI"></a>
+  <input type="text" id="mq" placeholder="🔍 Search..." onkeypress="if(event.key==='Enter'){document.getElementById('q').value=this.value;doSearch();}">
+  <button onclick="document.getElementById('q').value=document.getElementById('mq').value;doSearch();">🔍</button>
+</div>
+<script>
+// Shrink header + show mini search on scroll
+window.addEventListener('scroll', function(){
+  const hdr = document.querySelector('.hdr');
+  const mini = document.getElementById('miniSearch');
+  const toolbar = document.querySelector('.toolbar');
+  const banners = document.getElementById('banners');
+  if(window.scrollY > 300){
+    if(hdr) hdr.classList.add('shrink');
+    if(mini) mini.classList.add('show');
+    if(toolbar) toolbar.style.display = 'none';
+    if(banners) banners.style.display = 'none';
+  } else {
+    if(hdr) hdr.classList.remove('shrink');
+    if(mini) mini.classList.remove('show');
+    if(toolbar) toolbar.style.display = '';
+    if(banners) banners.style.display = '';
+  }
+});
+</script>
+<script>
+// ===== HOVER IMAGE AUTO-CHANGE (5 sec) =====
+window._hoverTimers = {};
+window._hoverIdx = {};
+function phOver(el, pid){
+  // Get product images from global store
+  const p = window._prodCache && window._prodCache[pid];
+  if(!p || !p.images || p.images.length < 2) return;
+  window._hoverIdx[pid] = 0;
+  window._hoverTimers[pid] = setInterval(() => {
+    window._hoverIdx[pid] = (window._hoverIdx[pid] + 1) % p.images.length;
+    el.src = p.images[window._hoverIdx[pid]];
+  }, 5000);
+}
+function phOut(el, pid, origSrc){
+  if(window._hoverTimers[pid]){
+    clearInterval(window._hoverTimers[pid]);
+    delete window._hoverTimers[pid];
+  }
+  el.src = origSrc;
+}
+// Cache products for hover
+window._prodCache = window._prodCache || {};
+function cacheProd(p){
+  window._prodCache[p.id] = p;
+  return p;
+}
+</script>
+<script>
+// ===== NEW FEATURES =====
+// Wishlist
+function toggleWish(pid, el){
+  event.stopPropagation();
+  let w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  const i = w.indexOf(pid);
+  if(i === -1){ w.push(pid); el.classList.add('active'); el.textContent = '❤️'; toast('❤️ Added to wishlist!'); }
+  else { w.splice(i, 1); el.classList.remove('active'); el.textContent = '🤍'; toast('🤍 Removed from wishlist!'); }
+  localStorage.setItem('wishlist', JSON.stringify(w));
+  document.getElementById('wishN').textContent = w.length;
+}
+function isWished(pid){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  return w.includes(pid);
+}
+function showWishlist(){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  if(w.length === 0){ toast('❤️ Wishlist is empty!'); return; }
+  const products = w.map(pid => window._prodCache[pid]).filter(p => p);
+  document.querySelector('.sec-h h2').innerHTML = '❤️ My Wishlist (' + products.length + ')';
+  document.getElementById('jfyG').innerHTML = products.map(cardHTML).join('');
+  document.getElementById('clearBtn').style.display = '';
+  toast('❤️ Showing wishlist!');
+}
+// Sort
+function sortProducts(mode){
+  if(!mode) return;
+  let sorted = [...displayedProducts];
+  if(mode === 'low') sorted.sort((a,b) => parseFloat(a.price) - parseFloat(b.price));
+  if(mode === 'high') sorted.sort((a,b) => parseFloat(b.price) - parseFloat(a.price));
+  if(mode === 'rating') sorted.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating));
+  if(mode === 'discount') sorted.sort((a,b) => parseInt(b.discount) - parseInt(a.discount));
+  document.getElementById('jfyG').innerHTML = sorted.map(cardHTML).join('');
+  toast('🔀 Sorted!');
+}
+// Price filter
+function filterPrice(range){
+  if(!range){
+    document.getElementById('jfyG').innerHTML = displayedProducts.map(cardHTML).join('');
+    return;
+  }
+  const [min, max] = range.split('-').map(Number);
+  const filtered = displayedProducts.filter(p => {
+    const pr = parseFloat(p.price);
+    return pr >= min && pr <= max;
+  });
+  document.getElementById('jfyG').innerHTML = filtered.map(cardHTML).join('');
+  toast(`💵 ${filtered.length} products in range!`);
+}
+// Share
+function shareProduct(pid, el){
+  event.stopPropagation();
+  const p = window._prodCache[pid];
+  const url = location.origin + location.pathname.replace('store.html','') + 'product.html?id=' + pid;
+  const text = `Check this: ${p.name} - $${p.price}`;
+  if(navigator.share){
+    navigator.share({title: p.name, text: text, url: url});
+  } else {
+    const wa = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+    window.open(wa, '_blank');
+  }
+  toast('📤 Share opened!');
+}
+// Recently viewed
+function addRecent(p){
+  let r = JSON.parse(localStorage.getItem('recent') || '[]');
+  r = r.filter(x => x.id !== p.id);
+  r.unshift({id: p.id, name: p.name, image: p.image, price: p.price});
+  r = r.slice(0, 10);
+  localStorage.setItem('recent', JSON.stringify(r));
+}
+</script>
+
+<script>
+// Update wishlist count on load
+(function(){
+  const w = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  const el = document.getElementById('wishN');
+  if(el) el.textContent = w.length;
+})();
+</script>
+
+<script>
+// Flash sale countdown
+function updateFlash(){
+  const el = document.getElementById('flashTime');
+  if(!el) return;
+  let t = el.textContent.split(':').map(Number);
+  let s = t[0]*3600 + t[1]*60 + t[2] - 1;
+  if(s < 0) s = 5*3600 + 59*60 + 59;
+  const hh = String(Math.floor(s/3600)).padStart(2,'0');
+  const mm = String(Math.floor((s%3600)/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  el.textContent = `${hh}:${mm}:${ss}`;
+}
+setInterval(updateFlash, 1000);
+</script>
+
+<script>
+// Update account icon based on login
+(function(){
+  const logged = localStorage.getItem('usai_logged') === '1';
+  const el = document.getElementById('accIcon');
+  if(el && logged){
+    el.innerHTML = '<span style="font-size:.7rem;font-weight:bold;background:#10b981;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;">✓</span>';
+    el.title = 'Logged in ✓';
+  }
+})();
+</script>
+</body>
+</html><div class="mini-search" id="miniSearch">
   <a href="index.html" style="text-decoration:none;"><img src="img/logo.png" style="width:28px;height:28px;border-radius:8px;" alt="US AI"></a>
   <input type="text" id="mq" placeholder="🔍 Search..." onkeypress="if(event.key==='Enter'){document.getElementById('q').value=this.value;doSearch();}">
   <button onclick="document.getElementById('q').value=document.getElementById('mq').value;doSearch();">🔍</button>
