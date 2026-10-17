@@ -161,7 +161,7 @@ body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(1
 
 /* Animated Banner Carousel */
 .banners{position:relative;max-width:1200px;margin:20px auto;overflow:hidden;border-radius:20px;height:200px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.bslide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1s;font-size:2rem;font-weight:900;text-align:center;animation:bannerZoom 8s ease-in-out infinite}
+.bslide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .8s;will-change:opacity;font-size:2rem;font-weight:900;text-align:center;animation:bannerZoom 8s ease-in-out infinite}
 .bslide.active{opacity:1}
 .bslide:nth-child(1){background:linear-gradient(90deg,#8b5cf6,#3b82f6)}
 .bslide:nth-child(2){background:linear-gradient(90deg,#ef4444,#f97316)}
@@ -465,7 +465,7 @@ function loadMore(){
     document.getElementById('lmBtn').textContent = '✅ All 10,000 Loaded!';
     return;
   }
-  const batchSize = 120; // Fewer initial, more in Load More!
+  const batchSize = 50; // 50 initial as user asked!
   const batch = genBatch(11 + jfyCount, batchSize);
   batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id)) displayedProducts.push(p); });
   document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
