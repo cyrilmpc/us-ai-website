@@ -163,8 +163,28 @@ const feed = document.getElementById('feed');
 let autoScroll = true;
 let currentIdx = 0;
 
+// Smart feed: followed dramas first, then shuffle rest
+function buildFeed() {
+  const followed = JSON.parse(localStorage.getItem('tk_followed') || '[]');
+  let sorted = [...VIDEOS];
+  if (followed.length > 0) {
+    // Prioritize followed dramas
+    sorted.sort((a, b) => {
+      const aF = followed.some(f => a.drama.includes(f.replace('@usai_dramas • ','')) || f.includes(a.drama));
+      const bF = followed.some(f => b.drama.includes(f.replace('@usai_dramas • ','')) || f.includes(b.drama));
+      if (aF && !bF) return -1;
+      if (!aF && bF) return 1;
+      return Math.random() - 0.5;
+    });
+  } else {
+    // Shuffle for variety
+    sorted.sort(() => Math.random() - 0.5);
+  }
+  return sorted;
+}
+
 // Build video elements
-VIDEOS.forEach((v, i) => {
+buildFeed().forEach((v, i) => {
   const wrap = document.createElement('div');
   wrap.className = 'tk-video-wrap';
   wrap.innerHTML = `
@@ -304,16 +324,26 @@ function toggleLike(el) {
   localStorage.setItem('tk_liked', JSON.stringify(likedVideos));
 }
 
+let currentVideoSrc = '';
 function openComments(el) {
+  const wrap = el.closest('.tk-video-wrap');
+  currentVideoSrc = wrap.querySelector('video').src;
   const modal = document.getElementById('tk-comments');
   modal.style.display = 'flex';
+  loadComments();
+}
+
+function loadComments() {
   const list = document.getElementById('tk-comments-list');
-  // Sample comments
-  list.innerHTML = `
-    <div style="margin-bottom:12px;"><strong>@drama_fan:</strong> 🔥 Amazing scene!</div>
-    <div style="margin-bottom:12px;"><strong>@turkish_lover:</strong> Best drama ever! ❤️</div>
-    <div style="margin-bottom:12px;"><strong>@usai_user:</strong> Urdu subtitles please! 🙏</div>
-  `;
+  const all = JSON.parse(localStorage.getItem('tk_comments') || '{}');
+  const comments = all[currentVideoSrc] || [];
+  if (comments.length === 0) {
+    list.innerHTML = '<div style="color:#888;text-align:center;padding:20px;">No comments yet. Be the first!</div>';
+  } else {
+    list.innerHTML = comments.map(c => 
+      '<div style="margin-bottom:12px;"><strong>@you:</strong> ' + c.replace(/</g,'&lt;') + '</div>'
+    ).join('');
+  }
 }
 
 function closeComments() {
@@ -323,13 +353,14 @@ function closeComments() {
 function postComment() {
   const input = document.getElementById('tk-comment-input');
   const text = input.value.trim();
-  if (!text) return;
-  const list = document.getElementById('tk-comments-list');
-  const div = document.createElement('div');
-  div.style.marginBottom = '12px';
-  div.innerHTML = '<strong>@you:</strong> ' + text.replace(/</g,'&lt;');
-  list.appendChild(div);
+  if (!text || !currentVideoSrc) return;
+  const all = JSON.parse(localStorage.getItem('tk_comments') || '{}');
+  if (!all[currentVideoSrc]) all[currentVideoSrc] = [];
+  all[currentVideoSrc].push(text);
+  localStorage.setItem('tk_comments', JSON.stringify(all));
   input.value = '';
+  loadComments();
+  const list = document.getElementById('tk-comments-list');
   list.scrollTop = list.scrollHeight;
 }
 </script>
