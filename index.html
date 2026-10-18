@@ -280,10 +280,16 @@ a[href*="whatsapp"][class*="community"], .community-join {
 </style>
 <style>
 /* User order: ONLY first 4 boxes smaller */
-.services-grid > .svc-card:nth-child(-n+4) img { height: 70px !important; }
+
 .services-grid > .svc-card:nth-child(-n+4) .svc-body { padding: 8px 6px !important; }
 .services-grid > .svc-card:nth-child(-n+4) h3 { font-size: 0.95rem !important; margin: 4px 0 !important; }
 .services-grid > .svc-card:nth-child(-n+4) p { font-size: 0.75rem !important; line-height: 1.25 !important; }
+</style>
+<style>
+/* User order: first 4 boxes - keep image animation, reduce empty space below */
+.services-grid > .svc-card:nth-child(-n+4) img { margin-bottom: 0 !important; }
+.services-grid > .svc-card:nth-child(-n+4) .svc-body { padding-top: 4px !important; margin-top: 0 !important; }
+.services-grid > .svc-card:nth-child(-n+4) { gap: 0 !important; }
 </style>
 </head>
 <body>
