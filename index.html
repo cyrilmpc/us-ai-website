@@ -3361,12 +3361,35 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function updatePriceDisplay(card) {
     if (!card) return;
+    var subId = card.getAttribute('data-sub');
+    var subData = null;
+    
+    // Get full data from global SUBS
+    if (window.USAI_SUBS && subId) {
+      for (var i = 0; i < window.USAI_SUBS.length; i++) {
+        if (window.USAI_SUBS[i][6] === subId) {
+          subData = window.USAI_SUBS[i];
+          break;
+        }
+      }
+    }
+    
     var nameEl = card.querySelector('.sub-name');
     var priceEl = card.querySelector('.sub-price');
-    if (!nameEl || !priceEl) return;
+    var name = nameEl ? nameEl.textContent.trim() : (subData ? subData[1] : 'Subscription');
+    var price = priceEl ? priceEl.textContent.trim() : '';
     
-    var name = nameEl.textContent.trim();
-    var price = priceEl.textContent.trim();
+    // Update details panel completely
+    var details = document.getElementById('sub-details');
+    if (details && subData) {
+      // subData: [icon, name, category, official PKR, our PKR, desc]
+      var icon = subData[0], sName = subData[1], cat = subData[2], official = subData[3], ourPrice = subData[4], desc = subData[5];
+      details.innerHTML = 
+        '<div class="sub-detail-logo" style="font-size:48px;">' + icon + '</div>' +
+        '<p><b>' + sName + '</b> <span class="tiny muted">' + cat + '</span></p>' +
+        '<p class="tiny muted">' + desc + '</p>' +
+        '<p class="tiny">Official: <s class="muted">$' + (official/280).toFixed(2) + '/mo</s> <b class="grad">$' + (ourPrice/280).toFixed(2) + '/mo</b></p>';
+    }
     
     // Update the details panel
     var details = document.getElementById('sub-details');

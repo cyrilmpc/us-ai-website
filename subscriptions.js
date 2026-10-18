@@ -3,7 +3,7 @@
   "use strict";
 
   /* [icon, name, category, official PKR/mo, our PKR/mo, desc] */
-  var SUBS = [
+  window.USAI_SUBS = window.USAI_SUBS || []; var SUBS = window.USAI_SUBS = [
   /* ---- AI CHAT ---- */
   ["🤖","ChatGPT Go","AI Chat",1400,2000,"OpenAI's budget plan — GPT-5, image gen, file uploads, higher limits."],
   ["🧠","ChatGPT Plus","AI Chat",5700,7500,"GPT-6 reasoning, priority access, deep research, Codex agent, custom GPTs."],
