@@ -17,8 +17,17 @@ body { background:#000; color:#fff; font-family:-apple-system,BlinkMacSystemFont
   padding:12px; gap:20px;
   background:linear-gradient(to bottom, rgba(0,0,0,.6), transparent);
 }
-.tk-logo { font-size:1.4rem; font-weight:800; letter-spacing:-0.5px; }
+.tk-logo {
+  font-size:1.6rem; font-weight:900; letter-spacing:-1px;
+  position:relative; display:inline-block;
+  animation:logoPulse 3s ease-in-out infinite;
+  text-shadow: 2px 2px 0 #25f4ee, -2px -2px 0 #fe2c55;
+}
 .tk-logo span:first-child { color:#fff; }
+@keyframes logoPulse {
+  0%,100% { transform:scale(1); text-shadow:2px 2px 0 #25f4ee, -2px -2px 0 #fe2c55; }
+  50% { transform:scale(1.05); text-shadow:3px 3px 0 #25f4ee, -3px -3px 0 #fe2c55; }
+}
 .tk-tab { font-size:1rem; color:#aaa; cursor:pointer; padding:4px 8px; }
 .tk-tab.active { color:#fff; font-weight:700; border-bottom:2px solid #fff; }
 
@@ -56,18 +65,47 @@ body { background:#000; color:#fff; font-family:-apple-system,BlinkMacSystemFont
 }
 .tk-action { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; }
 .tk-action-btn {
-  width:48px; height:48px; border-radius:50%;
-  background:rgba(255,255,255,.15); backdrop-filter:blur(10px);
-  display:flex; align-items:center; justify-content:center; font-size:1.4rem;
-  transition:transform .2s;
+  width:52px; height:52px; border-radius:50%;
+  background:linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08));
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 4px 15px rgba(0,0,0,.3);
 }
-.tk-action-btn:active { transform:scale(0.9); }
+.tk-action-btn:hover { transform:scale(1.1); }
+.tk-action-btn:active { transform:scale(0.85); }
+.tk-action.liked .tk-action-btn {
+  background:linear-gradient(135deg,#fe2c55,#ff6b8a);
+  border-color:#fe2c55;
+  animation:heartBurst .5s ease;
+  box-shadow:0 0 20px rgba(254,44,85,.6);
+}
+@keyframes heartBurst {
+  0% { transform:scale(1); }
+  30% { transform:scale(1.3); }
+  50% { transform:scale(0.9); }
+  70% { transform:scale(1.15); }
+  100% { transform:scale(1); }
+}
+.tk-action-count {
+  font-size:0.75rem; font-weight:700;
+  text-shadow:0 2px 4px rgba(0,0,0,.8);
+}
 .tk-action-count { font-size:0.75rem; font-weight:600; }
 .tk-action.liked .tk-action-btn { background:#fe2c55; }
 .tk-avatar {
-  width:48px; height:48px; border-radius:50%; border:2px solid #fff;
-  background:linear-gradient(135deg,#667eea,#764ba2);
-  display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  width:52px; height:52px; border-radius:50%;
+  border:2px solid #fff;
+  background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);
+  background-size:200% 200%;
+  animation:avatarGlow 3s ease infinite;
+  display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  box-shadow:0 4px 15px rgba(102,126,234,.5);
+}
+@keyframes avatarGlow {
+  0%,100% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
 }
 
 /* Bottom info */
