@@ -459,13 +459,19 @@ function subGoStep(n) {
   document.querySelectorAll('#subscriptions .sub-step').forEach(function(el) {
     el.classList.remove('active');
   });
-  document.getElementById('sub-step-' + n).classList.add('active');
+  var stepEl = document.getElementById('sub-step-' + n);
+  if (stepEl) stepEl.classList.add('active');
   document.querySelectorAll('#subscriptions .step-dot').forEach(function(el, i) {
-    el.classList.remove('active');
+    el.classList.remove('active', 'done');
     if (i + 1 < n) el.classList.add('done');
     if (i + 1 === n) el.classList.add('active');
   });
-  document.getElementById('subscriptions').scrollIntoView({behavior: 'smooth'});
+  var progress = document.getElementById('sub-progress');
+  if (progress) {
+    progress.style.width = ((n - 1) / 2 * 100) + '%';
+  }
+  var subs = document.getElementById('subscriptions');
+  if (subs) subs.scrollIntoView({behavior: 'smooth'});
 }
 </script>
 <style>
@@ -526,6 +532,41 @@ function subGoStep(n) {
     margin: 0 !important;
   }
 }
+</style>
+<style>
+/* User order: progress bar for steps */
+#subscriptions .sub-steps-nav {
+  position: relative;
+  max-width: 400px;
+  margin: 12px auto !important;
+}
+#subscriptions .sub-steps-nav::before {
+  content: '';
+  position: absolute;
+  top: 16px; left: 40px; right: 40px;
+  height: 3px; background: #333;
+  z-index: 0;
+}
+#subscriptions .sub-progress-fill {
+  position: absolute;
+  top: 16px; left: 40px;
+  height: 3px; background: linear-gradient(90deg,#8b5cf6,#d946ef);
+  z-index: 1; transition: width 0.3s;
+  width: 0%;
+}
+#subscriptions .step-dot {
+  position: relative; z-index: 2;
+  background: #1a1a2e !important;
+}
+#sub-buy-btn {
+  display: block; margin: 16px auto; padding: 14px 48px;
+  background: linear-gradient(135deg,#8b5cf6,#d946ef);
+  color: white; border: none; border-radius: 12px;
+  font-size: 1.1rem; font-weight: bold; cursor: pointer;
+  box-shadow: 0 4px 15px rgba(139,92,246,0.3);
+}
+#sub-buy-btn:hover { transform: scale(1.05); }
+#sub-buy-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 </style>
 </head>
 <body>
@@ -1774,6 +1815,7 @@ a.jk-otd-go:hover{text-decoration:underline;}
   <div class="shop-search"><input type="search" id="sub-search" placeholder="🔍 Search subscription... (e.g. ChatGPT, Netflix)" autocomplete="off" aria-label="Search subscriptions"></div>
   <div class="shop-grid">
     <div class="sub-steps-nav">
+        <div class="sub-progress-fill" id="sub-progress"></div>
         <div class="step-dot active">1</div>
         <div class="step-dot">2</div>
         <div class="step-dot">3</div>
