@@ -2792,11 +2792,21 @@ function sendChatMessage() {
   if (!text) return;
   input.value = '';
   var container = document.getElementById('lc-messages');
+  var wrapper = document.createElement('div');
+  wrapper.style.cssText = 'align-self:flex-end;display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:80%;';
   var div = document.createElement('div');
-  div.style.cssText = 'align-self:flex-end;background:#8b5cf6;padding:8px 12px;border-radius:12px;max-width:80%;color:white;';
+  div.style.cssText = 'background:#8b5cf6;padding:8px 12px;border-radius:12px;color:white;';
   div.textContent = text;
-  container.appendChild(div);
+  wrapper.appendChild(div);
+  var seen = document.createElement('div');
+  seen.style.cssText = 'font-size:10px;color:#888;display:flex;align-items:center;gap:4px;';
+  seen.innerHTML = '<span style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#d946ef);display:inline-flex;align-items:center;justify-content:center;font-size:10px;">🤖</span> Seen';
+  seen.style.opacity = '0';
+  seen.style.transition = 'opacity 0.5s';
+  wrapper.appendChild(seen);
+  container.appendChild(wrapper);
   container.scrollTop = container.scrollHeight;
+  setTimeout(function(){ seen.style.opacity = '1'; }, 1000);
   showTyping();
   // TODO: Send to backend
 }
