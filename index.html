@@ -594,6 +594,44 @@ function subGoStep(n) {
 }
 </style>
 
+
+<style>
+/* User order: Make subscriptions panel shorter */
+#subscriptions .sub-step {
+  max-width: 800px !important;
+}
+#sub-step-1 .chat-card {
+  padding: 12px !important;
+}
+#sub-grid {
+  max-height: 200px !important;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+  gap: 6px !important;
+}
+#sub-grid .sub-card {
+  padding: 8px 4px !important;
+  font-size: 0.75rem !important;
+}
+#sub-details {
+  padding: 10px !important;
+  margin: 8px 0 !important;
+}
+#subscriptions .ent-pill {
+  padding: 4px 10px !important;
+  font-size: 0.75rem !important;
+}
+/* Mobile: even more compact */
+@media (max-width: 768px) {
+  #sub-grid {
+    max-height: 160px !important;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+  }
+  #subscriptions .sub-step {
+    padding: 0 8px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
