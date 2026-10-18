@@ -3151,11 +3151,18 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.id = 'sub-buy-btn';
     btn.textContent = '🛒 Buy Selected →';
     btn.onclick = function() {
-      // Check if a subscription is selected
-      var selected = document.querySelector('#sub-grid .selected, #sub-grid .sub-card.selected');
-      if (!selected) {
-        alert('Please select a subscription first!');
+      // Login mandatory!
+      var user = localStorage.getItem('usai_user');
+      if (!user) {
+        alert('Please login first to buy a subscription!');
+        window.location.href = 'account.html';
         return;
+      }
+      // Check if a subscription is selected
+      var selected = document.querySelector('#sub-grid .selected, #sub-grid .sub-card.selected, #sub-grid .active');
+      if (!selected) {
+        // Try to get first selected or just proceed
+        selected = document.querySelector('#sub-grid .sub-card');
       }
       if (typeof subGoStep === 'function') subGoStep(2);
     };
