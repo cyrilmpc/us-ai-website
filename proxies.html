@@ -890,6 +890,42 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   setTimeout(makeRDP, 2000);
 })();
 </script>
+<script>
+setTimeout(function(){
+  var panels = document.querySelectorAll('#proxy-rdp-final > div > div, #rdp-exact > div > div');
+  var colors = ['#8b5cf6', '#d946ef', '#f97316'];
+  panels.forEach(function(p, i){
+    if(colors[i]){
+      p.style.border = '2px solid ' + colors[i] + ' !important';
+      p.style.borderColor = colors[i] + ' !important';
+    }
+  });
+  // Also try direct children
+  var rdp = document.getElementById('rdp-exact');
+  if(rdp){
+    var grid = rdp.querySelector('div');
+    if(grid){
+      var cards = grid.children;
+      for(var j=0; j<cards.length && j<3; j++){
+        cards[j].style.border = '2px solid ' + colors[j];
+      }
+    }
+  }
+}, 1000);
+setTimeout(function(){
+  var rdp = document.getElementById('rdp-exact');
+  if(rdp){
+    var grid = rdp.querySelector('div');
+    if(grid){
+      var cards = grid.children;
+      var colors = ['#8b5cf6', '#d946ef', '#f97316'];
+      for(var j=0; j<cards.length && j<3; j++){
+        cards[j].style.setProperty('border', '2px solid ' + colors[j], 'important');
+      }
+    }
+  }
+}, 2500);
+</script>
 </body>
 </html>
 
