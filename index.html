@@ -2381,19 +2381,19 @@ document.addEventListener('click', function(e){
   var lastY = 0;
   window.addEventListener('scroll', function(){
     var y = window.scrollY || 0;
-    var goingDown = y > lastY && y > 50;
+    var atTop = y <= 50; // Only show when at very top
     ['top-widgets','top-widgets-right','share-rail'].forEach(function(id){
       var el = document.getElementById(id);
       if(!el) return;
       if(id === 'lc-wrap') return; // never fade Live Chat
-      if(goingDown) el.classList.add('side-faded');
-      else el.classList.remove('side-faded');
+      if(atTop) el.classList.remove('side-faded');
+      else el.classList.add('side-faded');
     });
     // Sports icons also fade on scroll
-    var sportsEls = document.querySelectorAll('.sport-ico, #sports-float, .sports-col, #lc-sports-style');
+    var sportsEls = document.querySelectorAll('.sport-ico, #sports-float, .sports-col, #lc-sports-style, #lc-proper, #side-community-btns');
     sportsEls.forEach(function(s){
-      if(goingDown) s.classList.add('side-faded');
-      else s.classList.remove('side-faded');
+      if(atTop) s.classList.remove('side-faded');
+      else s.classList.add('side-faded');
     });
     lastY = y;
   }, {passive:true});
