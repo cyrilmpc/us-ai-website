@@ -436,6 +436,38 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 #subscriptions .chat-card { padding: 10px !important; }
 </style>
+<style>
+/* User order: 3-step wizard for subscriptions */
+#subscriptions .sub-step { display: none; }
+#subscriptions .sub-step.active { display: block; }
+#subscriptions .sub-steps-nav { display: flex; gap: 8px; margin: 12px 0; justify-content: center; }
+#subscriptions .sub-steps-nav .step-dot { 
+  width: 32px; height: 32px; border-radius: 50%; 
+  background: #2a2a3e; color: #888; 
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; border: 2px solid #444;
+}
+#subscriptions .sub-steps-nav .step-dot.active { 
+  background: linear-gradient(135deg,#8b5cf6,#d946ef); 
+  color: white; border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(139,92,246,0.5);
+}
+#subscriptions .sub-steps-nav .step-dot.done { background: #10b981; color: white; border-color: #10b981; }
+</style>
+<script>
+function subGoStep(n) {
+  document.querySelectorAll('#subscriptions .sub-step').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.getElementById('sub-step-' + n).classList.add('active');
+  document.querySelectorAll('#subscriptions .step-dot').forEach(function(el, i) {
+    el.classList.remove('active');
+    if (i + 1 < n) el.classList.add('done');
+    if (i + 1 === n) el.classList.add('active');
+  });
+  document.getElementById('subscriptions').scrollIntoView({behavior: 'smooth'});
+}
+</script>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -1682,7 +1714,13 @@ a.jk-otd-go:hover{text-decoration:underline;}
   <p class="muted center"><b id="sub-count">100+</b> premium subscriptions for the apps and tools you love — ChatGPT, Gemini, Midjourney, Canva, Netflix, Spotify and more — all below official price. Log in, pay with JazzCash, and your account details arrive on WhatsApp and email within 24 hours.</p>
   <div class="shop-search"><input type="search" id="sub-search" placeholder="🔍 Search subscription... (e.g. ChatGPT, Netflix)" autocomplete="off" aria-label="Search subscriptions"></div>
   <div class="shop-grid">
-    <div class="chat-card">
+    <div class="sub-steps-nav">
+        <div class="step-dot active">1</div>
+        <div class="step-dot">2</div>
+        <div class="step-dot">3</div>
+      </div>
+      <div id="sub-step-1" class="sub-step active">
+      <div class="chat-card">
       <h3>Choose subscription</h3>
       <div class="ent-pills" id="sub-cats" style="margin-bottom:10px"></div>
       <div id="sub-grid" class="sub-grid"></div>
@@ -1697,7 +1735,9 @@ a.jk-otd-go:hover{text-decoration:underline;}
       </label>
       <div class="price-box">Total: <strong id="sub-total">$7.14</strong> <span class="tiny muted" id="sub-unit"></span></div>
     </div>
-    <div class="chat-card">
+      </div>
+      <div id="sub-step-2" class="sub-step">
+      <div class="chat-card">
       <h3>Place your order</h3>
       <div id="sub-login-gate"></div>
       <form id="sub-order-form">
@@ -2875,6 +2915,33 @@ function sendChatMessage() {
 }
 </script>
 
+<script>
+// User order: 3-step subscription flow
+document.addEventListener('DOMContentLoaded', function() {
+  // When a subscription Buy button is clicked, go to step 2
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.matches('#sub-grid .sub-buy-btn, #sub-grid button')) {
+      setTimeout(function() { 
+        if (typeof subGoStep === 'function') subGoStep(2); 
+      }, 300);
+    }
+  });
+  
+  // When order form is submitted, go to step 3 (payment)
+  var form = document.getElementById('sub-order-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (typeof subGoStep === 'function') subGoStep(3);
+      // Show payment info
+      var step3 = document.getElementById('sub-step-3');
+      if (step3) {
+        step3.innerHTML = '<div class="chat-card"><h3>💳 Payment</h3><p>Pay with JazzCash to complete your order.</p><div class="price-box">Total: <strong id="sub-pay-total">$7.14</strong></div><button class="btn-primary" onclick="alert('JazzCash payment instructions will be sent via WhatsApp')">Pay with JazzCash</button><br><br><button onclick="subGoStep(1)">← Back to subscriptions</button></div>';
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>
 
