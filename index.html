@@ -191,6 +191,24 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 </style>
 
+
+<style>
+/* Widgets collapsed by default, click to expand */
+#top-widgets .tw-card > div:not(.tw-title),
+#top-widgets-right .tw-card > div:not(.tw-title) {
+  display: none !important;
+}
+#top-widgets .tw-card.tw-open > div,
+#top-widgets-right .tw-card.tw-open > div {
+  display: block !important;
+}
+#top-widgets .tw-card.tw-open > div.tw-title,
+#top-widgets-right .tw-card.tw-open > div.tw-title {
+  display: flex !important;
+}
+.tw-title { cursor: pointer !important; }
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -2419,6 +2437,21 @@ document.addEventListener('click', function(e){
       clearInterval(timer);
     }
   }, 1000);
+})();
+</script>
+
+
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    var title = e.target.closest('.tw-title');
+    if(!title) return;
+    var card = title.closest('.tw-card');
+    if(!card) return;
+    // Only for top widgets
+    if(!card.closest('#top-widgets') && !card.closest('#top-widgets-right')) return;
+    card.classList.toggle('tw-open');
+  });
 })();
 </script>
 
