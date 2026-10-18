@@ -3325,8 +3325,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Remove any existing handlers by cloning
     // Use capture to ensure we run first
-    grid.addEventListener('click', function(e) {
-      var card = e.target.closest('.sub-card');
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('#sub-grid .sub-card');
       if (!card) return;
       
       // Visual feedback immediately
@@ -3354,9 +3354,10 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 <script>
-// Complete fix: manual selection that definitely works
+// Complete fix v2: document-level handler
 (function() {
   var selectedCard = null;
+  console.log('Fix v2 loading...');
   
   function updatePriceDisplay(card) {
     if (!card) return;
@@ -3414,14 +3415,15 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    grid.addEventListener('click', function(e) {
-      var card = e.target.closest('.sub-card');
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('#sub-grid .sub-card');
       if (!card) return;
       
       e.preventDefault();
       
       // Update visual
-      grid.querySelectorAll('.sub-card').forEach(function(c) {
+      var grid = document.getElementById('sub-grid');
+      if (grid) grid.querySelectorAll('.sub-card').forEach(function(c) {
         c.classList.remove('active');
         c.style.borderColor = '';
         c.style.boxShadow = '';
