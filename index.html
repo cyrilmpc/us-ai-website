@@ -328,6 +328,16 @@ a[href*="whatsapp"][class*="community"], .community-join {
   min-height: 0 !important;
 }
 </style>
+<style>
+/* Prevent grid from stretching cards - let them be natural height */
+.services-grid { align-items: start !important; }
+.services-grid > .svc-card:nth-child(2),
+.services-grid > .svc-card:nth-child(3),
+.services-grid > .svc-card:nth-child(4) {
+  height: auto !important;
+  min-height: 0 !important;
+}
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
