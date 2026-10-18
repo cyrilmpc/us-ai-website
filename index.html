@@ -1857,7 +1857,18 @@ a.jk-otd-go:hover{text-decoration:underline;}
         <label class="fld"><span>Email</span><input type="email" id="sub-email" required placeholder="you@email.com" autocomplete="email"></label>
         <label class="fld"><span>WhatsApp number</span><input type="tel" id="sub-wa" required placeholder="+92..." inputmode="tel" autocomplete="tel"></label>
         <label class="fld"><span>Notes (optional)</span><input type="text" id="sub-notes" placeholder="Anything we should know"></label>
-        <button class="btn btn-primary btn-glow" type="submit">Buy Now</button>
+        
+        <div style="background:#1a1a2e;border:2px solid #10b981;border-radius:12px;padding:16px;margin:16px 0;">
+          <h4 style="margin:0 0 8px 0;color:#10b981;">💳 Payment via JazzCash</h4>
+          <ol style="margin:8px 0;padding-left:20px;color:#aaa;font-size:0.9rem;">
+            <li>Open JazzCash app on your phone</li>
+            <li>Send payment to: <strong style="color:white;">0300-1234567</strong> (US AI)</li>
+            <li>Note down the Transaction ID (TID)</li>
+          </ol>
+          <label class="fld" style="margin:8px 0 0 0;"><span>Enter JazzCash TID</span><input type="text" id="sub-tid" placeholder="e.g. 12345678901" required></label>
+        </div>
+        
+        <button class="btn btn-primary btn-glow" type="submit" style="width:100%;padding:14px;font-size:1.1rem;">✅ Confirm Order</button>
         <p class="tiny muted center" id="sub-order-msg">Log in, then pay with JazzCash right here — enter your TID, we verify and send your account details.</p>
       </form>
       <div id="sub-pay-box" style="display:none;margin-top:12px"></div>
