@@ -1406,6 +1406,25 @@ window.sawalScrollBehavior = function () {
     }
     if (search) search.addEventListener("input", function () { render(search.value); });
     render("");
+    // FALLBACK: if still empty after 3s, populate from main article cards
+    setTimeout(function(){
+      if(list && list.children.length === 0){
+        var cards = document.querySelectorAll('#articles-grid .mini-art');
+        var html = '';
+        cards.forEach(function(card, i){
+          var title = card.querySelector('h3');
+          var link = card.getAttribute('href');
+          if(title && link){
+            html += '<a class="allart-link" href="' + link + '"><span class="n">' + (i+1) + '.</span><span class="allart-t">' + title.textContent + '</span></a>';
+          }
+        });
+        if(html){
+          // Duplicate for ticker loop
+          list.innerHTML = '<div class="allart-track">' + html + html + '</div>';
+          list.classList.add('ticker');
+        }
+      }
+    }, 3000);
   }
 
   /* ---------- Floating animated sports icons (all sports) ---------- */
