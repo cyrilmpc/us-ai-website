@@ -3174,7 +3174,22 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('click', function(e) {
     if (e.target && e.target.matches('#sub-grid .sub-buy-btn, #sub-grid button')) {
       setTimeout(function() { 
-        if (typeof subGoStep === 'function') subGoStep(2); 
+        if (typeof subGoStep === 'function') subGoStep(2);
+      // Copy price to card form (user order)
+      setTimeout(function(){
+        var t=document.getElementById('sub-total');
+        var ct=document.getElementById('sub-card-total');
+        if(t&&ct&&t.textContent){ct.textContent=t.textContent;}
+        var u=document.getElementById('sub-unit');
+        var ai=document.getElementById('sub-auto-info');
+        if(ai){
+          try{
+            var s=JSON.parse(localStorage.getItem('sawalai_session')||localStorage.getItem('usai_user')||'{}');
+            var email=s.email||s.name||'Guest';
+            ai.innerHTML='Product: <strong>'+(u?u.textContent:'')+'</strong><br>Total: <strong style="color:#10b981;">'+(t?t.textContent:'')+'</strong><br>Email: <strong>'+email+'</strong>';
+          }catch(e){ai.innerHTML='Ready to pay';}
+        }
+      },400); 
       }, 300);
     }
   });
@@ -3294,6 +3309,21 @@ document.addEventListener('DOMContentLoaded', function() {
         selected = document.querySelector('#sub-grid .sub-card');
       }
       if (typeof subGoStep === 'function') subGoStep(2);
+      // Copy price to card form (user order)
+      setTimeout(function(){
+        var t=document.getElementById('sub-total');
+        var ct=document.getElementById('sub-card-total');
+        if(t&&ct&&t.textContent){ct.textContent=t.textContent;}
+        var u=document.getElementById('sub-unit');
+        var ai=document.getElementById('sub-auto-info');
+        if(ai){
+          try{
+            var s=JSON.parse(localStorage.getItem('sawalai_session')||localStorage.getItem('usai_user')||'{}');
+            var email=s.email||s.name||'Guest';
+            ai.innerHTML='Product: <strong>'+(u?u.textContent:'')+'</strong><br>Total: <strong style="color:#10b981;">'+(t?t.textContent:'')+'</strong><br>Email: <strong>'+email+'</strong>';
+          }catch(e){ai.innerHTML='Ready to pay';}
+        }
+      },400);
     };
     step1.appendChild(btn);
   }
