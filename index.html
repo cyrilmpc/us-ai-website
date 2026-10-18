@@ -2328,40 +2328,7 @@ document.addEventListener('click', function(e){
 </script>
 
 
-<script>
-// Articles: show 10, rest in More
-(function(){
-  function init(){
-    var grid = document.getElementById('articles-grid');
-    if(!grid) return;
-    var cards = grid.querySelectorAll('.mini-art');
-    if(cards.length <= 10) return;
-    // Hide beyond 10
-    for(var i = 10; i < cards.length; i++){
-      cards[i].style.display = 'none';
-      cards[i].setAttribute('data-hidden', '1');
-    }
-    // Add More button
-    if(!document.getElementById('articles-more-btn')){
-      var btn = document.createElement('button');
-      btn.id = 'articles-more-btn';
-      btn.textContent = 'More Articles → (' + (cards.length - 10) + ')';
-      btn.style.cssText = 'display:block;margin:20px auto;padding:12px 30px;background:#7c3aed;color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;';
-      btn.onclick = function(){
-        var hidden = grid.querySelectorAll('[data-hidden="1"]');
-        hidden.forEach(function(c){ c.style.display = ''; c.removeAttribute('data-hidden'); });
-        btn.style.display = 'none';
-      };
-      grid.parentNode.insertBefore(btn, grid.nextSibling);
-    }
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(init, 1000); });
-  } else {
-    setTimeout(init, 1000);
-  }
-})();
-</script>
+
 
 
 <!-- Live Chat button (restored) -->
@@ -2396,6 +2363,62 @@ document.addEventListener('click', function(e){
   setTimeout(fill, 2000);
   setTimeout(fill, 4000);
   setTimeout(fill, 6000);
+})();
+</script>
+
+
+<script>
+// Articles: 10 + More (robust)
+(function(){
+  function applyLimit(){
+    var grid = document.getElementById('articles-grid');
+    if(!grid) return false;
+    var cards = grid.querySelectorAll('.card.mini-art');
+    if(cards.length <= 10) return true; // Already OK or not loaded
+    // Hide beyond 10
+    var hidden = 0;
+    for(var i = 0; i < cards.length; i++){
+      if(i < 10){
+        cards[i].style.display = '';
+        cards[i].removeAttribute('data-hidden');
+      } else {
+        cards[i].style.display = 'none';
+        cards[i].setAttribute('data-hidden', '1');
+        hidden++;
+      }
+    }
+    // Add/update More button
+    var btn = document.getElementById('articles-more-btn');
+    if(hidden > 0){
+      if(!btn){
+        btn = document.createElement('button');
+        btn.id = 'articles-more-btn';
+        btn.style.cssText = 'display:block;margin:20px auto;padding:12px 30px;background:#7c3aed;color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;';
+        btn.onclick = function(){
+          var h = grid.querySelectorAll('[data-hidden="1"]');
+          for(var j = 0; j < h.length; j++){
+            h[j].style.display = '';
+            h[j].removeAttribute('data-hidden');
+          }
+          btn.style.display = 'none';
+        };
+        grid.parentNode.insertBefore(btn, grid.nextSibling);
+      }
+      btn.textContent = 'More Articles → (' + hidden + ')';
+      btn.style.display = 'block';
+    } else if(btn){
+      btn.style.display = 'none';
+    }
+    return true;
+  }
+  // Try multiple times (articles may load late)
+  var attempts = 0;
+  var timer = setInterval(function(){
+    attempts++;
+    if(applyLimit() || attempts > 10){
+      clearInterval(timer);
+    }
+  }, 1000);
 })();
 </script>
 
