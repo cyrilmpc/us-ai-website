@@ -291,6 +291,11 @@ a[href*="whatsapp"][class*="community"], .community-join {
 .services-grid > .svc-card:nth-child(-n+4) .svc-body { padding-top: 4px !important; margin-top: 0 !important; }
 .services-grid > .svc-card:nth-child(-n+4) { gap: 0 !important; }
 </style>
+<style>
+/* User order: first 4 boxes - remove empty space, keep pictures as-is */
+.services-grid > .svc-card:nth-child(-n+4) { min-height: auto !important; }
+.services-grid > .svc-card:nth-child(-n+4) .svc-body { flex: none !important; }
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
