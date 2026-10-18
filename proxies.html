@@ -246,12 +246,15 @@
   ]
 }
 </script>
+
 <style>
+/* FIX: Prevent vertical text, ensure proper mobile layout */
 @media(max-width:768px){
-  .sp-grid{grid-template-columns:1fr !important;gap:10px !important;padding:0 10px !important;}
-  .sp-card{padding:12px 10px !important;}
-  .sp-card .pic{width:48px !important;height:48px !important;}
+  .sp-grid{grid-template-columns:1fr !important;}
+  .sp-card{word-break:normal !important;overflow-wrap:normal !important;}
+  .sp-card *{word-break:normal !important;white-space:normal !important;}
 }
+.sp-card{word-break:normal !important;}
 </style>
 </head>
 <body>
