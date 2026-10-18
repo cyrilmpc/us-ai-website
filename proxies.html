@@ -57,7 +57,7 @@
   /* PQA-services 2026-10-12: aside kabhi truly empty nahi hota (andar #sp-side-body div hamesha hai) — is liye :has() se inner body empty hone par panel chhupao; buy-panel.js content render karte hi panel khud aa jata hai */
   #sp-side:has(#sp-side-body:empty){display:none;}
 }
-.sp-grid{max-width:960px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px;}
+.sp-grid{max-width:1400px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 16px;}
 .sp-card{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:16px 14px;transition:transform .15s,border-color .15s,box-shadow .15s;}
 .sp-card:hover{transform:translateY(-3px);border-color:rgba(99,102,241,.6);box-shadow:0 10px 26px rgba(99,102,241,.22);}
 .sp-card .pic{flex:none;width:68px;height:68px;border-radius:18px;object-fit:contain;background:#fff;padding:6px;box-shadow:0 4px 14px rgba(0,0,0,.4);animation:itemFloat 2.8s ease-in-out infinite;}
@@ -369,7 +369,15 @@
   <button type="button" class="buy-pill" data-cat="scraper">🕷️ Scraper APIs</button>
   <button type="button" class="buy-pill" data-cat="special">🎯 Special</button>
 </div>
-<div class="sp-grid" id="sp-grid"><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div></div></div>
+<div class="sp-grid" id="sp-grid"><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><
+<div class="sp-card" style="border:2px solid #a855f7;border-radius:16px;padding:20px;">
+  <h3>Place your order</h3>
+  <p>Your name</p><input type="text" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+  <p>Email</p><input type="email" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+  <p>WhatsApp number</p><input type="text" placeholder="+92" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
+  <button style="width:100%;padding:12px;background:#a855f7;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;">Buy Now</button>
+</div>
+/div></div>
 </div>
 <aside id="sp-side" aria-label="Buy panel"><div id="sp-side-body"></div></aside>
 </div>
