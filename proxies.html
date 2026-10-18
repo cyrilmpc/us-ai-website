@@ -246,6 +246,16 @@
   ]
 }
 </script>
+<style>
+/* RDP-style 3 panels: purple, pink, orange borders */
+#proxy-rdp-final > div > div:nth-child(1) { border-color: #8b5cf6 !important; }
+#proxy-rdp-final > div > div:nth-child(2) { border-color: #d946ef !important; }
+#proxy-rdp-final > div > div:nth-child(3) { border-color: #f97316 !important; }
+/* Also target by ID if exists */
+#rdp-exact > div > div:nth-child(1) { border: 2px solid #8b5cf6 !important; }
+#rdp-exact > div > div:nth-child(2) { border: 2px solid #d946ef !important; }
+#rdp-exact > div > div:nth-child(3) { border: 2px solid #f97316 !important; }
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
