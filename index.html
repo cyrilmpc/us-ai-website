@@ -2330,6 +2330,42 @@ document.addEventListener('click', function(e){
 })();
 </script>
 
+
+<script>
+// Articles: show 10, rest in More
+(function(){
+  function init(){
+    var grid = document.getElementById('articles-grid');
+    if(!grid) return;
+    var cards = grid.querySelectorAll('.mini-art');
+    if(cards.length <= 10) return;
+    // Hide beyond 10
+    for(var i = 10; i < cards.length; i++){
+      cards[i].style.display = 'none';
+      cards[i].setAttribute('data-hidden', '1');
+    }
+    // Add More button
+    if(!document.getElementById('articles-more-btn')){
+      var btn = document.createElement('button');
+      btn.id = 'articles-more-btn';
+      btn.textContent = 'More Articles → (' + (cards.length - 10) + ')';
+      btn.style.cssText = 'display:block;margin:20px auto;padding:12px 30px;background:#7c3aed;color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;';
+      btn.onclick = function(){
+        var hidden = grid.querySelectorAll('[data-hidden="1"]');
+        hidden.forEach(function(c){ c.style.display = ''; c.removeAttribute('data-hidden'); });
+        btn.style.display = 'none';
+      };
+      grid.parentNode.insertBefore(btn, grid.nextSibling);
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(init, 1000); });
+  } else {
+    setTimeout(init, 1000);
+  }
+})();
+</script>
+
 </body>
 </html>
 
