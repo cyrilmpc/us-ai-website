@@ -3192,6 +3192,74 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 </script>
+<script>
+// User order: fix order flow - show receipt, no going back
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('sub-order-form');
+  if (form) {
+    // Remove existing handlers and add ours
+    var newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    form = newForm;
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Check login (mandatory)
+      var user = localStorage.getItem('usai_user');
+      if (!user) {
+        alert('Please login first to place an order!');
+        window.location.href = 'account.html';
+        return;
+      }
+      
+      // Get form values
+      var name = document.getElementById('sub-name').value.trim();
+      var email = document.getElementById('sub-email').value.trim();
+      var wa = document.getElementById('sub-wa').value.trim();
+      var notes = document.getElementById('sub-notes') ? document.getElementById('sub-notes').value.trim() : '';
+      var tid = document.getElementById('sub-tid') ? document.getElementById('sub-tid').value.trim() : '';
+      
+      if (!name || !email || !wa) {
+        alert('Please fill all required fields!');
+        return;
+      }
+      
+      // Get selected subscription and price
+      var total = document.getElementById('sub-total') ? document.getElementById('sub-total').textContent : '$0';
+      var unit = document.getElementById('sub-unit') ? document.getElementById('sub-unit').textContent : '';
+      var dur = document.getElementById('sub-duration') ? document.getElementById('sub-duration').value : '1';
+      
+      // Generate order ID
+      var orderId = 'SUB-' + Date.now().toString(36).toUpperCase();
+      
+      // Fill receipt
+      var receipt = document.getElementById('sub-receipt-details');
+      if (receipt) {
+        receipt.innerHTML = 
+          '<p><strong>Order ID:</strong> ' + orderId + '</p>' +
+          '<p><strong>Product:</strong> ' + unit + '</p>' +
+          '<p><strong>Duration:</strong> ' + dur + ' Month(s)</p>' +
+          '<p><strong>Total:</strong> <span style="color:#10b981;font-size:1.2rem;">' + total + '</span></p>' +
+          '<p><strong>Name:</strong> ' + name + '</p>' +
+          '<p><strong>Email:</strong> ' + email + '</p>' +
+          '<p><strong>WhatsApp:</strong> ' + wa + '</p>' +
+          (tid ? '<p><strong>Transaction ID:</strong> ' + tid + '</p>' : '') +
+          (notes ? '<p><strong>Notes:</strong> ' + notes + '</p>' : '') +
+          '<p style="color:#888;font-size:0.85rem;margin-top:12px;">Account details will arrive on WhatsApp and email within 24 hours.</p>';
+      }
+      
+      // Go to Step 3 (receipt) - NOT back to Step 2!
+      if (typeof subGoStep === 'function') {
+        subGoStep(3);
+      }
+      
+      return false;
+    });
+  }
+});
+</script>
 </body>
 </html>
 
