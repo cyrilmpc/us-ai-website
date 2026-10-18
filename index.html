@@ -1882,7 +1882,16 @@ a.jk-otd-go:hover{text-decoration:underline;}
           <strong id="sub-card-total" style="font-size:1.4rem;color:#10b981;">$0.00</strong>
         </div>
         
-        <button type="button" onclick="processCardPayment()" style="width:100%;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;padding:16px;border-radius:12px;cursor:pointer;font-size:1.1rem;font-weight:bold;">
+        <button type="button" onclick="
+          var num=document.getElementById('card-number').value.replace(/\s/g,'');
+          if(num.length<16){alert('Enter 16-digit card number!');return;}
+          this.textContent='Processing...';this.disabled=true;
+          var orderId='SUB-'+Date.now().toString(36).toUpperCase();
+          var total=document.getElementById('sub-card-total').textContent;
+          var receipt=document.getElementById('sub-receipt-details');
+          if(receipt){receipt.innerHTML='<p><strong>Order ID:</strong> '+orderId+'</p><p><strong>Total:</strong> <span style=color:#10b981>'+total+'</span></p><p><strong>Status:</strong> <span style=color:#10b981>Payment Successful</span></p>';}
+          subGoStep(3);
+        " style="width:100%;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;padding:16px;border-radius:12px;cursor:pointer;font-size:1.1rem;font-weight:bold;">
           🔒 Pay Securely
         </button>
         
