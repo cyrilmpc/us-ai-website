@@ -3139,6 +3139,27 @@ document.addEventListener('click', function(e) {
   }
 }, true);
 </script>
+<script>
+// Add Buy button at bottom of step 1
+document.addEventListener('DOMContentLoaded', function() {
+  var step1 = document.getElementById('sub-step-1');
+  if (step1 && !document.getElementById('sub-buy-btn')) {
+    var btn = document.createElement('button');
+    btn.id = 'sub-buy-btn';
+    btn.textContent = '🛒 Buy Selected →';
+    btn.onclick = function() {
+      // Check if a subscription is selected
+      var selected = document.querySelector('#sub-grid .selected, #sub-grid .sub-card.selected');
+      if (!selected) {
+        alert('Please select a subscription first!');
+        return;
+      }
+      if (typeof subGoStep === 'function') subGoStep(2);
+    };
+    step1.appendChild(btn);
+  }
+});
+</script>
 </body>
 </html>
 
