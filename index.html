@@ -3257,6 +3257,50 @@ document.addEventListener('DOMContentLoaded', function() {
           '<p style="color:#888;font-size:0.85rem;margin-top:12px;">Account details will arrive on WhatsApp and email within 24 hours.</p>';
       }
       
+      // Save order for owner panel
+      var order = {
+        id: orderId,
+        product: unit,
+        duration: dur + ' Month(s)',
+        total: total,
+        name: name,
+        email: email,
+        whatsapp: wa,
+        notes: notes,
+        tid: tid,
+        date: new Date().toISOString()
+      };
+      try {
+        var orders = JSON.parse(localStorage.getItem('usai_orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('usai_orders', JSON.stringify(orders));
+      } catch(e) {}
+      
+      // Send WhatsApp with receipt
+      var waMsg = '🧾 *Order Receipt*\n\n' +
+        'Order ID: ' + orderId + '\n' +
+        'Product: ' + unit + '\n' +
+        'Duration: ' + dur + ' Month(s)\n' +
+        'Total: ' + total + '\n' +
+        'Name: ' + name + '\n' +
+        'TID: ' + (tid || 'N/A');
+      // Open WhatsApp to owner
+      setTimeout(function() {
+        window.open('https://wa.me/923254746678?text=' + encodeURIComponent(waMsg), '_blank');
+      }, 1000);
+      
+      // Send Email via FormSubmit
+      try {
+        fetch('https://formsubmit.co/ajax/cyrilmp4665@gmail.com', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            subject: 'New Subscription Order: ' + orderId,
+            message: 'Order ID: ' + orderId + '\nProduct: ' + unit + '\nDuration: ' + dur + ' Month(s)\nTotal: ' + total + '\nName: ' + name + '\nEmail: ' + email + '\nWhatsApp: ' + wa + '\nTID: ' + (tid || 'N/A') + '\nNotes: ' + (notes || 'N/A')
+          })
+        });
+      } catch(e) {}
+      
       // Go to Step 3 (receipt) - NOT back to Step 2!
       if (typeof subGoStep === 'function') {
         subGoStep(3);
