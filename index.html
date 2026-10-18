@@ -2348,13 +2348,19 @@ document.addEventListener('click', function(e){
   var lastY = 0;
   window.addEventListener('scroll', function(){
     var y = window.scrollY || 0;
-    var goingDown = y > lastY && y > 300;
+    var goingDown = y > lastY && y > 50;
     ['top-widgets','top-widgets-right','share-rail'].forEach(function(id){
       var el = document.getElementById(id);
       if(!el) return;
       if(id === 'lc-wrap') return; // never fade Live Chat
       if(goingDown) el.classList.add('side-faded');
       else el.classList.remove('side-faded');
+    });
+    // Sports icons also fade on scroll
+    var sportsEls = document.querySelectorAll('.sport-ico, #sports-float, .sports-col, #lc-sports-style');
+    sportsEls.forEach(function(s){
+      if(goingDown) s.classList.add('side-faded');
+      else s.classList.remove('side-faded');
     });
     lastY = y;
   }, {passive:true});
