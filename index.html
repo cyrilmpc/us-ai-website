@@ -2715,6 +2715,19 @@ document.addEventListener('click', function(e){
     <p id="lc-login-error" style="color:#ff6b6b;font-size:0.85rem;display:none;"></p>
   </div>
   <div id="lc-chat-area" style="display:none;flex:1;flex-direction:column;">
+    <div style="padding:8px;text-align:center;border-bottom:1px solid #333;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:#2a2a3e;padding:6px 12px;border-radius:20px;font-size:0.85rem;color:#aaa;">
+        <span style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#d946ef);display:inline-flex;align-items:center;justify-content:center;font-size:14px;">🤖</span>
+        US AI Support
+        <span id="lc-typing" style="display:none;color:#8b5cf6;">typing<span class="lc-dots"><span>.</span><span>.</span><span>.</span></span></span>
+      </span>
+    </div>
+    <style>
+    @keyframes lc-dot-bounce { 0%,60%,100%{transform:translateY(0);} 30%{transform:translateY(-4px);} }
+    .lc-dots span { animation: lc-dot-bounce 1.2s infinite; display:inline-block; }
+    .lc-dots span:nth-child(2) { animation-delay:0.2s; }
+    .lc-dots span:nth-child(3) { animation-delay:0.4s; }
+    </style>
     <div id="lc-messages" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
     <div style="padding:10px;border-top:1px solid #333;display:flex;gap:8px;">
       <input id="lc-input" type="text" placeholder="Type..." style="flex:1;padding:8px;border-radius:8px;border:1px solid #444;background:#2a2a3e;color:white;">
@@ -2767,6 +2780,10 @@ async function doChatLogin() {
     errEl.style.display = 'block';
   }
 }
+function showTyping() {
+  document.getElementById('lc-typing').style.display = 'inline';
+  setTimeout(() => { document.getElementById('lc-typing').style.display = 'none'; }, 3000);
+}
 function sendChatMessage() {
   var input = document.getElementById('lc-input');
   var text = input.value.trim();
@@ -2778,6 +2795,7 @@ function sendChatMessage() {
   div.textContent = text;
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
+  showTyping();
   // TODO: Send to backend
 }
 </script>
