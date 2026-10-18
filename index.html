@@ -3313,6 +3313,46 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script>
+// Fix: ensure card selection works
+(function() {
+  function initSelection() {
+    var grid = document.getElementById('sub-grid');
+    if (!grid) {
+      setTimeout(initSelection, 500);
+      return;
+    }
+    
+    // Remove any existing handlers by cloning
+    // Use capture to ensure we run first
+    grid.addEventListener('click', function(e) {
+      var card = e.target.closest('.sub-card');
+      if (!card) return;
+      
+      // Visual feedback immediately
+      grid.querySelectorAll('.sub-card').forEach(function(c) {
+        c.classList.remove('active', 'selected');
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+      });
+      card.classList.add('active', 'selected');
+      card.style.borderColor = '#8b5cf6';
+      card.style.boxShadow = '0 0 15px rgba(139,92,246,0.5)';
+      
+      // Let subscriptions.js handle the data update
+      // Its handler should also run (we don't stop propagation)
+    });
+    
+    console.log('✅ Selection handler attached');
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSelection);
+  } else {
+    initSelection();
+  }
+})();
+</script>
 </body>
 </html>
 
