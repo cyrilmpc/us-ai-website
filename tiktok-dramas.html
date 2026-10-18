@@ -172,14 +172,16 @@ VIDEOS.forEach((v, i) => {
     <video class="tk-video" src="${v.src}" loop playsinline preload="metadata"></video>
     <div class="tk-play-ind">▶</div>
     <div class="tk-actions">
-      <div class="tk-action">
+      <div class="tk-action" onclick="toggleFollow(this)">
         <div class="tk-avatar">🎬</div>
+        <div style="background:#fe2c55;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;margin-top:-10px;position:relative;z-index:2;">+</div>
+        <div class="tk-action-count follow-text">Follow</div>
       </div>
       <div class="tk-action" onclick="toggleLike(this)">
         <div class="tk-action-btn">❤️</div>
         <div class="tk-action-count">${(Math.random()*900+100|0)}K</div>
       </div>
-      <div class="tk-action">
+      <div class="tk-action" onclick="openComments(this)">
         <div class="tk-action-btn">💬</div>
         <div class="tk-action-count">${(Math.random()*90+10|0)}K</div>
       </div>
@@ -259,5 +261,79 @@ setTimeout(() => {
   if (ind && autoScroll) ind.style.opacity = '0.5';
 }, 5000);
 </script>
+
+<!-- Comments Modal -->
+<div id="tk-comments" style="display:none;position:fixed;bottom:0;left:0;right:0;max-width:500px;margin:0 auto;background:#1a1a1a;border-radius:20px 20px 0 0;z-index:200;max-height:70vh;flex-direction:column;">
+  <div style="padding:16px;border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:center;">
+    <strong>Comments</strong>
+    <button onclick="closeComments()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">✕</button>
+  </div>
+  <div id="tk-comments-list" style="flex:1;overflow-y:auto;padding:16px;"></div>
+  <div style="padding:12px;border-top:1px solid #333;display:flex;gap:8px;">
+    <input id="tk-comment-input" placeholder="Add a comment..." style="flex:1;padding:10px;border-radius:20px;border:1px solid #444;background:#2a2a2a;color:#fff;">
+    <button onclick="postComment()" style="background:#fe2c55;color:#fff;border:none;border-radius:20px;padding:10px 20px;cursor:pointer;">Post</button>
+  </div>
+</div>
+
+<script>
+let followedUsers = JSON.parse(localStorage.getItem('tk_followed') || '[]');
+let likedVideos = JSON.parse(localStorage.getItem('tk_liked') || '[]');
+
+function toggleFollow(el) {
+  const username = el.closest('.tk-video-wrap').querySelector('.tk-username').textContent;
+  const idx = followedUsers.indexOf(username);
+  const btn = el.querySelector('.follow-text');
+  if (idx >= 0) {
+    followedUsers.splice(idx, 1);
+    btn.textContent = 'Follow';
+    el.querySelector('div:nth-child(2)').textContent = '+';
+  } else {
+    followedUsers.push(username);
+    btn.textContent = 'Following';
+    el.querySelector('div:nth-child(2)').textContent = '✓';
+  }
+  localStorage.setItem('tk_followed', JSON.stringify(followedUsers));
+}
+
+function toggleLike(el) {
+  el.classList.toggle('liked');
+  const videoWrap = el.closest('.tk-video-wrap');
+  const videoSrc = videoWrap.querySelector('video').src;
+  const idx = likedVideos.indexOf(videoSrc);
+  if (idx >= 0) likedVideos.splice(idx, 1);
+  else likedVideos.push(videoSrc);
+  localStorage.setItem('tk_liked', JSON.stringify(likedVideos));
+}
+
+function openComments(el) {
+  const modal = document.getElementById('tk-comments');
+  modal.style.display = 'flex';
+  const list = document.getElementById('tk-comments-list');
+  // Sample comments
+  list.innerHTML = `
+    <div style="margin-bottom:12px;"><strong>@drama_fan:</strong> 🔥 Amazing scene!</div>
+    <div style="margin-bottom:12px;"><strong>@turkish_lover:</strong> Best drama ever! ❤️</div>
+    <div style="margin-bottom:12px;"><strong>@usai_user:</strong> Urdu subtitles please! 🙏</div>
+  `;
+}
+
+function closeComments() {
+  document.getElementById('tk-comments').style.display = 'none';
+}
+
+function postComment() {
+  const input = document.getElementById('tk-comment-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const list = document.getElementById('tk-comments-list');
+  const div = document.createElement('div');
+  div.style.marginBottom = '12px';
+  div.innerHTML = '<strong>@you:</strong> ' + text.replace(/</g,'&lt;');
+  list.appendChild(div);
+  input.value = '';
+  list.scrollTop = list.scrollHeight;
+}
+</script>
+
 </body>
 </html>
