@@ -2691,9 +2691,14 @@ document.addEventListener('click', function(e){
     <div><b>💬 Live Chat</b><br><small style="opacity:0.8">US AI Support</small></div>
     <button onclick="document.getElementById('lc-widget').style.display='none'" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">✕</button>
   </div>
-  <div id="lc-login-prompt" style="padding:20px;text-align:center;color:white;">
-    <p>Please login to chat!</p>
-    <button onclick="window.location.href='account.html'" style="background:#8b5cf6;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;">Login</button>
+  <div id="lc-login-prompt" style="padding:30px 20px;text-align:center;color:white;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1;">
+    <div style="font-size:48px;">🔐</div>
+    <h3 style="margin:0;font-size:1.2rem;">Login to Chat</h3>
+    <p style="margin:0;color:#aaa;font-size:0.9rem;">Please login to start chatting with us!</p>
+    <input id="lc-email" type="email" placeholder="Email" style="width:100%;max-width:280px;padding:12px;border-radius:10px;border:1px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
+    <input id="lc-password" type="password" placeholder="Password" style="width:100%;max-width:280px;padding:12px;border-radius:10px;border:1px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
+    <button onclick="doChatLogin()" style="width:100%;max-width:280px;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:white;border:none;padding:14px;border-radius:10px;cursor:pointer;font-size:1.1rem;font-weight:bold;">Login to Chat</button>
+    <p id="lc-login-error" style="color:#ff6b6b;font-size:0.85rem;display:none;"></p>
   </div>
   <div id="lc-chat-area" style="display:none;flex:1;flex-direction:column;">
     <div id="lc-messages" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
@@ -2715,6 +2720,37 @@ function openLiveChat() {
   } else {
     document.getElementById('lc-login-prompt').style.display = 'block';
     document.getElementById('lc-chat-area').style.display = 'none';
+  }
+}
+async function doChatLogin() {
+  var email = document.getElementById('lc-email').value.trim();
+  var password = document.getElementById('lc-password').value;
+  var errEl = document.getElementById('lc-login-error');
+  if (!email || !password) {
+    errEl.textContent = 'Please enter email and password';
+    errEl.style.display = 'block';
+    return;
+  }
+  try {
+    var res = await fetch('https://usai-accounts-api.usai-api.workers.dev/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email, password: password})
+    });
+    var data = await res.json();
+    if (data.ok || data.token) {
+      localStorage.setItem('usai_user', JSON.stringify({email: email}));
+      document.getElementById('lc-login-prompt').style.display = 'none';
+      document.getElementById('lc-chat-area').style.display = 'flex';
+      if (typeof loadMessages === 'function') loadMessages();
+      if (typeof startPolling === 'function') startPolling();
+    } else {
+      errEl.textContent = data.error || 'Login failed';
+      errEl.style.display = 'block';
+    }
+  } catch(e) {
+    errEl.textContent = 'Login failed. Try again.';
+    errEl.style.display = 'block';
   }
 }
 function sendChatMessage() {
