@@ -2367,6 +2367,38 @@ document.addEventListener('click', function(e){
 <!-- Live Chat button (restored) -->
 <a href="https://wa.me/923254746678?text=Hi%20US%20AI!%20I%20need%20help." target="_blank" rel="noopener" id="lc-wrap" style="position:fixed;bottom:20px;right:20px;z-index:9999;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.3);text-decoration:none;font-size:28px;" title="Live Chat">💬</a>
 
+
+<script>
+// All Articles: standalone filler (guaranteed)
+(function(){
+  function fill(){
+    var list = document.getElementById('allart-list');
+    if(!list) return;
+    if(list.children.length > 0) return; // Already has content
+    var cards = document.querySelectorAll('#articles-grid .card.mini-art');
+    if(cards.length === 0) return;
+    var html = '';
+    for(var i = 0; i < cards.length; i++){
+      var card = cards[i];
+      var h3 = card.querySelector('h3');
+      var href = card.getAttribute('href');
+      if(h3 && href){
+        var t = h3.textContent.trim();
+        html += '<a class="allart-link" href="' + href + '"><span class="n">' + (i+1) + '.</span><span class="allart-t">' + t + '</span></a>';
+      }
+    }
+    if(html){
+      list.innerHTML = '<div class="allart-track">' + html + html + '</div>';
+      list.classList.add('ticker');
+    }
+  }
+  // Try multiple times
+  setTimeout(fill, 2000);
+  setTimeout(fill, 4000);
+  setTimeout(fill, 6000);
+})();
+</script>
+
 </body>
 </html>
 
