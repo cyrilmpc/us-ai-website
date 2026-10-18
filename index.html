@@ -3486,6 +3486,104 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 })();
 </script>
+<script>
+// NUCLEAR FIX: Take over selection completely
+(function() {
+  console.log('Nuclear fix loading...');
+  
+  function doSelect(card) {
+    if (!card) return;
+    var subId = card.getAttribute('data-sub');
+    if (!subId || !window.USAI_SUBS) return;
+    
+    // Find data
+    var sub = null;
+    for (var i = 0; i < window.USAI_SUBS.length; i++) {
+      if (window.USAI_SUBS[i][6] === subId) {
+        sub = window.USAI_SUBS[i];
+        break;
+      }
+    }
+    if (!sub) return;
+    
+    // Update visual
+    var grid = document.getElementById('sub-grid');
+    if (grid) {
+      grid.querySelectorAll('.sub-card').forEach(function(c) {
+        c.classList.remove('active');
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+      });
+    }
+    card.classList.add('active');
+    card.style.borderColor = '#8b5cf6';
+    card.style.boxShadow = '0 0 20px rgba(139,92,246,0.6)';
+    
+    // Update details COMPLETELY
+    // sub: [icon, name, category, official, ourPrice, desc, id]
+    var details = document.getElementById('sub-details');
+    if (details) {
+      details.innerHTML = 
+        '<div class="sub-detail-logo" style="font-size:48px;">' + sub[0] + '</div>' +
+        '<p><b>' + sub[1] + '</b> <span class="tiny muted">' + sub[2] + '</span></p>' +
+        '<p class="tiny muted">' + sub[5] + '</p>' +
+        '<p class="tiny">Official: <s class="muted">$' + (sub[3]/280).toFixed(2) + '/mo</s> ' +
+        '<b class="grad">$' + (sub[4]/280).toFixed(2) + '/mo</b></p>';
+    }
+    
+    // Update price
+    var durSel = document.getElementById('sub-duration');
+    var dur = durSel ? durSel.value : '1';
+    var qtyEl = document.getElementById('sub-qty-n');
+    var qty = qtyEl ? parseInt(qtyEl.textContent) || 1 : 1;
+    
+    var pricePerMo = sub[4] / 280;
+    var mult = {'1':1, '3':3*0.95, '6':6*0.9, '12':12*0.8}[dur] || 1;
+    var total = Math.round(pricePerMo * mult * qty * 100) / 100;
+    
+    var totalEl = document.getElementById('sub-total');
+    if (totalEl) {
+      totalEl.textContent = '$' + total.toFixed(2);
+      totalEl.style.color = '#10b981';
+      totalEl.style.fontWeight = 'bold';
+    }
+    
+    var unitEl = document.getElementById('sub-unit');
+    if (unitEl) {
+      var labels = {'1':'1 Month', '3':'3 Months (5% off)', '6':'6 Months (10% off)', '12':'12 Months (20% off)'};
+      unitEl.textContent = sub[1] + ' — ' + (labels[dur] || dur) + ' × ' + qty;
+    }
+    
+    // Store for Buy button
+    window._selectedSub = sub;
+    window._selectedSubId = subId;
+    
+    console.log('✅ Selected:', sub[1]);
+  }
+  
+  // Attach with capture and stop propagation to block original
+  document.addEventListener('click', function(e) {
+    var card = e.target.closest('#sub-grid .sub-card');
+    if (card) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      doSelect(card);
+      return false;
+    }
+  }, true);
+  
+  // Duration change
+  document.addEventListener('change', function(e) {
+    if (e.target && e.target.id === 'sub-duration') {
+      var card = document.querySelector('#sub-grid .sub-card.active');
+      if (card) doSelect(card);
+    }
+  });
+  
+  console.log('✅ Nuclear fix active');
+})();
+</script>
 </body>
 </html>
 
