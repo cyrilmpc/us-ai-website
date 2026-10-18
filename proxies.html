@@ -809,6 +809,64 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   else{ setTimeout(renderBundles, 1500); }
 })();
 </script>
+
+<script>
+// Force RDP-style 3-panel layout on proxy page
+(function(){
+  function makeRDPStyle(){
+    // Find the main content area (after hero)
+    var hero = document.querySelector('h1');
+    if(!hero || !hero.textContent.includes('Prox')) return;
+    
+    // Create 3-panel grid
+    var grid = document.createElement('div');
+    grid.id = 'proxy-rdp-style';
+    grid.style.cssText = 'max-width:1400px;margin:20px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 16px;';
+    
+    grid.innerHTML = `
+      <div style="border:2px solid #7c3aed;border-radius:16px;padding:20px;background:rgba(124,58,237,0.05);">
+        <h3 style="margin:0 0 16px;">Configure your proxy</h3>
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <button style="padding:8px 16px;border-radius:20px;background:#7c3aed;color:#fff;border:none;">Residential</button>
+          <button style="padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);">Datacenter</button>
+          <button style="padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);">HTTP ISP</button>
+        </div>
+        <p style="font-size:0.9rem;opacity:0.8;">⭐ BEST for social media accounts</p>
+        <p style="font-size:1.2rem;font-weight:700;">$8.93 / IP / month</p>
+        <label>Country</label>
+        <select style="width:100%;padding:10px;margin:8px 0;border-radius:8px;"><option>USA</option><option>UK</option></select>
+        <label>Number of IPs</label>
+        <input type="number" value="1" style="width:100%;padding:10px;border-radius:8px;">
+      </div>
+      <div style="border:2px solid #a855f7;border-radius:16px;padding:20px;background:rgba(168,85,247,0.05);">
+        <h3 style="margin:0 0 16px;">Place your order</h3>
+        <label>Your name</label>
+        <input type="text" placeholder="Your name" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:#fff;">
+        <label>Email</label>
+        <input type="email" placeholder="Email" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:#fff;">
+        <label>WhatsApp number</label>
+        <input type="text" placeholder="+92" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:#fff;">
+        <button style="width:100%;padding:14px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;">Buy Now</button>
+      </div>
+      <div style="border:2px solid #f59e0b;border-radius:16px;padding:20px;background:rgba(245,158,11,0.05);">
+        <h3 style="margin:0 0 16px;">Full price list — per IP / month (USD)</h3>
+        <table style="width:100%;font-size:0.85rem;">
+          <tr><th>Country</th><th>Residential</th><th>Datacenter</th></tr>
+          <tr><td>USA</td><td>$8.93</td><td>$1.79</td></tr>
+          <tr><td>UK</td><td>$8.93</td><td>$1.79</td></tr>
+          <tr><td>Germany</td><td>$8.93</td><td>$1.79</td></tr>
+        </table>
+      </div>
+    `;
+    
+    // Insert after hero
+    hero.parentNode.insertBefore(grid, hero.nextSibling);
+  }
+  setTimeout(makeRDPStyle, 1000);
+  setTimeout(makeRDPStyle, 2000);
+})();
+</script>
+
 </body>
 </html>
 
