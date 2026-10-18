@@ -3118,24 +3118,14 @@ document.getElementById('sub-modal').addEventListener('click', function(e) {
 });
 </script>
 <script>
-// User order: Buy opens modal, not new page
+// User order: card click only selects, Buy button goes to step 2
 document.addEventListener('click', function(e) {
-  // Find Buy button in subscription grid
-  var btn = e.target.closest('#sub-grid button, #sub-grid .sub-buy-btn');
-  if (btn) {
-    e.preventDefault();
-    e.stopPropagation();
-    // Get product name from the card
-    var card = btn.closest('.sub-card, [data-sub]');
-    var name = 'Subscription';
-    if (card) {
-      var titleEl = card.querySelector('h4, .sub-name, strong');
-      if (titleEl) name = titleEl.textContent.trim();
-    }
-    if (typeof openSubModal === 'function') {
-      openSubModal(name);
-    }
-    return false;
+  // Card click - just select (let subscriptions.js handle it)
+  var card = e.target.closest('#sub-grid .sub-card');
+  if (card && !e.target.closest('button')) {
+    // Just select, don't do anything else
+    // subscriptions.js will handle the selection and price update
+    return;
   }
 }, true);
 </script>
