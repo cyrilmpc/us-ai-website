@@ -3150,6 +3150,35 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script>
+// User order: everything in same box, no new page
+(function() {
+  // Override the subscription card click to prevent navigation
+  document.addEventListener('click', function(e) {
+    var card = e.target.closest('#sub-grid .sub-card');
+    if (card) {
+      // Let subscriptions.js handle selection, but prevent any navigation
+      e.stopPropagation();
+      // Don't let it bubble to handlers that navigate
+    }
+  }, true);
+  
+  // Override Buy button to go to step 2 in same box
+  document.addEventListener('DOMContentLoaded', function() {
+    var buyBtn = document.getElementById('sub-buy-btn');
+    if (buyBtn) {
+      buyBtn.onclick = function(e) {
+        e.preventDefault();
+        // Go to step 2 in same box
+        if (typeof subGoStep === 'function') {
+          subGoStep(2);
+        }
+        return false;
+      };
+    }
+  });
+})();
+</script>
 </body>
 </html>
 
