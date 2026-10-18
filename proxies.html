@@ -57,7 +57,7 @@
   /* PQA-services 2026-10-12: aside kabhi truly empty nahi hota (andar #sp-side-body div hamesha hai) — is liye :has() se inner body empty hone par panel chhupao; buy-panel.js content render karte hi panel khud aa jata hai */
   #sp-side:has(#sp-side-body:empty){display:none;}
 }
-.sp-grid{max-width:1400px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 16px;}
+.sp-grid{max-width:960px;margin:14px auto 10px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px;}
 .sp-card{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:16px 14px;transition:transform .15s,border-color .15s,box-shadow .15s;}
 .sp-card:hover{transform:translateY(-3px);border-color:rgba(99,102,241,.6);box-shadow:0 10px 26px rgba(99,102,241,.22);}
 .sp-card .pic{flex:none;width:68px;height:68px;border-radius:18px;object-fit:contain;background:#fff;padding:6px;box-shadow:0 4px 14px rgba(0,0,0,.4);animation:itemFloat 2.8s ease-in-out infinite;}
@@ -98,7 +98,7 @@
 .buy-x{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(99,102,241,.5);background:rgba(99,102,241,.15);color:#fff;font-size:1.1rem;cursor:pointer;}
 .buy-x:hover{background:rgba(239,68,68,.35);}
 .buy-head{display:flex;gap:12px;align-items:center;margin-bottom:16px;padding-right:46px;}
-.buy-head .pic{width:58px;height:58px;border-radius:18px;object-fit:contain;background:#fff;padding:5px;flex:none;animation:itemFloat 2.8s ease-in-out infinite;}
+.buy-head .pic{width:58px;height:58px;border-radius:16px;object-fit:contain;background:#fff;padding:5px;flex:none;animation:itemFloat 2.8s ease-in-out infinite;}
 .buy-head .pic.ic{display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(168,85,247,.25));padding:0;}
 .buy-head .pic.darkbg{background:linear-gradient(135deg,#1a1d3a,#2a2d5a);}
 .buy-head b{display:block;font-size:1.02rem;}
@@ -246,16 +246,6 @@
   ]
 }
 </script>
-<style>
-/* RDP-style 3 panels: purple, pink, orange borders */
-#proxy-rdp-final > div > div:nth-child(1) { border-color: #8b5cf6 !important; }
-#proxy-rdp-final > div > div:nth-child(2) { border-color: #d946ef !important; }
-#proxy-rdp-final > div > div:nth-child(3) { border-color: #f97316 !important; }
-/* Also target by ID if exists */
-#rdp-exact > div > div:nth-child(1) { border: 2px solid #8b5cf6 !important; }
-#rdp-exact > div > div:nth-child(2) { border: 2px solid #d946ef !important; }
-#rdp-exact > div > div:nth-child(3) { border: 2px solid #f97316 !important; }
-</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -379,15 +369,7 @@
   <button type="button" class="buy-pill" data-cat="scraper">🕷️ Scraper APIs</button>
   <button type="button" class="buy-pill" data-cat="special">🎯 Special</button>
 </div>
-<div class="sp-grid" id="sp-grid"><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><
-<div class="sp-card" style="border:2px solid #a855f7;border-radius:18px;padding:20px;">
-  <h3>Place your order</h3>
-  <p>Your name</p><input type="text" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
-  <p>Email</p><input type="email" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
-  <p>WhatsApp number</p><input type="text" placeholder="+92" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;">
-  <button style="width:100%;padding:12px;background:#a855f7;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;">Buy Now</button>
-</div>
-/div></div>
+<div class="sp-grid" id="sp-grid"><div class="qsk" aria-hidden="true"><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div><div class="qsc"></div></div></div>
 </div>
 <aside id="sp-side" aria-label="Buy panel"><div id="sp-side-body"></div></aside>
 </div>
@@ -395,7 +377,7 @@
 <section class="px-compare" style="max-width:960px;margin:26px auto 4px;padding:0 16px">
   <h2 style="text-align:center;margin:6px 0 14px;font-size:1.25rem">⚖️ Which proxy is right for you?</h2>
   <div style="overflow-x:auto;">
-  <table class="px-cmp" style="width:100%;border-collapse:collapse;font-size:.85rem;background:var(--bg2);border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+  <table class="px-cmp" style="width:100%;border-collapse:collapse;font-size:.85rem;background:var(--bg2);border:1px solid var(--line);border-radius:16px;overflow:hidden;">
     <thead><tr style="background:rgba(99,102,241,.12);">
       <th style="padding:10px 12px;text-align:left;">Type</th>
       <th style="padding:10px 12px;text-align:center;">⚡ Speed</th>
@@ -818,113 +800,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   if(window.SawalShop && window.SawalShop.BUNDLES){ renderBundles(); }
   else{ setTimeout(renderBundles, 1500); }
 })();
-</script>
-
-
-
-
-
-<script>
-(function(){
-  function makeRDP(){
-    var heads = document.querySelectorAll('h1');
-    var target = null;
-    for(var i=0;i<heads.length;i++){ if(heads[i].textContent.includes('Buy Prox')){ target=heads[i]; break; } }
-    if(!target || document.getElementById('rdp-exact')) return;
-    
-    // Hide old
-    var s = target.nextElementSibling, c=0;
-    while(s && c<8){
-      var n=s.nextElementSibling;
-      if(s.textContent.includes('Configure your proxy')) s.style.display='none';
-      s=n; c++;
-    }
-    
-    var d=document.createElement('div');
-    d.id='rdp-exact';
-    d.innerHTML=`<div style="max-width:1400px;margin:16px auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:0 16px;">
-<div style="border:2px solid #8b5cf6;border-radius:18px;padding:16px 14px;background:linear-gradient(160deg,#1a1033,#0d0a1f);">
-<h3 style="color:#fff;margin:0 0 16px;font-size:1.15rem;">Configure your proxy</h3>
-<label style="color:#ccc;font-size:0.9rem;">Type</label>
-<div style="display:flex;gap:8px;margin:8px 0 16px;">
-<button style="padding:10px 18px;border-radius:20px;background:#8b5cf6;color:#fff;border:none;font-weight:600;">Residential</button>
-<button style="padding:10px 18px;border-radius:20px;background:transparent;color:#fff;border:1px solid #444;">Datacenter</button>
-<button style="padding:10px 18px;border-radius:20px;background:transparent;color:#fff;border:1px solid #444;">HTTP ISP</button>
-</div>
-<label style="color:#ccc;font-size:0.9rem;">Country</label>
-<select style="width:100%;padding:12px;margin:8px 0 16px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;"><option>USA</option></select>
-<label style="color:#ccc;font-size:0.9rem;">Duration</label>
-<select style="width:100%;padding:12px;margin:8px 0 16px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;"><option>1 Month</option></select>
-<div style="background:#1e1b3a;border-radius:10px;padding:14px;margin-top:8px;">
-<span style="color:#fff;font-weight:700;">Total: $8.93</span>
-<span style="color:#aaa;font-size:0.85rem;"> ($8.93 / IP × 1 month)</span>
-</div>
-</div>
-<div style="border:2px solid #d946ef;border-radius:18px;padding:16px 14px;background:linear-gradient(160deg,#1f0f2e,#0d0a1f);">
-<h3 style="color:#fff;margin:0 0 16px;font-size:1.15rem;">Place your order</h3>
-<label style="color:#ccc;font-size:0.9rem;">Your name</label>
-<input placeholder="Full name" style="width:100%;padding:12px;margin:8px 0 14px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;box-sizing:border-box;">
-<label style="color:#ccc;font-size:0.9rem;">Email</label>
-<input placeholder="you@email.com" style="width:100%;padding:12px;margin:8px 0 14px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;box-sizing:border-box;">
-<label style="color:#ccc;font-size:0.9rem;">WhatsApp number</label>
-<input placeholder="+92" style="width:100%;padding:12px;margin:8px 0 14px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;box-sizing:border-box;">
-<label style="color:#ccc;font-size:0.9rem;">Notes (optional)</label>
-<input placeholder="Purpose..." style="width:100%;padding:12px;margin:8px 0 16px;border-radius:10px;background:#1e1b3a;color:#fff;border:1px solid #444;box-sizing:border-box;">
-<button style="width:100%;padding:14px;background:linear-gradient(135deg,#c084fc,#a855f7);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;">Buy Now</button>
-<p style="color:#aaa;font-size:0.8rem;margin-top:12px;">Pay with JazzCash right here — enter your TID, we verify</p>
-</div>
-<div style="border:2px solid #f97316;border-radius:18px;padding:16px 14px;background:linear-gradient(160deg,#1f1206,#0d0a1f);">
-<h3 style="color:#fff;margin:0 0 16px;font-size:1.05rem;">Full price list — per IP / month (USD)</h3>
-<table style="width:100%;color:#fff;font-size:0.85rem;border-collapse:collapse;">
-<tr style="border-bottom:1px solid #333;"><td style="padding:10px 6px;color:#aaa;">Country</td><td style="padding:10px 6px;color:#aaa;">Residential</td><td style="padding:10px 6px;color:#aaa;">Datacenter</td></tr>
-<tr style="border-bottom:1px solid #222;"><td style="padding:10px 6px;">USA</td><td style="padding:10px 6px;">$8.93</td><td style="padding:10px 6px;">$1.79</td></tr>
-<tr style="border-bottom:1px solid #222;"><td style="padding:10px 6px;">UK</td><td style="padding:10px 6px;">$8.93</td><td style="padding:10px 6px;">$1.79</td></tr>
-<tr style="border-bottom:1px solid #222;"><td style="padding:10px 6px;">Germany</td><td style="padding:10px 6px;">$8.93</td><td style="padding:10px 6px;">$1.79</td></tr>
-<tr><td style="padding:10px 6px;">France</td><td style="padding:10px 6px;">$8.93</td><td style="padding:10px 6px;">$1.79</td></tr>
-</table>
-</div>
-</div>`;
-    target.parentNode.insertBefore(d, target.nextSibling);
-  }
-  setTimeout(makeRDP, 800);
-  setTimeout(makeRDP, 2000);
-})();
-</script>
-<script>
-setTimeout(function(){
-  var panels = document.querySelectorAll('#proxy-rdp-final > div > div, #rdp-exact > div > div');
-  var colors = ['#8b5cf6', '#d946ef', '#f97316'];
-  panels.forEach(function(p, i){
-    if(colors[i]){
-      p.style.border = '2px solid ' + colors[i] + ' !important';
-      p.style.borderColor = colors[i] + ' !important';
-    }
-  });
-  // Also try direct children
-  var rdp = document.getElementById('rdp-exact');
-  if(rdp){
-    var grid = rdp.querySelector('div');
-    if(grid){
-      var cards = grid.children;
-      for(var j=0; j<cards.length && j<3; j++){
-        cards[j].style.border = '2px solid ' + colors[j];
-      }
-    }
-  }
-}, 1000);
-setTimeout(function(){
-  var rdp = document.getElementById('rdp-exact');
-  if(rdp){
-    var grid = rdp.querySelector('div');
-    if(grid){
-      var cards = grid.children;
-      var colors = ['#8b5cf6', '#d946ef', '#f97316'];
-      for(var j=0; j<cards.length && j<3; j++){
-        cards[j].style.setProperty('border', '2px solid ' + colors[j], 'important');
-      }
-    }
-  }
-}, 2500);
 </script>
 </body>
 </html>
