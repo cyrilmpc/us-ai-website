@@ -296,6 +296,23 @@ a[href*="whatsapp"][class*="community"], .community-join {
 .services-grid > .svc-card:nth-child(-n+4) { min-height: auto !important; }
 .services-grid > .svc-card:nth-child(-n+4) .svc-body { flex: none !important; }
 </style>
+<style>
+/* User order: first 4 - link at very bottom, no empty space below */
+.services-grid > .svc-card:nth-child(-n+4) { 
+  min-height: 0 !important; 
+  height: auto !important;
+  padding-bottom: 12px !important;
+}
+.services-grid > .svc-card:nth-child(-n+4) .svc-body { 
+  flex: none !important; 
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+.services-grid > .svc-card:nth-child(-n+4) .svc-body > a:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
