@@ -3353,6 +3353,114 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 })();
 </script>
+<script>
+// Complete fix: manual selection that definitely works
+(function() {
+  var selectedCard = null;
+  
+  function updatePriceDisplay(card) {
+    if (!card) return;
+    var nameEl = card.querySelector('.sub-name');
+    var priceEl = card.querySelector('.sub-price');
+    if (!nameEl || !priceEl) return;
+    
+    var name = nameEl.textContent.trim();
+    var price = priceEl.textContent.trim();
+    
+    // Update the details panel
+    var details = document.getElementById('sub-details');
+    if (details) {
+      // Keep the existing structure but update name/price
+      var nameInDetails = details.querySelector('b');
+      if (nameInDetails) nameInDetails.textContent = name;
+    }
+    
+    // Update total
+    var durSel = document.getElementById('sub-duration');
+    var dur = durSel ? durSel.value : '1';
+    var qtyEl = document.getElementById('sub-qty-n');
+    var qty = qtyEl ? parseInt(qtyEl.textContent) || 1 : 1;
+    
+    // Parse price (e.g., "$7.14/mo" -> 7.14)
+    var priceNum = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+    
+    // Apply duration multiplier (from DUR in subscriptions.js)
+    var mult = {'1':1, '3':3*0.95, '6':6*0.9, '12':12*0.8}[dur] || 1;
+    var total = Math.round(priceNum * mult * qty * 100) / 100;
+    
+    var totalEl = document.getElementById('sub-total');
+    if (totalEl) {
+      totalEl.textContent = '$' + total.toFixed(2);
+      // Flash to show update
+      totalEl.style.transition = 'all 0.3s';
+      totalEl.style.transform = 'scale(1.2)';
+      totalEl.style.color = '#10b981';
+      setTimeout(function() {
+        totalEl.style.transform = 'scale(1)';
+      }, 300);
+    }
+    
+    var unitEl = document.getElementById('sub-unit');
+    if (unitEl) {
+      var durLabels = {'1':'1 Month', '3':'3 Months (5% off)', '6':'6 Months (10% off)', '12':'12 Months (20% off)'};
+      unitEl.textContent = name + ' — ' + (durLabels[dur] || dur) + ' × ' + qty;
+    }
+  }
+  
+  function initFix() {
+    var grid = document.getElementById('sub-grid');
+    if (!grid) {
+      setTimeout(initFix, 500);
+      return;
+    }
+    
+    grid.addEventListener('click', function(e) {
+      var card = e.target.closest('.sub-card');
+      if (!card) return;
+      
+      e.preventDefault();
+      
+      // Update visual
+      grid.querySelectorAll('.sub-card').forEach(function(c) {
+        c.classList.remove('active');
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+      });
+      card.classList.add('active');
+      card.style.borderColor = '#8b5cf6';
+      card.style.boxShadow = '0 0 20px rgba(139,92,246,0.6)';
+      selectedCard = card;
+      
+      // Update price immediately
+      updatePriceDisplay(card);
+      
+      console.log('✅ Selected:', card.querySelector('.sub-name').textContent);
+    }, true);
+    
+    // Also update price when duration changes
+    var durSel = document.getElementById('sub-duration');
+    if (durSel) {
+      durSel.addEventListener('change', function() {
+        if (selectedCard) {
+          updatePriceDisplay(selectedCard);
+        } else {
+          // Use first card if none selected
+          var first = grid.querySelector('.sub-card');
+          if (first) updatePriceDisplay(first);
+        }
+      });
+    }
+    
+    console.log('✅ Manual selection fix active');
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFix);
+  } else {
+    initFix();
+  }
+})();
+</script>
 </body>
 </html>
 
