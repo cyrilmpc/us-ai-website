@@ -209,6 +209,37 @@ a[href*="whatsapp"][class*="community"], .community-join {
 .tw-title { cursor: pointer !important; }
 </style>
 
+
+<style>
+/* Live Chat sports-style icon below sports */
+#lc-sports-style {
+  position: fixed;
+  right: 14px;
+  z-index: 9998;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  animation: lc-pulse 2s ease-in-out infinite;
+  cursor: pointer;
+}
+@keyframes lc-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+}
+#lc-sports-style:hover { transform: scale(1.12); }
+/* Hide other floating elements below sports (keep only Live Chat) */
+#tasbih-fab, #tool-dice, #surprise-me, #back-top, #s-buddy {
+  display: none !important;
+}
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -2451,6 +2482,37 @@ document.addEventListener('click', function(e){
     // Only for top widgets
     if(!card.closest('#top-widgets') && !card.closest('#top-widgets-right')) return;
     card.classList.toggle('tw-open');
+  });
+})();
+</script>
+
+
+<a href="https://wa.me/923254746678?text=Hi%20US%20AI!%20I%20need%20help." target="_blank" rel="noopener" id="lc-sports-style" title="Live Chat" style="display:none;">💬</a>
+<script>
+(function(){
+  function positionLC(){
+    var sports = document.querySelector('#sports-float, .sports-col');
+    var lc = document.getElementById('lc-sports-style');
+    if(!lc) return;
+    if(sports){
+      var rect = sports.getBoundingClientRect();
+      var top = rect.bottom + window.scrollY + 12;
+      lc.style.top = top + 'px';
+      lc.style.display = 'flex';
+    } else {
+      // Fallback: fixed below top widgets
+      lc.style.top = '400px';
+      lc.style.display = 'flex';
+    }
+  }
+  setTimeout(positionLC, 2000);
+  setTimeout(positionLC, 4000);
+  window.addEventListener('scroll', function(){
+    var lc = document.getElementById('lc-sports-style');
+    if(lc && lc.style.display === 'flex'){
+      // Keep it visible on scroll (fixed position)
+      lc.style.position = 'fixed';
+    }
   });
 })();
 </script>
