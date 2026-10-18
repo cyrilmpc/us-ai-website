@@ -1893,93 +1893,34 @@ a.jk-otd-go:hover{text-decoration:underline;}
       
       <script>
       // Auto-fill details from account
-      (function() {
+      setTimeout(function() {
         try {
           var session = JSON.parse(localStorage.getItem('sawalai_session') || 'null');
           var infoEl = document.getElementById('sub-auto-info');
           if (session && session.email && infoEl) {
-            infoEl.innerHTML = '✅ <strong>' + session.email + '</strong><br><span style="font-size:0.8rem;">Logged in - details auto-filled!</span>';
-          } else if (infoEl) {
-            infoEl.innerHTML = '⚠️ Please login to continue';
+            infoEl.innerHTML = 'Email: <strong>' + session.email + '</strong> (auto-filled)';
           }
+          var totalEl = document.getElementById('sub-total');
+          var cardTotalEl = document.getElementById('sub-card-total');
+          if (totalEl && cardTotalEl) cardTotalEl.textContent = totalEl.textContent;
         } catch(e) {}
-        
-        // Update total
-        var totalEl = document.getElementById('sub-total');
-        var cardTotalEl = document.getElementById('sub-card-total');
-        if (totalEl && cardTotalEl) {
-          cardTotalEl.textContent = totalEl.textContent;
-          // Watch for changes
-          setInterval(function() {
-            if (totalEl.textContent !== cardTotalEl.textContent) {
-              cardTotalEl.textContent = totalEl.textContent;
-            }
-          }, 500);
-        }
-      })();
+      }, 1000);
       
       function processCardPayment() {
         var num = document.getElementById('card-number').value.replace(/\s/g, '');
-        var exp = document.getElementById('card-expiry').value;
-        var cvv = document.getElementById('card-cvv').value;
-        var name = document.getElementById('card-name').value;
-        
-        if (num.length < 16) { alert('Please enter a valid 16-digit card number!'); return; }
-        if (exp.length < 5) { alert('Please enter expiry (MM/YY)!'); return; }
-        if (cvv.length < 3) { alert('Please enter CVV!'); return; }
-        if (!name) { alert('Please enter cardholder name!'); return; }
-        
-        // In setup mode - show processing then success
-        // When API keys are added, this will process real payment
+        if (num.length < 16) { alert('Enter valid 16-digit card number!'); return; }
         var btn = event.target;
-        btn.textContent = '⏳ Processing...';
+        btn.textContent = 'Processing...';
         btn.disabled = true;
-        
         setTimeout(function() {
-          // Generate order and show receipt
           var orderId = 'SUB-' + Date.now().toString(36).toUpperCase();
           var total = document.getElementById('sub-card-total').textContent;
-          
-          // Fill receipt
           var receipt = document.getElementById('sub-receipt-details');
           if (receipt) {
-            try {
-              var session = JSON.parse(localStorage.getItem('sawalai_session') || '{}');
-              receipt.innerHTML = 
-                '<p><strong>Order ID:</strong> ' + orderId + '</p>' +
-                '<p><strong>Total Paid:</strong> <span style="color:#10b981;font-size:1.2rem;">' + total + '</span></p>' +
-                '<p><strong>Email:</strong> ' + (session.email || 'N/A') + '</p>' +
-                '<p><strong>Card:</strong> **** **** **** ' + num.slice(-4) + '</p>' +
-                '<p><strong>Status:</strong> <span style="color:#10b981;">✅ Payment Successful</span></p>' +
-                '<p style="color:#888;font-size:0.85rem;margin-top:12px;">Receipt sent to your email. Account details within 24 hours.</p>';
-            } catch(e) {}
+            receipt.innerHTML = '<p><strong>Order ID:</strong> ' + orderId + '</p>' +
+              '<p><strong>Total:</strong> <span style="color:#10b981;">' + total + '</span></p>' +
+              '<p><strong>Status:</strong> <span style="color:#10b981;">Payment Successful</span></p>';
           }
-          
-          // Send email receipt
-          try {
-            var session = JSON.parse(localStorage.getItem('sawalai_session') || '{}');
-            if (session.email) {
-              fetch('https://formsubmit.co/ajax/' + session.email, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                  subject: 'US AI Order Receipt: ' + orderId,
-                  message: 'Thank you for your order!\n\nOrder ID: ' + orderId + '\nTotal: ' + total + '\n\nAccount details will arrive within 24 hours.'
-                })
-              });
-            }
-            // Also to owner
-            fetch('https://formsubmit.co/ajax/cyrilmp4665@gmail.com', {
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({
-                subject: 'New Order: ' + orderId,
-                message: 'New subscription order!\n\nOrder ID: ' + orderId + '\nTotal: ' + total + '\nCard: ****' + num.slice(-4)
-              })
-            });
-          } catch(e) {}
-          
-          // Go to receipt
           if (typeof subGoStep === 'function') subGoStep(3);
         }, 2000);
       }
