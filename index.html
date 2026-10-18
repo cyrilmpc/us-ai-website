@@ -3153,8 +3153,8 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.id = 'sub-buy-btn';
     btn.textContent = '🛒 Buy Selected →';
     btn.onclick = function() {
-      // Login mandatory!
-      var user = localStorage.getItem('usai_user');
+      // Login mandatory! (check sawalai_session from account.html)
+      var user = localStorage.getItem('sawalai_session') || localStorage.getItem('usai_user');
       if (!user) {
         alert('Please login first to buy a subscription!');
         window.location.href = 'account.html';
@@ -3216,7 +3216,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.stopPropagation();
       
       // Check login (mandatory)
-      var user = localStorage.getItem('usai_user');
+      var user = localStorage.getItem('sawalai_session') || localStorage.getItem('usai_user');
       if (!user) {
         alert('Please login first to place an order!');
         window.location.href = 'account.html';
