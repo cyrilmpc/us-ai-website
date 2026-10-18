@@ -2693,13 +2693,25 @@ document.addEventListener('click', function(e){
     <div><b>💬 Live Chat</b><br><small style="opacity:0.8">US AI Support</small></div>
     <button onclick="document.getElementById('lc-widget').style.display='none'" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">✕</button>
   </div>
-  <div id="lc-login-prompt" style="padding:30px 20px;text-align:center;color:white;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1;">
-    <div style="font-size:48px;">🔐</div>
-    <h3 style="margin:0;font-size:1.2rem;">Login to Chat</h3>
-    <p style="margin:0;color:#aaa;font-size:0.9rem;">Please login to start chatting with us!</p>
-    <input id="lc-email" type="email" placeholder="Email" style="width:100%;max-width:280px;padding:12px;border-radius:10px;border:1px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
-    <input id="lc-password" type="password" placeholder="Password" style="width:100%;max-width:280px;padding:12px;border-radius:10px;border:1px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
-    <button onclick="doChatLogin()" style="width:100%;max-width:280px;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:white;border:none;padding:14px;border-radius:10px;cursor:pointer;font-size:1.1rem;font-weight:bold;">Login to Chat</button>
+  <div id="lc-login-prompt" style="padding:30px 20px;text-align:center;color:white;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1;position:relative;overflow:hidden;">
+    <style>
+    @keyframes lc-lock-bounce { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-10px) scale(1.1);} }
+    @keyframes lc-glow-pulse { 0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.5);} 50%{box-shadow:0 0 40px rgba(217,70,239,0.8);} }
+    @keyframes lc-shimmer { 0%{background-position:-200% 0;} 100%{background-position:200% 0;} }
+    @keyframes lc-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+    .lc-anim-lock { font-size:56px; animation: lc-lock-bounce 2s ease-in-out infinite; filter: drop-shadow(0 0 15px rgba(139,92,246,0.8)); }
+    .lc-anim-title { animation: lc-float 3s ease-in-out infinite; background: linear-gradient(90deg,#fff,#d946ef,#8b5cf6,#fff); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation: lc-shimmer 3s linear infinite, lc-float 3s ease-in-out infinite; }
+    .lc-anim-input { transition: all 0.3s; }
+    .lc-anim-input:focus { border-color:#d946ef !important; box-shadow:0 0 15px rgba(217,70,239,0.5) !important; transform:scale(1.02); outline:none; }
+    .lc-anim-btn { animation: lc-glow-pulse 2s ease-in-out infinite; transition: transform 0.2s; }
+    .lc-anim-btn:hover { transform: scale(1.05); }
+    </style>
+    <div class="lc-anim-lock">🔐</div>
+    <h3 class="lc-anim-title" style="margin:0;font-size:1.4rem;font-weight:bold;">Login to Chat</h3>
+    <p style="margin:0;color:#aaa;font-size:0.9rem;animation:lc-float 4s ease-in-out infinite;">Please login to start chatting with us!</p>
+    <input id="lc-email" class="lc-anim-input" type="email" placeholder="✉️ Email" style="width:100%;max-width:280px;padding:14px;border-radius:12px;border:2px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
+    <input id="lc-password" class="lc-anim-input" type="password" placeholder="🔑 Password" style="width:100%;max-width:280px;padding:14px;border-radius:12px;border:2px solid #444;background:#2a2a3e;color:white;font-size:1rem;">
+    <button onclick="doChatLogin()" class="lc-anim-btn" style="width:100%;max-width:280px;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:white;border:none;padding:15px;border-radius:12px;cursor:pointer;font-size:1.15rem;font-weight:bold;">🚀 Login to Chat</button>
     <p id="lc-login-error" style="color:#ff6b6b;font-size:0.85rem;display:none;"></p>
   </div>
   <div id="lc-chat-area" style="display:none;flex:1;flex-direction:column;">
