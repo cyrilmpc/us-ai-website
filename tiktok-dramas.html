@@ -18,15 +18,23 @@ body { background:#000; color:#fff; font-family:-apple-system,BlinkMacSystemFont
   background:linear-gradient(to bottom, rgba(0,0,0,.6), transparent);
 }
 .tk-logo {
-  font-size:1.6rem; font-weight:900; letter-spacing:-1px;
-  position:relative; display:inline-block;
-  animation:logoPulse 3s ease-in-out infinite;
-  text-shadow: 2px 2px 0 #25f4ee, -2px -2px 0 #fe2c55;
+  font-size:1.5rem; font-weight:800; letter-spacing:-0.5px;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.tk-logo span:first-child { color:#fff; }
-@keyframes logoPulse {
-  0%,100% { transform:scale(1); text-shadow:2px 2px 0 #25f4ee, -2px -2px 0 #fe2c55; }
-  50% { transform:scale(1.05); text-shadow:3px 3px 0 #25f4ee, -3px -3px 0 #fe2c55; }
+/* TikTok musical note icon that rotates every 4s like US AI logo */
+.tk-logo-icon {
+  display:inline-block; font-size:1.4rem;
+  animation:tkSpin 4s linear infinite;
+  filter:drop-shadow(0 0 8px rgba(37,244,238,.6));
+}
+@keyframes tkSpin {
+  0% { transform:rotate(0deg); }
+  100% { transform:rotate(360deg); }
+}
+.tk-logo-text {
+  background:linear-gradient(135deg,#fff,#a5b4fc);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 .tk-tab { font-size:1rem; color:#aaa; cursor:pointer; padding:4px 8px; }
 .tk-tab.active { color:#fff; font-weight:700; border-bottom:2px solid #fff; }
@@ -156,7 +164,7 @@ body { background:#000; color:#fff; font-family:-apple-system,BlinkMacSystemFont
 
 <div class="tk-header">
   <div class="tk-tab">Following</div>
-  <div class="tk-logo"><span>Tik</span><span style="color:#fe2c55">Tok</span></div>
+  <div class="tk-logo"><span class="tk-logo-icon">🎵</span><span class="tk-logo-text">TikTok</span></div>
   <div class="tk-tab active">For You</div>
 </div>
 
