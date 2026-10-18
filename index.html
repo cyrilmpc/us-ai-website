@@ -3131,16 +3131,7 @@ document.getElementById('sub-modal').addEventListener('click', function(e) {
 });
 </script>
 <script>
-// User order: card click only selects, Buy button goes to step 2
-document.addEventListener('click', function(e) {
-  // Card click - just select (let subscriptions.js handle it)
-  var card = e.target.closest('#sub-grid .sub-card');
-  if (card && !e.target.closest('button')) {
-    // Just select, don't do anything else
-    // subscriptions.js will handle the selection and price update
-    return;
-  }
-}, true);
+<!-- Card selection handled by subscriptions.js -->
 </script>
 <script>
 // Add Buy button at bottom of step 1
