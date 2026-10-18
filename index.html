@@ -2330,7 +2330,7 @@ document.addEventListener('click', function(e){
   
   // Expand widget -> hide sports icons below
   document.addEventListener('click', function(e){
-    var title = e.target.closest('#top-widgets-right .tw-title');
+    var title = e.target.closest('#top-widgets .tw-title, #top-widgets-right .tw-title');
     if(!title) return;
     var card = title.parentElement;
     var isOpen = card.classList.contains('tw-open');
