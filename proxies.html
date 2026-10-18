@@ -812,15 +812,86 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 
 
 
+
 <script>
-setTimeout(function(){
-  var h1 = document.querySelector('h1');
-  if(h1 && h1.textContent.includes('Prox')){
+(function(){
+  function replaceTop(){
+    // Find Buy Proxies heading
+    var heads = document.querySelectorAll('h1, h2');
+    var target = null;
+    for(var i=0; i<heads.length; i++){
+      if(heads[i].textContent.includes('Buy Prox')){
+        target = heads[i];
+        break;
+      }
+    }
+    if(!target) return;
+    if(document.getElementById('proxy-rdp-final')) return; // Already done
+    
+    // Hide existing top section (next siblings until we hit product grid)
+    var sib = target.nextElementSibling;
+    var count = 0;
+    while(sib && count < 10){
+      var next = sib.nextElementSibling;
+      // Stop if we hit the product grid or filters
+      if(sib.textContent.includes('39 / 39') || sib.querySelector('.sp-grid')){
+        break;
+      }
+      // Hide configure and price panels
+      if(sib.textContent.includes('Configure your proxy') || sib.textContent.includes('Full price list')){
+        sib.style.display = 'none';
+      }
+      sib = next;
+      count++;
+    }
+    
+    // Create RDP-style 3 panels
     var div = document.createElement('div');
-    div.innerHTML = '<div style="max-width:1400px;margin:20px auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:0 16px;"><div style="border:2px solid #7c3aed;border-radius:16px;padding:20px;"><h3>Configure your proxy</h3><p>Residential / Datacenter / HTTP ISP</p></div><div style="border:2px solid #a855f7;border-radius:16px;padding:20px;"><h3>Place your order</h3><input placeholder="Name" style="width:100%;padding:8px;margin:5px 0;"><button style="width:100%;padding:10px;background:#a855f7;color:#fff;border:none;border-radius:8px;">Buy Now</button></div><div style="border:2px solid #f59e0b;border-radius:16px;padding:20px;"><h3>Price List (USD)</h3><p>USA: $8.93 / $1.79</p></div></div>';
-    h1.parentNode.insertBefore(div, h1.nextSibling);
+    div.id = 'proxy-rdp-final';
+    div.innerHTML = '<div style="max-width:1400px;margin:20px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 16px;">' +
+      '<div style="border:2px solid #7c3aed;border-radius:16px;padding:20px;background:#0d1026;">' +
+        '<h3 style="color:#fff;margin:0 0 16px;">Configure your proxy</h3>' +
+        '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">' +
+          '<button style="padding:8px 16px;border-radius:20px;background:#7c3aed;color:#fff;border:none;">Residential</button>' +
+          '<button style="padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);">Datacenter</button>' +
+          '<button style="padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);">HTTP ISP</button>' +
+        '</div>' +
+        '<p style="color:#fbbf24;font-weight:700;">⭐ BEST for social media accounts</p>' +
+        '<p style="color:#fff;font-size:1.3rem;font-weight:700;">$8.93 / IP / month</p>' +
+        '<label style="color:#fff;">Country</label>' +
+        '<select style="width:100%;padding:10px;margin:8px 0;border-radius:8px;background:#1a1d3a;color:#fff;border:1px solid #333;"><option>USA</option><option>UK</option><option>Germany</option></select>' +
+      '</div>' +
+      '<div style="border:2px solid #a855f7;border-radius:16px;padding:20px;background:#0d1026;">' +
+        '<h3 style="color:#fff;margin:0 0 16px;">Place your order</h3>' +
+        '<label style="color:#fff;">Your name</label>' +
+        '<input type="text" placeholder="Full name" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;background:#1a1d3a;color:#fff;border:1px solid #333;">' +
+        '<label style="color:#fff;">Email</label>' +
+        '<input type="email" placeholder="you@email.com" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;background:#1a1d3a;color:#fff;border:1px solid #333;">' +
+        '<label style="color:#fff;">WhatsApp number</label>' +
+        '<input type="text" placeholder="+92" style="width:100%;padding:10px;margin:8px 0 12px;border-radius:8px;background:#1a1d3a;color:#fff;border:1px solid #333;">' +
+        '<button style="width:100%;padding:14px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;">Buy Now</button>' +
+      '</div>' +
+      '<div style="border:2px solid #f59e0b;border-radius:16px;padding:20px;background:#0d1026;">' +
+        '<h3 style="color:#fff;margin:0 0 16px;">Full price list — per IP / month (USD)</h3>' +
+        '<table style="width:100%;color:#fff;font-size:0.85rem;border-collapse:collapse;">' +
+          '<tr style="border-bottom:1px solid #333;"><th style="text-align:left;padding:8px;">Country</th><th style="padding:8px;">Residential</th><th style="padding:8px;">Datacenter</th></tr>' +
+          '<tr style="border-bottom:1px solid #222;"><td style="padding:8px;">USA</td><td style="padding:8px;">$8.93</td><td style="padding:8px;">$1.79</td></tr>' +
+          '<tr style="border-bottom:1px solid #222;"><td style="padding:8px;">UK</td><td style="padding:8px;">$8.93</td><td style="padding:8px;">$1.79</td></tr>' +
+          '<tr style="border-bottom:1px solid #222;"><td style="padding:8px;">Germany</td><td style="padding:8px;">$8.93</td><td style="padding:8px;">$1.79</td></tr>' +
+          '<tr><td style="padding:8px;">France</td><td style="padding:8px;">$8.93</td><td style="padding:8px;">$1.79</td></tr>' +
+        '</table>' +
+      '</div>' +
+    '</div>';
+    
+    target.parentNode.insertBefore(div, target.nextSibling);
   }
-}, 1500);
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(replaceTop, 500); });
+  } else {
+    setTimeout(replaceTop, 500);
+  }
+  setTimeout(replaceTop, 2000);
+})();
 </script>
 </body>
 </html>
