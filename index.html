@@ -2959,6 +2959,80 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<style>
+/* User order: modal for order details */
+#sub-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+#sub-modal.open { display: flex; }
+#sub-modal .modal-box {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid #8b5cf6;
+  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+}
+#sub-modal .modal-box h3 { margin-top: 0; color: white; }
+#sub-modal .modal-box .fld { margin: 12px 0; }
+#sub-modal .modal-box .fld span { display: block; color: #aaa; font-size: 0.85rem; margin-bottom: 4px; }
+#sub-modal .modal-box .fld input { 
+  width: 100%; padding: 12px; border-radius: 8px; 
+  border: 1px solid #444; background: #2a2a3e; color: white; 
+  box-sizing: border-box;
+}
+#sub-modal .modal-close {
+  float: right; background: none; border: none; 
+  color: #888; font-size: 24px; cursor: pointer;
+}
+</style>
+<div id="sub-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeSubModal()">&times;</button>
+    <h3>📝 Place Your Order</h3>
+    <p id="sub-modal-product" style="color:#8b5cf6;"></p>
+    <div class="fld"><span>Your name</span><input type="text" id="sub-m-name" placeholder="Full name"></div>
+    <div class="fld"><span>Email</span><input type="email" id="sub-m-email" placeholder="you@email.com"></div>
+    <div class="fld"><span>WhatsApp number</span><input type="tel" id="sub-m-wa" placeholder="+92..."></div>
+    <div class="fld"><span>Notes (optional)</span><input type="text" id="sub-m-notes" placeholder="Any notes..."></div>
+    <button onclick="submitSubModal()" style="width:100%;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:white;border:none;padding:14px;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:bold;margin-top:12px;">Continue to Payment →</button>
+  </div>
+</div>
+<script>
+function openSubModal(productName) {
+  document.getElementById('sub-modal-product').textContent = productName || 'Subscription';
+  document.getElementById('sub-modal').classList.add('open');
+}
+function closeSubModal() {
+  document.getElementById('sub-modal').classList.remove('open');
+}
+function submitSubModal() {
+  var name = document.getElementById('sub-m-name').value;
+  var email = document.getElementById('sub-m-email').value;
+  var wa = document.getElementById('sub-m-wa').value;
+  if (!name || !email || !wa) {
+    alert('Please fill all required fields');
+    return;
+  }
+  closeSubModal();
+  // Open payment in new tab
+  var product = document.getElementById('sub-modal-product').textContent;
+  window.open('subscription-order.html?name=' + encodeURIComponent(product) + '&from=modal', '_blank');
+}
+// Close modal when clicking outside
+document.getElementById('sub-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeSubModal();
+});
+</script>
 </body>
 </html>
 
