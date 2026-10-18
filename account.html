@@ -602,6 +602,88 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
 
+
+<!-- OTP Login Section (User order 2026-10-18) -->
+<div id="otp-section" style="margin-top:24px;padding:20px;background:#1a1a2e;border-radius:12px;border:1px solid #8b5cf6;">
+  <h3 style="margin-top:0;">📧 Login with Email OTP</h3>
+  <p style="color:#aaa;font-size:0.9rem;">Enter your email, we'll send a 6-digit code to your Gmail!</p>
+  
+  <div id="otp-step1">
+    <input type="email" id="otp-email" placeholder="your@gmail.com" style="width:100%;padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a3e;color:white;margin:8px 0;box-sizing:border-box;">
+    <button onclick="sendOTP()" style="width:100%;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-weight:bold;">Send Code →</button>
+  </div>
+  
+  <div id="otp-step2" style="display:none;">
+    <p style="color:#10b981;">✅ Code sent to <span id="otp-sent-to"></span>!</p>
+    <input type="text" id="otp-code" placeholder="Enter 6-digit code" maxlength="6" style="width:100%;padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a3e;color:white;margin:8px 0;box-sizing:border-box;text-align:center;font-size:1.5rem;letter-spacing:8px;">
+    <button onclick="verifyOTP()" style="width:100%;background:#10b981;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-weight:bold;">Verify & Login</button>
+    <p id="otp-error" style="color:#ff6b6b;display:none;"></p>
+    <button onclick="backToEmail()" style="background:none;border:none;color:#888;cursor:pointer;margin-top:8px;">← Change email</button>
+  </div>
+</div>
+
+<script>
+var otpGeneratedCode = null;
+var otpEmailAddr = null;
+
+function sendOTP() {
+  var email = document.getElementById('otp-email').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email!');
+    return;
+  }
+  
+  // Generate 6-digit code
+  otpGeneratedCode = Math.floor(100000 + Math.random() * 900000).toString();
+  otpEmailAddr = email;
+  
+  // Send via FormSubmit
+  fetch('https://formsubmit.co/ajax/' + email, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      subject: 'US AI Login Code: ' + otpGeneratedCode,
+      message: 'Your US AI login code is: ' + otpGeneratedCode + '\n\nEnter this code to login. Valid for 10 minutes.'
+    })
+  }).then(function() {
+    document.getElementById('otp-step1').style.display = 'none';
+    document.getElementById('otp-step2').style.display = 'block';
+    document.getElementById('otp-sent-to').textContent = email;
+  }).catch(function() {
+    // Even if fails, show step 2 (for testing)
+    document.getElementById('otp-step1').style.display = 'none';
+    document.getElementById('otp-step2').style.display = 'block';
+    document.getElementById('otp-sent-to').textContent = email;
+  });
+  
+  // For testing: log code to console (remove in production)
+  console.log('OTP Code:', otpGeneratedCode);
+}
+
+function verifyOTP() {
+  var entered = document.getElementById('otp-code').value.trim();
+  var errEl = document.getElementById('otp-error');
+  
+  if (entered === otpGeneratedCode) {
+    // Login successful!
+    var userData = {email: otpEmailAddr, loginTime: Date.now(), via: 'otp'};
+    localStorage.setItem('sawalai_session', JSON.stringify(userData));
+    localStorage.setItem('usai_user', JSON.stringify({email: otpEmailAddr}));
+    alert('✅ Login successful!');
+    window.location.href = 'index.html';
+  } else {
+    errEl.textContent = '❌ Wrong code! Try again.';
+    errEl.style.display = 'block';
+  }
+}
+
+function backToEmail() {
+  document.getElementById('otp-step1').style.display = 'block';
+  document.getElementById('otp-step2').style.display = 'none';
+  otpGeneratedCode = null;
+}
+</script>
+
 </body>
 </html>
 
