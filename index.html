@@ -240,6 +240,39 @@ a[href*="whatsapp"][class*="community"], .community-join {
 }
 </style>
 
+
+<style>
+/* Move share rail up */
+#share-rail {
+  bottom: 140px !important;
+}
+/* Community and WhatsApp buttons at bottom left */
+#side-community-btns {
+  position: fixed;
+  left: 14px;
+  bottom: 20px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#side-community-btns a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 22px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+#side-community-btns a:hover { transform: scale(1.1); }
+#btn-community { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+#btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+</style>
+
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -2544,6 +2577,12 @@ document.addEventListener('click', function(e){
   50% { transform: scale(1.08); }
 }
 </style>
+
+
+<div id="side-community-btns">
+  <a href="https://chat.whatsapp.com/HDahpOL3tsqFKOWsRddkY6" target="_blank" rel="noopener" id="btn-community" title="Join Community">👥</a>
+  <a href="https://wa.me/923254746678" target="_blank" rel="noopener" id="btn-whatsapp" title="WhatsApp">📱</a>
+</div>
 
 </body>
 </html>
