@@ -995,10 +995,34 @@ function loadMore(){
     document.getElementById('lmBtn').textContent = '✅ All 500,000,000 Loaded!';
     return;
   }
-  const batchSize = 500; // 500 initial! // 300 products as user asked!
-  const batch = genBatch(11 + jfyCount, batchSize);
-  batch.forEach(p => { if(!displayedProducts.find(x => x.id === p.id || x.name === p.name)) displayedProducts.push(p); });
-  document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
+  const batchSize = 50; // Safe batch size
+  const batch = [];
+  // Generate with error handling - no duplicates
+  for(let i = 0; i < batchSize; i++){
+    try {
+      const p = genProduct(11 + jfyCount + i);
+      // No duplicates: check by id and name
+      if(p && p.id && !displayedProducts.find(x => x.id === p.id)){
+        batch.push(p);
+        displayedProducts.push(p);
+      }
+    } catch(e){ console.log("Product gen error:", e); }
+  }
+  // Fallback: if no products generated, use REAL_PRODUCTS directly
+  if(batch.length === 0 && typeof REAL_PRODUCTS !== 'undefined'){
+    for(let i = 0; i < Math.min(50, REAL_PRODUCTS.length); i++){
+      const idx = (jfyCount + i) % REAL_PRODUCTS.length;
+      const rp = REAL_PRODUCTS[idx];
+      if(rp && !displayedProducts.find(x => x.name === rp[0])){
+        const p = {id:'rp'+idx, name:rp[0], brand:rp[1], category:rp[2], price:(rp[4]||99).toFixed(2), old_price:(rp[5]||129).toFixed(2), discount:'-20%', rating:'4.5', reviews:'1,234', image:"https://images.unsplash.com/"+rp[3]+"?w=800"};
+        batch.push(p);
+        displayedProducts.push(p);
+      }
+    }
+  }
+  if(batch.length > 0){
+    document.getElementById('jfyG').innerHTML += batch.map(cardHTML).join('');
+  }
   jfyCount += batchSize;
   const total = Math.min(jfyCount + 10, MAX_PRODUCTS + 10);
   toast(`+${batchSize} products! Total: ${total.toLocaleString()} shown`);
